@@ -1,4 +1,4 @@
-﻿using Core.Moodle.Interface;
+using Core.Moodle.Interface;
 
 namespace Core.Moodle.Implementation;
 

@@ -1,4 +1,4 @@
-﻿namespace Core.WebUntis.Interface;
+namespace Core.WebUntis.Interface;
 
 public interface IWebUntisClient
 {

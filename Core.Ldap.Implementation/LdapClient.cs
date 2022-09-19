@@ -1,4 +1,4 @@
-﻿using Core.Ldap.Interface;
+using Core.Ldap.Interface;
 
 namespace Core.Ldap.Implementation;
 

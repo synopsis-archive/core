@@ -8,3 +8,22 @@ For new branches use the correct prefix:
 * Branches for bug fixes should be called `bug/a-few-words`
 
 GitHub branch names should use kebab-case, so words should be separated by a hyphen `-`.
+
+## Pre-commit hooks
+
+We use [pre-commit](https://pre-commit.com/) to run a number of checks before each commit.
+These checks are also run on CI. It is strongly recommended to install pre-commit as described below to **avoid
+unnecessary cleanup commits**.
+
+### Install pre-commit
+
+> ⚠ [Python 3](https://www.python.org/downloads/windows/) has to be installed on the development machine.
+
+Run the following commands in a terminal **inside the project directory** to install the pre-commit hooks:
+
+```bash
+pip install pre-commit
+pre-commit install
+```
+
+The first run can take a while, as it installs all the hooks.

@@ -1,4 +1,4 @@
-﻿namespace Core.Ldap.Interface;
+namespace Core.Ldap.Interface;
 
 public interface ILdapClient
 {
