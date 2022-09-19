@@ -1,4 +1,4 @@
-﻿using Core.WebUntis.Interface;
+using Core.WebUntis.Interface;
 
 namespace Core.WebUntis.Implementation;
 

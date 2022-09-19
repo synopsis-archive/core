@@ -5,8 +5,8 @@ on:
   pull_request:
   workflow_dispatch:
 
-defaults: 
-  run: 
+defaults:
+  run:
     working-directory: frontend
 
 jobs:
