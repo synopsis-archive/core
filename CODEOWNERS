@@ -1,0 +1,27 @@
+# frontend
+frontend    @littlegamer757
+
+# architektur team
+Core.WebUntis.Interface @profiluefter
+Core.Moodle.Interface   @profiluefter
+Core.Ldap.Interface     @profiluefter
+
+# backend 2
+Core.Moodle.Implementation  @EinboeckFranz
+Core.Ldap.Implementation    @EinboeckFranz
+
+# backend 1
+Core.WebUntis.Implementation    @SchoenbergerFabian
+
+# miscellaneous files
+diagrams                    @SchneckchenAndy
+.editorconfig               @profiluefter
+
+docker-compose.yml          @Klausmd5
+Dockerfile                  @Klausmd5
+
+.pre-commit-config.yaml     @profiluefter
+.github/release-drafter.yml @Klausmd5
+
+.github/workflows/*                     @profiluefter
+.github/workflows/release-drafter.yml   @Klausmd5
