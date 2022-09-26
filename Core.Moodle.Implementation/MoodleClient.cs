@@ -5,18 +5,22 @@ namespace Core.Moodle.Implementation;
 
 public class MoodleClient : IMoodleClient
 {
-    private const string BaseAddress = "https://www.eduvidual.at/";
+    private readonly string _baseAddress;
     private readonly HttpClient _client;
 
-    public MoodleClient(HttpClient client) => _client = client;
+    public MoodleClient(HttpClient client, MoodleConfiguration moodleConfig)
+    {
+        _client = client;
+        _baseAddress = moodleConfig.BaseUrl;
+    }
 
     /*
      * Grabs all Courses of a User
      */
-    public IEnumerable<MoodleCourse> GetCourses(string token)
+    public async Task<IEnumerable<MoodleCourse>> GetCourses(string token)
     {
-        var jsonElement = GetJsonResponse("mod_assign_get_assignments", token, "").Result.RootElement;
-        var courses = jsonElement.GetProperty("courses").EnumerateArray()
+        var jsonElement = await GetJsonResponse("mod_assign_get_assignments", token, "");
+        var courses = jsonElement.RootElement.GetProperty("courses").EnumerateArray()
             .Select(x => new MoodleCourse
             {
                 Id = x.GetProperty("id").GetInt64().ToString(),
@@ -28,10 +32,10 @@ public class MoodleClient : IMoodleClient
     /*
      * Grabs detailed information about a course
      */
-    public DetailedMoodleCourse? GetDetailedCourse(string courseId, string token)
+    public async Task<DetailedMoodleCourse?> GetDetailedCourse(string courseId, string token)
     {
-        var jsonElement = GetJsonResponse("core_course_get_courses_by_field", token, $"field=id&value={courseId}").Result.RootElement;
-        var course = jsonElement.GetProperty("courses").EnumerateArray()
+        var jsonElement = await GetJsonResponse("core_course_get_courses_by_field", token, $"field=id&value={courseId}");
+        var course = jsonElement.RootElement.GetProperty("courses").EnumerateArray()
             .Select(x => new DetailedMoodleCourse()
             {
                 Id = x.GetProperty("id").GetInt64().ToString(),
@@ -49,10 +53,10 @@ public class MoodleClient : IMoodleClient
     /*
      * Grabs all Assignments of a User
      */
-    public IEnumerable<MoodleAssignment> GetAssignments(string token)
+    public async Task<IEnumerable<MoodleAssignment>> GetAssignments(string token)
     {
-        var jsonElement = GetJsonResponse("mod_assign_get_assignments", token, "").Result.RootElement;
-        var assignments = jsonElement.GetProperty("courses")
+        var jsonElement = await GetJsonResponse("mod_assign_get_assignments", token, "");
+        var assignments = jsonElement.RootElement.GetProperty("courses")
             .EnumerateArray()
             .Where(x => x.GetProperty("assignments").EnumerateArray().Any())
             .SelectMany(x => x.GetProperty("assignments").EnumerateArray())
@@ -66,14 +70,15 @@ public class MoodleClient : IMoodleClient
         return assignments;
     }
 
-    private Task<JsonDocument> GetJsonResponse(string functionName, string token, string additionalArgs)
+    private async Task<JsonDocument> GetJsonResponse(string functionName, string token, string additionalArgs)
     {
+
         var httpAddress = new Uri(
-            $"{BaseAddress}webservice/rest/server.php" +
+            $"{_baseAddress}webservice/rest/server.php" +
             $"?wstoken={token}&wsfunction={functionName}&moodlewsrestformat=json&{additionalArgs}"
         );
-        var response = _client.GetStreamAsync(httpAddress);
-        return JsonDocument.ParseAsync(response.Result);
+        var response = await _client.GetStreamAsync(httpAddress);
+        return await JsonDocument.ParseAsync(response);
     }
 
     private static DateTime ConvertUnixTimeStampToDateTime(long unixTimeStamp)
