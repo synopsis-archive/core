@@ -13,9 +13,4 @@ public class MoodleClient : IMoodleClient
     {
         throw new NotImplementedException();
     }
-
-    public Task<MoodleAssignment> GetAssignment(string token)
-    {
-        throw new NotImplementedException();
-    }
 }
