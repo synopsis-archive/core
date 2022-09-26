@@ -8,7 +8,7 @@ node Backend {
     component api [
         API-Controller
     ]
-    
+
     component UntisInterface
     component EduvidualInterface
     component LDAPInterface
