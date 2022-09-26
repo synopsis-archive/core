@@ -1,4 +1,7 @@
 # core
+[![Backend](https://github.com/htl-grieskirchen-core/core/actions/workflows/backend.yml/badge.svg)](https://github.com/htl-grieskirchen-core/core/actions/workflows/backend.yml)
+[![Frontend](https://github.com/htl-grieskirchen-core/core/actions/workflows/frontend.yml/badge.svg)](https://github.com/htl-grieskirchen-core/core/actions/workflows/frontend.yml)
+[![pre-commit](https://github.com/htl-grieskirchen-core/core/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/htl-grieskirchen-core/core/actions/workflows/pre-commit.yml)
 
 ## Branches
 
@@ -6,6 +9,7 @@ For new branches use the correct prefix:
 
 * Branches for new features should be called `feature/a-few-words`
 * Branches for bug fixes should be called `bug/a-few-words`
+* Branches for documentation changes should be called `docs/a-few-words`
 
 GitHub branch names should use kebab-case, so words should be separated by a hyphen `-`.
 
@@ -27,3 +31,10 @@ pre-commit install
 ```
 
 The first run can take a while, as it installs all the hooks.
+
+## Techstack
+
+As specified by the coaching teachers:
+
+* C# + ASP.NET Core
+* Angular
