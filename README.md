@@ -6,6 +6,7 @@ For new branches use the correct prefix:
 
 * Branches for new features should be called `feature/a-few-words`
 * Branches for bug fixes should be called `bug/a-few-words`
+* Branches for documentation changes should be called `docs/a-few-words`
 
 GitHub branch names should use kebab-case, so words should be separated by a hyphen `-`.
 
@@ -27,3 +28,10 @@ pre-commit install
 ```
 
 The first run can take a while, as it installs all the hooks.
+
+## Techstack
+
+As specified by the coaching teachers:
+
+* C# + ASP.NET Core
+* Angular
