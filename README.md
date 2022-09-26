@@ -1,4 +1,7 @@
 # core
+[![Backend](https://github.com/htl-grieskirchen-core/core/actions/workflows/backend.yml/badge.svg)](https://github.com/htl-grieskirchen-core/core/actions/workflows/backend.yml)
+[![Frontend](https://github.com/htl-grieskirchen-core/core/actions/workflows/frontend.yml/badge.svg)](https://github.com/htl-grieskirchen-core/core/actions/workflows/frontend.yml)
+[![pre-commit](https://github.com/htl-grieskirchen-core/core/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/htl-grieskirchen-core/core/actions/workflows/pre-commit.yml)
 
 ## Branches
 
