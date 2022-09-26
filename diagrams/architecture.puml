@@ -1,0 +1,35 @@
+@startuml
+
+actor User
+
+node Frontend
+
+node Backend {
+    component api [
+        API-Controller
+    ]
+    
+    component UntisInterface
+    component EduvidualInterface
+    component LDAPInterface
+}
+
+database db [
+    Datenbank
+]
+
+node LDAP
+node Webuntis
+node eduvidual
+
+User --> Frontend
+Frontend --> api
+api --> UntisInterface
+api --> EduvidualInterface
+api --> LDAPInterface
+UntisInterface --> Webuntis
+EduvidualInterface --> eduvidual
+LDAPInterface --> LDAP
+api --> db
+
+@enduml
