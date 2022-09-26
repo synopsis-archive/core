@@ -5,12 +5,15 @@ public interface IMoodleClient
     /*
      * Get Course of student
      */
-    Task<MoodleCourse> GetCourses(string token);
+    Task<IEnumerable<MoodleCourse>> GetCourses(string token);
+
+    /*
+     * Get detailed course information
+     */
+    Task<DetailedMoodleCourse?> GetDetailedCourse(string courseId, string token);
 
     /*
      * Get Calendar Events/Assignments of student
-     * core_calendar_get_calendar_events
      */
-    Task<MoodleAssignment> GetAssignment(string token);
-
+    Task<IEnumerable<MoodleAssignment>> GetAssignments(string token);
 }
