@@ -5,8 +5,9 @@ public class DetailedMoodleCourse : MoodleCourse
     /*
      * All Teachers assigned to this course
      * Name of the teacher, format varies depending on the teachers moodle name
+     * If no teachers are assigned, this will be an empty list
      */
-    public List<string> Contacts { get; set; } = null!;
+    public List<string> Teachers { get; set; } = null!;
 
     /*
      * The description of this course

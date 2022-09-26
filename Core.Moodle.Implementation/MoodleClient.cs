@@ -35,18 +35,21 @@ public class MoodleClient : IMoodleClient
     public async Task<DetailedMoodleCourse?> GetDetailedCourse(string courseId, string token)
     {
         var jsonElement = await GetJsonResponse("core_course_get_courses_by_field", token, $"field=id&value={courseId}");
-        var course = jsonElement.RootElement.GetProperty("courses").EnumerateArray()
-            .Select(x => new DetailedMoodleCourse()
+        var course = jsonElement.RootElement.GetProperty("courses")
+            .EnumerateArray()
+            .Select(x => new DetailedMoodleCourse
             {
                 Id = x.GetProperty("id").GetInt64().ToString(),
                 Name = x.GetProperty("fullname").GetString(),
                 CategoryName = x.GetProperty("categoryname").GetString(),
-                Contacts = x.GetProperty("contacts").EnumerateArray().Select(y => y.GetProperty("fullname").GetString()).ToList(),
+                Teachers = x.GetProperty("contacts").EnumerateArray()
+                    .Where(y => y.GetProperty("fullname").GetString() != null)
+                    .Select(y => y.GetProperty("fullname").GetString()!)
+                    .ToList(),
                 Description = x.GetProperty("summary").GetString(),
                 StartDate = ConvertUnixTimeStampToDateTime(x.GetProperty("startdate").GetInt64()),
                 EndDate = ConvertUnixTimeStampToDateTime(x.GetProperty("enddate").GetInt64()),
-            })
-            .FirstOrDefault();
+            }).FirstOrDefault();
         return course;
     }
 
