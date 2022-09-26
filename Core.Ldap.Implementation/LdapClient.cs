@@ -20,9 +20,9 @@ public class LdapClient : ILdapClient
         {
             if (ex.Message == "The supplied credential is invalid.")
             {
-                throw new InvalidLoginException("Hey Schüler/Lehrer! Deine Anmeldedaten sind sowas von falsch :)");
+                throw new InvalidLoginException("Hey Schüler/Lehrer! Deine Anmeldedaten sind falsch!");
             }
-            throw ex; //into mülleimer;
+            throw;
         }
         return new SignInResult();
     }

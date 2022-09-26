@@ -1,7 +1,6 @@
-namespace Core.Ldap.Interface
+namespace Core.Ldap.Interface;
+
+public class SignInResult
 {
-    public class SignInResult
-    {
-        public object User { get; set; } = null!;
-    }
+    public object User { get; set; } = null!;
 }

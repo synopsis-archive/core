@@ -1,12 +1,8 @@
-namespace Core.Ldap.Interface
-{
-    public class InvalidLoginException : Exception
-    {
-        public override string Message { get; } = null!;
+namespace Core.Ldap.Interface;
 
-        public InvalidLoginException(string message)
-        {
-            Message = message;
-        }
-    }
+public class InvalidLoginException : Exception
+{
+    public override string Message { get; } = null!;
+
+    public InvalidLoginException(string message) => Message = message;
 }
