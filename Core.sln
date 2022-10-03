@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Ldap.Interface", "Core
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Ldap.Implementation", "Core.Ldap.Implementation\Core.Ldap.Implementation.csproj", "{D1EA2400-2B04-430C-9CDA-3714937E0688}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Plugin.Interface", "Core.Plugin.Interface\Core.Plugin.Interface.csproj", "{765F354B-3BAD-473D-98B5-12735D8D4516}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,10 @@ Global
 		{D1EA2400-2B04-430C-9CDA-3714937E0688}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1EA2400-2B04-430C-9CDA-3714937E0688}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1EA2400-2B04-430C-9CDA-3714937E0688}.Release|Any CPU.Build.0 = Release|Any CPU
+		{765F354B-3BAD-473D-98B5-12735D8D4516}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{765F354B-3BAD-473D-98B5-12735D8D4516}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{765F354B-3BAD-473D-98B5-12735D8D4516}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{765F354B-3BAD-473D-98B5-12735D8D4516}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{493D65D2-EE9C-4CC5-8AD2-1B231394F88F} = {4B2A9A6E-8916-435C-B452-24A779859355}
