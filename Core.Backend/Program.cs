@@ -1,3 +1,4 @@
+using Core.Ldap.Implementation;
 using Core.Moodle.Implementation;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.Configure<MoodleConfiguration>(builder.Configuration.GetSection("Moodle"));
+builder.Services.Configure<LdapConfiguration>(builder.Configuration.GetSection("LDAPConfiguration"));
 
 var app = builder.Build();
 

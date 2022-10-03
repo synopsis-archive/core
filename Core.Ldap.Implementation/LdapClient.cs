@@ -6,10 +6,14 @@ namespace Core.Ldap.Implementation;
 
 public class LdapClient : ILdapClient
 {
+    private readonly LdapConfiguration _ldapConfiguration;
+
+    public LdapClient(LdapConfiguration ldapConfiguration) => _ldapConfiguration = ldapConfiguration;
+
     public SignInResult SignIn(SignInParams signInParams)
     {
         var credentials = new NetworkCredential(signInParams.Username, signInParams.Password, "HTL");
-        var serverId = new LdapDirectoryIdentifier("10.10.0.11");
+        var serverId = new LdapDirectoryIdentifier(_ldapConfiguration.ServerIp);
         var connection = new LdapConnection(serverId, credentials);
 
         try
