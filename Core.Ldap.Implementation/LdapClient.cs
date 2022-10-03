@@ -1,3 +1,4 @@
+using System.Collections;
 using Core.Ldap.Interface;
 using System.DirectoryServices.Protocols;
 using System.Net;
@@ -19,6 +20,7 @@ public class LdapClient : ILdapClient
         try
         {
             connection.Bind();
+            return new SignInResult { User = GetLdapUser(signInParams, connection) };
         }
         catch (LdapException ex)
         {
@@ -28,6 +30,60 @@ public class LdapClient : ILdapClient
             }
             throw;
         }
-        return new SignInResult();
+    }
+
+    private static LdapUser GetLdapUser(SignInParams signInParams, DirectoryConnection connection)
+    {
+        var directoryEntry = GetDirectoryEntry(connection, signInParams.Username);
+        var attributes = GetAllUserAttributes(directoryEntry);
+
+        var attendingClass = attributes["memberOf"].FirstOrDefault(x => x.Contains("Klasse"))?.Split("=")[1].Trim();
+        var organizationUnit = attributes["memberOf"].FirstOrDefault(x => x.Contains("OU="))!.Split("=")[1].Trim();
+
+        return new LdapUser
+        {
+            DisplayName = attributes["displayName"][0],
+            LoginName = attributes["sAMAccountName"][0],
+            Email = attributes["mail"][0],
+            Class = attendingClass ?? null,
+            OrganizationUnit = organizationUnit,
+        };
+    }
+
+    private static SearchResultEntryCollection GetDirectoryEntry(DirectoryConnection connection, string username)
+    {
+        var collection = GetDirectoryEntryByGroup(connection, LdapGroup.Administrator, username);
+        if (collection.Count != 0)
+            return collection;
+
+        collection = GetDirectoryEntryByGroup(connection, LdapGroup.Lehrer, username);
+        if (collection.Count != 0)
+            return collection;
+
+        collection = GetDirectoryEntryByGroup(connection, LdapGroup.Schueler, username);
+        if (collection.Count == 0)
+            throw new InvalidUserException("User is unknown. Please contact your administrator.");
+
+        return collection;
+    }
+
+    private static SearchResultEntryCollection GetDirectoryEntryByGroup(DirectoryConnection connection, LdapGroup group, string username)
+    {
+        var request = new SearchRequest($"OU={group},DC=htl,DC=grieskirchen,DC=local",
+            $"(objectClass=*)(sAMAccountName={username})",
+            SearchScope.Subtree, "displayName", "sAMAccountName", "mail", "memberOf");
+        var response = (SearchResponse)connection.SendRequest(request);
+        return response.Entries;
+    }
+
+    private static Dictionary<string, string[]> GetAllUserAttributes(IEnumerable directoryEntry)
+    {
+        return (from SearchResultEntry o in directoryEntry
+                from DictionaryEntry oAttribute in o.Attributes
+                select oAttribute).ToDictionary(
+                oAttribute => oAttribute.Key.ToString() ?? "No name set",
+                oAttribute => ((DirectoryAttribute)oAttribute.Value!).GetValues(typeof(string))
+                    .Select(x => x.ToString()).ToArray()
+            )!;
     }
 }
