@@ -11,7 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="WebUntis.Net" Version="1.0.6" />
+      <PackageReference Include="TaurusSoftware.WebUntisNet" Version="0.4.0" />
     </ItemGroup>
 
 </Project>
