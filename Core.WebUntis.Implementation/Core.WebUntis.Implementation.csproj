@@ -10,4 +10,8 @@
       <ProjectReference Include="..\Core.WebUntis.Interface\Core.WebUntis.Interface.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="WebUntis.Net" Version="1.0.6" />
+    </ItemGroup>
+
 </Project>
