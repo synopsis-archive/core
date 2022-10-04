@@ -38,7 +38,7 @@ public class LdapClient : ILdapClient
         var attributes = GetAllUserAttributes(directoryEntry);
 
         var attendingClass = attributes["memberOf"].FirstOrDefault(x => x.Contains("Klasse"))?.Split("=")[1].Trim();
-        var organizationUnit = attributes["memberOf"].FirstOrDefault(x => x.Contains("OU="))!.Split("=")[1].Trim();
+        var organizationUnit = GetOrganizationUnitOfString(attributes["memberOf"].Where(x => x.Contains("OU")).ToArray());
 
         return new LdapUser
         {
@@ -48,6 +48,13 @@ public class LdapClient : ILdapClient
             Class = attendingClass ?? null,
             OrganizationUnit = organizationUnit,
         };
+    }
+
+    private static LdapGroup GetOrganizationUnitOfString(string[] organizationUnits)
+    {
+        if (organizationUnits.Any(x => x.Contains("Administrator")))
+            return LdapGroup.Administrator;
+        return organizationUnits.Any(x => x.Contains("Lehrer")) ? LdapGroup.Lehrer : LdapGroup.Schueler;
     }
 
     private static SearchResultEntryCollection GetDirectoryEntry(DirectoryConnection connection, string username)
