@@ -2,5 +2,5 @@ namespace Core.Ldap.Interface;
 
 public class SignInResult
 {
-    public object User { get; set; } = null!;
+    public LdapUser User { get; set; } = null!;
 }
