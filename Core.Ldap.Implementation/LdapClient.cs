@@ -15,7 +15,10 @@ public class LdapClient : ILdapClient
     {
         var credentials = new NetworkCredential(signInParams.Username, signInParams.Password, "HTL");
         var serverId = new LdapDirectoryIdentifier(_ldapConfiguration.ServerIp);
-        var connection = new LdapConnection(serverId, credentials);
+        var connection = new LdapConnection(serverId, credentials)
+        {
+            AuthType = AuthType.Basic
+        };
 
         try
         {
@@ -52,33 +55,16 @@ public class LdapClient : ILdapClient
 
     private static LdapGroup GetOrganizationUnitOfString(string[] organizationUnits)
     {
-        if (organizationUnits.Any(x => x.Contains("Administrator")))
+        if (organizationUnits.Any(x => x.Contains("Administration")))
             return LdapGroup.Administrator;
         return organizationUnits.Any(x => x.Contains("Lehrer")) ? LdapGroup.Lehrer : LdapGroup.Schueler;
     }
 
     private static SearchResultEntryCollection GetDirectoryEntry(DirectoryConnection connection, string username)
     {
-        var collection = GetDirectoryEntryByGroup(connection, LdapGroup.Administrator, username);
-        if (collection.Count != 0)
-            return collection;
-
-        collection = GetDirectoryEntryByGroup(connection, LdapGroup.Lehrer, username);
-        if (collection.Count != 0)
-            return collection;
-
-        collection = GetDirectoryEntryByGroup(connection, LdapGroup.Schueler, username);
-        if (collection.Count == 0)
-            throw new InvalidUserException("User is unknown. Please contact your administrator.");
-
-        return collection;
-    }
-
-    private static SearchResultEntryCollection GetDirectoryEntryByGroup(DirectoryConnection connection, LdapGroup group, string username)
-    {
-        var request = new SearchRequest($"OU={group},DC=htl,DC=grieskirchen,DC=local",
-            $"(objectClass=*)(sAMAccountName={username})",
-            SearchScope.Subtree, "displayName", "sAMAccountName", "mail", "memberOf");
+        var request = new SearchRequest("DC=htl,DC=grieskirchen,DC=local",
+            $"(&(objectClass=user)(sAMAccountName={username}))",
+            SearchScope.Subtree, null);
         var response = (SearchResponse)connection.SendRequest(request);
         return response.Entries;
     }

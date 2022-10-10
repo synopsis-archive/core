@@ -27,5 +27,5 @@ public class LdapUser
      * One of three Organization Units the user could be part of
      * e.g Schueler, Administrator, Lehrer
      */
-    public LdapGroup OrganizationUnit { get; set; } = LdapGroup.Administrator;
+    public LdapGroup OrganizationUnit { get; set; } = LdapGroup.Schueler;
 }
