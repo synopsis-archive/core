@@ -43,7 +43,7 @@ public class LdapClient : ILdapClient
         var directoryEntry = GetDirectoryEntry(connection, signInParams.Username);
         var attributes = GetAllUserAttributes(directoryEntry);
 
-        var attendingClass = attributes["memberof"].FirstOrDefault(x => x.Contains("Klasse"))?.Split("=")[1].Trim();
+        var attendingClass = attributes["memberof"].FirstOrDefault(x => x.Contains("Klasse"))?.Split("=")[1].Split(",")[0].Trim();
         var organizationUnit = GetOrganizationUnitOfString(attributes["memberof"].Where(x => x.Contains("OU")).ToArray());
 
         return new LdapUser
