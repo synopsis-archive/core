@@ -30,7 +30,21 @@ pip install pre-commit
 pre-commit install
 ```
 
+Run test to check bevore commit:
+```bash
+pre-commit run --all-files
+```
+
 The first run can take a while, as it installs all the hooks.
+
+### Checks:
+- trailing-whitespace
+- end-of-file-fixer
+- check-yaml
+- check-added-large-files
+- dotnet-format
+- eslint
+- simon-check - checks for Simons credentials
 
 ## Techstack
 
@@ -38,3 +52,4 @@ As specified by the coaching teachers:
 
 * C# + ASP.NET Core
 * Angular
+* Python
