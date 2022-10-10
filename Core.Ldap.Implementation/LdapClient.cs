@@ -17,9 +17,12 @@ public class LdapClient : ILdapClient
         var serverId = new LdapDirectoryIdentifier(_ldapConfiguration.ServerIp);
         var connection = new LdapConnection(serverId, credentials)
         {
-            AuthType = AuthType.Basic
+            AuthType = AuthType.Basic,
+            SessionOptions =
+            {
+                ReferralChasing = ReferralChasingOptions.None
+            }
         };
-
         try
         {
             connection.Bind();
