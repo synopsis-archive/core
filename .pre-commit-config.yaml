@@ -28,3 +28,10 @@ repos:
           - "@angular-eslint/eslint-plugin-template@14.1.1"
           - "@typescript-eslint/parser@5.37.0"
           - "@typescript-eslint/eslint-plugin@5.37.0"
+  - repo: local
+    hooks:
+        - id: simon-check
+          name: SIMONCHECK
+          entry: python ./.github/checkPw.py
+          language: python
+          pass_filenames: false
