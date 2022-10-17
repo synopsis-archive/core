@@ -1,4 +1,4 @@
-namespace Core.WebUntis.Interface.Types;
+namespace Core.WebUntis.Implementation.ResponseTypes;
 
 public class TimegridItem
 {

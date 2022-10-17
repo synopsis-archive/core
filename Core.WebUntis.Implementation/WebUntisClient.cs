@@ -3,6 +3,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using Core.WebUntis.Implementation.RequestTypes;
+using Core.WebUntis.Implementation.ResponseTypes;
 using Core.WebUntis.Interface;
 using Core.WebUntis.Interface.Types;
 
@@ -29,9 +30,9 @@ public class WebUntisClient : IWebUntisClient
         _httpClient = new HttpClient(handler) { BaseAddress = baseAddress };
     }
 
-    public async Task<AuthenticateResponse> Authenticate(string user, string password)
+    public async Task<Authentication> Authenticate(string user, string password)
     {
-        return await Request<AuthenticateResponse>(
+        var authenticateResponse = await Request<AuthenticateResponse>(
             "authenticate",
             new AuthenticateRequest
             {
@@ -43,6 +44,8 @@ public class WebUntisClient : IWebUntisClient
                 {"school", School}
             }
         );
+
+        return authenticateResponse.Convert();
     }
 
     private async Task<TResponse> Request<TResponse>(
