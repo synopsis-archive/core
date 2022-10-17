@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CORE Mainframe</title>
+    <style>
+        html, body {
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #navigation {
+            width: 100vw;
+            height: 100vh;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+<iframe src="/navigation.html" id="navigation"></iframe>
+
+<div style="position: absolute" id="loaded-plugin">
+
+</div>
+
+<script>
+    const plugins = {
+        "webuntis": {
+            url: "/webuntis.html",
+            permissions: ["webuntis"]
+        },
+        "sokrates": {
+            url: "/sokrates.html",
+            permissions: ["webuntis", "sokrates"]
+        }
+    };
+
+    const navigation = document.getElementById('navigation');
+    const plugin = document.getElementById("loaded-plugin");
+    let pluginIframe = null;
+    let loadedPlugin = null;
+
+    window.addEventListener("message", event => {
+        console.debug("message", event.data, event.source)
+
+        if (event.source === navigation.contentWindow) {
+            if (typeof event.data.method !== "string") {
+                console.error("Invalid message from navigation", event);
+                return;
+            }
+
+            switch (event.data.method) {
+                case "loadPlugin":
+                    const loadPlugin = event.data.plugin;
+                    if (typeof loadPlugin !== "string") {
+                        console.error("Invalid message from navigation", event);
+                        return;
+                    }
+                    plugin.innerHTML = '';
+
+                    if (Object.keys(plugins).includes(loadPlugin)) {
+                        console.log("loading plugin", loadPlugin);
+                        loadedPlugin = plugins[loadPlugin];
+
+                        pluginIframe = document.createElement('iframe');
+                        pluginIframe.src = loadedPlugin.url;
+                        pluginIframe.style.width = "100%";
+                        pluginIframe.style.height = "100%";
+                        pluginIframe.style.border = "none";
+                        plugin.appendChild(pluginIframe);
+                    } else {
+                        console.error("Illegal plugin", loadPlugin);
+                    }
+                    break;
+                case "container":
+                    if (typeof event.data.x !== "number" || typeof event.data.y !== "number" || typeof event.data.width !== "number" || typeof event.data.height !== "number") {
+                        console.error("Invalid message from navigation", event);
+                        return;
+                    }
+
+                    plugin.style.left = event.data.x + "px";
+                    plugin.style.top = event.data.y + "px";
+                    plugin.style.width = event.data.width + "px";
+                    plugin.style.height = event.data.height + "px";
+                    break;
+            }
+        }
+
+        if (event.source === pluginIframe?.contentWindow) {
+            if (event.data === "webuntis") {
+                if (loadedPlugin.permissions.includes("webuntis"))
+                    pluginIframe?.contentWindow.postMessage("webuntis data");
+                else
+                    console.error("Plugin does not have permission to access webuntis data");
+            }
+
+            if (event.data === "sokrates") {
+                if (loadedPlugin.permissions.includes("sokrates"))
+                    pluginIframe?.contentWindow.postMessage("sokrates data");
+                else
+                    console.error("Plugin does not have permission to access sokrates data");
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
