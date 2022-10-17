@@ -1,4 +1,3 @@
-using System.Globalization;
 using System.Net;
 using System.Text;
 using System.Text.Json;
@@ -12,6 +11,7 @@ namespace Core.WebUntis.Implementation;
 
 public class WebUntisClient : IWebUntisClient
 {
+    private const string BaseUrl = "https://arche.webuntis.com/WebUntis/jsonrpc.do";
     private const string School = "htbla-grieskirchen";
     private const string Client = "htl-grieskirchen-core";
 
@@ -19,7 +19,7 @@ public class WebUntisClient : IWebUntisClient
 
     public WebUntisClient(string? token = null)
     {
-        var baseAddress = new Uri("https://arche.webuntis.com/WebUntis/jsonrpc.do");
+        var baseAddress = new Uri(BaseUrl);
 
         var cookieContainer = new CookieContainer();
         if (token != null)
@@ -96,28 +96,4 @@ public class WebUntisClient : IWebUntisClient
 
         return new StringContent(json.ToJsonString(), Encoding.UTF8, "application/json");
     }
-
-    #region staticMethods
-
-    public static DateTime ConvertUntisDateToDate(int date)
-    {
-        return DateTime.ParseExact(date.ToString(), "yyyyMMdd", CultureInfo.InvariantCulture);
-    }
-
-    public static int ConvertDateToUntisDate(DateTime date)
-    {
-        return int.Parse(date.ToString("yyyyMMdd", CultureInfo.InvariantCulture));
-    }
-
-    public static DateTime ConvertUntisTimeToTime(int time)
-    {
-        return DateTime.ParseExact(time.ToString(), "HHmm", CultureInfo.InvariantCulture);
-    }
-
-    public static int ConvertTimeToUntisTime(DateTime time)
-    {
-        return int.Parse(time.ToString("HHmm", CultureInfo.InvariantCulture));
-    }
-
-    #endregion
 }
