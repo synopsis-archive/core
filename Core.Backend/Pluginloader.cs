@@ -21,19 +21,24 @@ public static class Pluginloader
 
     public static void LoadPlugins(string folder)
     {
-        var files = Directory.GetFiles(folder, "*.dll");
+        Console.WriteLine("x--------------------[Loading Plugins]---------------------x");
+        var files = Directory.GetFiles(@folder, "*.dll");
         foreach (var file in files)
         {
-            var assembly = Assembly.LoadFile(file);
+            Console.WriteLine($"loading from {Path.GetFullPath(file)}");
+            var assembly = Assembly.LoadFile(Path.GetFullPath(file));
             var types = assembly.GetTypes();
 
             foreach (var type in types)
             {
-                if (type.IsSubclassOf(typeof(ICorePlugin)))
+
+                if (type.IsAssignableTo(typeof(ICorePlugin)))
                 {
                     Plugins.Add((ICorePlugin)Activator.CreateInstance(type)!);
+                    Console.WriteLine($"Loading Plugin {type.Name}");
                 }
             }
         }
+        Console.WriteLine("x------------------[Starting Application]------------------x");
     }
 }

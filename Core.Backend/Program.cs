@@ -4,7 +4,7 @@ using Core.Database;
 using Microsoft.EntityFrameworkCore;
 using Core.Moodle.Implementation;
 
-Pluginloader.LoadPlugins(AppDomain.CurrentDomain.BaseDirectory + "/plugins");
+Pluginloader.LoadPlugins("plugins");
 
 var builder = WebApplication.CreateBuilder(args);
 
