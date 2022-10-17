@@ -7,11 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Core.WebUntis.Interface\Core.WebUntis.Interface.csproj"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
+        <ProjectReference Include="..\Core.WebUntis.Interface\Core.WebUntis.Interface.csproj" />
     </ItemGroup>
 
 </Project>

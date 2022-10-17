@@ -1,3 +1,5 @@
+using Core.WebUntis.Interface.Types;
+
 namespace Core.WebUntis.Interface;
 
 public interface IWebUntisClient

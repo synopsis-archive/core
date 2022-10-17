@@ -1,10 +1,10 @@
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
-namespace Core.WebUntis.Implementation;
+namespace Core.WebUntis.Implementation.RequestTypes;
 
 public class AuthenticateRequest
 {
-    [JsonProperty("user")] public string User { get; set; } = null!;
-    [JsonProperty("password")] public string Password { get; set; } = null!;
-    [JsonProperty("client")] public string Client { get; set; } = null!;
+    [JsonPropertyName("user")] public string User { get; set; } = null!;
+    [JsonPropertyName("password")] public string Password { get; set; } = null!;
+    [JsonPropertyName("client")] public string Client { get; set; } = null!;
 }

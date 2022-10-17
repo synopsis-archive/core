@@ -1,8 +1,10 @@
 using System.Net;
 using System.Text;
+using System.Text.Json;
 using System.Text.Json.Nodes;
+using Core.WebUntis.Implementation.RequestTypes;
 using Core.WebUntis.Interface;
-using Newtonsoft.Json;
+using Core.WebUntis.Interface.Types;
 
 namespace Core.WebUntis.Implementation;
 
@@ -63,7 +65,7 @@ public class WebUntisClient : IWebUntisClient
         }
 
         var resultJsonString = responseJson["result"]!.ToJsonString();
-        return JsonConvert.DeserializeObject<TResponse>(resultJsonString)!;
+        return JsonSerializer.Deserialize<TResponse>(resultJsonString)!;
     }
 
     private string GetUrlParameterString(Dictionary<string, string>? urlParameters = null)
@@ -86,7 +88,7 @@ public class WebUntisClient : IWebUntisClient
         };
 
         if (request != null)
-            json["params"] = JsonNode.Parse(JsonConvert.SerializeObject(request));
+            json["params"] = JsonNode.Parse(JsonSerializer.Serialize(request));
 
         return new StringContent(json.ToJsonString(), Encoding.UTF8, "application/json");
     }
