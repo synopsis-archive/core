@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+<button onclick="parent.postMessage({method: 'loadPlugin', plugin: 'webuntis'})">Plugin WebUntis</button>
+<button onclick="parent.postMessage({method: 'loadPlugin', plugin: 'sokrates'})">Plugin Sokrates</button>
+
+<div style="border: black 1px solid; width: 50%; height: 200px; background-color: lightgrey" id="plugin-content">
+
+</div>
+
+<script>
+    let previousPosition = null;
+
+    setInterval(() => {
+        let position = document.getElementById('plugin-content').getBoundingClientRect();
+        if (!positionEquals(position, previousPosition)) {
+            console.debug("Position changed", position, previousPosition);
+            parent.postMessage({
+                method: "container",
+                x: position.x,
+                y: position.y,
+                width: position.width,
+                height: position.height
+            });
+            previousPosition = position;
+        }
+    }, 10);
+
+    function positionEquals(a, b) {
+        if (a === b) {
+            return true;
+        }
+        if (a === null || b === null) {
+            return false;
+        }
+        return a.x === b.x && a.y === b.y && a.width === b.width && a.height === b.height;
+    }
+</script>
+
+</body>
+</html>
