@@ -20,7 +20,7 @@ repos:
     hooks:
       - id: eslint
         name: Reformat Angular code
-        files: frontend/.*.[jt]sx?$  # *.js, *.jsx, *.ts and *.tsx
+        files: frontend/.*\.tsx?$ # *.ts and *.tsx
         types: [ file ]
         additional_dependencies:
           - "eslint@8.23.1"
