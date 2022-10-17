@@ -22,7 +22,7 @@ public static class Pluginloader
     public static void LoadPlugins(string folder)
     {
         Console.WriteLine("x--------------------[Loading Plugins]---------------------x");
-        var files = Directory.GetFiles(@folder, "*.dll");
+        var files = Directory.GetFiles(folder, "*.dll");
         foreach (var file in files)
         {
             Console.WriteLine($"loading from {Path.GetFullPath(file)}");
@@ -39,6 +39,8 @@ public static class Pluginloader
                 }
             }
         }
+        if (files.Length == 0)
+            Console.WriteLine("No Plugins found");
         Console.WriteLine("x------------------[Starting Application]------------------x");
     }
 }
