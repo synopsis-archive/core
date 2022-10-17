@@ -21,8 +21,13 @@
       <ProjectReference Include="..\Core.Ldap.Interface\Core.Ldap.Interface.csproj" />
       <ProjectReference Include="..\Core.Moodle.Implementation\Core.Moodle.Implementation.csproj" />
       <ProjectReference Include="..\Core.Moodle.Interface\Core.Moodle.Interface.csproj" />
+      <ProjectReference Include="..\Core.Plugin.Interface\Core.Plugin.Interface.csproj" />
       <ProjectReference Include="..\Core.WebUntis.Implementation\Core.WebUntis.Implementation.csproj" />
       <ProjectReference Include="..\Core.WebUntis.Interface\Core.WebUntis.Interface.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="plugins" />
     </ItemGroup>
 
 </Project>

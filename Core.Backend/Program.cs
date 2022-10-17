@@ -1,7 +1,10 @@
+using Core.Backend;
 using Core.Ldap.Implementation;
 using Core.Database;
 using Microsoft.EntityFrameworkCore;
 using Core.Moodle.Implementation;
+
+Pluginloader.LoadPlugins(AppDomain.CurrentDomain.BaseDirectory + "/plugins");
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +26,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.Configure<MoodleConfiguration>(builder.Configuration.GetSection("Moodle"));
 builder.Services.Configure<LdapConfiguration>(builder.Configuration.GetSection("LDAPConfiguration"));
 
-var app = builder.Build();
+var app = builder.InjectBuilderToPlugin().Build();
 
 using (var scope = app.Services.CreateScope())
 {
@@ -44,4 +47,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+app.InjectAppToPlugin().Run();
