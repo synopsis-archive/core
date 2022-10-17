@@ -5,7 +5,6 @@ namespace Core.Backend;
 
 public static class Pluginloader
 {
-    // , WebApplicationBuilder builder, WebApplication app
     private static List<ICorePlugin> Plugins { get; } = new List<ICorePlugin>();
 
     public static WebApplicationBuilder InjectBuilderToPlugin(this WebApplicationBuilder builder)
@@ -27,6 +26,7 @@ public static class Pluginloader
         {
             var assembly = Assembly.LoadFile(file);
             var types = assembly.GetTypes();
+
             foreach (var type in types)
             {
                 if (type.IsSubclassOf(typeof(ICorePlugin)))
