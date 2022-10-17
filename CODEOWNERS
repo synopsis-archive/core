@@ -2,6 +2,10 @@
 frontend    @littlegamer757
 
 # architektur team
+Core.WebUntis.Interface @profiluefter
+Core.Moodle.Interface   @profiluefter
+Core.Ldap.Interface     @profiluefter
+Core.Plugin.Interface   @profiluefter @SchneckchenAndy
 Core.WebUntis.Interface @profiluefter @SchoenbergerFabian
 Core.Moodle.Interface   @profiluefter @EinboeckFranz
 Core.Ldap.Interface     @profiluefter @EinboeckFranz
