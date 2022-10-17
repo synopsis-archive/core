@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Builder;
+
 namespace Core.Plugin.Interface;
 
 public interface ICorePlugin
