@@ -49,6 +49,18 @@ public class WebUntisClient : IWebUntisClient
         return authenticateResponse.Convert();
     }
 
+    public List<Class> GetClasses(int schoolYear)
+    {
+        var classesResponse = Request<ClassResponse[]>(
+            "getKlassen",
+            null,
+            new Dictionary<string, string> {
+                {"schoolYear", schoolYear.ToString()}
+            }
+        ).Result;
+        return classesResponse.Select(x => x.Convert()).ToList();
+    }
+
     private async Task<TResponse> Request<TResponse>(
         string method,
         object? request = null,
