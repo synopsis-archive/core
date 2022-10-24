@@ -1,4 +1,3 @@
-using System.Globalization;
 using System.Net;
 using System.Text;
 using System.Text.Json;
@@ -91,23 +90,23 @@ public class WebUntisClient : IWebUntisClient
         };
     }
 
-    public List<Class> GetClasses(int schoolYear)
+    public async Task<List<Class>> GetClasses(int schoolYear)
     {
-        var classesResponse = Request<ClassResponse[]>(
+        var classesResponse = await Request<ClassResponse[]>(
             "getKlassen",
             null,
             new Dictionary<string, string> {
                 {"schoolYear", schoolYear.ToString()}
             }
-        ).Result;
+        );
         return classesResponse.Select(x => x.Convert()).ToList();
     }
 
-    public List<Room> GetRooms()
+    public async Task<List<Room>> GetRooms()
     {
-        var roomsResponse = Request<RoomResponse[]>(
+        var roomsResponse = await Request<RoomResponse[]>(
             "getRooms"
-        ).Result;
+        );
         return roomsResponse.Select(x => x.Convert()).ToList();
     }
 
