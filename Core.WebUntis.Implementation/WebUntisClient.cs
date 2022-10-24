@@ -48,7 +48,7 @@ public class WebUntisClient : IWebUntisClient
 
     public async Task<Authentication> Authenticate(string user, string password)
     {
-        var authenticateResponse = await Request<AuthenticateResponse>(
+        var authenticateResponse = await JsonRpcRequest<AuthenticateResponse>(
             "authenticate",
             new AuthenticateRequest
             {
@@ -69,16 +69,18 @@ public class WebUntisClient : IWebUntisClient
         var otp = new TotpGenerator().Generate(secret);
         await Request(
             BaseUrlJsonRpcIntern,
-            "getUserData2017",
-            new object[] {
-                new AuthenticateWithSecretRequest {
-                    Auth = new AuthenticateWithSecretRequestAuth {
-                        ClientTime = DateTimeOffset.Now.ToUnixTimeMilliseconds(),
-                        User = user,
-                        Otp = otp.ToString()
+            GetJsonRpcContent(
+                "getUserData2017",
+                new object[] {
+                    new AuthenticateWithSecretRequest {
+                        Auth = new AuthenticateWithSecretRequestAuth {
+                            ClientTime = DateTimeOffset.Now.ToUnixTimeMilliseconds(),
+                            User = user,
+                            Otp = otp.ToString()
+                        }
                     }
                 }
-            },
+            ),
             new Dictionary<string, string> {
                 {"school", _school}
             }
@@ -92,7 +94,7 @@ public class WebUntisClient : IWebUntisClient
 
     public async Task<List<Class>> GetClasses(int schoolYear)
     {
-        var classesResponse = await Request<ClassResponse[]>(
+        var classesResponse = await JsonRpcRequest<ClassResponse[]>(
             "getKlassen",
             null,
             new Dictionary<string, string> {
@@ -104,13 +106,13 @@ public class WebUntisClient : IWebUntisClient
 
     public async Task<List<Room>> GetRooms()
     {
-        var roomsResponse = await Request<RoomResponse[]>(
+        var roomsResponse = await JsonRpcRequest<RoomResponse[]>(
             "getRooms"
         );
         return roomsResponse.Select(x => x.Convert()).ToList();
     }
 
-    private async Task<TResponse> Request<TResponse>(
+    private async Task<TResponse> JsonRpcRequest<TResponse>(
         string method,
         object? request = null,
         Dictionary<string, string>? urlParameters = null
@@ -118,8 +120,7 @@ public class WebUntisClient : IWebUntisClient
     {
         var response = await Request(
             BaseUrlJsonRpc,
-            method,
-            request,
+            GetJsonRpcContent(method, request),
             urlParameters
         );
         var responseJson = JsonNode.Parse(await response.Content.ReadAsStringAsync())!;
@@ -143,14 +144,13 @@ public class WebUntisClient : IWebUntisClient
 
     private async Task<HttpResponseMessage> Request(
         string url,
-        string method,
-        object? request = null,
+        HttpContent? httpContent = null,
         Dictionary<string, string>? urlParameters = null
     )
     {
         return await _httpClient.PostAsync(
             GetUrlWithParameters(url, urlParameters),
-            GetContent(method, request)
+            httpContent
         );
     }
 
@@ -161,7 +161,7 @@ public class WebUntisClient : IWebUntisClient
             : "");
     }
 
-    private HttpContent GetContent(
+    private HttpContent GetJsonRpcContent(
         string method,
         object? request = null
     )
