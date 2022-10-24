@@ -7,7 +7,7 @@ public class User
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int UserId { get; set; }
+    public Guid UUID { get; set; }
     [Required]
     public string SchoolEmail { get; set; } = null!;
 
