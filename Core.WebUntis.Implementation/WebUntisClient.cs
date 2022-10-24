@@ -3,9 +3,11 @@ using System.Net;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
+using AspNetCore.Totp;
 using Core.WebUntis.Implementation.RequestTypes;
 using Core.WebUntis.Implementation.ResponseTypes;
 using Core.WebUntis.Interface;
+using Core.WebUntis.Interface.Exceptions;
 using Core.WebUntis.Interface.Types;
 using Room = Core.WebUntis.Interface.Types.Room;
 
@@ -13,24 +15,36 @@ namespace Core.WebUntis.Implementation;
 
 public class WebUntisClient : IWebUntisClient
 {
-    private const string BaseUrl = "https://arche.webuntis.com/WebUntis/jsonrpc.do";
-    private const string School = "htbla-grieskirchen";
-    private const string Client = "htl-grieskirchen-core";
+    private readonly string _baseUrl;
+    private string BaseUrlJsonRpc => _baseUrl + "/WebUntis/jsonrpc.do";
+    private string BaseUrlJsonRpcIntern => _baseUrl + "/WebUntis/jsonrpc_intern.do";
+    private readonly string _school;
+    private readonly string _client;
 
     private readonly HttpClient _httpClient;
+    private readonly CookieContainer _cookies;
 
-    public WebUntisClient(string? token = null)
+    public WebUntisClient(
+        string baseUrl,
+        string school,
+        string client,
+        string? token = null
+    )
     {
-        var baseAddress = new Uri(BaseUrl);
+        _baseUrl = baseUrl;
+        _school = school;
+        _client = client;
 
-        var cookieContainer = new CookieContainer();
+        var baseAddress = new Uri(BaseUrlJsonRpc);
+
+        _cookies = new CookieContainer();
         if (token != null)
         {
-            cookieContainer.Add(baseAddress, new Cookie("JSESSIONID", token));
+            _cookies.Add(baseAddress, new Cookie("JSESSIONID", token));
         }
 
-        var handler = new HttpClientHandler { CookieContainer = cookieContainer };
-        _httpClient = new HttpClient(handler) { BaseAddress = baseAddress };
+        var handler = new HttpClientHandler { CookieContainer = _cookies };
+        _httpClient = new HttpClient(handler);
     }
 
     public async Task<Authentication> Authenticate(string user, string password)
@@ -41,14 +55,40 @@ public class WebUntisClient : IWebUntisClient
             {
                 User = user,
                 Password = password,
-                Client = Client
+                Client = _client
             },
             new Dictionary<string, string> {
-                {"school", School}
+                {"school", _school}
             }
         );
 
         return authenticateResponse.Convert();
+    }
+
+    public async Task<Authentication> AuthenticateWithSecret(string user, string secret)
+    {
+        var otp = new TotpGenerator().Generate(secret);
+        await Request(
+            BaseUrlJsonRpcIntern,
+            "getUserData2017",
+            new object[] {
+                new AuthenticateWithSecretRequest {
+                    Auth = new AuthenticateWithSecretRequestAuth {
+                        ClientTime = DateTimeOffset.Now.ToUnixTimeMilliseconds(),
+                        User = user,
+                        Otp = otp.ToString()
+                    }
+                }
+            },
+            new Dictionary<string, string> {
+                {"school", _school}
+            }
+        );
+
+        return new Authentication
+        {
+            Token = _cookies.GetCookies(new Uri(BaseUrlJsonRpcIntern))["JSESSIONID"]!.Value
+        };
     }
 
     public List<Class> GetClasses(int schoolYear)
@@ -77,9 +117,11 @@ public class WebUntisClient : IWebUntisClient
         Dictionary<string, string>? urlParameters = null
     )
     {
-        var response = await _httpClient.PostAsync(
-            GetUrlParameterString(urlParameters),
-            GetContent(method, request)
+        var response = await Request(
+            BaseUrlJsonRpc,
+            method,
+            request,
+            urlParameters
         );
         var responseJson = JsonNode.Parse(await response.Content.ReadAsStringAsync())!;
 
@@ -87,6 +129,12 @@ public class WebUntisClient : IWebUntisClient
         if (errorJson != null)
         {
             var errorCode = int.Parse(errorJson["code"]!.ToString());
+
+            if (errorCode == -8520)
+            {
+                throw new InvalidTokenException();
+            }
+
             throw new NotImplementedException();
         }
 
@@ -94,11 +142,24 @@ public class WebUntisClient : IWebUntisClient
         return JsonSerializer.Deserialize<TResponse>(resultJsonString)!;
     }
 
-    private string GetUrlParameterString(Dictionary<string, string>? urlParameters = null)
+    private async Task<HttpResponseMessage> Request(
+        string url,
+        string method,
+        object? request = null,
+        Dictionary<string, string>? urlParameters = null
+    )
     {
-        return urlParameters != null
+        return await _httpClient.PostAsync(
+            GetUrlWithParameters(url, urlParameters),
+            GetContent(method, request)
+        );
+    }
+
+    private string GetUrlWithParameters(string url, Dictionary<string, string>? urlParameters = null)
+    {
+        return url + (urlParameters != null
             ? $"?{string.Join("&", urlParameters.Select(entry => $"{entry.Key}={entry.Value}"))}"
-            : "";
+            : "");
     }
 
     private HttpContent GetContent(
@@ -118,28 +179,4 @@ public class WebUntisClient : IWebUntisClient
 
         return new StringContent(json.ToJsonString(), Encoding.UTF8, "application/json");
     }
-
-    #region staticMethods
-
-    public static DateTime ConvertUntisDateToDate(int date)
-    {
-        return DateTime.ParseExact(date.ToString(), "yyyyMMdd", CultureInfo.InvariantCulture);
-    }
-
-    public static int ConvertDateToUntisDate(DateTime date)
-    {
-        return int.Parse(date.ToString("yyyyMMdd", CultureInfo.InvariantCulture));
-    }
-
-    public static DateTime ConvertUntisTimeToTime(int time)
-    {
-        return DateTime.ParseExact(time.ToString(), "HHmm", CultureInfo.InvariantCulture);
-    }
-
-    public static int ConvertTimeToUntisTime(DateTime time)
-    {
-        return int.Parse(time.ToString("HHmm", CultureInfo.InvariantCulture));
-    }
-
-    #endregion
 }
