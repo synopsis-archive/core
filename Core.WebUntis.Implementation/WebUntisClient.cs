@@ -7,6 +7,7 @@ using Core.WebUntis.Implementation.RequestTypes;
 using Core.WebUntis.Implementation.ResponseTypes;
 using Core.WebUntis.Interface;
 using Core.WebUntis.Interface.Types;
+using Room = Core.WebUntis.Interface.Types.Room;
 
 namespace Core.WebUntis.Implementation;
 
@@ -60,6 +61,14 @@ public class WebUntisClient : IWebUntisClient
             }
         ).Result;
         return classesResponse.Select(x => x.Convert()).ToList();
+    }
+
+    public List<Room> GetRooms()
+    {
+        var roomsResponse = Request<RoomResponse[]>(
+            "getRooms"
+        ).Result;
+        return roomsResponse.Select(x => x.Convert()).ToList();
     }
 
     private async Task<TResponse> Request<TResponse>(
