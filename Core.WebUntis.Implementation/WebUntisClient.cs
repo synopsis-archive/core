@@ -17,6 +17,7 @@ public class WebUntisClient : IWebUntisClient
     private readonly string _baseUrl;
     private string BaseUrlJsonRpc => _baseUrl + "/WebUntis/jsonrpc.do";
     private string BaseUrlJsonRpcIntern => _baseUrl + "/WebUntis/jsonrpc_intern.do";
+    private string BaseUrlRest => _baseUrl + "/WebUntis";
     private readonly string _school;
     private readonly string _client;
 
@@ -68,8 +69,9 @@ public class WebUntisClient : IWebUntisClient
     {
         var otp = new TotpGenerator().Generate(secret);
         await Request(
+            HttpMethod.Post,
             BaseUrlJsonRpcIntern,
-            GetJsonRpcContent(
+            GetJsonRpcRequestContent(
                 "getUserData2017",
                 new object[] {
                     new AuthenticateWithSecretRequest {
@@ -101,7 +103,9 @@ public class WebUntisClient : IWebUntisClient
                 {"schoolYear", schoolYear.ToString()}
             }
         );
-        return classesResponse.Select(x => x.Convert()).ToList();
+        return classesResponse
+            .Select(x => x.Convert())
+            .ToList();
     }
 
     public async Task<List<Room>> GetRooms()
@@ -109,7 +113,9 @@ public class WebUntisClient : IWebUntisClient
         var roomsResponse = await JsonRpcRequest<RoomResponse[]>(
             "getRooms"
         );
-        return roomsResponse.Select(x => x.Convert()).ToList();
+        return roomsResponse
+            .Select(x => x.Convert())
+            .ToList();
     }
 
     private async Task<TResponse> JsonRpcRequest<TResponse>(
@@ -119,8 +125,9 @@ public class WebUntisClient : IWebUntisClient
     )
     {
         var response = await Request(
+            HttpMethod.Post,
             BaseUrlJsonRpc,
-            GetJsonRpcContent(method, request),
+            GetJsonRpcRequestContent(method, request),
             urlParameters
         );
         var responseJson = JsonNode.Parse(await response.Content.ReadAsStringAsync())!;
@@ -142,15 +149,42 @@ public class WebUntisClient : IWebUntisClient
         return JsonSerializer.Deserialize<TResponse>(resultJsonString)!;
     }
 
+    private async Task<TResponse> RestRequest<TResponse>(
+        HttpMethod method,
+        string path,
+        object? request = null,
+        Dictionary<string, string>? urlParameters = null
+    )
+    {
+        var response = await Request(
+            method,
+            $"{BaseUrlRest}/{path}",
+            GetRestRequestContent(request),
+            urlParameters
+        );
+
+        if (!response.IsSuccessStatusCode)
+        {
+            var errorCode = response.StatusCode;
+
+            throw new NotImplementedException();
+        }
+
+        return JsonSerializer.Deserialize<TResponse>(await response.Content.ReadAsStringAsync())!;
+    }
+
     private async Task<HttpResponseMessage> Request(
+        HttpMethod method,
         string url,
         HttpContent? httpContent = null,
         Dictionary<string, string>? urlParameters = null
     )
     {
-        return await _httpClient.PostAsync(
-            GetUrlWithParameters(url, urlParameters),
-            httpContent
+        return await _httpClient.SendAsync(
+            new HttpRequestMessage(method, GetUrlWithParameters(url, urlParameters))
+            {
+                Content = httpContent
+            }
         );
     }
 
@@ -161,7 +195,7 @@ public class WebUntisClient : IWebUntisClient
             : "");
     }
 
-    private HttpContent GetJsonRpcContent(
+    private HttpContent GetJsonRpcRequestContent(
         string method,
         object? request = null
     )
@@ -177,5 +211,12 @@ public class WebUntisClient : IWebUntisClient
             json["params"] = JsonNode.Parse(JsonSerializer.Serialize(request));
 
         return new StringContent(json.ToJsonString(), Encoding.UTF8, "application/json");
+    }
+
+    private HttpContent GetRestRequestContent(
+        object? request = null
+    )
+    {
+        return new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
     }
 }
