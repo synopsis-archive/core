@@ -3,7 +3,7 @@ import {ResizedEvent} from "angular-resize-event";
 import {MainframeNavService} from "../mainframe-nav.service";
 
 @Component({
-  selector: "lib-plugin-placeholder",
+  selector: "mainframe-plugin-placeholder",
   templateUrl: "./plugin-placeholder.component.html",
   styleUrls: ["./plugin-placeholder.component.css"]
 })
