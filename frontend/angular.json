@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
+    "core-ui": "libs/core-ui",
     "frontend": "apps/frontend",
     "mainframe-connector": "libs/mainframe-connector"
   }
