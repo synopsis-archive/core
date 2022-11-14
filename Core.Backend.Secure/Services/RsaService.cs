@@ -8,7 +8,7 @@ namespace Core.Backend.Secure.Services;
 
 public static class RsaService
 {
-    public static RSACryptoServiceProvider ImportRSAKey(string pem)
+    public static RSA ImportRSAKey(string pem)
     {
         var pk = File.ReadAllText(pem);
 
@@ -22,7 +22,7 @@ public static class RsaService
 
         var rsaParams = DotNetUtilities.ToRSAParameters(keyPair.Private as RsaPrivateCrtKeyParameters);
 
-        using RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
+        RSA rsa = RSA.Create();
         rsa.ImportParameters(rsaParams);
         rsa.ExportParameters(true);
 

@@ -14,7 +14,7 @@ public class CredService
     {
         _db = db;
         _conf = conf;
-        _privateKey = RsaService.ImportRSAKey("./keys/" + _conf["RSA:private-key"]);
+        //_privateKey = RsaService.ImportRSAKey("./keys/" + _conf["RSA:private-key"]);
         //_publicKey = ImportPublicKey("./keys/"+_conf["RSA:public-key"]);
     }
 

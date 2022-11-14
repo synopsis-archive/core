@@ -19,7 +19,7 @@ else
 
 builder.Services.AddTransient<CredService>();
 builder.Services.AddSingleton<JwtService>();
-builder.Services.AddSingleton<RSACryptoServiceProvider>(provider => RsaService.ImportRSAKey("./keys/" + builder.Configuration["RSA:private-key"]));
+builder.Services.AddSingleton<RSA>(provider => RsaService.ImportRSAKey("./keys/" + builder.Configuration["RSA:private-key"]));
 
 
 builder.Services.AddControllers();
