@@ -8,6 +8,7 @@ using Core.WebUntis.Implementation.ResponseTypes;
 using Core.WebUntis.Interface;
 using Core.WebUntis.Interface.Exceptions;
 using Core.WebUntis.Interface.Types;
+using Holiday = Core.WebUntis.Interface.Types.Holiday;
 using Homework = Core.WebUntis.Interface.Types.Homework;
 using Room = Core.WebUntis.Interface.Types.Room;
 
@@ -143,6 +144,14 @@ public class WebUntisClient : IWebUntisClient
             }
         );
         return homeworkResponse.Convert();
+    }
+
+    public async Task<IEnumerable<Holiday>> GetHolidays()
+    {
+        var holidayResponse = await JsonRpcRequest<HolidayResponse[]>(
+            method: "getHolidays"
+        );
+        return holidayResponse.Select(x => x.Convert());
     }
 
     private async Task<TResponse> JsonRpcRequest<TResponse>(
