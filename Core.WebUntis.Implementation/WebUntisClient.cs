@@ -154,19 +154,29 @@ public class WebUntisClient : IWebUntisClient
         return holidayResponse.Select(x => x.Convert());
     }
 
-    public async Task<List<Subject>> GetSubjects() //shows every subject from arche.webuntis.com
+    public async Task<IEnumerable<Subject>> GetSubjects() //shows every subject from arche.webuntis.com
     {
         var subjectResponse = await JsonRpcRequest<SubjectResponse[]>("getSubjects");
         return subjectResponse
-            .Select(x => x.Convert())
-            .ToList();
+            .Select(x => x.Convert());
     }
-    public async Task<List<Holiday>> GetHolidays()
+
+    public async Task<IEnumerable<Period>> GetTimetable(ElementType type, int? personId, DateTime startDate, DateTime endDate)
     {
-        var holidayResponse = await JsonRpcRequest<HolidayResponse[]>("getHolidays");
-        return holidayResponse
-            .Select(x => x.Convert())
-            .ToList();
+
+        var timetableResponse = await JsonRpcRequest<TimetableResponse[]>("getTimetable",
+            new TimetableRequest
+            {
+                Type = (int)type,
+                Id = personId,
+                StartDate = UntisDateTimeMethods.ConvertDateToUntisDate(startDate),
+                EndDate = UntisDateTimeMethods.ConvertDateToUntisDate(endDate)
+            },
+            new Dictionary<string, string>
+            {
+                { "school", _school }
+            });
+        return timetableResponse.Select(x => x.Convert());
     }
 
     private async Task<TResponse> JsonRpcRequest<TResponse>(
