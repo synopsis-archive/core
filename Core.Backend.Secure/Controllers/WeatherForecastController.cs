@@ -1,3 +1,5 @@
+using Core.Backend.Secure.Auth;
+using Core.Backend.Secure.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Core.Backend.Secure.Controllers;
@@ -11,22 +13,26 @@ public class WeatherForecastController : ControllerBase
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
 
-    private readonly ILogger<WeatherForecastController> _logger;
+    private JwtService _jwtService;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public WeatherForecastController(JwtService jwt)
     {
-        _logger = logger;
+        _jwtService = jwt;
     }
 
-    [HttpGet(Name = "GetWeatherForecast")]
-    public IEnumerable<WeatherForecast> Get()
+    [HttpGet(Name = "GetJWT")]
+    public string Get()
     {
-        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        var uuid = new Guid("00000000-0000-0000-0000-000000000000");
+        var idToken = new IDToken()
         {
-            Date = DateTime.Now.AddDays(index),
-            TemperatureC = Random.Shared.Next(-20, 55),
-            Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-        })
-            .ToArray();
+            Class = "5b",
+            Role = "Superduperadmin",
+            Username = "Siemens",
+            ConnectedPlatforms = new List<string>() { "Webuntis" },
+            MNR = "180012",
+            UUID = uuid
+        };
+        return _jwtService.GenerateToken(idToken);
     }
 }

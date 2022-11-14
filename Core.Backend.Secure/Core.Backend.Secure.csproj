@@ -8,7 +8,9 @@
 
     <ItemGroup>
         <PackageReference Include="BouncyCastle" Version="1.8.9" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.25.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -17,6 +19,15 @@
 
     <ItemGroup>
       <Folder Include="keys" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="keys\dev-private-key.pem">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="keys\dev-public-key.pem">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

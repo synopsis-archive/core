@@ -1,3 +1,4 @@
+using Core.Backend.Secure.Services;
 using Core.Database;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,7 +13,11 @@ if (builder.Environment.IsDevelopment())
 else
 {
     // TODO: setup production database
+    Console.WriteLine("Production database not setup yet");
 }
+
+builder.Services.AddSingleton<JwtService>();
+builder.Services.AddTransient<CredService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -24,7 +29,7 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<CoreContext>();
-    context.Database.EnsureCreated();
+    //context.Database.EnsureCreated();
 }
 
 // Configure the HTTP request pipeline.
