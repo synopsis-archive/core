@@ -8,6 +8,7 @@ using Core.WebUntis.Implementation.ResponseTypes;
 using Core.WebUntis.Interface;
 using Core.WebUntis.Interface.Exceptions;
 using Core.WebUntis.Interface.Types;
+using Homework = Core.WebUntis.Interface.Types.Homework;
 using Room = Core.WebUntis.Interface.Types.Room;
 
 namespace Core.WebUntis.Implementation;
@@ -18,7 +19,7 @@ public class WebUntisClient : IWebUntisClient
     private Uri BaseUri => new(_baseUrl);
     private string BaseUrlJsonRpc => _baseUrl + "/WebUntis/jsonrpc.do";
     private string BaseUrlJsonRpcIntern => _baseUrl + "/WebUntis/jsonrpc_intern.do";
-    private string BaseUrlRest => _baseUrl + "/WebUntis";
+    private string BaseUrlRest => _baseUrl + "/WebUntis/api";
     private readonly string _school;
     private readonly string _client;
 
@@ -131,16 +132,29 @@ public class WebUntisClient : IWebUntisClient
             .ToList();
     }
 
+    public async Task<IEnumerable<Homework>> GetHomeworks(DateTime startDate, DateTime endDate)
+    {
+        var homeworkResponse = await RestRequest<HomeworkResponse>(
+            method: HttpMethod.Get,
+            path: $"/homeworks/lessons",
+            urlParameters: new Dictionary<string, string> {
+                {"startDate", UntisDateTimeMethods.ConvertDateToUntisDate(startDate).ToString()},
+                {"endDate", UntisDateTimeMethods.ConvertDateToUntisDate(endDate).ToString()}
+            }
+        );
+        return homeworkResponse.Convert();
+    }
+
     private async Task<TResponse> JsonRpcRequest<TResponse>(
         string method,
-        object? request = null,
+        object? body = null,
         Dictionary<string, string>? urlParameters = null
     )
     {
         var response = await Request(
             HttpMethod.Post,
             BaseUrlJsonRpc,
-            GetJsonRpcRequestContent(method, request),
+            GetJsonRpcRequestContent(method, body),
             urlParameters
         );
         var responseJson = JsonNode.Parse(await response.Content.ReadAsStringAsync())!;
@@ -165,14 +179,14 @@ public class WebUntisClient : IWebUntisClient
     private async Task<TResponse> RestRequest<TResponse>(
         HttpMethod method,
         string path,
-        object? request = null,
+        object? body = null,
         Dictionary<string, string>? urlParameters = null
     )
     {
         var response = await Request(
             method,
             $"{BaseUrlRest}/{path}",
-            GetRestRequestContent(request),
+            GetRestRequestContent(body),
             urlParameters
         );
 
