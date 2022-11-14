@@ -174,9 +174,7 @@ public class WebUntisClient : IWebUntisClient
             var errorCode = int.Parse(errorJson["code"]!.ToString());
 
             if (errorCode == -8520)
-            {
                 throw new InvalidTokenException();
-            }
 
             throw new NotImplementedException();
         }
@@ -224,16 +222,16 @@ public class WebUntisClient : IWebUntisClient
         );
     }
 
-    private string GetUrlWithParameters(string url, Dictionary<string, string>? urlParameters = null)
+    private static string GetUrlWithParameters(string url, Dictionary<string, string>? urlParameters = null)
     {
         return url + (urlParameters != null
             ? $"?{string.Join("&", urlParameters.Select(entry => $"{entry.Key}={entry.Value}"))}"
             : "");
     }
 
-    private HttpContent GetJsonRpcRequestContent(
+    private static HttpContent GetJsonRpcRequestContent(
         string method,
-        object? request = null
+        object? body = null
     )
     {
         var json = new JsonObject
@@ -243,16 +241,16 @@ public class WebUntisClient : IWebUntisClient
             ["jsonrpc"] = "2.0"
         };
 
-        if (request != null)
-            json["params"] = JsonNode.Parse(JsonSerializer.Serialize(request));
+        if (body != null)
+            json["params"] = JsonNode.Parse(JsonSerializer.Serialize(body));
 
         return new StringContent(json.ToJsonString(), Encoding.UTF8, "application/json");
     }
 
-    private HttpContent GetRestRequestContent(
-        object? request = null
+    private static HttpContent GetRestRequestContent(
+        object? body = null
     )
     {
-        return new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
+        return new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8, "application/json");
     }
 }
