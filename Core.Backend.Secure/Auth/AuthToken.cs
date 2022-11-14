@@ -10,8 +10,6 @@ public class AuthToken
      *
      */
 
-    public string Username { get; set; }
+    public string? Username { get; set; }
     public Guid UUID { get; set; }
-
-    public bool IsAuthToken = true;
 }
