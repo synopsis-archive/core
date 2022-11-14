@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Core.Backend.Secure.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("[controller]/[action]")]
 public class WeatherForecastController : ControllerBase
 {
     private static readonly string[] Summaries = new[]
@@ -20,8 +20,8 @@ public class WeatherForecastController : ControllerBase
         _jwtService = jwt;
     }
 
-    [HttpGet(Name = "GetJWT")]
-    public string Get()
+    [HttpGet]
+    public string GetIDToken()
     {
         var uuid = new Guid("00000000-0000-0000-0000-000000000000");
         var idToken = new IDToken()
@@ -31,6 +31,18 @@ public class WeatherForecastController : ControllerBase
             Username = "Siemens",
             ConnectedPlatforms = new List<string>() { "Webuntis" },
             MNR = "180012",
+            UUID = uuid,
+        };
+        return _jwtService.GenerateToken(idToken);
+    }
+
+    [HttpGet]
+    public string GetAuth()
+    {
+        var uuid = new Guid("00000000-0000-0000-0000-000000000000");
+        var idToken = new AuthToken()
+        {
+            Username = "Siemens",
             UUID = uuid
         };
         return _jwtService.GenerateToken(idToken);

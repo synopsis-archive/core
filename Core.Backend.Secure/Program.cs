@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using Core.Backend.Secure.Services;
 using Core.Database;
 using Microsoft.EntityFrameworkCore;
@@ -16,8 +17,10 @@ else
     Console.WriteLine("Production database not setup yet");
 }
 
-builder.Services.AddSingleton<JwtService>();
 builder.Services.AddTransient<CredService>();
+builder.Services.AddSingleton<JwtService>();
+builder.Services.AddSingleton<RSACryptoServiceProvider>(provider => RsaService.ImportRSAKey("./keys/" + builder.Configuration["RSA:private-key"]));
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
