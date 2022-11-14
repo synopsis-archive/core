@@ -1,24 +1,17 @@
 using Core.Backend.Secure.Auth;
 using Core.Backend.Secure.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Core.Backend.Secure.Controllers;
 
 [ApiController]
 [Route("[controller]/[action]")]
-public class WeatherForecastController : ControllerBase
+public class AuthController : ControllerBase
 {
-    private static readonly string[] Summaries = new[]
-    {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
-
     private JwtService _jwtService;
 
-    public WeatherForecastController(JwtService jwt)
-    {
-        _jwtService = jwt;
-    }
+    public AuthController(JwtService jwt) => _jwtService = jwt;
 
     [HttpGet]
     public string GetIDToken()
@@ -47,4 +40,12 @@ public class WeatherForecastController : ControllerBase
         };
         return _jwtService.GenerateToken(idToken);
     }
+
+    [Authorize]
+    [HttpGet]
+    public bool IsAuthed() => true;
+
+    [Authorize(Policy = "ID-Token")]
+    [HttpGet]
+    public string? GetRole() => User.Claims.FirstOrDefault(x => x.Type == "rolle")?.Value;
 }
