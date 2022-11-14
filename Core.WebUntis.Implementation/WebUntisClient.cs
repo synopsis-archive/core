@@ -133,6 +133,14 @@ public class WebUntisClient : IWebUntisClient
             .ToList();
     }
 
+    public async Task<List<Teacher>> GetTeachers()
+    {
+        var teacherResponse = await JsonRpcRequest<TeacherResponse[]>("getTeachers");
+        return teacherResponse
+            .Select(x => x.Convert())
+            .ToList();
+    }
+
     public async Task<IEnumerable<Homework>> GetHomeworks(DateTime startDate, DateTime endDate)
     {
         var homeworkResponse = await RestRequest<HomeworkResponse>(

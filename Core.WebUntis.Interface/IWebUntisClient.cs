@@ -9,4 +9,5 @@ public interface IWebUntisClient
     public Task<List<Class>> GetClasses(int schoolYear);
     public Task<List<Subject>> GetSubjects();
     public Task<List<Room>> GetRooms();
+    public Task<List<Teacher>> GetTeachers();
 }
