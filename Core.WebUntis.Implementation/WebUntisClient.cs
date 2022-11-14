@@ -15,6 +15,7 @@ namespace Core.WebUntis.Implementation;
 public class WebUntisClient : IWebUntisClient
 {
     private readonly string _baseUrl;
+    private Uri BaseUri => new(_baseUrl);
     private string BaseUrlJsonRpc => _baseUrl + "/WebUntis/jsonrpc.do";
     private string BaseUrlJsonRpcIntern => _baseUrl + "/WebUntis/jsonrpc_intern.do";
     private string BaseUrlRest => _baseUrl + "/WebUntis";
@@ -35,16 +36,20 @@ public class WebUntisClient : IWebUntisClient
         _school = school;
         _client = client;
 
-        var baseAddress = new Uri(BaseUrlJsonRpc);
-
         _cookies = new CookieContainer();
+
         if (token != null)
         {
-            _cookies.Add(baseAddress, new Cookie("JSESSIONID", token));
+            AddToken(token);
         }
 
         var handler = new HttpClientHandler { CookieContainer = _cookies };
         _httpClient = new HttpClient(handler);
+    }
+
+    private void AddToken(string token)
+    {
+        _cookies.Add(BaseUri, new Cookie("JSESSIONID", token));
     }
 
     public async Task<Authentication> Authenticate(string user, string password)
@@ -62,7 +67,11 @@ public class WebUntisClient : IWebUntisClient
             }
         );
 
-        return authenticateResponse.Convert();
+        var authentication = authenticateResponse.Convert();
+
+        AddToken(authentication.Token);
+
+        return authentication;
     }
 
     public async Task<Authentication> AuthenticateWithSecret(string user, string secret)
@@ -88,10 +97,14 @@ public class WebUntisClient : IWebUntisClient
             }
         );
 
-        return new Authentication
+        var authentication = new Authentication
         {
             Token = _cookies.GetCookies(new Uri(BaseUrlJsonRpcIntern))["JSESSIONID"]!.Value
         };
+
+        AddToken(authentication.Token);
+
+        return authentication;
     }
 
     public async Task<List<Class>> GetClasses(int schoolYear)
