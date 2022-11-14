@@ -154,11 +154,12 @@ public class WebUntisClient : IWebUntisClient
         return holidayResponse.Select(x => x.Convert());
     }
 
-    public async Task<IEnumerable<Subject>> GetSubjects() //shows every subject from arche.webuntis.com
+    public async Task<List<Subject>> GetSubjects() //shows every subject from arche.webuntis.com
     {
         var subjectResponse = await JsonRpcRequest<SubjectResponse[]>("getSubjects");
         return subjectResponse
-            .Select(x => x.Convert());
+            .Select(x => x.Convert())
+            .ToList();
     }
 
     public async Task<IEnumerable<Period>> GetTimetable(ElementType type, int? personId, DateTime startDate, DateTime endDate)

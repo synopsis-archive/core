@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using Core.WebUntis.Interface.Types;
 
 namespace Core.WebUntis.Implementation.ResponseTypes;
 
@@ -7,8 +8,8 @@ public class SubjectResponse
     [JsonPropertyName("id")] public int Id { get; set; }
     [JsonPropertyName("name")] public string Name { get; set; }
     [JsonPropertyName("longName")] public string LongName { get; set; }
-    [JsonPropertyName("foreColorHex")] public string ForeColorHex { get; set; }
-    [JsonPropertyName("backColorHex")] public string BackColorHex { get; set; }
+    [JsonPropertyName("alternativeName")] public string AlternativeName { get; set; }
+    [JsonPropertyName("active")] public bool Active { get; set; }
 
     public Subject Convert()
     {
@@ -16,9 +17,7 @@ public class SubjectResponse
         {
             Id = Id,
             Name = Name,
-            LongName = LongName,
-            ForeColorHex = ForeColorHex,
-            BackColorHex = BackColorHex
+            LongName = LongName
         };
     }
 }
