@@ -10,15 +10,15 @@ public class SubjectResponse
     [JsonPropertyName("foreColorHex")] public string ForeColorHex { get; set; }
     [JsonPropertyName("backColorHex")] public string BackColorHex { get; set; }
 
-    public Subject Convert(SubjectResponse response)
+    public Subject Convert()
     {
         return new Subject
         {
-            Id = response.Id,
-            Name = response.Name,
-            LongName = response.LongName,
-            ForeColorHex = response.ForeColorHex,
-            BackColorHex = response.BackColorHex
+            Id = Id,
+            Name = Name,
+            LongName = LongName,
+            ForeColorHex = ForeColorHex,
+            BackColorHex = BackColorHex
         };
     }
 }

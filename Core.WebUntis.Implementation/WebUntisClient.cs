@@ -118,6 +118,14 @@ public class WebUntisClient : IWebUntisClient
             .ToList();
     }
 
+    public async Task<List<Subject>> GetSubjects() //shows every subject from arche.webuntis.com
+    {
+        var subjectResponse = await JsonRpcRequest<SubjectResponse[]>("getSubjects");
+        return subjectResponse
+            .Select(x => x.Convert())
+            .ToList();
+    }
+
     private async Task<TResponse> JsonRpcRequest<TResponse>(
         string method,
         object? request = null,
