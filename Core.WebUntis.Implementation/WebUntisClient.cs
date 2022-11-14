@@ -8,6 +8,8 @@ using Core.WebUntis.Implementation.ResponseTypes;
 using Core.WebUntis.Interface;
 using Core.WebUntis.Interface.Exceptions;
 using Core.WebUntis.Interface.Types;
+using Holiday = Core.WebUntis.Interface.Types.Holiday;
+using Homework = Core.WebUntis.Interface.Types.Homework;
 using Room = Core.WebUntis.Interface.Types.Room;
 
 namespace Core.WebUntis.Implementation;
@@ -15,9 +17,10 @@ namespace Core.WebUntis.Implementation;
 public class WebUntisClient : IWebUntisClient
 {
     private readonly string _baseUrl;
+    private Uri BaseUri => new(_baseUrl);
     private string BaseUrlJsonRpc => _baseUrl + "/WebUntis/jsonrpc.do";
     private string BaseUrlJsonRpcIntern => _baseUrl + "/WebUntis/jsonrpc_intern.do";
-    private string BaseUrlRest => _baseUrl + "/WebUntis";
+    private string BaseUrlRest => _baseUrl + "/WebUntis/api";
     private readonly string _school;
     private readonly string _client;
 
@@ -35,16 +38,20 @@ public class WebUntisClient : IWebUntisClient
         _school = school;
         _client = client;
 
-        var baseAddress = new Uri(BaseUrlJsonRpc);
-
         _cookies = new CookieContainer();
+
         if (token != null)
         {
-            _cookies.Add(baseAddress, new Cookie("JSESSIONID", token));
+            AddToken(token);
         }
 
         var handler = new HttpClientHandler { CookieContainer = _cookies };
         _httpClient = new HttpClient(handler);
+    }
+
+    private void AddToken(string token)
+    {
+        _cookies.Add(BaseUri, new Cookie("JSESSIONID", token));
     }
 
     public async Task<Authentication> Authenticate(string user, string password)
@@ -62,7 +69,11 @@ public class WebUntisClient : IWebUntisClient
             }
         );
 
-        return authenticateResponse.Convert();
+        var authentication = authenticateResponse.Convert();
+
+        AddToken(authentication.Token);
+
+        return authentication;
     }
 
     public async Task<Authentication> AuthenticateWithSecret(string user, string secret)
@@ -88,10 +99,14 @@ public class WebUntisClient : IWebUntisClient
             }
         );
 
-        return new Authentication
+        var authentication = new Authentication
         {
             Token = _cookies.GetCookies(new Uri(BaseUrlJsonRpcIntern))["JSESSIONID"]!.Value
         };
+
+        AddToken(authentication.Token);
+
+        return authentication;
     }
 
     public async Task<List<Class>> GetClasses(int schoolYear)
@@ -118,6 +133,27 @@ public class WebUntisClient : IWebUntisClient
             .ToList();
     }
 
+    public async Task<IEnumerable<Homework>> GetHomeworks(DateTime startDate, DateTime endDate)
+    {
+        var homeworkResponse = await RestRequest<HomeworkResponse>(
+            method: HttpMethod.Get,
+            path: $"/homeworks/lessons",
+            urlParameters: new Dictionary<string, string> {
+                {"startDate", UntisDateTimeMethods.ConvertDateToUntisDate(startDate).ToString()},
+                {"endDate", UntisDateTimeMethods.ConvertDateToUntisDate(endDate).ToString()}
+            }
+        );
+        return homeworkResponse.Convert();
+    }
+
+    public async Task<IEnumerable<Holiday>> GetHolidays()
+    {
+        var holidayResponse = await JsonRpcRequest<HolidayResponse[]>(
+            method: "getHolidays"
+        );
+        return holidayResponse.Select(x => x.Convert());
+    }
+
     public async Task<List<Subject>> GetSubjects() //shows every subject from arche.webuntis.com
     {
         var subjectResponse = await JsonRpcRequest<SubjectResponse[]>("getSubjects");
@@ -135,14 +171,14 @@ public class WebUntisClient : IWebUntisClient
 
     private async Task<TResponse> JsonRpcRequest<TResponse>(
         string method,
-        object? request = null,
+        object? body = null,
         Dictionary<string, string>? urlParameters = null
     )
     {
         var response = await Request(
             HttpMethod.Post,
             BaseUrlJsonRpc,
-            GetJsonRpcRequestContent(method, request),
+            GetJsonRpcRequestContent(method, body),
             urlParameters
         );
         var responseJson = JsonNode.Parse(await response.Content.ReadAsStringAsync())!;
@@ -167,14 +203,14 @@ public class WebUntisClient : IWebUntisClient
     private async Task<TResponse> RestRequest<TResponse>(
         HttpMethod method,
         string path,
-        object? request = null,
+        object? body = null,
         Dictionary<string, string>? urlParameters = null
     )
     {
         var response = await Request(
             method,
             $"{BaseUrlRest}/{path}",
-            GetRestRequestContent(request),
+            GetRestRequestContent(body),
             urlParameters
         );
 

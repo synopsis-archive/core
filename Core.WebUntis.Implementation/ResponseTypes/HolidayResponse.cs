@@ -1,57 +1,25 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
+using HolidayInterface = Core.WebUntis.Interface.Types.Holiday;
 
 namespace Core.WebUntis.Implementation.ResponseTypes;
 
 public class HolidayResponse
 {
-    [JsonPropertyName("id")] public int Id { get; set; }
-    [JsonPropertyName("name")] public string Name { get; set; }
-    [JsonPropertyName("longName")] public string LongName { get; set; }
+    [JsonPropertyName( "active" )] public ulong Id { get; set; }
+    [JsonPropertyName( "name" )] public string Name { get; set; }
+    [JsonPropertyName( "longName" )] public string LongName { get; set; }
+    [JsonPropertyName( "startDate" )] public int StartDateUntis { get; set; }
+    [JsonPropertyName( "endDate" )] public int EndDateUntis { get; set; }
 
-    private int startDateUntis;
-    [JsonPropertyName("startDate")]
-    public int StartDateUntis
+    public HolidayInterface Convert()
     {
-        get
-        {
-            return this.startDateUntis;
-        }
-        set
-        {
-            this.startDateUntis = value;
-            StartDate = UntisDateTimeMethods.ConvertUntisDateToDate(value);
-        }
-    }
-
-    private int endDateUntis;
-
-    [JsonPropertyName("endDate")]
-    public int EndDateUntis
-    {
-        get
-        {
-            return this.endDateUntis;
-        }
-        set
-        {
-            this.endDateUntis = value;
-            EndDate = UntisDateTimeMethods.ConvertUntisDateToDate(value);
-        }
-    }
-
-    public DateTime StartDate { get; set; }
-    public DateTime EndDate { get; set; }
-
-
-    public Holiday Convert()
-    {
-        return new Holiday
+        return new HolidayInterface
         {
             Id = Id,
             Name = Name,
-            EndDate = EndDate,
             LongName = LongName,
-            StartDate = StartDate
+            StartDate = UntisDateTimeMethods.ConvertUntisDateToDate(StartDateUntis),
+            EndDate = UntisDateTimeMethods.ConvertUntisDateToDate(EndDateUntis)
         };
     }
 }
