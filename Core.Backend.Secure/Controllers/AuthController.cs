@@ -23,7 +23,7 @@ public class AuthController : ControllerBase
             Role = "Superduperadmin",
             Username = "Siemens",
             ConnectedPlatforms = new List<string>() { "Webuntis" },
-            MNR = "180012",
+            MatriculationNumber = "180012",
             UUID = uuid,
         };
         return _jwtService.GenerateToken(idToken);

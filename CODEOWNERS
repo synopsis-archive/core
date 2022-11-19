@@ -10,6 +10,11 @@ Core.WebUntis.Interface      @profiluefter @SchoenbergerFabian
 Core.Moodle.Interface        @profiluefter @EinboeckFranz
 Core.Ldap.Interface          @profiluefter @EinboeckFranz
 Core.Backend/Pluginloader.cs @Klausmd5
+Core.Backend.Secure          @Klausmd5
+
+Core.Backend.Secure/Services/RsaService.cs @Klausmd5
+Core.Backend.Secure/Services/JwtService.cs @Klausmd5
+Core.Backend.Secure/Services/CredService.cs @Klausmd5
 
 # backend 2
 Core.Moodle.Implementation  @EinboeckFranz

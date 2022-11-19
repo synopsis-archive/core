@@ -24,6 +24,12 @@ public static class RsaService
 
         RSA rsa = RSA.Create();
         rsa.ImportParameters(rsaParams);
+
+        /*
+         * Enables "exportation of keys" to RSACryptoServiceProvider if used;
+         * https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.rsacryptoserviceprovider.exportparameters?view=net-7.0
+         */
+
         rsa.ExportParameters(true);
 
         return rsa;
