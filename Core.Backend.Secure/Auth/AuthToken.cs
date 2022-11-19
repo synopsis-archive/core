@@ -1,15 +1,26 @@
+using System.Security.Claims;
+
 namespace Core.Backend.Secure.Auth;
 
 public class AuthToken
 {
-    /*
-     * Auth-Token:
-     *
-     * username: ldap-username
-     * uid: db-uuid
-     *
-     */
+    /// <summary>
+    /// username: ldap-username
+    /// </summary>
+    public string Username { get; set; } = null!;
 
-    public string? Username { get; set; }
+    /// <summary>
+    /// uid: db-uuid
+    /// </summary>
     public Guid UUID { get; set; }
+
+    public virtual Claim[] Claims
+    {
+        get => new[]
+        {
+            new Claim("type", "auth-token"),
+            new Claim("username", Username),
+            new Claim("uuid", UUID.ToString()),
+        };
+    }
 }

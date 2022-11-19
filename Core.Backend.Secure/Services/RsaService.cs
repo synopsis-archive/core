@@ -24,7 +24,6 @@ public static class RsaService
 
         RSA rsa = RSA.Create();
         rsa.ImportParameters(rsaParams);
-        rsa.ExportParameters(true);
 
         return rsa;
     }

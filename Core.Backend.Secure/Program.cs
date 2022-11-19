@@ -63,7 +63,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization(opt =>
 {
-    opt.AddPolicy("Admin", policy => policy.RequireClaim("rolle", "Admin"));
+    opt.AddPolicy("Admin", policy =>
+    {
+        policy.RequireClaim("rolle", "Admin");
+        policy.RequireClaim("type", "id-token");
+    });
+
     opt.AddPolicy("ID-Token", policy => policy.RequireClaim("type", "id-token"));
     opt.AddPolicy("Auth-Token", policy => policy.RequireClaim("type", "auth-token"));
 });

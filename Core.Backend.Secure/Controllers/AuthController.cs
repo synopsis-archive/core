@@ -30,7 +30,7 @@ public class AuthController : ControllerBase
             Username = "Siemens",
             Email = "siemens.feichtlbauer@gmail.com",
             ConnectedPlatforms = new List<string>() { "Webuntis" },
-            MNR = "180012",
+            MatriculationNumber = "180012",
             UUID = uuid,
         };
         return _jwtService.GenerateToken(idToken);
@@ -74,7 +74,7 @@ public class AuthController : ControllerBase
                 Class = signInResult.User.Class ?? string.Empty,
                 UUID = new Guid("00000000-0000-0000-0000-000000000000"),
                 ConnectedPlatforms = new List<string>() { "Webuntis" },
-                MNR = "180012",
+                MatriculationNumber = "180012",
             }),
             ["authToken"] = _jwtService.GenerateToken(new AuthToken()
             {
