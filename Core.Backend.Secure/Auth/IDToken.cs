@@ -17,6 +17,8 @@ public class IDToken : AuthToken
 
     public string Role { get; set; }
     public string Class { get; set; }
+
+    public string Email { get; set; }
     public string MNR { get; set; }
     public List<string> ConnectedPlatforms { get; set; }
 }
