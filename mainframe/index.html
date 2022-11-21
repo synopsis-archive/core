@@ -33,6 +33,10 @@
         "sokrates": {
             url: "sokrates.html",
             permissions: ["webuntis", "sokrates"]
+        },
+        "login": {
+            url: "login.html",
+            permissions: ["login"]
         }
     };
 
@@ -88,18 +92,34 @@
         }
 
         if (event.source === pluginIframe?.contentWindow) {
-            if (event.data === "webuntis") {
-                if (loadedPlugin.permissions.includes("webuntis"))
-                    pluginIframe?.contentWindow.postMessage("webuntis data");
-                else
-                    console.error("Plugin does not have permission to access webuntis data");
-            }
 
-            if (event.data === "sokrates") {
-                if (loadedPlugin.permissions.includes("sokrates"))
-                    pluginIframe?.contentWindow.postMessage("sokrates data");
-                else
-                    console.error("Plugin does not have permission to access sokrates data");
+            switch (event.data.method) {
+                case "login":
+                    console.log(event.data.data)
+                    return;
+                    break;
+                case "msg":
+                    if (event.data.data === "webuntis") {
+                        if (loadedPlugin.permissions.includes("webuntis"))
+                            pluginIframe?.contentWindow.postMessage("webuntis data");
+                        else
+                            console.error("Plugin does not have permission to access webuntis data");
+                    }
+
+                    if (event.data.data === "sokrates") {
+                        if (loadedPlugin.permissions.includes("sokrates"))
+                            pluginIframe?.contentWindow.postMessage("sokrates data");
+                        else
+                            console.error("Plugin does not have permission to access sokrates data");
+                    }
+
+                    if (event.data.data === "login") {
+                        if (loadedPlugin.permissions.includes("login"))
+                            pluginIframe?.contentWindow.postMessage("login data");
+                        else
+                            console.error("Plugin does not have permission to access sokrates data");
+                    }
+                    break;
             }
         }
     })
