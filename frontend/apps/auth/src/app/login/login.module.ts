@@ -1,12 +1,9 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import {CredentialPageComponent} from "./credential-page/credential-page.component";
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule
-  ]
+  declarations: [CredentialPageComponent],
+  imports: [CommonModule],
 })
-export class LoginModule { }
+export class LoginModule {}
