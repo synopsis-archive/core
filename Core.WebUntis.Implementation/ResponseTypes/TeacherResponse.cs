@@ -1,5 +1,4 @@
-﻿using System.Runtime.Versioning;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 using Core.WebUntis.Interface.Types;
 
 namespace Core.WebUntis.Implementation.ResponseTypes;
