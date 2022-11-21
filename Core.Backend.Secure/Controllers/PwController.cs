@@ -16,8 +16,8 @@ public class PwController : ControllerBase
     public PwController(CredService cred) => _cred = cred;
 
     [Authorize(Policy = "Auth-Token")]
-    [HttpPost("MoodleToken/{token}")]
-    public ActionResult SetEduvidualToken(string token)
+    [HttpPost("MoodleToken")]
+    public ActionResult SetEduvidualToken([FromBody] string token)
     {
         try
         {
@@ -31,8 +31,8 @@ public class PwController : ControllerBase
     }
 
     [Authorize(Policy = "Auth-Token")]
-    [HttpPost("WebuntisToken/{token}")]
-    public ActionResult SetWebuntisToken(string token)
+    [HttpPost("WebuntisToken")]
+    public ActionResult SetWebuntisToken([FromBody] string token)
     {
         try
         {
@@ -46,12 +46,12 @@ public class PwController : ControllerBase
     }
 
     [Authorize(Policy = "Auth-Token")]
-    [HttpPost("LDAP/{username}/{password}")]
-    public ActionResult SaveLdapPassword(string username, string password)
+    [HttpPost("LDAP")]
+    public ActionResult SaveLdapPassword([FromBody] string password)
     {
         try
         {
-            _cred.SaveLdapPassword(User.GetUUID(), username, password);
+            _cred.SaveLdapPassword(User.GetUUID(), User.GetUsername(), password);
             return Ok();
         }
         catch (AuthException e)

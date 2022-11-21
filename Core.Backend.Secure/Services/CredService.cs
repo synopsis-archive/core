@@ -50,7 +50,7 @@ public class CredService
     {
         var userTokens = GetUserTokenSet(uuid);
         if (userTokens.User.SchoolEmail.Split('@')[0] != username)
-            throw new InvalidUserException("UUID does not match username");
+            throw new InvalidUserException("Username does not match username");
 
         userTokens.LdapPassword = password;
         _db.SaveChanges();
