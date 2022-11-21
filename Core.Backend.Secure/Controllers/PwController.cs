@@ -1,7 +1,9 @@
+using Core.Backend.Secure.Auth;
 using Core.Backend.Secure.exceptions;
 using Core.Backend.Secure.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace Core.Backend.Secure.Controllers;
 
@@ -13,19 +15,13 @@ public class PwController : ControllerBase
 
     public PwController(CredService cred) => _cred = cred;
 
-    [HttpGet]
-    public string Encrypt(string pw) => _cred.EncryptPw(pw);
-
-    [HttpGet]
-    public string? Decrypt(string pw) => _cred.DecryptPw(pw);
-
     [Authorize(Policy = "Auth-Token")]
-    [HttpPost("MoodleToken/{guid:guid}/{token}")]
-    public ActionResult SetEduvidualToken(Guid guid, string token)
+    [HttpPost("MoodleToken/{token}")]
+    public ActionResult SetEduvidualToken(string token)
     {
         try
         {
-            _cred.SaveToken(guid, token, "eduvidual");
+            _cred.SaveToken(User.GetUUID(), token, "eduvidual");
             return Ok();
         }
         catch (AuthException e)
@@ -35,12 +31,12 @@ public class PwController : ControllerBase
     }
 
     [Authorize(Policy = "Auth-Token")]
-    [HttpPost("WebuntisToken/{guid:guid}/{token}")]
-    public ActionResult SetWebuntisToken(Guid guid, string token)
+    [HttpPost("WebuntisToken/{token}")]
+    public ActionResult SetWebuntisToken(string token)
     {
         try
         {
-            _cred.SaveToken(guid, token, "webuntis");
+            _cred.SaveToken(User.GetUUID(), token, "webuntis");
             return Ok();
         }
         catch (AuthException e)
@@ -50,12 +46,12 @@ public class PwController : ControllerBase
     }
 
     [Authorize(Policy = "Auth-Token")]
-    [HttpPost("LDAP/{guid:guid}/{username}/{password}")]
-    public ActionResult SaveLdapPassword(Guid guid, string username, string password)
+    [HttpPost("LDAP/{username}/{password}")]
+    public ActionResult SaveLdapPassword(string username, string password)
     {
         try
         {
-            _cred.SaveLdapPassword(guid, username, password);
+            _cred.SaveLdapPassword(User.GetUUID(), username, password);
             return Ok();
         }
         catch (AuthException e)
