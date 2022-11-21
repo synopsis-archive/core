@@ -107,4 +107,11 @@ public class AuthController : ControllerBase
     [Authorize(Policy = "ID-Token")]
     [HttpGet]
     public string? GetRole() => User.Claims.FirstOrDefault(x => x.Type == "rolle")?.Value;
+
+    [Authorize(Policy = "ID-Token")]
+    [HttpPost]
+    public void SaveLdapPassword()
+    {
+
+    }
 }
