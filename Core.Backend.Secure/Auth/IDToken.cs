@@ -16,6 +16,11 @@ public class IDToken : AuthToken
     public string? Class { get; set; }
 
     /// <summary>
+    /// Email
+    /// </summary>
+    public string Email { get; set; }
+
+    /// <summary>
     /// matrikelnummer - nur bei Schülern verfügbar
     /// </summary>
     public string? MatriculationNumber { get; set; }
@@ -35,6 +40,7 @@ public class IDToken : AuthToken
                 new Claim("username", Username),
                 new Claim("uuid", UUID.ToString()),
                 new Claim("rolle", Role),
+                new Claim("email", Email),
                 new Claim("connectedPlatforms", JsonConvert.SerializeObject(ConnectedPlatforms)),
             };
 
