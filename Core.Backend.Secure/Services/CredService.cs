@@ -2,7 +2,6 @@ using System.Security.Cryptography;
 using System.Text;
 using Core.Backend.Secure.exceptions;
 using Core.Database;
-using Core.Ldap.Interface;
 using Microsoft.EntityFrameworkCore;
 
 namespace Core.Backend.Secure.Services;
@@ -49,9 +48,7 @@ public class CredService
     public void SaveLdapPassword(Guid uuid, string username, string password)
     {
         var userTokens = GetUserTokenSet(uuid);
-        if (userTokens.User.SchoolEmail.Split('@')[0] != username)
-            throw new InvalidUserException("Username does not match username");
-
+        userTokens.LdapUsername = username;
         userTokens.LdapPassword = password;
         _db.SaveChanges();
     }
