@@ -3,6 +3,10 @@ import {BrowserModule} from "@angular/platform-browser";
 
 import {AppComponent} from "./app.component";
 import {MainframeConnectorModule} from "mainframe-connector";
+import {HomeRoutingModule} from "./home/home-routing.module";
+import {HomeModule} from "./home/home.module";
+import {RouterModule} from "@angular/router";
+import {AppRoutingModule} from "./app-routing.module";
 
 @NgModule({
   declarations: [
@@ -10,7 +14,9 @@ import {MainframeConnectorModule} from "mainframe-connector";
   ],
   imports: [
     BrowserModule,
-    MainframeConnectorModule
+    MainframeConnectorModule,
+    HomeModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
