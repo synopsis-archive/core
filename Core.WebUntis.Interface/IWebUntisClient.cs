@@ -11,7 +11,9 @@ public interface IWebUntisClient
     public Task<List<Room>> GetRooms();
     public Task<IEnumerable<Homework>> GetHomeworks(DateTime startDate, DateTime endDate);
     public Task<IEnumerable<Holiday>> GetHolidays();
+    [Obsolete("Deprecated due to insufficient rights")]
     public Task<List<Student>> GetStudents();
+    [Obsolete("Deprecated due to insufficient rights")]
     public Task<List<Teacher>> GetTeachers();
     public Task<List<Timetable>> GetTimetable(ElementType type, int? personId, DateTime startDate, DateTime endDate);
     public Task<List<Timetable>> GetTimetableFromToday(ElementType type, int? personId);
