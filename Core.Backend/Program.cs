@@ -1,5 +1,9 @@
 using Core.Backend.Services;
+using Core.Backend;
+using Core.Ldap.Implementation;
 using Core.Moodle.Implementation;
+
+Pluginloader.LoadPlugins("plugins");
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,8 +15,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<WebUntisService>();
 builder.Services.Configure<MoodleConfiguration>(builder.Configuration.GetSection("Moodle"));
+builder.Services.Configure<LdapConfiguration>(builder.Configuration.GetSection("LDAPConfiguration"));
 
-var app = builder.Build();
+var app = builder.InjectBuilderToPlugin().Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -27,4 +32,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+app.InjectAppToPlugin().Run();
