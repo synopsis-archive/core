@@ -21,11 +21,11 @@ public class PwController : ControllerBase
 
     [Authorize(Policy = "Auth-Token")]
     [HttpPost("MoodleToken/{guid:guid}/{token}")]
-    public ActionResult SetMoodleToken(Guid guid, string token)
+    public ActionResult SetEduvidualToken(Guid guid, string token)
     {
         try
         {
-            _cred.SaveToken(guid, token, "moodle");
+            _cred.SaveToken(guid, token, "eduvidual");
             return Ok();
         }
         catch (AuthException e)
@@ -33,4 +33,20 @@ public class PwController : ControllerBase
             return BadRequest(e.Message);
         }
     }
+
+    [Authorize(Policy = "Auth-Token")]
+    [HttpPost("WebuntisToken/{guid:guid}/{token}")]
+    public ActionResult SetWebuntisToken(Guid guid, string token)
+    {
+        try
+        {
+            _cred.SaveToken(guid, token, "webuntis");
+            return Ok();
+        }
+        catch (AuthException e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
 }
