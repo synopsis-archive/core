@@ -207,7 +207,6 @@ public class WebUntisClient : IWebUntisClient
             .ToList();
     }
 
-    //GetStudents is not Tested and does maybe not work
     public async Task<List<Student>> GetStudents()
     {
         var holidayResponse = await JsonRpcRequest<StudentResponse[]>(
