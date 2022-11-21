@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using Core.WebUntis.Interface.Types;
 
 namespace Core.WebUntis.Implementation.ResponseTypes;
 
@@ -16,9 +17,9 @@ public class TimetableResponse
     [JsonPropertyName("statisticalFlags")] public string StatisticalFlags { get; set; }
     [JsonPropertyName("code")] public string Code { get; internal set; }
 
-    public Period Convert()
+    public Timetable Convert()
     {
-        return new Period
+        return new Timetable
         {
             Id = Id,
             Code = Enum.Parse<Code>(Code),

@@ -170,7 +170,7 @@ public class WebUntisClient : IWebUntisClient
             .ToList();
     }
 
-    public async Task<IEnumerable<Period>> GetTimetable(ElementType type, int? personId, DateTime startDate, DateTime endDate)
+    public async Task<List<Timetable>> GetTimetable(ElementType type, int? personId, DateTime startDate, DateTime endDate)
     {
 
         var timetableResponse = await JsonRpcRequest<TimetableResponse[]>("getTimetable",
@@ -185,7 +185,26 @@ public class WebUntisClient : IWebUntisClient
             {
                 { "school", _school }
             });
-        return timetableResponse.Select(x => x.Convert());
+        return timetableResponse.Select(x => x.Convert())
+            .ToList();
+    }
+
+    public async Task<List<Timetable>> GetTimetableFromToday(ElementType type, int? personId)
+    {
+        var timetableResponse = await JsonRpcRequest<TimetableResponse[]>("getTimetable",
+            new TimetableRequest
+            {
+                Type = (int)type,
+                Id = personId,
+                StartDate = UntisDateTimeMethods.ConvertDateToUntisDate(DateTime.Today),
+                EndDate = UntisDateTimeMethods.ConvertDateToUntisDate(DateTime.Today.AddDays(1))
+            },
+            new Dictionary<string, string>
+            {
+                { "school", _school }
+            });
+        return timetableResponse.Select(x => x.Convert())
+            .ToList();
     }
 
     private async Task<TResponse> JsonRpcRequest<TResponse>(

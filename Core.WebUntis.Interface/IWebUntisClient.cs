@@ -10,4 +10,6 @@ public interface IWebUntisClient
     public Task<List<Subject>> GetSubjects();
     public Task<List<Room>> GetRooms();
     public Task<List<Teacher>> GetTeachers();
+    public Task<List<Timetable>> GetTimetable(ElementType type, int? personId, DateTime startDate, DateTime endDate);
+    public Task<List<Timetable>> GetTimetableFromToday(ElementType type, int? personId);
 }

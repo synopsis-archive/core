@@ -1,6 +1,6 @@
-namespace Core.WebUntis.Implementation.ResponseTypes;
+namespace Core.WebUntis.Interface.Types;
 
-public class Period
+public class Timetable
 {
     public DateTime Start { get; set; }
 
@@ -14,10 +14,10 @@ public class Period
     public List<int>? TeacherIds { get; set; }
 
     public LessonType LessonType { get; set; }
-    public string? Text { get; internal set; }
+    public string? Text { get; set; }
 
     public string? StatisticalFlags { get; set; }
-    public Code? Code { get; internal set; }
+    public Code? Code { get; set; }
 
     //public string code { get; set; }
     //public string statflags { get; set; }

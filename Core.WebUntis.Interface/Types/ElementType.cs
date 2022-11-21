@@ -1,4 +1,4 @@
-namespace Core.WebUntis.Implementation.ResponseTypes;
+namespace Core.WebUntis.Interface.Types;
 
 public enum ElementType
 {
