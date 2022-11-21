@@ -1,4 +1,5 @@
 using Core.Backend.Secure.Auth;
+using Core.Backend.Secure.Dtos;
 using Core.Backend.Secure.exceptions;
 using Core.Backend.Secure.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -47,11 +48,11 @@ public class PwController : ControllerBase
 
     [Authorize(Policy = "Auth-Token")]
     [HttpPost("LDAP")]
-    public ActionResult SaveLdapPassword([FromBody] string username, [FromBody] string password)
+    public ActionResult SaveLdapPassword([FromBody] LdapUserDto ldapUserDto)
     {
         try
         {
-            _cred.SaveLdapPassword(User.GetUUID(), username, password);
+            _cred.SaveLdapPassword(User.GetUUID(), ldapUserDto.LdapUsername, ldapUserDto.LdapPassword);
             return Ok();
         }
         catch (AuthException e)
