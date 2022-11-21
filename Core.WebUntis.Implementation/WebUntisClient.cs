@@ -207,6 +207,16 @@ public class WebUntisClient : IWebUntisClient
             .ToList();
     }
 
+    public Task<List<ExamType>> GetExamTypes()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<List<Exam>> GetExams(int examTypeId, DateTime startDate, DateTime endDate)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<List<Student>> GetStudents()
     {
         var holidayResponse = await JsonRpcRequest<StudentResponse[]>(

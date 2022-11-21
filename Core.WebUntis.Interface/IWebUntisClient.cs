@@ -17,4 +17,8 @@ public interface IWebUntisClient
     public Task<List<Teacher>> GetTeachers();
     public Task<List<Timetable>> GetTimetable(ElementType type, int? personId, DateTime startDate, DateTime endDate);
     public Task<List<Timetable>> GetTimetableFromToday(ElementType type, int? personId);
+    [Obsolete("Deprecated due to unknown documentation")]
+    public Task<List<ExamType>> GetExamTypes();
+    [Obsolete("Deprecated due to insufficient rights")]
+    public Task<List<Exam>> GetExams(int examTypeId, DateTime startDate, DateTime endDate);
 }
