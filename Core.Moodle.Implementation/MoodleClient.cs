@@ -1,5 +1,6 @@
 using System.Text.Json;
 using Core.Moodle.Interface;
+using Microsoft.Extensions.Options;
 
 namespace Core.Moodle.Implementation;
 
@@ -8,10 +9,10 @@ public class MoodleClient : IMoodleClient
     private readonly string _baseAddress;
     private readonly HttpClient _client;
 
-    public MoodleClient(HttpClient client, MoodleConfiguration moodleConfig)
+    public MoodleClient(HttpClient client, IOptions<MoodleConfiguration> moodleConfig)
     {
         _client = client;
-        _baseAddress = moodleConfig.BaseUrl;
+        _baseAddress = moodleConfig.Value.BaseUrl;
     }
 
     /*

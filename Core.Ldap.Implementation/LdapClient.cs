@@ -2,6 +2,7 @@ using System.Collections;
 using Core.Ldap.Interface;
 using System.DirectoryServices.Protocols;
 using System.Net;
+using Microsoft.Extensions.Options;
 
 namespace Core.Ldap.Implementation;
 
@@ -9,7 +10,7 @@ public class LdapClient : ILdapClient
 {
     private readonly LdapConfiguration _ldapConfiguration;
 
-    public LdapClient(LdapConfiguration ldapConfiguration) => _ldapConfiguration = ldapConfiguration;
+    public LdapClient(IOptions<LdapConfiguration> ldapConfiguration) => _ldapConfiguration = ldapConfiguration.Value;
 
     public SignInResult SignIn(SignInParams signInParams)
     {

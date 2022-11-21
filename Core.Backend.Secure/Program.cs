@@ -1,6 +1,8 @@
 using System.Security.Cryptography;
 using Core.Backend.Secure.Services;
 using Core.Database;
+using Core.Ldap.Implementation;
+using Core.Ldap.Interface;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -22,6 +24,9 @@ else
 builder.Services.AddTransient<CredService>();
 builder.Services.AddSingleton<JwtService>();
 builder.Services.AddSingleton<RSA>(RsaService.ImportRSAKey("./keys/" + builder.Configuration["RSA:private-key"]));
+
+builder.Services.Configure<LdapConfiguration>(builder.Configuration.GetSection("LDAPConfiguration"));
+builder.Services.AddTransient<ILdapClient, LdapClient>();
 
 
 builder.Services.AddControllers();
