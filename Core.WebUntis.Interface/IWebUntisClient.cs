@@ -9,6 +9,9 @@ public interface IWebUntisClient
     public Task<List<Class>> GetClasses(int schoolYear);
     public Task<List<Subject>> GetSubjects();
     public Task<List<Room>> GetRooms();
+    public Task<IEnumerable<Homework>> GetHomeworks(DateTime startDate, DateTime endDate);
+    public Task<IEnumerable<Holiday>> GetHolidays();
+    public Task<List<Student>> GetStudents();
     public Task<List<Teacher>> GetTeachers();
     public Task<List<Timetable>> GetTimetable(ElementType type, int? personId, DateTime startDate, DateTime endDate);
     public Task<List<Timetable>> GetTimetableFromToday(ElementType type, int? personId);
