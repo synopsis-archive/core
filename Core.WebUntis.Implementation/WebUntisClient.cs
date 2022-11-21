@@ -154,6 +154,15 @@ public class WebUntisClient : IWebUntisClient
         return holidayResponse.Select(x => x.Convert());
     }
 
+    //GetStudents is not Tested and does maybe not work
+    public async Task<List<Student>> GetStudents()
+    {
+        var holidayResponse = await JsonRpcRequest<StudentResponse[]>(
+            method: "getStudents"
+        );
+        return holidayResponse.Select(x => x.Convert()).ToList();
+    }
+
     private async Task<TResponse> JsonRpcRequest<TResponse>(
         string method,
         object? body = null,

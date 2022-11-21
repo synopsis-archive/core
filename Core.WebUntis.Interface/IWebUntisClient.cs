@@ -8,6 +8,7 @@ public interface IWebUntisClient
     public Task<Authentication> AuthenticateWithSecret(string user, string secret);
     public Task<List<Class>> GetClasses(int schoolYear);
     public Task<List<Room>> GetRooms();
-    public Task<IEnumerable<Homework>> GetHomeworks( DateTime startDate, DateTime endDate);
+    public Task<IEnumerable<Homework>> GetHomeworks(DateTime startDate, DateTime endDate);
     public Task<IEnumerable<Holiday>> GetHolidays();
+    public Task<List<Student>> GetStudents();
 }
