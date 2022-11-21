@@ -1,7 +1,7 @@
-using Core.Backend.Services;
+using Core.Backend.Secure.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Core.Backend.Controllers;
+namespace Core.Backend.Secure.Controllers;
 
 [ApiController]
 [Route("[controller]")]
@@ -13,4 +13,6 @@ public class WebUntisController : ControllerBase
     {
         _webUntisService = webUntisService;
     }
+
+    //[Authorize(Policy = "Auth-Token")]
 }

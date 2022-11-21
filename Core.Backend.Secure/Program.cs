@@ -28,6 +28,8 @@ builder.Services.AddSingleton<RSA>(RsaService.ImportRSAKey("./keys/" + builder.C
 builder.Services.Configure<LdapConfiguration>(builder.Configuration.GetSection("LDAPConfiguration"));
 builder.Services.AddTransient<ILdapClient, LdapClient>();
 
+builder.Services.AddTransient<WebUntisService>();
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -1,4 +1,3 @@
-using Core.Backend.Services;
 using Core.Backend;
 using Core.Ldap.Implementation;
 using Core.Moodle.Implementation;
@@ -13,7 +12,6 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddTransient<WebUntisService>();
 builder.Services.Configure<MoodleConfiguration>(builder.Configuration.GetSection("Moodle"));
 builder.Services.Configure<LdapConfiguration>(builder.Configuration.GetSection("LDAPConfiguration"));
 

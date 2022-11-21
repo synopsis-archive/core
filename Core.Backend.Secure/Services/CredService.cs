@@ -19,7 +19,7 @@ public class CredService
         //_publicKey = ImportPublicKey("./keys/"+_conf["RSA:public-key"]);
     }
 
-    public string? GetWebuntisToken(Guid uuid) => DecryptPw(GetUserTokenSet(uuid).WebUntisToken);
+    public string? GetWebUntisSecret(Guid uuid) => DecryptPw(GetUserTokenSet(uuid).WebUntisSecret);
     public string? GetEduvidualToken(Guid uuid) => DecryptPw(GetUserTokenSet(uuid).EduvidualToken);
     private StoredUserTokens GetUserTokenSet(Guid uuid) => _db.StoredUserTokens.First(x => x.UUID == uuid);
     public string? DecryptPw(string? pw) => pw is not null ? Encoding.UTF8.GetString(_rsa.Decrypt(Convert.FromBase64String(pw), RSAEncryptionPadding.OaepSHA512)) : pw;
