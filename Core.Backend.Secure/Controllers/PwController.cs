@@ -49,4 +49,17 @@ public class PwController : ControllerBase
         }
     }
 
+    [Authorize(Policy = "Auth-Token")]
+    [HttpPost("LDAP/{guid:guid}/{username}/{password}")]
+    public ActionResult SaveLdapPassword(Guid guid, string username, string password)
+    {
+        try
+        {
+            _cred.SaveLdapPassword(guid, username, password);
+            return Ok();
+        } catch (AuthException e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
 }
