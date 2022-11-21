@@ -5,7 +5,7 @@ namespace Core.Database;
 public class StoredUserTokens
 {
     [Key]
-    public Guid UUID { get; set; }
+    public Guid UserUUID { get; set; }
     public string? WebUntisToken { get; set; }
     public string? EduvidualToken { get; set; }
     public string? LdapUsername { get; set; }
