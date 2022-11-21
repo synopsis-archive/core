@@ -57,7 +57,8 @@ public class PwController : ControllerBase
         {
             _cred.SaveLdapPassword(guid, username, password);
             return Ok();
-        } catch (AuthException e)
+        }
+        catch (AuthException e)
         {
             return BadRequest(e.Message);
         }
