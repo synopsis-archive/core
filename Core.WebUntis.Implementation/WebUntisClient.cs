@@ -235,10 +235,12 @@ public class WebUntisClient : IWebUntisClient
         {
             var errorCode = int.Parse(errorJson["code"]!.ToString());
 
-            if (errorCode == -8520)
-                throw new InvalidTokenException();
-
-            throw new NotImplementedException();
+            throw errorCode switch
+            {
+                -8520 => new InvalidTokenException(),
+                -8509 => new InsufficientRightsException(),
+                _ => new NotImplementedException()
+            };
         }
 
         var resultJsonString = responseJson["result"]!.ToJsonString();
@@ -263,7 +265,10 @@ public class WebUntisClient : IWebUntisClient
         {
             var errorCode = response.StatusCode;
 
-            throw new NotImplementedException();
+            throw errorCode switch
+            {
+                _ => new NotImplementedException()
+            };
         }
 
         return JsonSerializer.Deserialize<TResponse>(await response.Content.ReadAsStringAsync())!;
