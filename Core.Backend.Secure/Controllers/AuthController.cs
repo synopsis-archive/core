@@ -1,5 +1,6 @@
 using Core.Backend.Secure.Auth;
 using Core.Backend.Secure.Services;
+using Core.Database;
 using Core.Ldap.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,11 +12,13 @@ namespace Core.Backend.Secure.Controllers;
 public class AuthController : ControllerBase
 {
     private JwtService _jwtService;
+    private CoreContext _db;
     private ILdapClient _ldap;
 
-    public AuthController(JwtService jwt, ILdapClient ldap)
+    public AuthController(JwtService jwt, CoreContext db, ILdapClient ldap)
     {
         _jwtService = jwt;
+        _db = db;
         _ldap = ldap;
     }
 
@@ -63,6 +66,18 @@ public class AuthController : ControllerBase
                 OrganizationUnit = LdapGroup.Schueler
             }
         };*/
+
+        if (!_db.Users.Any(x => x.SchoolEmail == signInResult.User.Email))
+        {
+            _db.Users.Add(new User
+            {
+                SchoolEmail = signInResult.User.Email,
+                //Must be implemented correctly
+                UUID = new Guid("00000000-0000-0000-0000-000000000000"),
+                StoredUserTokens = new StoredUserTokens()
+            });
+            _db.SaveChanges();
+        }
 
         var tokens = new Dictionary<string, string>
         {
