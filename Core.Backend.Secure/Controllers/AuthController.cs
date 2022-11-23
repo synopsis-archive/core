@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using Core.Backend.Secure.Auth;
 using Core.Backend.Secure.Services;
 using Core.Database;
@@ -67,16 +68,33 @@ public class AuthController : ControllerBase
             }
         };*/
 
-        if (!_db.Users.Any(x => x.SchoolEmail == signInResult.User.Email))
+        var user = _db.Users.FirstOrDefault(x => x.SchoolEmail == signInResult.User.Email);
+        if (user is null)
         {
-            _db.Users.Add(new User
+            user = _db.Users.Add(new User
             {
                 SchoolEmail = signInResult.User.Email,
-                //Must be implemented correctly
-                UUID = new Guid("00000000-0000-0000-0000-000000000000"),
                 StoredUserTokens = new StoredUserTokens()
-            });
+            }).Entity;
             _db.SaveChanges();
+        }
+
+        var obj = _db.StoredUserTokens.First(x => x.UserUUID == user.UUID);
+        var connectedPlatforms = obj.GetType().GetProperties().Where(x => x.Name != "UserUUID" && x.Name != "User")
+            .Where(x => x.GetValue(obj, null) is not null).Select(x => x.Name).ToList();
+
+        string? mnr = null;
+        if (signInResult.User.OrganizationUnit.Equals(LdapGroup.Schueler))
+        {
+            var rg = new Regex(@"\d{6}");
+            var mr = rg.Match(signInResult.User.LoginName);
+
+            if (!mr.Success)
+            {
+                throw new Exception("Matriculation number not found");
+            }
+
+            mnr = mr.Value;
         }
 
         var tokens = new Dictionary<string, string>
@@ -87,14 +105,14 @@ public class AuthController : ControllerBase
                 Email = signInResult.User.Email,
                 Role = signInResult.User.OrganizationUnit.ToString(),
                 Class = signInResult.User.Class ?? string.Empty,
-                UUID = new Guid("00000000-0000-0000-0000-000000000000"),
-                ConnectedPlatforms = new List<string>() { "Webuntis" },
-                MatriculationNumber = "180012",
+                UUID = user.UUID,
+                ConnectedPlatforms = connectedPlatforms,
+                MatriculationNumber = mnr,
             }),
             ["authToken"] = _jwtService.GenerateToken(new AuthToken()
             {
                 Username = signInResult.User.LoginName,
-                UUID = new Guid("00000000-0000-0000-0000-000000000000"),
+                UUID = user.UUID,
             })
         };
 
