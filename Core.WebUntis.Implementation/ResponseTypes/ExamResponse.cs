@@ -6,9 +6,9 @@ namespace Core.WebUntis.Implementation.ResponseTypes;
 public class ExamResponse
 {
     [JsonPropertyName("id")] public int Id { get; set; }
-    [JsonPropertyName("classes")] public List<int> Classes { get; set; }
-    [JsonPropertyName("teachers")] public List<int> Teachers { get; set; }
-    [JsonPropertyName("students")] public List<int> Students { get; set; }
+    [JsonPropertyName("classes")] public List<int>? Classes { get; set; }
+    [JsonPropertyName("teachers")] public List<int>? Teachers { get; set; }
+    [JsonPropertyName("students")] public List<int>? Students { get; set; }
     [JsonPropertyName("date")] public int Date { get; set; }
     [JsonPropertyName("subject")] public int Subject { get; set; }
     [JsonPropertyName("startTime")] public int StartTime { get; set; }

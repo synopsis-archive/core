@@ -6,11 +6,11 @@ namespace Core.WebUntis.Implementation.ResponseTypes;
 public class StudentResponse
 {
     [JsonPropertyName("id")] public int Id { get; set; }
-    [JsonPropertyName("name")] public string Name { get; set; }
-    [JsonPropertyName("longName")] public string LongName { get; set; }
-    [JsonPropertyName("foreName")] public string ForeName { get; set; }
-    [JsonPropertyName("key")] public string Key { get; set; }
-    [JsonPropertyName("gender")] public string Gender { get; set; }
+    [JsonPropertyName("name")] public string? Name { get; set; }
+    [JsonPropertyName("longName")] public string? LongName { get; set; }
+    [JsonPropertyName("foreName")] public string? ForeName { get; set; }
+    [JsonPropertyName("key")] public string? Key { get; set; }
+    [JsonPropertyName("gender")] public string? Gender { get; set; }
 
     public Student Convert()
     {

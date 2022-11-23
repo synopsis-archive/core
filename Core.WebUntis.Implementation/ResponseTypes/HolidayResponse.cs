@@ -5,11 +5,11 @@ namespace Core.WebUntis.Implementation.ResponseTypes;
 
 public class HolidayResponse
 {
-    [JsonPropertyName( "active" )] public ulong Id { get; set; }
-    [JsonPropertyName( "name" )] public string Name { get; set; }
-    [JsonPropertyName( "longName" )] public string LongName { get; set; }
-    [JsonPropertyName( "startDate" )] public int StartDateUntis { get; set; }
-    [JsonPropertyName( "endDate" )] public int EndDateUntis { get; set; }
+    [JsonPropertyName("active")] public ulong Id { get; set; }
+    [JsonPropertyName("name")] public string? Name { get; set; }
+    [JsonPropertyName("longName")] public string? LongName { get; set; }
+    [JsonPropertyName("startDate")] public int StartDateUntis { get; set; }
+    [JsonPropertyName("endDate")] public int EndDateUntis { get; set; }
 
     public HolidayInterface Convert()
     {

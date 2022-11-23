@@ -207,6 +207,7 @@ public class WebUntisClient : IWebUntisClient
             .ToList();
     }
 
+    [Obsolete]
     public Task<List<ExamType>> GetExamTypes()
     {
         throw new NotImplementedException();

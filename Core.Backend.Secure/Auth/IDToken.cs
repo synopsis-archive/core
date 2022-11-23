@@ -18,7 +18,7 @@ public class IDToken : AuthToken
     /// <summary>
     /// Email
     /// </summary>
-    public string Email { get; set; }
+    public string? Email { get; set; }
 
     /// <summary>
     /// matrikelnummer - nur bei Schülern verfügbar
