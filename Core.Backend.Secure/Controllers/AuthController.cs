@@ -49,20 +49,9 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost]
-    public Dictionary<string, string> Login(SignInParams signInParams)
+    public IActionResult Login(SignInParams signInParams)
     {
         var signInResult = _ldap.SignIn(signInParams);
-        /*var signInResult = new SignInResult()
-        {
-            User = new LdapUser()
-            {
-                Class = "5b",
-                Email = "FeichtlbauerS180061",
-                DisplayName = "Feichtlbauer Simon",
-                LoginName = "FeichtlbauerS180061",
-                OrganizationUnit = LdapGroup.Schueler
-            }
-        };*/
 
         var tokens = new Dictionary<string, string>
         {
@@ -87,17 +76,15 @@ public class AuthController : ControllerBase
         {
             HttpOnly = true,
             IsEssential = true,
-            Domain = "/",
             Expires = DateTime.Now.AddMinutes(15),
-            Secure = false
+            Secure = true,
+            SameSite = SameSiteMode.None
         };
 
-        Response.Cookies.Append("Authorization", tokens["authToken"], cookie);
-        Response.Cookies.Append("Auth-Token", tokens["authToken"], cookie);
-        Response.Cookies.Append("ID-Token", tokens["idToken"], cookie);
+        Response.Cookies.Append("auth", tokens["authToken"], cookie);
         //Response.Cookies.Append("Test", "anel", cookie);
 
-        return tokens;
+        return Ok();
     }
 
     [Authorize]
