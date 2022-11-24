@@ -14,9 +14,9 @@ public class AuthToken
     /// </summary>
     public Guid UUID { get; set; }
 
-    public virtual Claim[] Claims
+    public virtual List<Claim> Claims
     {
-        get => new[]
+        get => new List<Claim>
         {
             new Claim("type", "auth-token"),
             new Claim("username", Username),
