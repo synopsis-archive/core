@@ -1,3 +1,4 @@
+using Core.AuthLib;
 using Core.Backend;
 using Core.Ldap.Implementation;
 using Core.Moodle.Implementation;
@@ -14,6 +15,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.Configure<MoodleConfiguration>(builder.Configuration.GetSection("Moodle"));
 builder.Services.Configure<LdapConfiguration>(builder.Configuration.GetSection("LDAPConfiguration"));
+
+builder.AddCookieAuth();
 
 var app = builder.InjectBuilderToPlugin().Build();
 

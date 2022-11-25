@@ -23,7 +23,7 @@ else
 
 builder.Services.AddTransient<CredService>();
 builder.Services.AddSingleton<JwtService>();
-builder.Services.AddSingleton<RSA>(RsaService.ImportRSAKey("./keys/" + builder.Configuration["RSA:private-key"]));
+builder.Services.AddSingleton<RSA>(RsaService.ImportRSAKey("./keys/" + builder.Configuration["RSA:private-key"], true));
 
 builder.Services.Configure<LdapConfiguration>(builder.Configuration.GetSection("LDAPConfiguration"));
 builder.Services.AddTransient<ILdapClient, LdapClient>();
@@ -37,7 +37,7 @@ builder.Services.AddSwaggerGen(o =>
 
 });
 
-builder.AddCookieAuth();
+builder.AddCookieAuth(true);
 
 var app = builder.Build();
 

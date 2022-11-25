@@ -8,25 +8,23 @@ namespace Core.AuthLib.Services;
 
 public static class RsaService
 {
-    public static RSA ImportRSAKey(string pem, bool isPk = false)
+    public static RSA ImportRSAKey(string pem, bool isPrivateKey = false)
     {
+
         var pk = File.ReadAllText(pem);
+        RSAParameters rsaParams = new RSAParameters();
 
-        AsymmetricCipherKeyPair? keyPair;
-
-        using (var sr = new StringReader(pk))
+        if (!isPrivateKey)
         {
-            var pr = new PemReader(sr);
-            keyPair = pr.ReadObject() as AsymmetricCipherKeyPair;
+            var kp = (AsymmetricKeyParameter)new PemReader(new StringReader(pk)).ReadObject();
+            rsaParams = DotNetUtilities.ToRSAParameters((RsaKeyParameters)kp);
+        }
+        else
+        {
+            AsymmetricCipherKeyPair? keyPair = (AsymmetricCipherKeyPair)new PemReader(new StringReader(pk)).ReadObject();
+            rsaParams = DotNetUtilities.ToRSAParameters(keyPair.Private as RsaPrivateCrtKeyParameters);
         }
 
-        if (keyPair == null)
-            throw new Exception("KeyPair is null");
-
-        var rsaParams =
-            DotNetUtilities.ToRSAParameters(isPk
-                ? keyPair.Private as RsaPrivateCrtKeyParameters
-                : keyPair.Public as RsaPrivateCrtKeyParameters);
         var rsa = RSA.Create();
         rsa.ImportParameters(rsaParams);
 
