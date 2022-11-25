@@ -37,7 +37,7 @@ builder.Services.AddSwaggerGen(o =>
 
 });
 
-builder.AddAuth();
+builder.AddCookieAuth();
 
 var app = builder.Build();
 
