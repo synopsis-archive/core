@@ -1,6 +1,3 @@
-import { Route } from "@angular/router";
-import {CredentialPageComponent} from "./login/credential-page/credential-page.component";
+import {Route} from "@angular/router";
 
-export const appRoutes: Route[] = [
-  {path: "credentials", component: CredentialPageComponent}
-];
+export const appRoutes: Route[] = [];
