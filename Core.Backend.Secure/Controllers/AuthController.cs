@@ -5,6 +5,7 @@ using Core.Database;
 using Core.Ldap.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SignInResult = Core.Ldap.Interface.SignInResult;
 
 namespace Core.Backend.Secure.Controllers;
 
@@ -15,29 +16,14 @@ public class AuthController : ControllerBase
     private JwtService _jwtService;
     private CoreContext _db;
     private ILdapClient _ldap;
+    private IConfiguration _conf;
 
-    public AuthController(JwtService jwt, CoreContext db, ILdapClient ldap)
+    public AuthController(JwtService jwt, CoreContext db, ILdapClient ldap, IConfiguration conf)
     {
         _jwtService = jwt;
         _db = db;
         _ldap = ldap;
-    }
-
-    [HttpGet]
-    public string GetIDToken()
-    {
-        var uuid = new Guid("00000000-0000-0000-0000-000000000000");
-        var idToken = new IDToken()
-        {
-            Class = "5b",
-            Role = "Superduperadmin",
-            Username = "Siemens",
-            Email = "siemens.feichtlbauer@gmail.com",
-            ConnectedPlatforms = new List<string>() { "Webuntis" },
-            MatriculationNumber = "180012",
-            UUID = uuid,
-        };
-        return _jwtService.GenerateToken(idToken);
+        _conf = conf;
     }
 
     [HttpGet]
@@ -52,37 +38,61 @@ public class AuthController : ControllerBase
         return _jwtService.GenerateToken(idToken);
     }
 
-    [HttpPost]
-    public Dictionary<string, string> Login(SignInParams signInParams)
+    [Authorize(Policy = "Auth-Token")]
+    [HttpGet]
+    public string GetIdToken()
     {
-        var signInResult = _ldap.SignIn(signInParams);
-        /*var signInResult = new SignInResult()
-        {
-            User = new LdapUser()
-            {
-                Class = "5b",
-                Email = "FeichtlbauerS180061",
-                DisplayName = "Feichtlbauer Simon",
-                LoginName = "FeichtlbauerS180061",
-                OrganizationUnit = LdapGroup.Schueler
-            }
-        };*/
 
-        var user = _db.Users.FirstOrDefault(x => x.SchoolEmail == signInResult.User.Email);
-        if (user is null)
-        {
-            user = _db.Users.Add(new User
-            {
-                SchoolEmail = signInResult.User.Email,
-                StoredUserTokens = new StoredUserTokens()
-            }).Entity;
-            _db.SaveChanges();
-        }
+        var user = _db.Users.FirstOrDefault(x => x.UUID == User.GetUUID());
 
         var obj = _db.StoredUserTokens.First(x => x.UserUUID == user.UUID);
         var connectedPlatforms = obj.GetType().GetProperties().Where(x => x.Name != "UserUUID" && x.Name != "User")
             .Where(x => x.GetValue(obj, null) is not null).Select(x => x.Name).ToList();
 
+        return _jwtService.GenerateToken(new IDToken()
+        {
+            Username = user.Username,
+            Email = user.SchoolEmail,
+            Role = user.Role.ToString(),
+            Class = user.Class,
+            UUID = user.UUID,
+            ConnectedPlatforms = connectedPlatforms,
+            MatriculationNumber = user.MatriculationNumber,
+        });
+    }
+
+    [HttpPost]
+    public IActionResult Login(SignInParams signInParams)
+    {
+        var signInResult = _ldap.SignIn(signInParams);
+        var user = UpdateUserInDB(signInResult);
+
+        DateTime valid = _conf["JWT:Auth-Token-Expiration-Unit"] == "days"
+            ? DateTime.Now.AddDays(Convert.ToInt32(_conf["JWT:Auth-Token-Expiration"]))
+            : DateTime.Now.AddMinutes(Convert.ToInt32(_conf["JWT:Auth-Token-Expiration"]));
+
+        var cookie = new CookieOptions()
+        {
+            HttpOnly = true,
+            IsEssential = true,
+            Expires = valid,
+            Secure = true,
+            SameSite = SameSiteMode.None
+        };
+
+        var token = _jwtService.GenerateToken(new AuthToken()
+        {
+            Username = signInResult.User.LoginName,
+            UUID = user.UUID,
+        });
+
+        Response.Cookies.Append("auth", token, cookie);
+        return Ok();
+    }
+
+    [NonAction]
+    public User UpdateUserInDB(SignInResult signInResult)
+    {
         string? mnr = null;
         if (signInResult.User.OrganizationUnit.Equals(LdapGroup.Schueler))
         {
@@ -97,40 +107,31 @@ public class AuthController : ControllerBase
             mnr = mr.Value;
         }
 
-        var tokens = new Dictionary<string, string>
+        var user = _db.Users.FirstOrDefault(x => x.SchoolEmail == signInResult.User.Email);
+        if (user is null)
         {
-            ["idToken"] = _jwtService.GenerateToken(new IDToken()
+            user = _db.Users.Add(new User
             {
+                SchoolEmail = signInResult.User.Email,
+                StoredUserTokens = new StoredUserTokens(),
+                Class = signInResult.User.Class,
+                Role = signInResult.User.OrganizationUnit,
                 Username = signInResult.User.LoginName,
-                Email = signInResult.User.Email,
-                Role = signInResult.User.OrganizationUnit.ToString(),
-                Class = signInResult.User.Class ?? string.Empty,
-                UUID = user.UUID,
-                ConnectedPlatforms = connectedPlatforms,
-                MatriculationNumber = mnr,
-            }),
-            ["authToken"] = _jwtService.GenerateToken(new AuthToken()
-            {
-                Username = signInResult.User.LoginName,
-                UUID = user.UUID,
-            })
-        };
-
-        var cookie = new CookieOptions()
+                DisplayName = signInResult.User.DisplayName,
+                MatriculationNumber = mnr
+            }).Entity;
+        }
+        else
         {
-            HttpOnly = true,
-            IsEssential = true,
-            Domain = "/",
-            Expires = DateTime.Now.AddMinutes(15),
-            Secure = false
-        };
-
-        Response.Cookies.Append("Authorization", tokens["authToken"], cookie);
-        Response.Cookies.Append("Auth-Token", tokens["authToken"], cookie);
-        Response.Cookies.Append("ID-Token", tokens["idToken"], cookie);
-        //Response.Cookies.Append("Test", "anel", cookie);
-
-        return tokens;
+            user.SchoolEmail = signInResult.User.Email;
+            user.Class = signInResult.User.Class;
+            user.Role = signInResult.User.OrganizationUnit;
+            user.Username = signInResult.User.LoginName;
+            user.DisplayName = signInResult.User.DisplayName;
+            user.MatriculationNumber = mnr;
+        }
+        _db.SaveChanges();
+        return user;
     }
 
     [Authorize]
