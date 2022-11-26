@@ -1,11 +1,11 @@
 using System.Security.Cryptography;
+using Core.AuthLib;
+using Core.AuthLib.Services;
 using Core.Backend.Secure.Services;
 using Core.Database;
 using Core.Ldap.Implementation;
 using Core.Ldap.Interface;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +23,7 @@ else
 
 builder.Services.AddTransient<CredService>();
 builder.Services.AddSingleton<JwtService>();
-builder.Services.AddSingleton<RSA>(RsaService.ImportRSAKey("./keys/" + builder.Configuration["RSA:private-key"]));
+builder.Services.AddSingleton<RSA>(RsaService.ImportRSAKey("./keys/" + builder.Configuration["RSA:private-key"], true));
 
 builder.Services.Configure<LdapConfiguration>(builder.Configuration.GetSection("LDAPConfiguration"));
 builder.Services.AddTransient<ILdapClient, LdapClient>();
@@ -37,44 +37,7 @@ builder.Services.AddSwaggerGen(o =>
 
 });
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
-    {
-        options.RequireHttpsMetadata = false;
-        options.SaveToken = true;
-
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ClockSkew = TimeSpan.Zero,
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidAudience = builder.Configuration["Jwt:Audience"],
-            ValidIssuer = builder.Configuration["Jwt:Issuer"],
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new RsaSecurityKey(RsaService.ImportRSAKey("./keys/" + builder.Configuration["RSA:private-key"]))
-        };
-        options.Events = new JwtBearerEvents
-        {
-            OnMessageReceived = context =>
-            {
-                context.Token = context.Request.Cookies["auth"];
-                return Task.CompletedTask;
-            }
-        };
-    });
-
-builder.Services.AddAuthorization(opt =>
-{
-    opt.AddPolicy("Admin", policy =>
-    {
-        policy.RequireClaim("rolle", "Admin");
-        policy.RequireClaim("type", "id-token");
-    });
-
-    opt.AddPolicy("ID-Token", policy => policy.RequireClaim("type", "id-token"));
-    opt.AddPolicy("Auth-Token", policy => policy.RequireClaim("type", "auth-token"));
-});
+builder.AddCookieAuth(true);
 
 var app = builder.Build();
 
