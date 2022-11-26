@@ -1,10 +1,9 @@
-using Core.Backend.Secure.Auth;
+using Core.AuthLib;
 using Core.Backend.Secure.Dtos;
 using Core.Backend.Secure.exceptions;
 using Core.Backend.Secure.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
 
 namespace Core.Backend.Secure.Controllers;
 
