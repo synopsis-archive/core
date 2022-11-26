@@ -16,7 +16,13 @@ builder.Services.AddSwaggerGen();
 builder.Services.Configure<MoodleConfiguration>(builder.Configuration.GetSection("Moodle"));
 builder.Services.Configure<LdapConfiguration>(builder.Configuration.GetSection("LDAPConfiguration"));
 
-builder.AddCookieAuth();
+builder.Services.AddSwaggerGen(o =>
+{
+    o.AddSwaggerGenHeader();
+});
+
+
+builder.AddHeaderAuth();
 
 var app = builder.InjectBuilderToPlugin().Build();
 

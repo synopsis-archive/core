@@ -27,4 +27,10 @@
       <ProjectReference Include="..\Core.WebUntis.Interface\Core.WebUntis.Interface.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="keys\dev-public-key.pem">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>
