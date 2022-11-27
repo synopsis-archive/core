@@ -6,6 +6,6 @@ import { LogoFullComponent } from "./logo-full/logo-full.component";
 @NgModule({
   declarations: [FooterComponent, LogoFullComponent],
   imports: [CommonModule],
-  exports: [FooterComponent],
+  exports: [FooterComponent, LogoFullComponent],
 })
 export class SharedModule {}
