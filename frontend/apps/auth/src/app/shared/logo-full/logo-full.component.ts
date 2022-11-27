@@ -5,8 +5,6 @@ import { Component, OnInit } from "@angular/core";
   templateUrl: "./logo-full.component.html",
   styleUrls: ["./logo-full.component.css"],
 })
-export class LogoFullComponent implements OnInit {
+export class LogoFullComponent {
   constructor() {}
-
-  ngOnInit(): void {}
 }
