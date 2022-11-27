@@ -16,6 +16,11 @@ public class IDToken : AuthToken
     public string? Class { get; set; }
 
     /// <summary>
+    /// Email
+    /// </summary>
+    public string Email { get; set; }
+
+    /// <summary>
     /// matrikelnummer - nur bei Schülern verfügbar
     /// </summary>
     public string? MatriculationNumber { get; set; }
@@ -25,24 +30,25 @@ public class IDToken : AuthToken
     /// </summary>
     public List<string> ConnectedPlatforms { get; set; } = null!;
 
-    public override Claim[] Claims
+    public override List<Claim> Claims
     {
         get
         {
-            var claims = new[]
+            var claims = new List<Claim>
             {
                 new Claim("type", "id-token"),
                 new Claim("username", Username),
                 new Claim("uuid", UUID.ToString()),
                 new Claim("rolle", Role),
+                new Claim("email", Email),
                 new Claim("connectedPlatforms", JsonConvert.SerializeObject(ConnectedPlatforms)),
             };
 
             if (MatriculationNumber != null)
-                claims.Append(new Claim("matrikelnummer", MatriculationNumber));
+                claims.Add(new Claim("matrikelnummer", MatriculationNumber));
 
             if (Class != null)
-                claims.Append(new Claim("klasse", Class));
+                claims.Add(new Claim("klasse", Class));
 
             return claims;
         }
