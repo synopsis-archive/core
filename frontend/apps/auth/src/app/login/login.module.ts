@@ -6,10 +6,11 @@ import { CredentialPageComponent } from "./credential-page/credential-page.compo
 import { DailyQuoteComponent } from "./daily-quote/daily-quote.component";
 import { LoginComponent } from "./login.component";
 import { SharedModule } from "../shared/shared.module";
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [CredentialPageComponent, DailyQuoteComponent, LoginComponent],
-  imports: [CommonModule, SharedModule, LoginRoutingModule],
+  imports: [CommonModule, SharedModule, LoginRoutingModule, FormsModule],
   bootstrap: [LoginComponent],
 })
 export class LoginModule {}

@@ -18,7 +18,7 @@
 </head>
 <body>
 
-<iframe src="/navigation.html" id="navigation"></iframe>
+<iframe src="navigation.html" id="navigation"></iframe>
 
 <div style="position: absolute" id="loaded-plugin">
 
@@ -27,12 +27,16 @@
 <script>
     const plugins = {
         "webuntis": {
-            url: "/webuntis.html",
+            url: "webuntis.html",
             permissions: ["webuntis"]
         },
         "sokrates": {
-            url: "/sokrates.html",
+            url: "sokrates.html",
             permissions: ["webuntis", "sokrates"]
+        },
+        "login": {
+            url: "http://localhost:4200/login",
+            permissions: ["login"]
         }
     };
 
@@ -88,18 +92,47 @@
         }
 
         if (event.source === pluginIframe?.contentWindow) {
-            if (event.data === "webuntis") {
-                if (loadedPlugin.permissions.includes("webuntis"))
-                    pluginIframe?.contentWindow.postMessage("webuntis data");
-                else
-                    console.error("Plugin does not have permission to access webuntis data");
-            }
 
-            if (event.data === "sokrates") {
-                if (loadedPlugin.permissions.includes("sokrates"))
-                    pluginIframe?.contentWindow.postMessage("sokrates data");
-                else
-                    console.error("Plugin does not have permission to access sokrates data");
+            switch (event.data.method) {
+                case "login":
+                    console.log(event.data.data)
+
+                    fetch('https://localhost:7139/Auth/Login', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                        },
+                        credentials: "include",
+                        body: JSON.stringify({
+                            "username": event.data.data.username,
+                            "password": event.data.data.password
+                        }),
+                    });
+
+                    return;
+                case "msg":
+                    if (event.data.data === "webuntis") {
+                        if (loadedPlugin.permissions.includes("webuntis"))
+                            pluginIframe?.contentWindow.postMessage("webuntis data");
+                        else
+                            console.error("Plugin does not have permission to access webuntis data");
+                    }
+
+                    if (event.data.data === "sokrates") {
+                        if (loadedPlugin.permissions.includes("sokrates"))
+                            pluginIframe?.contentWindow.postMessage("sokrates data");
+                        else
+                            console.error("Plugin does not have permission to access sokrates data");
+                    }
+
+                    if (event.data.data === "login") {
+                        if (loadedPlugin.permissions.includes("login"))
+                            pluginIframe?.contentWindow.postMessage("login data");
+                        else
+                            console.error("Plugin does not have permission to access sokrates data");
+                    }
+                    break;
             }
         }
     })
