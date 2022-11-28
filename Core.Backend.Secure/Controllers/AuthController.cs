@@ -27,18 +27,6 @@ public class AuthController : ControllerBase
         _conf = conf;
     }
 
-    [HttpGet]
-    public string GetAuth()
-    {
-        var uuid = new Guid("00000000-0000-0000-0000-000000000000");
-        var idToken = new AuthToken()
-        {
-            Username = "Siemens",
-            UUID = uuid
-        };
-        return _jwtService.GenerateToken(idToken);
-    }
-
     [Authorize(Policy = "Auth-Token")]
     [HttpGet]
     public string GetIdToken()
