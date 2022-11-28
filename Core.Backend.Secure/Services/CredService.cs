@@ -33,7 +33,7 @@ public class CredService
         switch (type)
         {
             case "webuntis":
-                userTokens.WebUntisToken = token;
+                userTokens.WebUntisSecret = token;
                 _db.SaveChanges();
                 break;
             case "eduvidual":
