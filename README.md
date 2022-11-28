@@ -5,7 +5,7 @@
 
 ## Branches
 
-For new branches use the correct prefix:
+For new branches, use the correct prefix:
 
 * Branches for new features should be called `feature/a-few-words`
 * Branches for bug fixes should be called `bug/a-few-words`
@@ -30,12 +30,12 @@ pip install pre-commit
 pre-commit install
 ```
 
-Run test to check bevore commit:
+Run test to check before commit:
 ```bash
 pre-commit run --all-files
 ```
 
-The first run can take a while, as it installs all the hooks.
+The first run may take a while, as it installs all the hooks.
 
 ### Checks:
 - trailing-whitespace
@@ -44,7 +44,7 @@ The first run can take a while, as it installs all the hooks.
 - check-added-large-files
 - dotnet-format
 - eslint
-- simon-check - checks for Simons credentials
+- simon-check - checks for Simon's credentials
 
 ## Techstack
 
