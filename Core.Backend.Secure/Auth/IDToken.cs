@@ -30,11 +30,11 @@ public class IDToken : AuthToken
     /// </summary>
     public List<string> ConnectedPlatforms { get; set; } = null!;
 
-    public override Claim[] Claims
+    public override List<Claim> Claims
     {
         get
         {
-            var claims = new[]
+            var claims = new List<Claim>
             {
                 new Claim("type", "id-token"),
                 new Claim("username", Username),
@@ -45,10 +45,10 @@ public class IDToken : AuthToken
             };
 
             if (MatriculationNumber != null)
-                claims.Append(new Claim("matrikelnummer", MatriculationNumber));
+                claims.Add(new Claim("matrikelnummer", MatriculationNumber));
 
             if (Class != null)
-                claims.Append(new Claim("klasse", Class));
+                claims.Add(new Claim("klasse", Class));
 
             return claims;
         }
