@@ -48,6 +48,7 @@ services:
       dockerfile: deployment/backend.secure.Dockerfile
     environment:
       ConnectionStrings__Production: "server=secure-database;database=core;user=root;password=network-security"
+      MainframeOrigin: "http://mainframe.core.localhost"
     volumes:
       - ./private-keys:/app/keys
     networks:

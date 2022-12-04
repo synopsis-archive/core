@@ -50,9 +50,16 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-    app.UseCors(policyBuilder => policyBuilder.AllowAnyHeader().WithOrigins("http://localhost:63342").AllowAnyMethod()
-        .AllowCredentials());
 }
+
+app.UseCors(policyBuilder => policyBuilder
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    .AllowCredentials()
+    .WithOrigins(app.Configuration["MainframeOrigin"])
+);
+var logger = app.Services.GetRequiredService<ILogger<Program>>();
+logger.LogInformation("Configured mainframe origin to {Origin}", app.Configuration["MainframeOrigin"]);
 
 app.UseAuthentication();
 app.UseAuthorization();
