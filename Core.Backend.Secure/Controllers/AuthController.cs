@@ -31,7 +31,6 @@ public class AuthController : ControllerBase
     [HttpGet]
     public string GetIdToken()
     {
-
         var user = _db.Users.FirstOrDefault(x => x.UUID == User.GetUUID());
 
         var obj = _db.StoredUserTokens.First(x => x.UserUUID == user.UUID);
@@ -53,7 +52,17 @@ public class AuthController : ControllerBase
     [HttpPost]
     public IActionResult Login(SignInParams signInParams)
     {
-        var signInResult = _ldap.SignIn(signInParams);
+        SignInResult signInResult;
+
+        try
+        {
+            signInResult = _ldap.SignIn(signInParams);
+        }
+        catch (Exception e) when (e is InvalidLoginException or LdapNotReachableException)
+        {
+            return BadRequest(e.Message);
+        }
+
         var user = UpdateUserInDB(signInResult);
 
         DateTime valid = _conf["JWT:Auth-Token-Expiration-Unit"] == "days"
@@ -119,6 +128,7 @@ public class AuthController : ControllerBase
             user.DisplayName = signInResult.User.DisplayName;
             user.MatriculationNumber = mnr;
         }
+
         _db.SaveChanges();
         return user;
     }

@@ -9,6 +9,9 @@
         <h1 class="text-3xl font-bold">Welcome to HTL Grieskirchen Core!</h1>
         <p class="mb-10">Please enter your credentials</p>
 
+        <!-- TODO: make less ugly -->
+        <h2 *ngIf="error !== null" class="text-red-500 font-bold mb-4">{{error}}</h2>
+
         <form>
           <label for="user" class="block mb-1 text-sm font-medium text-gray-900"
             >Username</label
@@ -36,8 +39,11 @@
             name="password"
           />
 
+          <!-- TODO: display loading and disabled state -->
+
           <button
             (click)="login()"
+            [disabled]="loading"
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center mb-5"
           >
             Login

@@ -12,12 +12,13 @@
                 "webuntis",
                 "sokrates"
             ]
-        },
-        "login": {
-            "url": "http://localhost:4200/login",
-            "permissions": [
-                "login"
-            ]
         }
-    }
+    },
+    "login": {
+        "url": "http://localhost:4200/login"
+    },
+    "navigation": {
+        "url": "http://localhost:4201/"
+    },
+    "secureBackendUrl": "https://localhost:7139"
 }
