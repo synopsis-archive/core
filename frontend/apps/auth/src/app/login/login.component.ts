@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
+import { MainframeService } from "../mainframe.service";
 
 @Component({
   selector: "app-login",
@@ -9,16 +10,21 @@ export class LoginComponent {
   username = "";
   password = "";
 
-  constructor() {}
+  loading = false;
+  error: null | string = null;
+
+  constructor(private mainframe: MainframeService) {}
 
   login() {
-    window.parent.postMessage({
-      "method": "login",
-      "data": {
-        "username": this.username,
-        "password": this.password
-      }
-      // FIXME: Fix targetOrigin
-    }, "*")
+    if(this.loading)
+      return;
+
+    this.loading = true;
+    this.error = null;
+
+    this.mainframe.login(this.username, this.password).then(error => {
+      this.loading = false;
+      this.error = error;
+    })
   }
 }
