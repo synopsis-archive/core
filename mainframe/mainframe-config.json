@@ -1,0 +1,23 @@
+﻿{
+    "plugins": {
+        "webuntis": {
+            "url": "webuntis.html",
+            "permissions": [
+                "webuntis"
+            ]
+        },
+        "sokrates": {
+            "url": "sokrates.html",
+            "permissions": [
+                "webuntis",
+                "sokrates"
+            ]
+        },
+        "login": {
+            "url": "http://localhost:4200/login",
+            "permissions": [
+                "login"
+            ]
+        }
+    }
+}

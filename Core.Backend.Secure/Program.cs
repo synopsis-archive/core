@@ -17,8 +17,9 @@ if (builder.Environment.IsDevelopment())
 }
 else
 {
-    // TODO: setup production database
-    Console.WriteLine("Production database not setup yet");
+    var connectionString = builder.Configuration.GetConnectionString("Production");
+    builder.Services.AddDbContext<CoreContext>(db =>
+        db.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 }
 
 builder.Services.AddTransient<CredService>();
@@ -32,10 +33,7 @@ builder.Services.AddTransient<ILdapClient, LdapClient>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(o =>
-{
-
-});
+builder.Services.AddSwaggerGen();
 
 builder.AddCookieAuth(true);
 
@@ -52,10 +50,9 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-    app.UseCors(policyBuilder => policyBuilder.AllowAnyHeader().WithOrigins("http://localhost:63342").AllowAnyMethod().AllowCredentials());
+    app.UseCors(policyBuilder => policyBuilder.AllowAnyHeader().WithOrigins("http://localhost:63342").AllowAnyMethod()
+        .AllowCredentials());
 }
-
-app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
