@@ -23,20 +23,14 @@
 <div style="position: absolute" id="loaded-plugin"></div>
 
 <script>
-    const plugins = {
-        "webuntis": {
-            url: "webuntis.html",
-            permissions: ["webuntis"]
-        },
-        "sokrates": {
-            url: "sokrates.html",
-            permissions: ["webuntis", "sokrates"]
-        },
-        "login": {
-            url: "http://localhost:4200/login",
-            permissions: ["login"]
-        }
-    };
+    let plugins;
+
+    fetch("mainframe-config.json")
+        .then(response => response.json())
+        .then(data => {
+            console.log("Retrieved mainframe config", data);
+            plugins = data.plugins;
+        });
 
     let loggedIn = false;
     fetch('https://localhost:7139/Auth/IsAuthed', {
