@@ -1,0 +1,8 @@
+{
+  "version": 2,
+  "projects": {
+    "auth": "apps/auth",
+    "frontend": "apps/frontend",
+    "mainframe-connector": "libs/mainframe-connector"
+  }
+}
