@@ -40,7 +40,7 @@
 
     async function checkLoginState(secureBackendUrl) {
         try {
-            const response = await fetch(secureBackendUrl + "/Auth/IsAuthed", { credentials: "include" });
+            const response = await fetch(secureBackendUrl + "/Auth/IsAuthed", {credentials: "include"});
             if (response.status === 401)
                 return false;
             const isAuthed = await response.json();
@@ -99,7 +99,7 @@
 
     function sendErrorMessageToLogin(message) {
         const frame = document.getElementById("login-container").firstChild;
-        frame.contentWindow.postMessage({ method: "error", data: { message } }, "*");
+        frame.contentWindow.postMessage({method: "error", data: {message}}, "*");
     }
 
     async function executeLogin(secureBackendUrl, username, password) {
@@ -150,10 +150,10 @@
         createPluginFrame(config.navigation.url, "nav-container");
 
         while (true) {
-            const navData = await waitForMessageFromFrame("nav-container", (data) => {
-                return data.method === "loadPlugin";
-
-            });
+            const navData = await waitForMessageFromFrame("nav-container", (data) =>
+                typeof data.method === "string" &&
+                typeof data.pluginId === "string" &&
+                data.method === "loadPlugin");
             clearFrameContainer("plugin-container");
             createPluginFrame(config[navData.pluginId].url, "plugin-container");
         }
