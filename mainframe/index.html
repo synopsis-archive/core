@@ -64,29 +64,37 @@
         }
     }
 
-    function waitForCredentialsFromLogin() {
+    function waitForMessageFromFrame(containerId, filter) {
         return new Promise(resolve => {
-            const frame = document.getElementById("login-container").firstChild;
-            window.addEventListener("message", (event) => {
+            const frame = document.getElementById(containerId).firstChild;
+            window.addEventListener("message", function (event) {
                 console.log(event);
                 if (event.source !== frame.contentWindow) {
                     console.debug("Ignoring message from unknown source", event);
                     return;
                 }
 
-                const data = event.data;
-
-                if (data.method === "login") {
-                    if (typeof data.data === "object" &&
-                        typeof data.data.username === "string" &&
-                        typeof data.data.password === "string") {
-                        resolve({ username: data.data.username, password: data.data.password });
-                    } else {
-                        console.error("Invalid login data", data);
-                    }
+                if (filter(event.data)) {
+                    window.removeEventListener("message", this);
+                    resolve(event.data);
                 }
             });
         });
+    }
+
+    async function waitForCredentialsFromLogin() {
+        return (await waitForMessageFromFrame("login-container", (data) => {
+            if (data.method === "login") {
+                if (typeof data.data === "object" &&
+                    typeof data.data.username === "string" &&
+                    typeof data.data.password === "string") {
+                    return true;
+                } else {
+                    console.error("Invalid login data", data);
+                    return false;
+                }
+            }
+        })).data;
     }
 
     function sendErrorMessageToLogin(message) {
@@ -140,6 +148,15 @@
         }
 
         createPluginFrame(config.navigation.url, "nav-container");
+
+        while (true) {
+            const navData = await waitForMessageFromFrame("nav-container", (data) => {
+                return data.method === "loadPlugin";
+
+            });
+            clearFrameContainer("plugin-container");
+            createPluginFrame(config[navData.pluginId].url, "plugin-container");
+        }
     }
 
     main();
