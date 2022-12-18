@@ -25,7 +25,9 @@ export class HomeComponent implements OnInit {
     this.getNewCategory('Alle', 'border-all.svg')];
 
   ngOnInit(): void {
-    this.jwtPayload = this.service.decodeJwt(this.service.getJwt());
+    this.service.getJwt().then(jwt=>{
+      this.jwtPayload = this.service.decodeJwt(jwt);
+    });
   }
 }
 
