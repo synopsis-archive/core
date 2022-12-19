@@ -23,8 +23,8 @@ export class ListViewComponent implements OnInit {
   }
 
   sortPlugins() {
-    this._plugins = [...this._plugins.sort((a,b) =>
-      this.titleAsc ? a.name!.localeCompare(b.name!) : b.name!.localeCompare(a.name!))];
+    this._plugins = this._plugins.sort((a,b) =>
+      this.titleAsc ? a.name!.localeCompare(b.name!) : b.name!.localeCompare(a.name!));
     console.log(this._plugins)
   }
 }

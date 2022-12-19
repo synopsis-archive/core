@@ -14,11 +14,11 @@ export class DashboardComponent implements OnInit {
   constructor() {
   }
 
-  courses: Category[] = [];
+  categories: Category[] = [];
   getNewCategory = (name: string, icon: string) => new Category( name, `../../../assets/icons/${icon}`);
 
   ngOnInit(): void {
-    this.courses = [
+    this.categories = [
       this.getNewCategory('Favoriten', 'star.svg'),
       this.getNewCategory('Meine', 'user-search.svg'),
       this.getNewCategory('Bald fällig', 'hourglass-low.svg'),

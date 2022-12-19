@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   showDashboard: boolean = true;
 
   // getNewPlugin = (name: string, image: string) => new Plugin( name, [], null, null, null, null, `../../../assets/images/${image}`);
-
+  //
   // plugins: Plugin[] = [
   // this.getNewPlugin('BeReal Anfängerkurs', 'nodla.jpeg'),
   // this.getNewPlugin('Kirtag in Lambrechten', 'wiesn.jpg'),
