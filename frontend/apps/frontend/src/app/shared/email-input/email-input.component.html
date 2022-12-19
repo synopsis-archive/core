@@ -1,6 +1,10 @@
-<label for="email" style="font-size: small">E-Mail</label><br>
-<input #email id="email" type="email" value="test@test.test" required
-       title="Gib eine valide E-Mailadresse ein: max@musterman.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" (input)="onClick(valid = email.checkValidity())">
-<br>
-<label *ngIf="!valid" style="color: red; font-size: 10pt">Bitte geben Sie eine valide Adresse ein! z.B.:
-  max@musterman.com</label>
+<div class="mb-6 flex-row">
+  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="email">E-Mail</label><br>
+  <input #email
+         (input)="valid = email.checkValidity()"
+         [ngClass]="{'text-green-700':valid, 'dark:text-green-400':valid, 'placeholder-green-700':valid, 'dark:placeholder-green-500':valid, 'ring-green-500':valid, 'border-green-500':valid}" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+         placeholder="test@test.test" required type="email" title="Gib eine valide E-Mailadresse ein: max@musterman.com"><br>
+  <label *ngIf="!valid"
+         class="text-red-700 dark:text-red-400 placeholder-red-700 dark:placeholder-red-500 ring-red-500 border-red-500"
+         style="font-size: 10pt">Bitte geben Sie eine valide Adresse ein! z.B.: max@musterman.com</label>
+</div>
