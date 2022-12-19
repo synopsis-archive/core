@@ -2,7 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {
   IDTokenPayload,
   MainframeIdTokenService
-} from "../../../../../../libs/mainframe-connector/src/lib/mainframe-id-token.service";
+} from "mainframe-connector";
 import {Plugin} from "../../shared/classes/plugin";
 
 @Component({
