@@ -115,8 +115,8 @@
             },
             credentials: "include",
             body: JSON.stringify({
-                "username": username,
-                "password": password
+                "username": username.trim(),
+                "password": password.trim()
             })
         });
 
