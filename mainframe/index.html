@@ -175,6 +175,20 @@
 
         createPluginFrame(config.navigation.url, "nav-container");
 
+        const plugins = Object.entries(config.plugins).map(([name, plugin]) => {
+            return {
+                id: name,
+                name: plugin.info.name,
+                description: plugin.info.description,
+                teachers: plugin.info.teachers,
+                tags: plugin.info.tags,
+                startDate: plugin.info.startDate,
+                endDate: plugin.info.endDate,
+                image: plugin.info.image,
+                isFavourite: plugin.info.isFavourite
+            };
+        });
+
         while (isAuthed) {
             console.log     ("Waiting for plugin request");
             const navData = await waitForMessageFromFrame("nav-container", (data) => typeof data.method === "string");
@@ -190,6 +204,8 @@
             switch (navData.method) {
                 case "getIDToken":
                     sendMessageToFrame("nav-container", "getIDToken", await fetch2(config.secureBackendUrl, "/Auth/GetIDToken", "GET"));
+                case "getPluginList":
+                    sendMessageToFrame("nav-container", "getPluginList", plugins);
             }
 
             clearFrameContainer("plugin-container");
