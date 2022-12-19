@@ -3,7 +3,6 @@ import {
   IDTokenPayload,
   MainframeIdTokenService
 } from "mainframe-connector";
-import {Plugin} from "../../shared/classes/plugin";
 
 @Component({
   selector: "app-home",
