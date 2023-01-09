@@ -1,4 +1,5 @@
 import {Component, HostBinding, Input, OnInit} from "@angular/core";
+import {MainframeNavService} from "mainframe-connector";
 
 @Component({
   selector: "app-plugin",
@@ -13,10 +14,15 @@ export class PluginComponent implements OnInit {
     this.background = `background-image: linear-gradient(rgba(0,0,0, 0),rgba(0,0,0,0.8)), url(${src})`;
   };
   @Input() name: string | null = "";
+  @Input() id: string = null!;
 
-  constructor() {}
+  constructor(private navService: MainframeNavService) {}
 
   ngOnInit(): void {
     console.log('test')
+  }
+
+  open() {
+    this.navService.openPlugin(this.id);
   }
 }

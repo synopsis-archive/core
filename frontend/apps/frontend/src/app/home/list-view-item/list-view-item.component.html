@@ -6,8 +6,9 @@
     {{plugin.endDate ?? '-'}}
   </td>
   <td class="py-4 px-6">
-    {{plugin.teachers?.join(', ')}}
+    {{plugin.teachers.join(', ')}}
   </td>
   <td class="py-4 px-6">
-    Tags
+    <app-tag *ngFor="let tag of plugin.tags"
+             [name]="tag"></app-tag>
   </td>

@@ -4,6 +4,7 @@ import {
   MainframeIdTokenService
 } from "mainframe-connector";
 import {Plugin} from "../../shared/classes/plugin";
+import {setTagColors} from "../../shared/classes/tagColors";
 
 @Component({
   selector: "app-home",
@@ -12,7 +13,7 @@ import {Plugin} from "../../shared/classes/plugin";
 })
 export class HomeComponent implements OnInit {
 
-  plugins: Plugin[] = [];
+  plugins: Plugin[] = [new Plugin('test', [], null, ['test'], null, null, null,  true)];
 
   constructor(private service: MainframeIdTokenService) {
   }
@@ -40,5 +41,7 @@ export class HomeComponent implements OnInit {
     this.service.getJwt().then(jwt=>{
       this.jwtPayload = this.service.decodeJwt(jwt);
     });
+
+    setTagColors(['test']);
   }
 }
