@@ -27,6 +27,9 @@ services:
     build:
       context: ..
       dockerfile: deployment/backend.Dockerfile
+      platforms:
+        - "linux/amd64"
+        - "linux/arm64"
     environment:
       RSA__public-key: "${RSA_PUBLIC_KEY_FILE}"
     depends_on:
@@ -53,6 +56,9 @@ services:
     build:
       context: ..
       dockerfile: deployment/backend.secure.Dockerfile
+      platforms:
+        - "linux/amd64"
+        - "linux/arm64"
     environment:
       ConnectionStrings__Production: "server=secure-database;database=core;user=root;password=network-security"
       MainframeOrigin: "${SITE_PROTOCOL}://mainframe.${DOMAIN_NAME}"
