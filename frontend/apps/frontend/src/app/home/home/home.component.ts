@@ -1,10 +1,10 @@
 import {Component, OnInit} from "@angular/core";
 import {
   IDTokenPayload,
-  MainframeIdTokenService
+  MainframeIdTokenService,
+  PluginListService,
+  Plugin
 } from "mainframe-connector";
-import {PluginListService} from "../../../../../../libs/mainframe-connector/src/lib/plugin-list.service";
-import {Plugin} from "mainframe-connector";
 
 @Component({
   selector: "app-home",
