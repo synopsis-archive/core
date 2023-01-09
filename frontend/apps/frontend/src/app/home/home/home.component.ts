@@ -3,6 +3,8 @@ import {
   IDTokenPayload,
   MainframeIdTokenService
 } from "mainframe-connector";
+import {PluginListService} from "../../../../../../libs/mainframe-connector/src/lib/plugin-list.service";
+import {Plugin} from "mainframe-connector";
 
 @Component({
   selector: "app-home",
@@ -10,11 +12,10 @@ import {
   styleUrls: ["./home.component.css"],
 })
 export class HomeComponent implements OnInit {
+  constructor(private service: MainframeIdTokenService, private pluginService: PluginListService) {
+  }
 
   plugins: Plugin[] = [];
-
-  constructor(private service: MainframeIdTokenService) {
-  }
 
   jwtPayload: IDTokenPayload | undefined;
   showDashboard: boolean = true;
@@ -35,7 +36,12 @@ export class HomeComponent implements OnInit {
   // this.getNewPlugin('ORF interview', 'meeting.jpg')
   // ];
 
+  pluginList: any;
+
   ngOnInit(): void {
+    this.pluginService.getPluginList().then(plugins => {
+      this.pluginList = plugins;
+    });
     this.service.getJwt().then(jwt=>{
       this.jwtPayload = this.service.decodeJwt(jwt);
     });

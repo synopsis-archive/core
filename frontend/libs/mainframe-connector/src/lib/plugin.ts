@@ -1,6 +1,6 @@
 ﻿export interface Plugin {
     // name of plugin - example: "Religion_abmelden"
-    name: string | null,
+    name: string,
 
     // teachers of plugin - example for Religion_abmelden: ["Mairinger", "Mörixbauer"]
     teachers: string[],
@@ -9,7 +9,7 @@
     description: string | null,
 
     // tags for this plugin - example for Religion_abmelden: ["Erste Schulwoche", "Religion"]
-    tags: string[] | null,
+    tags: string[],
 
     // startDate for plugin - example for Religion_abmelden: "1662789600" (Datum des ersten Schultags als UnixTimeStamp mit Sekunden)
     startDate: string | null,

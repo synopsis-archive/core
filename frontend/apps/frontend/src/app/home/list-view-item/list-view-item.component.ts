@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from "@angular/core";
-import {Plugin} from "../../shared/classes/plugin";
+import {Plugin} from "mainframe-connector";
 
 @Component({
   // eslint-disable-next-line  @angular-eslint/component-selector

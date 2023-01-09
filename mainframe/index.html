@@ -200,12 +200,13 @@
             /*switch (navData.pluginId) {
                 case "navigate": doNavigateStuff(navData); break;
             }*/
-
             switch (navData.method) {
                 case "getIDToken":
                     sendMessageToFrame("nav-container", "getIDToken", await fetch2(config.secureBackendUrl, "/Auth/GetIDToken", "GET"));
+                    break;
                 case "getPluginList":
                     sendMessageToFrame("nav-container", "getPluginList", plugins);
+                    break;
             }
 
             clearFrameContainer("plugin-container");
