@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {IDTokenPayload, MainframeIdTokenService} from "mainframe-connector";
-import {Plugin} from "../../shared/classes/plugin";
+import {Plugin} from "mainframe-connector";
 
 @Component({
   selector: "app-dashboard",
