@@ -22,7 +22,6 @@
     public image: string | null,
 
     // whether the user added this course to their favourites
-    public isFavourite: boolean = false,
-  ) {
-  }
+    public isFavourite: boolean = false
+  ) {}
 }
