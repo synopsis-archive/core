@@ -12,6 +12,11 @@ const routes: Routes = [
     loadChildren: () =>
       import("./plugin/plugin.module").then((m) => m.PluginModule),
   },
+  {
+    path: "credits",
+    loadChildren: () =>
+      import("./credits/credits.module").then((m) => m.CreditsModule),
+  },
 ];
 
 @NgModule({
