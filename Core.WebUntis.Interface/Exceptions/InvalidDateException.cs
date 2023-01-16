@@ -1,6 +1,6 @@
-﻿namespace Core.WebUntis.Interface.Exceptions;
+namespace Core.WebUntis.Interface.Exceptions;
 
-public class InvalidDateException: Exception
+public class InvalidDateException : Exception
 {
 
 }
