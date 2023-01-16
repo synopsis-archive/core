@@ -8,6 +8,7 @@ import { PluginComponent } from "./plugin/plugin.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { ListViewComponent } from "./list-view/list-view.component";
 import { ListViewItemComponent } from "./list-view-item/list-view-item.component";
+import {CoreUiModule} from "core-ui";
 
 @NgModule({
   declarations: [
@@ -18,6 +19,6 @@ import { ListViewItemComponent } from "./list-view-item/list-view-item.component
     ListViewComponent,
     ListViewItemComponent,
   ],
-  imports: [CommonModule, HomeRoutingModule],
+    imports: [CommonModule, HomeRoutingModule, CoreUiModule],
 })
 export class HomeModule {}

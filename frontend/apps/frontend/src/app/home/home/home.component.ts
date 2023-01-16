@@ -41,4 +41,8 @@ export class HomeComponent implements OnInit {
       this.jwtPayload = this.service.decodeJwt(jwt);
     });
   }
+
+  buttonPressed() {
+    console.log("button pressed");
+  }
 }
