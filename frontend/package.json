@@ -2,6 +2,8 @@
   "name": "frontend",
   "version": "0.0.0",
   "scripts": {
+    "dev:a": "nx serve auth",
+    "dev:f": "nx serve frontend",
     "ng": "nx",
     "start-old": "nx serve",
     "build": "nx build",
