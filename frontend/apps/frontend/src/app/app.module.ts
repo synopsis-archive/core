@@ -6,6 +6,7 @@ import {MainframeConnectorModule} from "mainframe-connector";
 import {SharedModule} from "./shared/shared.module";
 import { HomeModule } from "./home/home.module";
 import { AppRoutingModule } from "./app-routing.module";
+import {SettingsModule} from "./settings/settings.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { AppRoutingModule } from "./app-routing.module";
     HomeModule,
     AppRoutingModule,
     SharedModule,
+    SettingsModule
   ],
 })
 export class AppModule {}
