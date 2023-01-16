@@ -1,5 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {HttpClient} from '@angular/common/http';
+import { environment } from "apps/auth/src/environments/environment";
 
 @Component({
   selector: "app-daily-quote",
@@ -10,7 +11,7 @@ export class DailyQuoteComponent implements OnInit {
   constructor(private http: HttpClient) {
   }
 
-  configUrl = 'https://localhost:7022/Quotes';
+  configUrl = environment.backendUrl+'/Quotes';
   Quote: string | null = null;
   SubmittedBy: string | null = null;
   QuoteID: string | null = null;
