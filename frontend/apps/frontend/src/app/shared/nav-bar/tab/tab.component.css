@@ -12,3 +12,7 @@ button {
   padding: 3px;
   margin-right: 3px;
 }
+
+.isActive {
+  background-color: white;
+}
