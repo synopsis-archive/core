@@ -22,9 +22,8 @@ public class WebUntisService
 
     private async Task<WebUntisClient> GetWebUntisClient(ClaimsPrincipal? user = null)
     {
-        var webuntisSection = _config.GetSection("WebUntis");
-        var baseUrl = webuntisSection["BaseUrl"];
-        var school = webuntisSection["School"];
+        var baseUrl = _config["WebUntis:BaseUrl"];
+        var school = _config["WebUntis:School"];
 
         var webUntisClient = new WebUntisClient(baseUrl, school, "Synopsis");
         if (user != null)
