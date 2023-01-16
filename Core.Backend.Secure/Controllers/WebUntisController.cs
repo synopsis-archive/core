@@ -60,28 +60,26 @@ public class WebUntisController : ControllerBase
     }
 
     [HttpGet("TeacherTimetable")]
-    public async Task<IEnumerable<Timetable>> GetTimetableFromTeacher(DateTime startDate, DateTime endDate,
-        int? personId)
+    public async Task<IEnumerable<Timetable>> GetTimetableFromTeacher(DateTime startDate, DateTime endDate)
     {
-        return await _webUntisService.GetTimetableFromTeacher(User, startDate, endDate, personId);
+        return await _webUntisService.GetTimetableFromTeacher(User, startDate, endDate);
     }
 
     [HttpGet("StudentTimetable")]
-    public async Task<IEnumerable<Timetable>> GetTimetableFromStudent(DateTime startDate, DateTime endDate,
-        int? personId)
+    public async Task<IEnumerable<Timetable>> GetTimetableFromStudent(DateTime startDate, DateTime endDate)
     {
-        return await _webUntisService.GetTimetableFromStudent(User, startDate, endDate, personId);
+        return await _webUntisService.GetTimetableFromStudent(User, startDate, endDate);
     }
 
     [HttpGet("StudentSubstitutionTimetable")]
-    public async Task<IEnumerable<Timetable>> GetSubstitutionsFromStudent(DateTime startDate, DateTime endDate, int? personId)
+    public async Task<IEnumerable<Timetable>> GetSubstitutionsFromStudent(DateTime startDate, DateTime endDate)
     {
-        return await _webUntisService.GetSubstitutionsFromStudent(User, startDate, endDate, personId);
+        return await _webUntisService.GetSubstitutionsFromStudent(User, startDate, endDate);
     }
 
     [HttpGet("TeacherSubstitutionTimetable")]
-    public async Task<IEnumerable<Timetable>> GetSubstitutionsFromTeacher(DateTime startDate, DateTime endDate, int? personId)
+    public async Task<IEnumerable<Timetable>> GetSubstitutionsFromTeacher(DateTime startDate, DateTime endDate)
     {
-        return await _webUntisService.GetSubstitutionsFromTeacher(User, startDate, endDate, personId);
+        return await _webUntisService.GetSubstitutionsFromTeacher(User, startDate, endDate);
     }
 }

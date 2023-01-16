@@ -5,35 +5,55 @@ namespace Core.WebUntis.Implementation.ResponseTypes;
 
 public class TimetableResponse
 {
-    [JsonPropertyName("start")] public DateTime Start { get; set; }
-    [JsonPropertyName("end")] public DateTime End { get; set; }
     [JsonPropertyName("id")] public int Id { get; set; }
-    [JsonPropertyName("classIds")] public List<int>? ClassIds { get; set; }
-    [JsonPropertyName("roomIds")] public List<int>? RoomIds { get; set; }
-    [JsonPropertyName("subjectIds")] public List<int>? SubjectIds { get; set; }
-    [JsonPropertyName("teacherIds")] public List<int>? TeacherIds { get; set; }
-    [JsonPropertyName("lessonType")] public string? LessonType { get; set; }
-    [JsonPropertyName("text")] public string? Text { get; internal set; }
-    [JsonPropertyName("statisticalFlags")] public string? StatisticalFlags { get; set; }
-    [JsonPropertyName("code")] public string? Code { get; internal set; }
-    [JsonPropertyName("substText")] public string? SubstitutionText { get; internal set; }
+    [JsonPropertyName("date")] public int Date { get; set; }
+    [JsonPropertyName("startTime")] public int Start { get; set; }
+    [JsonPropertyName("endTime")] public int End { get; set; }
+    [JsonPropertyName("code")] public string? Code { get; set; }
+    [JsonPropertyName("kl")] public List<ClassId>? ClassIds { get; set; }
+    [JsonPropertyName("te")] public List<TeacherId>? TeacherIds { get; set; }
+    [JsonPropertyName("su")] public List<SubjectId>? SubjectIds { get; set; }
+    [JsonPropertyName("ro")] public List<RoomId>? RoomIds { get; set; }
+    [JsonPropertyName("activityType")] public string? LessonType { get; set; }
+    //[JsonPropertyName("date")] public int Date { get; internal set; }
+    [JsonPropertyName("substText")] public string? SubstitutionText { get; set; }
+
+
 
     public Timetable Convert()
     {
         return new Timetable
         {
             Id = Id,
-            Code = Enum.Parse<Code>(Code),
-            Start = Start,
-            End = End,
-            Text = Text,
-            ClassIds = ClassIds,
-            LessonType = Enum.Parse<LessonType>(LessonType),
-            RoomIds = RoomIds,
-            StatisticalFlags = StatisticalFlags,
-            SubjectIds = SubjectIds,
-            TeacherIds = TeacherIds,
+            Code = Code,
+            Start = UntisDateTimeMethods.ConvertUntisTimeToTime(Start),
+            End = UntisDateTimeMethods.ConvertUntisTimeToTime(End),
+            ClassIds = ClassIds.Select(x => x.Id).ToList(),
+            LessonType = LessonType,
+            RoomIds = RoomIds.Select(x => x.Id).ToList(),
+            SubjectIds = SubjectIds.Select(x => x.Id).ToList(),
+            TeacherIds = TeacherIds.Select(x => x.Id).ToList(),
             SubstitutionText = SubstitutionText
         };
     }
+}
+
+public class RoomId
+{
+    [JsonPropertyName("id")] public int Id { get; set; }
+}
+
+public class SubjectId
+{
+    [JsonPropertyName("id")] public int Id { get; set; }
+}
+
+public class TeacherId
+{
+    [JsonPropertyName("id")] public int Id { get; set; }
+}
+
+public class ClassId
+{
+    [JsonPropertyName("id")] public int Id { get; set; }
 }

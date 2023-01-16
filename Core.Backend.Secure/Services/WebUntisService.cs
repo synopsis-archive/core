@@ -106,32 +106,30 @@ public class WebUntisService
     }
 
     public async Task<IEnumerable<Timetable>> GetTimetableFromTeacher(ClaimsPrincipal user, DateTime startDate,
-        DateTime endDate, int? personId)
+        DateTime endDate)
     {
         var webUntisClient = await GetWebUntisClient(user);
-        return await webUntisClient.GetTimetable(ElementType.Teacher, personId, startDate, endDate);
+        return await webUntisClient.GetTimetable(ElementType.Teacher, startDate, endDate);
     }
 
     public async Task<IEnumerable<Timetable>> GetTimetableFromStudent(ClaimsPrincipal user, DateTime startDate,
-        DateTime endDate, int? personId)
+        DateTime endDate)
     {
         var webUntisClient = await GetWebUntisClient(user);
-        return await webUntisClient.GetTimetable(ElementType.Student, personId, startDate, endDate);
+        return await webUntisClient.GetTimetable(ElementType.Student, startDate, endDate);
     }
 
-    public async Task<IEnumerable<Timetable>> GetSubstitutionsFromStudent(ClaimsPrincipal user, DateTime startDate, DateTime endDate,
-        int? personId)
+    public async Task<IEnumerable<Timetable>> GetSubstitutionsFromStudent(ClaimsPrincipal user, DateTime startDate, DateTime endDate)
     {
         var webUntisClient = await GetWebUntisClient(user);
-        var items = await webUntisClient.GetTimetable(ElementType.Student, personId, startDate, endDate);
-        return items.Where(x => x.SubstitutionText == "Supplierung");
+        var items = await webUntisClient.GetTimetable(ElementType.Student, startDate, endDate);
+        return items.Where(x => x.SubstitutionText == "Supplierung").DefaultIfEmpty(new Timetable{Id = -1});
     }
 
-    public async Task<IEnumerable<Timetable>> GetSubstitutionsFromTeacher(ClaimsPrincipal user, DateTime startDate, DateTime endDate,
-        int? personId)
+    public async Task<IEnumerable<Timetable>> GetSubstitutionsFromTeacher(ClaimsPrincipal user, DateTime startDate, DateTime endDate)
     {
         var webUntisClient = await GetWebUntisClient(user);
-        var items = await webUntisClient.GetTimetable(ElementType.Teacher, personId, startDate, endDate);
+        var items = await webUntisClient.GetTimetable(ElementType.Teacher, startDate, endDate);
         return items.Where(x => x.SubstitutionText == "Supplierung");
     }
 

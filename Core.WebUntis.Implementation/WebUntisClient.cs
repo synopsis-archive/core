@@ -25,6 +25,7 @@ public class WebUntisClient : IWebUntisClient
 
     private readonly HttpClient _httpClient;
     private readonly CookieContainer _cookies;
+    public int _personId;
 
     public WebUntisClient(
         string baseUrl,
@@ -71,6 +72,8 @@ public class WebUntisClient : IWebUntisClient
         var authentication = authenticateResponse.Convert();
 
         AddToken(authentication.Token);
+
+        _personId = authentication.PersonId;
 
         return authentication;
     }
@@ -122,15 +125,16 @@ public class WebUntisClient : IWebUntisClient
             .Select(x => x.Convert());
     }
 
-    public async Task<IEnumerable<Timetable>> GetTimetable(ElementType type, int? personId, DateTime startDate,
+    public async Task<IEnumerable<Timetable>> GetTimetable(ElementType type, DateTime startDate,
         DateTime endDate)
     {
+        var request = new TimetableRequest(
+            _personId,
+            (int)type,
+            UntisDateTimeMethods.ConvertDateToUntisDate(startDate),
+            UntisDateTimeMethods.ConvertDateToUntisDate(endDate));
         var timetableResponse = await JsonRpcRequest<TimetableResponse[]>("getTimetable",
-            new TimetableRequest(
-                personId ?? 0,
-                (int)type,
-                UntisDateTimeMethods.ConvertDateToUntisDate(startDate),
-                UntisDateTimeMethods.ConvertDateToUntisDate(endDate)),
+            request,
             new Dictionary<string, string>
             {
                 {"school", _school}
@@ -172,6 +176,7 @@ public class WebUntisClient : IWebUntisClient
             {
                 -8520 => new InvalidTokenException(),
                 -8509 => new InsufficientRightsException(),
+                -8507 => new InvalidDateException(),
                 _ => new NotImplementedException()
             };
         }
