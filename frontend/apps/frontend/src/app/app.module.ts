@@ -4,6 +4,7 @@ import { AppComponent } from "./app.component";
 import { MainframeConnectorModule } from "mainframe-connector";
 import { HomeModule } from "./home/home.module";
 import { AppRoutingModule } from "./app-routing.module";
+import {SettingsModule} from "./settings/settings.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -11,7 +12,8 @@ import { AppRoutingModule } from "./app-routing.module";
     BrowserModule,
     MainframeConnectorModule,
     HomeModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SettingsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
