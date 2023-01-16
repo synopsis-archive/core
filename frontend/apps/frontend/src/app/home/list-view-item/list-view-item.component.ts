@@ -7,13 +7,9 @@ import {Plugin} from "mainframe-connector";
   templateUrl: "./list-view-item.component.html",
   styleUrls: ["./list-view-item.component.css"],
 })
-export class ListViewItemComponent implements OnInit {
+export class ListViewItemComponent {
 
   @Input() plugin!: Plugin;
 
   constructor() {}
-
-  ngOnInit(): void {
-    console.log('')
-  }
 }
