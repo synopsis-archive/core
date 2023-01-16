@@ -6,7 +6,7 @@ import {MainframeNavService} from "mainframe-connector";
   templateUrl: "./plugin.component.html",
   styleUrls: ["./plugin.component.scss"],
 })
-export class PluginComponent implements OnInit {
+export class PluginComponent {
 
   background: string = "";
 
@@ -17,10 +17,6 @@ export class PluginComponent implements OnInit {
   @Input() id: string = null!;
 
   constructor(private navService: MainframeNavService) {}
-
-  ngOnInit(): void {
-    console.log('test')
-  }
 
   open() {
     this.navService.openPlugin(this.id);

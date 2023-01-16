@@ -5,7 +5,6 @@ import {
   PluginListService,
   Plugin
 } from "mainframe-connector";
-import {Plugin} from "../../shared/classes/plugin";
 import {setTagColors} from "../../shared/classes/tagColors";
 
 @Component({
@@ -16,8 +15,6 @@ import {setTagColors} from "../../shared/classes/tagColors";
 export class HomeComponent implements OnInit {
   constructor(private service: MainframeIdTokenService, private pluginService: PluginListService) {
   }
-
-  plugins: Plugin[] = [new Plugin('test', [], null, ['test'], null, null, null,  true)];
 
   jwtPayload: IDTokenPayload | undefined;
   showDashboard: boolean = true;
@@ -38,16 +35,17 @@ export class HomeComponent implements OnInit {
   // this.getNewPlugin('ORF interview', 'meeting.jpg')
   // ];
 
-  pluginList: any;
+  plugins: Plugin[] = [];
 
   ngOnInit(): void {
     this.pluginService.getPluginList().then(plugins => {
-      this.pluginList = plugins;
+      this.plugins = plugins.sort((a,b) => a.name!.localeCompare(b.name!));
+      let tags = [...new Set(this.plugins.flatMap(x => x.tags))];
+      setTagColors(tags);
     });
+
     this.service.getJwt().then(jwt=>{
       this.jwtPayload = this.service.decodeJwt(jwt);
     });
-
-    setTagColors(['test']);
   }
 }
