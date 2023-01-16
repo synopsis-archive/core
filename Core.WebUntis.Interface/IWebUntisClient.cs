@@ -10,7 +10,7 @@ public interface IWebUntisClient
     public Task<IEnumerable<Room>> GetRooms();
     public Task<IEnumerable<Homework>> GetHomeworks(DateTime startDate, DateTime endDate);
     public Task<IEnumerable<Holiday>> GetHolidays();
-    public Task<IEnumerable<Timetable>> GetTimetable(ElementType type, int? personId, DateTime startDate,
+    public Task<IEnumerable<Timetable>> GetTimetable(ElementType type, DateTime startDate,
         DateTime endDate);
     [Obsolete("Deprecated due to unknown documentation")]
     public Task<IEnumerable<ExamType>> GetExamTypes();

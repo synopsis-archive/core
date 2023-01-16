@@ -12,12 +12,7 @@ public class Timetable
     public List<int>? RoomIds { get; set; }
     public List<int>? SubjectIds { get; set; }
     public List<int>? TeacherIds { get; set; }
-
-    public LessonType LessonType { get; set; }
-    public string? Text { get; set; }
-
-    public string? StatisticalFlags { get; set; }
-    public Code? Code { get; set; }
-
+    public string? LessonType { get; set; }
+    public string? Code { get; set; }
     public string? SubstitutionText { get; set; }
 }
