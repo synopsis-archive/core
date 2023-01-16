@@ -18,8 +18,8 @@ export class TagComponent implements OnInit {
   ngOnInit(): void {
     this.rgbColor = tagColors.get(this.name);
 
-    this.style = `background: rgba(${this.rgbColor},0.2);`;
-    this.style += `color: rgb(${this.rgbColor});`
-    this.style += `border: 0.15em solid rgb(${this.rgbColor});`
+    this.style = `background: ${this.rgbColor}40;`;
+    this.style += `color: ${this.rgbColor};`
+    this.style += `border: 0.15em solid ${this.rgbColor};`
   }
 }
