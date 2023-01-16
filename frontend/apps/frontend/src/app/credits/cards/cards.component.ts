@@ -19,7 +19,7 @@ export class CardsComponent implements OnInit {
   }
 
   contributors: any[] = [];
-  lastContribute = [];
+  lastContribute: any[] = [];
 
   configUrl = "https://api.github.com/repos/" + this.repoOwner + "/" + this.repoName + "/contributors";
   commitUrl = "https://api.github.com/repos/" + this.repoOwner + "/" + this.repoName + "/commits?per_page=1&author=";
@@ -56,11 +56,10 @@ export class CardsComponent implements OnInit {
 
         this.contributors.forEach(x=> {
           this.getCommitCount(x.login).subscribe(count => {
-            // @ts-ignore
+
             let frst = this.to2Digits(new Date(count[0].commit.author.date).getMonth()+1).toString();
             let scnd = new Date(count[0].commit.author.date).getFullYear().toString().substr(2,4);
 
-            // @ts-ignore
             this.lastContribute[x.login] = frst + scnd;
           });
         })
