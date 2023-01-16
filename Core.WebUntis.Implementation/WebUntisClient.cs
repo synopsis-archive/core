@@ -142,17 +142,6 @@ public class WebUntisClient : IWebUntisClient
         return timetableResponse.Select(x => x.Convert());
     }
 
-    [Obsolete]
-    public Task<IEnumerable<ExamType>> GetExamTypes()
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<IEnumerable<Exam>> GetExams(int examTypeId, DateTime startDate, DateTime endDate)
-    {
-        throw new NotImplementedException();
-    }
-
     private async Task<TResponse> JsonRpcRequest<TResponse>(
         string method,
         object? body = null,

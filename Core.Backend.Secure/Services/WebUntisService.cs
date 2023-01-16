@@ -9,18 +9,24 @@ namespace Core.Backend.Secure.Services;
 
 public class WebUntisService
 {
+    private readonly IConfiguration _config;
     private readonly CredService _credService;
-    private CoreContext _db;
+    private readonly CoreContext _db;
 
-    public WebUntisService(CredService credService, CoreContext db)
+    public WebUntisService(IConfiguration config, CredService credService, CoreContext db)
     {
+        _config = config;
         _credService = credService;
         _db = db;
     }
 
     private async Task<WebUntisClient> GetWebUntisClient(ClaimsPrincipal? user = null)
     {
-        var webUntisClient = new WebUntisClient("https://arche.webuntis.com", "htbla-grieskirchen", "Synopsis");
+        var webuntisSection = _config.GetSection("WebUntis");
+        var baseUrl = webuntisSection["BaseUrl"];
+        var school = webuntisSection["School"];
+
+        var webUntisClient = new WebUntisClient(baseUrl, school, "Synopsis");
         if (user != null)
         {
             var webUntisCredentials = GetWebUntisCredentials(user);

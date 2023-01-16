@@ -12,8 +12,4 @@ public interface IWebUntisClient
     public Task<IEnumerable<Holiday>> GetHolidays();
     public Task<IEnumerable<Timetable>> GetTimetable(ElementType type, DateTime startDate,
         DateTime endDate);
-    [Obsolete("Deprecated due to unknown documentation")]
-    public Task<IEnumerable<ExamType>> GetExamTypes();
-    [Obsolete("Deprecated due to insufficient rights")]
-    public Task<IEnumerable<Exam>> GetExams(int examTypeId, DateTime startDate, DateTime endDate);
 }
