@@ -19,6 +19,6 @@ export class ListViewComponent {
 
   sortPlugins() {
     this._plugins = this._plugins.sort((a,b) =>
-      this.titleAsc ? a.name!.localeCompare(b.name!) : b.name!.localeCompare(a.name!));
+      this.titleAsc ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name));
   }
 }
