@@ -10,15 +10,12 @@ public class TimetableResponse
     [JsonPropertyName("startTime")] public int Start { get; set; }
     [JsonPropertyName("endTime")] public int End { get; set; }
     [JsonPropertyName("code")] public string? Code { get; set; }
-    [JsonPropertyName("kl")] public List<ClassId>? ClassIds { get; set; }
-    [JsonPropertyName("te")] public List<TeacherId>? TeacherIds { get; set; }
-    [JsonPropertyName("su")] public List<SubjectId>? SubjectIds { get; set; }
-    [JsonPropertyName("ro")] public List<RoomId>? RoomIds { get; set; }
+    [JsonPropertyName("kl")] public List<TimetableResponseClass>? ClassIds { get; set; }
+    [JsonPropertyName("te")] public List<TimetableResponseTeacher>? TeacherIds { get; set; }
+    [JsonPropertyName("su")] public List<TimetableResponseSubject>? SubjectIds { get; set; }
+    [JsonPropertyName("ro")] public List<TimetableResponseRoom>? RoomIds { get; set; }
     [JsonPropertyName("activityType")] public string? LessonType { get; set; }
-    //[JsonPropertyName("date")] public int Date { get; internal set; }
     [JsonPropertyName("substText")] public string? SubstitutionText { get; set; }
-
-
 
     public Timetable Convert()
     {
@@ -38,22 +35,22 @@ public class TimetableResponse
     }
 }
 
-public class RoomId
+public class TimetableResponseRoom
 {
     [JsonPropertyName("id")] public int Id { get; set; }
 }
 
-public class SubjectId
+public class TimetableResponseSubject
 {
     [JsonPropertyName("id")] public int Id { get; set; }
 }
 
-public class TeacherId
+public class TimetableResponseTeacher
 {
     [JsonPropertyName("id")] public int Id { get; set; }
 }
 
-public class ClassId
+public class TimetableResponseClass
 {
     [JsonPropertyName("id")] public int Id { get; set; }
 }
