@@ -2,35 +2,61 @@ using Core.Database;
 
 namespace Core.Backend.Secure.Services;
 
-public class CSVReaderService : BackgroundService
+public class CsvReaderService : BackgroundService
 {
+    private readonly ILogger<CsvReaderService> _logger;
     private readonly IServiceProvider _serviceProvider;
+    private readonly IConfiguration _conf;
 
-    public CSVReaderService(IServiceProvider serviceProvider)
+    public CsvReaderService(
+        ILogger<CsvReaderService> logger,
+        IServiceProvider serviceProvider,
+        IConfiguration conf
+    )
     {
+        _logger = logger;
         _serviceProvider = serviceProvider;
+        _conf = conf;
     }
 
     protected override Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        using IServiceScope scope = _serviceProvider.CreateScope();
+        using var scope = _serviceProvider.CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<CoreContext>();
         db.Database.EnsureCreated();
-        db.Teachers.RemoveRange(db.Teachers.ToList());
-        PopulateTeachers(db);
-        db.Students.RemoveRange(db.Students.ToList());
-        PopulateStudents(db);
+
+        var csvSection = _conf.GetSection("CSV");
+        var csvPath = csvSection["Path"];
+
+        var webuntisSection = csvSection.GetSection("WebUntis");
+        var teachersPath = webuntisSection["Teachers"];
+        var studentsPath = webuntisSection["Students"];
+
+        RepopulateTeachers(db, csvPath, teachersPath);
+        RepopulateStudents(db, csvPath, studentsPath);
+
         return Task.Run(() => { }, stoppingToken);
     }
 
-    private void PopulateStudents(CoreContext db)
+    private void RepopulateStudents(CoreContext db, string csvPath, string studentsPath)
     {
-        try
+        var path = Path.Combine(csvPath, studentsPath);
+
+        if (!File.Exists(path))
         {
-            File.ReadLines("CSV/students.csv")
+            _logger.LogWarning("Setting CSV/WebUntis/Students incorrectly provided or file does not exist");
+            return;
+        }
+
+        _logger.LogInformation("Repopulate Students");
+
+        db.Students.RemoveRange(db.Students.ToList());
+
+        db.AddRange(
+            File.ReadLines(path)
                 .Skip(1)
                 .Select(x => x.Split(";"))
-                .Select(student => new Student()
+                .Select(student => new Student
                 {
                     Class = student[0],
                     ClassTeacher = student[1],
@@ -40,37 +66,39 @@ public class CSVReaderService : BackgroundService
                 }
                 )
                 .ToList()
-                .ForEach(x => db.Students.Add(x));
-            db.SaveChanges();
-        }
-        catch (FileNotFoundException e)
-        {
-            throw new Exception("File \"students.csv\" does not exist!");
-        }
+        );
 
-
+        db.SaveChanges();
     }
 
-    private static void PopulateTeachers(CoreContext db)
+    private void RepopulateTeachers(CoreContext db, string csvPath, string teachersPath)
     {
-        try
+        var path = Path.Combine(csvPath, teachersPath);
+
+        if (!File.Exists(path))
         {
-            File.ReadLines("CSV/teachers.csv")
+            _logger.LogWarning("Setting CSV/WebUntis/Teachers incorrectly provided or file does not exist");
+            return;
+        }
+
+        _logger.LogInformation("Repopulate Teachers");
+
+        db.Teachers.RemoveRange(db.Teachers.ToList());
+
+        db.AddRange(
+            File.ReadLines(path)
                 .Skip(1)
                 .Select(x => x.Split(";"))
                 .Select(x => new Teacher
                 {
-                    Id = Int32.Parse(x[0]),
+                    Id = int.Parse(x[0]),
                     Name = x[1],
                     LastName = x[2],
                     FirstName = x[3]
                 }
-                ).ToList().ForEach(t => db.Teachers.Add(t));
-            db.SaveChanges();
-        }
-        catch (FileNotFoundException e)
-        {
-            throw new Exception("File \"teachers.csv\" does not exist!");
-        }
+                ).ToList()
+        );
+
+        db.SaveChanges();
     }
 }

@@ -22,7 +22,7 @@ else
         db.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 }
 
-builder.Services.AddHostedService<CSVReaderService>();
+builder.Services.AddHostedService<CsvReaderService>();
 builder.Services.AddTransient<CredService>();
 builder.Services.AddSingleton<JwtService>();
 builder.Services.AddTransient<UserService>();
