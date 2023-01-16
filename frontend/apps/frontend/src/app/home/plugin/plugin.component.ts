@@ -11,7 +11,7 @@ export class PluginComponent {
   background: string = "";
 
   @Input() set imageSrc (src: string | null) {
-    this.background = `background-image: linear-gradient(rgba(0,0,0, 0),rgba(0,0,0,0.8)), url(${src})`;
+    this.background = `background-image: linear-gradient(#00000000,#000000aa), url(${src})`;
   };
   @Input() name: string | null = "";
   @Input() id: string = null!;
