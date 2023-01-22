@@ -7,5 +7,10 @@ JWT: {{ jwtPayload | json }} Plugins : {{ plugins | json }}
 >
   {{ showDashboard ? "list" : "tiles" }}
 </button>
+
+<button type="button" (click)="navService.openPlugin('polls')" class="bg-red-700">Navigate to polls</button>
+
+<mainframe-plugin-placeholder style="width: 500px; height: 500px; display: block"></mainframe-plugin-placeholder>
+
 <app-dashboard *ngIf="showDashboard" [plugins]="plugins"></app-dashboard>
 <app-list-view *ngIf="!showDashboard" [plugins]="plugins"></app-list-view>

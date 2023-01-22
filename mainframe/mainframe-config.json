@@ -42,6 +42,9 @@
                 "image": "example.com/image.png",
                 "isFavourite": false
             }
+        },
+        "polls": {
+            "url": "http://localhost:4202"
         }
     },
     "login": {
