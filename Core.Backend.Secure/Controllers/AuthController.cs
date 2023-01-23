@@ -15,12 +15,14 @@ public class AuthController : ControllerBase
     private JwtService _jwtService;
     private IConfiguration _conf;
     private AuthService _authService;
+    private CredService _credService;
 
-    public AuthController(JwtService jwt, IConfiguration conf, AuthService auth)
+    public AuthController(JwtService jwt, IConfiguration conf, AuthService auth, CredService cred)
     {
         _jwtService = jwt;
         _conf = conf;
         _authService = auth;
+        _credService = cred;
     }
 
     [Authorize(Policy = "Auth-Token")]
@@ -48,9 +50,10 @@ public class AuthController : ControllerBase
         SignInResult signInResult;
         try
         {
+            signInParams.Password = _credService.DecryptPw(signInParams.Password) ?? signInParams.Password;
             signInResult = _authService.SignIn(signInParams);
         }
-        catch (Exception e)
+        catch (Exception e) when (e is InvalidLoginException or LdapNotReachableException)
         {
             return BadRequest(e.Message);
         }

@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Reflection;
 using Core.Plugin.Interface;
 
@@ -9,7 +10,11 @@ public static class Pluginloader
 
     public static WebApplicationBuilder InjectBuilderToPlugin(this WebApplicationBuilder builder)
     {
-        Plugins.ForEach(plugin => plugin.ConfigureServices(builder));
+        Plugins.ForEach(plugin =>
+        {
+            plugin.ConfigureServices(builder);
+            builder.Services.AddControllers().AddApplicationPart(plugin.GetType().Assembly);
+        });
         return builder;
     }
 
@@ -22,25 +27,41 @@ public static class Pluginloader
     public static void LoadPlugins(string folder)
     {
         Console.WriteLine("x--------------------[Loading Plugins]---------------------x");
-        var files = Directory.GetFiles(folder, "*.dll");
-        foreach (var file in files)
+        var pluginDirectories = Directory.GetDirectories(folder);
+        foreach (var pluginDirectory in pluginDirectories)
         {
-            Console.WriteLine($"loading from {Path.GetFullPath(file)}");
-            var assembly = Assembly.LoadFile(Path.GetFullPath(file));
+            Console.WriteLine($"Searching for plugins in {pluginDirectory}");
+            var assembly = Assembly.LoadFile(Path.GetFullPath(Path.Combine(pluginDirectory, "CorePlugin.Plugin.dll")));
             var types = assembly.GetTypes();
 
             foreach (var type in types)
             {
-
-                if (type.IsAssignableTo(typeof(ICorePlugin)))
-                {
-                    Plugins.Add((ICorePlugin)Activator.CreateInstance(type)!);
-                    Console.WriteLine($"Loading Plugin {type.Name}");
-                }
+                if (!type.IsAssignableTo(typeof(ICorePlugin)) ||
+                    type.FullName == "Core.Plugin.Interface.ICorePlugin") continue;
+                Plugins.Add((ICorePlugin)Activator.CreateInstance(type)!);
+                Console.WriteLine($"Loading plugin {type.Name}");
             }
         }
-        if (files.Length == 0)
-            Console.WriteLine("No Plugins found");
+
+        if (pluginDirectories.Length == 0)
+            Console.WriteLine("No plugin folders found");
         Console.WriteLine("x------------------[Starting Application]------------------x");
+    }
+
+    public static void HookAssemblyResolver()
+    {
+        AppDomain.CurrentDomain.AssemblyResolve += OnAssemblyResolve;
+    }
+
+    private static Assembly? OnAssemblyResolve(object? sender, ResolveEventArgs args)
+    {
+        var folderPath = Path.GetDirectoryName((args.RequestingAssembly ?? typeof(Pluginloader).Assembly).Location);
+        var assemblyPath = Path.Combine(folderPath, new AssemblyName(args.Name).Name + ".dll");
+
+        Debug.WriteLine($"Resolving assembly {args.Name} from {assemblyPath}");
+
+        if (!File.Exists(assemblyPath)) return null;
+        var assembly = Assembly.LoadFrom(assemblyPath);
+        return assembly;
     }
 }

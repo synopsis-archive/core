@@ -9,6 +9,7 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "paths": {
+      "core-ui": ["libs/core-ui/src/index.ts"],
       "mainframe-connector": ["libs/mainframe-connector/src/index.ts"]
     },
     "noFallthroughCasesInSwitch": true,
@@ -21,7 +22,8 @@
     "target": "es2020",
     "module": "es2020",
     "lib": ["es2020", "dom"],
-    "rootDir": "."
+    "rootDir": ".",
+    "allowSyntheticDefaultImports": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
