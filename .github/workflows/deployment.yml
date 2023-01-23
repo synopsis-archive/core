@@ -16,6 +16,9 @@ jobs:
       - deployment
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+          clean: false
       - name: Configure .env
         run: |
           echo "DOMAIN_NAME=synopsis.hini.ga" >> .env

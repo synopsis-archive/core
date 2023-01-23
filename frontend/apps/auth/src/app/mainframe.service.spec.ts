@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { MainframeService } from './mainframe.service';
+import { MainframeService } from "./mainframe.service";
 
-describe('MainframeService', () => {
+describe("MainframeService", () => {
   let service: MainframeService;
 
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('MainframeService', () => {
     service = TestBed.inject(MainframeService);
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(service).toBeTruthy();
   });
 });
