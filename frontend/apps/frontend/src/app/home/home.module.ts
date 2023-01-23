@@ -8,7 +8,8 @@ import { PluginComponent } from "./plugin/plugin.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { ListViewComponent } from "./list-view/list-view.component";
 import { ListViewItemComponent } from "./list-view-item/list-view-item.component";
-import {SharedModule} from "../shared/shared.module";
+import { MainframeConnectorModule } from "mainframe-connector";
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -19,6 +20,6 @@ import {SharedModule} from "../shared/shared.module";
     ListViewComponent,
     ListViewItemComponent,
   ],
-  imports: [CommonModule, HomeRoutingModule, SharedModule],
+  imports: [CommonModule, HomeRoutingModule, MainframeConnectorModule, SharedModule]
 })
 export class HomeModule {}

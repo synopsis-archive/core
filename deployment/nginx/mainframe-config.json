@@ -12,6 +12,9 @@
                 "webuntis",
                 "sokrates"
             ]
+        },
+        "polls": {
+            "url": "@@PROTOCOL@@://polls.plugin.@@DOMAIN_NAME@@"
         }
     },
     "login": {

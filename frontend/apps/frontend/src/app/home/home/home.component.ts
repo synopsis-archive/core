@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {
   IDTokenPayload,
   MainframeIdTokenService,
+  MainframeNavService,
   PluginListService,
   Plugin
 } from "mainframe-connector";
@@ -13,7 +14,8 @@ import {setTagColors} from "../../shared/classes/tagColors";
   styleUrls: ["./home.component.css"],
 })
 export class HomeComponent implements OnInit {
-  constructor(private service: MainframeIdTokenService, private pluginService: PluginListService) {
+  constructor(private service: MainframeIdTokenService, private pluginService: PluginListService,
+              public navService: MainframeNavService) {
   }
 
   jwtPayload: IDTokenPayload | undefined;
