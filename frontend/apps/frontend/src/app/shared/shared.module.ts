@@ -22,4 +22,5 @@ import {UsernameInputComponent} from "./username-input/username-input.component"
   ],
 
 })
-export class SharedModule { }
+export class SharedModule {
+}
