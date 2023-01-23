@@ -23,7 +23,8 @@ export class CredService {
     try {
       const pub = await this.importPublicKey(this.publicKey);
       const encrypted = await this.encryptRSA(pub, new TextEncoder().encode(pwPlain));
-      const encryptedBase64 = window.btoa(this.ab2str(new Int32Array(encrypted)));
+      // @ts-ignore
+      const encryptedBase64 = window.btoa(this.ab2str(encrypted));
       console.log(encryptedBase64.replace(/(.{64})/g, "$1\n"));
       return encryptedBase64;
     } catch (error) {
@@ -73,6 +74,6 @@ export class CredService {
   }
 
   ab2str(buf: Iterable<number>) {
-    return String.fromCharCode(...buf);
+    return String.fromCharCode.apply(null, Array.from(new Uint8Array(buf)));
   }
 }
