@@ -1,19 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-password-input',
   templateUrl: './password-input.component.html',
   styleUrls: ['./password-input.component.css']
 })
-export class PasswordInputComponent implements OnInit {
-  valid : boolean = true
+export class PasswordInputComponent {
+  valid : boolean | null = null
+  password: string = "";
+
   constructor() { }
-
-  ngOnInit(): void {
-    console.log()
-  }
-
-  onClick(b: boolean) {
-    console.log(b)
-  }
 }

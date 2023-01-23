@@ -6,8 +6,8 @@ import {Component} from '@angular/core';
   styleUrls: ['./email-input.component.css']
 })
 export class EmailInputComponent {
-  valid: boolean = true
+  valid: boolean | null = null
+  email: string = "";
 
-  constructor() {
-  }
+  constructor() {}
 }
