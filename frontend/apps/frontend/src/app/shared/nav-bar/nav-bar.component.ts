@@ -34,8 +34,12 @@ export class NavBarComponent implements OnInit{
     this.tabs = this.tabs.filter(x => x !== tab);
   }
 
-  seas(tab: string) {
+  open(tab: string) {
     this.openTab = tab;
     // show tab
+  }
+
+  closeSearchBar() {
+    this.showSearchBar = !this.showSearchBar;
   }
 }

@@ -1,11 +1,13 @@
 li {
   color: #050505;
-  width: 170px;
+  width: 180px;
   text-overflow: ellipsis;
   height: 35px;
   white-space: nowrap;
+  padding-left: 15px;
   text-align: left;
   background-color: lightgray;
+  border-radius: 10px;
 }
 
 button {
