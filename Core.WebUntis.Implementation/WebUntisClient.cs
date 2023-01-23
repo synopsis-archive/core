@@ -100,7 +100,7 @@ public class WebUntisClient : IWebUntisClient
     {
         var homeworkResponse = await RestRequest<HomeworkResponse>(
             method: HttpMethod.Get,
-            path: $"/homeworks/lessons",
+            path: "/homeworks/lessons",
             urlParameters: new Dictionary<string, string>
             {
                 {"startDate", UntisDateTimeMethods.ConvertDateToUntisDate(startDate).ToString()},
