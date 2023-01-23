@@ -4,6 +4,16 @@
 [![Frontend](https://github.com/htl-grieskirchen-core/core/actions/workflows/frontend.yml/badge.svg)](https://github.com/htl-grieskirchen-core/core/actions/workflows/frontend.yml)
 [![pre-commit](https://github.com/htl-grieskirchen-core/core/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/htl-grieskirchen-core/core/actions/workflows/pre-commit.yml)
 
+## Mainframe connector
+
+A git submodule is used to reference the lib-mainframe-connector repository in the folder `/frontend/libs`.
+
+To initialize the submodule, use the following command after cloning this repository:
+
+```
+git submodule update --init --recursive
+```
+
 ## Branches
 
 For new branches, use the correct prefix:
