@@ -38,7 +38,7 @@ export class CardsComponent implements OnInit {
   }
 
   to2Digits(nr: number): string {
-    return nr.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}).toString();
+    return nr.toLocaleString("en-US", {minimumIntegerDigits: 2, useGrouping:false}).toString();
   }
 
   toNr(str: string) {
@@ -46,7 +46,7 @@ export class CardsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.configUrl = 'https://api.github.com/repos/'+this.repoOwner+'/'+this.repoName+'/contributors';
+    this.configUrl = "https://api.github.com/repos/"+this.repoOwner+"/"+this.repoName+"/contributors";
     this.commitUrl = "https://api.github.com/repos/" + this.repoOwner + "/" + this.repoName + "/commits?per_page=1&author=";
 
     this.getContributors()

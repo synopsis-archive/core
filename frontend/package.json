@@ -9,7 +9,7 @@
     "build": "nx build",
     "watch": "nx build --watch --configuration development",
     "test": "nx test",
-    "lint": "nx lint",
+    "lint": "nx lint --run-many --all --target=lint",
     "start": "nx run-many --target=serve"
   },
   "private": true,
