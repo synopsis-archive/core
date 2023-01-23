@@ -5,10 +5,6 @@ import { Component, OnInit } from "@angular/core";
   templateUrl: "./plugin.component.html",
   styleUrls: ["./plugin.component.css"],
 })
-export class PluginComponent implements OnInit {
+export class PluginComponent {
   constructor() {}
-
-  ngOnInit(): void {
-    throw new Error("Method not implemented.");
-  }
 }
