@@ -8,5 +8,4 @@ import {SynoBaseComponent} from "./syno-base/syno-base.component";
   declarations: [SynoButtonComponent, SynoBaseComponent],
   exports: [SynoButtonComponent],
 })
-export class CoreUiModule {
-}
+export class CoreUiModule {}
