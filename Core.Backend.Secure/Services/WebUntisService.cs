@@ -74,7 +74,7 @@ public class WebUntisService
             LastName = s.LastName,
             Email = s.Email,
             ClassId = classes.First(x => x.Name == s.Class).Id,
-            ClassTeacherId = teachers.First(x => $"{x.FirstName} {x.LastName}" == s.ClassTeacher).Id
+            ClassTeacherId = teachers.First(x => s.ClassTeacher.Contains($"{x.FirstName} {x.LastName}")).Id
         });
     }
 

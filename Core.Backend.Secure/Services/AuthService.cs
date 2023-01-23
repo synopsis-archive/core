@@ -89,7 +89,7 @@ public class AuthService
         }
 
         _db.SaveChanges();
-        _credService.SaveLdapPassword(user.UUID, new LdapUserDto { LdapPassword = signInParams.Password, LdapUsername = signInParams.Username });
+        _credService.SaveLdapPassword(user.UUID, new LdapUserDto { LdapPassword = signInParams.Password, LdapUsername = signInParams.Username }, true);
 
         return user;
     }
