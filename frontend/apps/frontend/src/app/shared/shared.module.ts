@@ -1,26 +1,26 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {EmailInputComponent} from "./email-input/email-input.component";
 import {PasswordInputComponent} from "./password-input/password-input.component";
 import {FormsModule} from "@angular/forms";
-import {RouterLink} from "@angular/router";
-
-
+import {UsernameInputComponent} from "./username-input/username-input.component";
 
 @NgModule({
   declarations: [
     EmailInputComponent,
-    PasswordInputComponent
+    PasswordInputComponent,
+    UsernameInputComponent
   ],
   imports: [
     CommonModule,
-    RouterLink,
-    FormsModule
+    FormsModule,
   ],
   exports: [
     EmailInputComponent,
-    PasswordInputComponent
+    PasswordInputComponent,
+    UsernameInputComponent
   ],
 
 })
-export class SharedModule { }
+export class SharedModule {
+}
