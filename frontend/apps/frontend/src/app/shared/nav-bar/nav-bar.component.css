@@ -7,30 +7,6 @@
   );
 }
 
-input {
-  background-color: transparent;
-}
-
-.searchBar {
-  border-radius: 25px;
-  background-color: lightgray;
-  margin-top: 10px;
-}
-
-.no-outline {
-  outline: none;
-}
-
-.btnRound {
-  border-radius: 25px;
-  background-color: transparent;
-}
-
-.edgesRound {
-  border-radius: 25px;
-  background-color: lightgray;
-}
-
 .isSelectedView {
   background-color: white;
 }
@@ -40,17 +16,15 @@ input {
   opacity: 0.2;
 }
 
-ul {
-  background-color: transparent;
-}
-
 .closeBtn {
   margin-left: auto;
-  margin-right: 10px;
-  color: black;
 }
 
 ::placeholder {
   color: black;
   opacity: 1;
+}
+
+.edgesRound {
+  border-radius: 25px;
 }
