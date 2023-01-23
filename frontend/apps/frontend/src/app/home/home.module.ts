@@ -9,6 +9,8 @@ import { DashboardComponent } from "./dashboard/dashboard.component";
 import { ListViewComponent } from "./list-view/list-view.component";
 import { ListViewItemComponent } from "./list-view-item/list-view-item.component";
 import {CoreUiModule} from "core-ui";
+import { MainframeConnectorModule } from "mainframe-connector";
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -19,6 +21,6 @@ import {CoreUiModule} from "core-ui";
     ListViewComponent,
     ListViewItemComponent,
   ],
-    imports: [CommonModule, HomeRoutingModule, CoreUiModule],
+  imports: [CommonModule, HomeRoutingModule, MainframeConnectorModule, SharedModule, CoreUiModule]
 })
 export class HomeModule {}

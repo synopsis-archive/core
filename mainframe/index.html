@@ -9,11 +9,7 @@
             overflow: hidden;
         }
 
-        #login-container {
-            position: absolute;
-        }
-
-        #nav-container {
+        #login-container, #nav-container, #plugin-container {
             position: absolute;
         }
 
@@ -21,6 +17,11 @@
             height: 100vh;
             width: 100vw;
             border: 0;
+        }
+
+        #plugin-container > iframe {
+            height: 100%;
+            width: 100%;
         }
     </style>
 </head>
@@ -40,7 +41,7 @@
 
     async function checkLoginState(secureBackendUrl) {
         try {
-            const response = await fetch(secureBackendUrl + "/Auth/IsAuthed", {credentials: "include"});
+            const response = await fetch(secureBackendUrl + "/Auth/IsAuthed", { credentials: "include" });
             if (response.status === 401)
                 return false;
             const isAuthed = await response.json();
@@ -67,7 +68,7 @@
     function waitForMessageFromFrame(containerId, filter) {
         return new Promise(resolve => {
             const frame = document.getElementById(containerId).firstChild;
-            window.addEventListener("message", function (event) {
+            window.addEventListener("message", function(event) {
                 if (event.source !== frame.contentWindow) {
                     console.debug("Ignoring message from unknown source", event);
                     return;
@@ -78,6 +79,17 @@
                     resolve(event.data);
                 }
             });
+        });
+    }
+
+    function addMessageListenerToFrame(containerId, callback) {
+        const frame = document.getElementById(containerId).firstChild;
+        window.addEventListener("message", function(event) {
+            if (event.source !== frame.contentWindow) return;
+            const result = callback(event.data);
+            if (result.then !== undefined) {
+                result.catch(e => console.error("Error while handling message", e));
+            }
         });
     }
 
@@ -98,12 +110,12 @@
 
     function sendErrorMessageToLogin(message) {
         const frame = document.getElementById("login-container").firstChild;
-        frame.contentWindow.postMessage({method: "error", data: {message}}, "*");
+        frame.contentWindow.postMessage({ method: "error", data: { message } }, "*");
     }
 
     function sendMessageToFrame(container, method, message) {
         const frame = document.getElementById(container).firstChild;
-        frame.contentWindow.postMessage({method: method, data: message}, "*");
+        frame.contentWindow.postMessage({ method: method, data: message }, "*");
     }
 
     async function executeLogin(secureBackendUrl, username, password) {
@@ -131,7 +143,7 @@
         throw new Error("Es ist ein unbekannter Fehler aufgetreten!");
     }
 
-    async function fetch2(secureBackendUrl, requestPath,method, body = undefined) {
+    async function fetch2(secureBackendUrl, requestPath, method, body = undefined) {
         const response = await fetch(secureBackendUrl + requestPath, {
             method: method,
             headers: {
@@ -175,26 +187,64 @@
 
         createPluginFrame(config.navigation.url, "nav-container");
 
-        while (isAuthed) {
-            console.log     ("Waiting for plugin request");
-            const navData = await waitForMessageFromFrame("nav-container", (data) => typeof data.method === "string");
+        const plugins = Object.entries(config.plugins).map(([name, plugin]) => {
+            return {
+                id: name,
+                name: plugin.info.name,
+                description: plugin.info.description,
+                teachers: plugin.info.teachers,
+                tags: plugin.info.tags,
+                startDate: plugin.info.startDate,
+                endDate: plugin.info.endDate,
+                image: plugin.info.image,
+                isFavourite: plugin.info.isFavourite
+            };
+        });
 
-            /*
-             typeof data.method === "string" &&
-                typeof data.pluginId === "string"
-             */
-            /*switch (navData.pluginId) {
-                case "navigate": doNavigateStuff(navData); break;
-            }*/
+        addMessageListenerToFrame("nav-container", async (navData) => {
+            if (typeof navData.method !== "string") {
+                console.warn("Ignoring invalid message", navData);
+                return;
+            }
 
             switch (navData.method) {
                 case "getIDToken":
                     sendMessageToFrame("nav-container", "getIDToken", await fetch2(config.secureBackendUrl, "/Auth/GetIDToken", "GET"));
+                    break;
+                case "getPluginList":
+                    sendMessageToFrame("nav-container", "getPluginList", plugins);
+                    break;
+                case "loadPlugin":
+                    if (typeof navData.plugin !== "string") {
+                        console.warn("Ignoring invalid loadPlugin message", navData);
+                        return;
+                    }
+                    let plugin = config.plugins[navData.plugin];
+                    if (plugin === undefined) {
+                        console.error("Could not find plugin", navData.plugin);
+                        return;
+                    }
+                    clearFrameContainer("plugin-container");
+                    createPluginFrame(plugin.url, "plugin-container");
+                    break;
+                case "container":
+                    if (typeof navData.x !== "number" ||
+                        typeof navData.y !== "number" ||
+                        typeof navData.width !== "number" ||
+                        typeof navData.height !== "number") {
+                        console.warn("Ignoring invalid container message", navData);
+                        return;
+                    }
+                    console.debug("Setting container size", navData);
+                    document.getElementById("plugin-container").style.left = navData.x + "px";
+                    document.getElementById("plugin-container").style.top = navData.y + "px";
+                    document.getElementById("plugin-container").style.width = navData.width + "px";
+                    document.getElementById("plugin-container").style.height = navData.height + "px";
+                    break;
+                default:
+                    console.warn("Ignoring unknown message method", navData.method);
             }
-
-            clearFrameContainer("plugin-container");
-            //createPluginFrame(config[navData.pluginId].url, "plugin-container");
-        }
+        });
     }
 
     main();
