@@ -44,7 +44,22 @@
             }
         },
         "polls": {
-            "url": "http://localhost:4202"
+            "url": "http://localhost:4202",
+            "info": {
+                "name": "Polls",
+                "description": "Plugin Polls",
+                "teachers": [
+                    "Teacher1",
+                    "Teacher2"
+                ],
+                "tags": [
+                    "dua moi wos"
+                ],
+                "startDate": "1662789600",
+                "endDate": "1663221600",
+                "image": "example.com/image.png",
+                "isFavourite": true
+            }
         }
     },
     "login": {
