@@ -23,6 +23,7 @@ export class CredService {
     try {
       const pub = await this.importPublicKey(this.publicKey);
       const encrypted = await this.encryptRSA(pub, new TextEncoder().encode(pwPlain));
+      // @ts-ignore
       const encryptedBase64 = window.btoa(this.ab2str(encrypted));
       console.log(encryptedBase64.replace(/(.{64})/g, "$1\n"));
       return encryptedBase64;

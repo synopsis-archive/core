@@ -1,7 +1,7 @@
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
-import {AngularResizeEventModule} from "angular-resize-event";
 import {PluginPlaceholderComponent} from "./plugin-placeholder/plugin-placeholder.component";
+import {SizeMeModule} from "@eisberg-labs/ngx-size-me";
 
 @NgModule({
   declarations: [
@@ -9,7 +9,7 @@ import {PluginPlaceholderComponent} from "./plugin-placeholder/plugin-placeholde
   ],
   imports: [
     CommonModule,
-    AngularResizeEventModule
+    SizeMeModule
   ],
   exports: [
     PluginPlaceholderComponent,

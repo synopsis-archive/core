@@ -21,7 +21,8 @@
     "target": "es2020",
     "module": "es2020",
     "lib": ["es2020", "dom"],
-    "rootDir": "."
+    "rootDir": ".",
+    "allowSyntheticDefaultImports": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

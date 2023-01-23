@@ -1,1 +1,3 @@
-<div (resized)="sendPluginResized($event)">Plugin wird geladen...</div>
+<div sizeMe [monitorPosition]="true" [monitorHeight]="true" [monitorWidth]="true" (resize)="handleResize($event)">
+  Plugin wird geladen...
+</div>

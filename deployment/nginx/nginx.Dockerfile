@@ -2,7 +2,7 @@
 
 WORKDIR /app
 
-COPY frontend/package.json frontend/yarn.lock frontend/decorate-angular-cli.js ./
+COPY frontend/package.json frontend/yarn.lock ./
 
 RUN yarn install --frozen-lockfile
 
