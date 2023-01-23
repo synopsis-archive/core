@@ -38,7 +38,7 @@ export class CardsComponent implements OnInit {
   }
 
   to2Digits(nr: number): string {
-    return nr.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}).toString();
+    return nr.toLocaleString("en-US", {minimumIntegerDigits: 2, useGrouping:false}).toString();
   }
 
   toNr(str: string) {
@@ -46,7 +46,7 @@ export class CardsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.configUrl = 'https://api.github.com/repos/'+this.repoOwner+'/'+this.repoName+'/contributors';
+    this.configUrl = "https://api.github.com/repos/"+this.repoOwner+"/"+this.repoName+"/contributors";
     this.commitUrl = "https://api.github.com/repos/" + this.repoOwner + "/" + this.repoName + "/commits?per_page=1&author=";
 
     this.getContributors()
@@ -57,8 +57,8 @@ export class CardsComponent implements OnInit {
         this.contributors.forEach(x=> {
           this.getCommitCount(x.login).subscribe(count => {
 
-            let frst = this.to2Digits(new Date(count[0].commit.author.date).getMonth()+1).toString();
-            let scnd = new Date(count[0].commit.author.date).getFullYear().toString().substr(2,4);
+            const frst = this.to2Digits(new Date(count[0].commit.author.date).getMonth()+1).toString();
+            const scnd = new Date(count[0].commit.author.date).getFullYear().toString().substr(2,4);
 
             this.lastContribute[x.login] = frst + scnd;
           });

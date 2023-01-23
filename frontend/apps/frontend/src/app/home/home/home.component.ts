@@ -40,9 +40,9 @@ export class HomeComponent implements OnInit {
   plugins: Plugin[] = [];
 
   ngOnInit(): void {
-    this.pluginService.getPluginList().then(plugins => {
+    this.pluginService.getPluginList().then((plugins: Plugin[]) => {
       this.plugins = plugins.sort((a,b) => a.name.localeCompare(b.name));
-      let tags = [...new Set(this.plugins.flatMap(x => x.tags))];
+      const tags = [...new Set(this.plugins.flatMap(x => x.tags))];
       setTagColors(tags);
     });
 

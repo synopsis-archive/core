@@ -19,10 +19,10 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.categories = [
-      this.getNewCategory('Favoriten', 'star.svg'),
-      this.getNewCategory('Meine', 'user-search.svg'),
-      this.getNewCategory('Bald fällig', 'hourglass-low.svg'),
-      this.getNewCategory('Alle', 'border-all.svg')];
+      this.getNewCategory("Favoriten", "star.svg"),
+      this.getNewCategory("Meine", "user-search.svg"),
+      this.getNewCategory("Bald fällig", "hourglass-low.svg"),
+      this.getNewCategory("Alle", "border-all.svg")];
   }
 }
 
