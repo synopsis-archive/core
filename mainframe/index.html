@@ -9,11 +9,7 @@
             overflow: hidden;
         }
 
-        #login-container {
-            position: absolute;
-        }
-
-        #nav-container {
+        #login-container, #nav-container, #plugin-container {
             position: absolute;
         }
 
@@ -21,6 +17,11 @@
             height: 100vh;
             width: 100vw;
             border: 0;
+        }
+
+        #plugin-container > iframe {
+            height: 100%;
+            width: 100%;
         }
     </style>
 </head>
@@ -52,9 +53,9 @@
     }
 
     function createPluginFrame(url, targetDivId) {
-        const loginFrame = document.createElement("iframe");
-        loginFrame.src = url;
-        document.getElementById(targetDivId).appendChild(loginFrame);
+        const newFrame = document.createElement("iframe");
+        newFrame.src = url;
+        document.getElementById(targetDivId).appendChild(newFrame);
     }
 
     function clearFrameContainer(targetDivId) {
@@ -64,34 +65,57 @@
         }
     }
 
-    function waitForCredentialsFromLogin() {
+    function waitForMessageFromFrame(containerId, filter) {
         return new Promise(resolve => {
-            const frame = document.getElementById("login-container").firstChild;
-            window.addEventListener("message", (event) => {
-                console.log(event);
+            const frame = document.getElementById(containerId).firstChild;
+            window.addEventListener("message", function(event) {
                 if (event.source !== frame.contentWindow) {
                     console.debug("Ignoring message from unknown source", event);
                     return;
                 }
 
-                const data = event.data;
-
-                if (data.method === "login") {
-                    if (typeof data.data === "object" &&
-                        typeof data.data.username === "string" &&
-                        typeof data.data.password === "string") {
-                        resolve({ username: data.data.username, password: data.data.password });
-                    } else {
-                        console.error("Invalid login data", data);
-                    }
+                if (filter(event.data)) {
+                    window.removeEventListener("message", this);
+                    resolve(event.data);
                 }
             });
         });
     }
 
+    function addMessageListenerToFrame(containerId, callback) {
+        const frame = document.getElementById(containerId).firstChild;
+        window.addEventListener("message", function(event) {
+            if (event.source !== frame.contentWindow) return;
+            const result = callback(event.data);
+            if (result.then !== undefined) {
+                result.catch(e => console.error("Error while handling message", e));
+            }
+        });
+    }
+
+    async function waitForCredentialsFromLogin() {
+        return (await waitForMessageFromFrame("login-container", (data) => {
+            if (data.method === "login") {
+                if (typeof data.data === "object" &&
+                    typeof data.data.username === "string" &&
+                    typeof data.data.password === "string") {
+                    return true;
+                } else {
+                    console.error("Invalid login data", data);
+                    return false;
+                }
+            }
+        })).data;
+    }
+
     function sendErrorMessageToLogin(message) {
         const frame = document.getElementById("login-container").firstChild;
         frame.contentWindow.postMessage({ method: "error", data: { message } }, "*");
+    }
+
+    function sendMessageToFrame(container, method, message) {
+        const frame = document.getElementById(container).firstChild;
+        frame.contentWindow.postMessage({ method: method, data: message }, "*");
     }
 
     async function executeLogin(secureBackendUrl, username, password) {
@@ -103,13 +127,35 @@
             },
             credentials: "include",
             body: JSON.stringify({
-                "username": username,
-                "password": password
+                "username": username.trim(),
+                "password": password.trim()
             })
         });
 
         if (response.status === 200)
             return true;
+
+        const error = await response.json();
+
+        if (typeof error === "string")
+            throw new Error(error);
+
+        throw new Error("Es ist ein unbekannter Fehler aufgetreten!");
+    }
+
+    async function fetch2(secureBackendUrl, requestPath, method, body = undefined) {
+        const response = await fetch(secureBackendUrl + requestPath, {
+            method: method,
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            credentials: "include",
+            body: body === undefined ? undefined : JSON.stringify(body)
+        });
+
+        if (response.status === 200)
+            return await response.json();
 
         const error = await response.json();
 
@@ -140,6 +186,65 @@
         }
 
         createPluginFrame(config.navigation.url, "nav-container");
+
+        const plugins = Object.entries(config.plugins).map(([name, plugin]) => {
+            return {
+                id: name,
+                name: plugin.info.name,
+                description: plugin.info.description,
+                teachers: plugin.info.teachers,
+                tags: plugin.info.tags,
+                startDate: plugin.info.startDate,
+                endDate: plugin.info.endDate,
+                image: plugin.info.image,
+                isFavourite: plugin.info.isFavourite
+            };
+        });
+
+        addMessageListenerToFrame("nav-container", async (navData) => {
+            if (typeof navData.method !== "string") {
+                console.warn("Ignoring invalid message", navData);
+                return;
+            }
+
+            switch (navData.method) {
+                case "getIDToken":
+                    sendMessageToFrame("nav-container", "getIDToken", await fetch2(config.secureBackendUrl, "/Auth/GetIDToken", "GET"));
+                    break;
+                case "getPluginList":
+                    sendMessageToFrame("nav-container", "getPluginList", plugins);
+                    break;
+                case "loadPlugin":
+                    if (typeof navData.plugin !== "string") {
+                        console.warn("Ignoring invalid loadPlugin message", navData);
+                        return;
+                    }
+                    let plugin = config.plugins[navData.plugin];
+                    if (plugin === undefined) {
+                        console.error("Could not find plugin", navData.plugin);
+                        return;
+                    }
+                    clearFrameContainer("plugin-container");
+                    createPluginFrame(plugin.url, "plugin-container");
+                    break;
+                case "container":
+                    if (typeof navData.x !== "number" ||
+                        typeof navData.y !== "number" ||
+                        typeof navData.width !== "number" ||
+                        typeof navData.height !== "number") {
+                        console.warn("Ignoring invalid container message", navData);
+                        return;
+                    }
+                    console.debug("Setting container size", navData);
+                    document.getElementById("plugin-container").style.left = navData.x + "px";
+                    document.getElementById("plugin-container").style.top = navData.y + "px";
+                    document.getElementById("plugin-container").style.width = navData.width + "px";
+                    document.getElementById("plugin-container").style.height = navData.height + "px";
+                    break;
+                default:
+                    console.warn("Ignoring unknown message method", navData.method);
+            }
+        });
     }
 
     main();

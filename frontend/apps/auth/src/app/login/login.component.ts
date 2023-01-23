@@ -1,5 +1,6 @@
-import { Component } from "@angular/core";
-import { MainframeService } from "../mainframe.service";
+import {Component} from "@angular/core";
+import {MainframeService} from "../mainframe.service";
+import {CredService} from "../core/cred.service";
 
 @Component({
   selector: "app-login",
@@ -13,16 +14,19 @@ export class LoginComponent {
   loading = false;
   error: null | string = null;
 
-  constructor(private mainframe: MainframeService) {}
+  constructor(private mainframe: MainframeService, private credService: CredService) {
+  }
 
-  login() {
-    if(this.loading)
+  async login() {
+    if (this.loading)
       return;
 
     this.loading = true;
     this.error = null;
 
-    this.mainframe.login(this.username, this.password).then(error => {
+    const pwEncrypted = await this.credService.encryptPassword(this.password);
+
+    this.mainframe.login(this.username, pwEncrypted).then(error => {
       this.loading = false;
       this.error = error;
     })

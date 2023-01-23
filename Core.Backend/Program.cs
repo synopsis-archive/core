@@ -1,6 +1,8 @@
 using Core.AuthLib;
 using Core.Backend;
 
+Pluginloader.HookAssemblyResolver();
+
 Pluginloader.LoadPlugins("plugins");
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,6 +30,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(app => app.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
 app.UseAuthorization();
 

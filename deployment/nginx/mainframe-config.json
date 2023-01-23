@@ -4,21 +4,69 @@
             "url": "webuntis.html",
             "permissions": [
                 "webuntis"
-            ]
+            ],
+            "info": {
+                "name": "WebUntis",
+                "description": "WebUntis Plugin",
+                "teachers": [
+                    "Teacher1",
+                    "Teacher2"
+                ],
+                "tags": [
+                    "Erste Schulwoche"
+                ],
+                "startDate": "1662789600",
+                "endDate": "1663221600",
+                "image": "example.com/image.png",
+                "isFavourite": true
+            }
         },
         "sokrates": {
             "url": "sokrates.html",
             "permissions": [
                 "webuntis",
                 "sokrates"
-            ]
+            ],
+            "info": {
+                "name": "Sokrates",
+                "description": "Sokrates Plugin",
+                "teachers": [
+                    "Teacher3",
+                    "Teacher4"
+                ],
+                "tags": [
+                    "Letzte Schulwoche"
+                ],
+                "startDate": "1662789600",
+                "endDate": "1663221600",
+                "image": "example.com/image.png",
+                "isFavourite": false
+            }
+        },
+        "polls": {
+            "url": "@@PROTOCOL@@://polls.plugin.@@DOMAIN_NAME@@",
+            "info": {
+                "name": "Polls",
+                "description": "Plugin Polls",
+                "teachers": [
+                    "Teacher1",
+                    "Teacher2"
+                ],
+                "tags": [
+                    "dua moi wos"
+                ],
+                "startDate": "1662789600",
+                "endDate": "1663221600",
+                "image": "example.com/image.png",
+                "isFavourite": true
+            }
         }
     },
     "login": {
-        "url": "http://auth.plugin.core.localhost"
+        "url": "@@PROTOCOL@@://auth.plugin.@@DOMAIN_NAME@@"
     },
     "navigation": {
-        "url": "http://frontend.plugin.core.localhost"
+        "url": "@@PROTOCOL@@://frontend.plugin.@@DOMAIN_NAME@@"
     },
-    "secureBackendUrl": "http://secure.backend.core.localhost"
+    "secureBackendUrl": "@@PROTOCOL@@://secure.backend.@@DOMAIN_NAME@@"
 }

@@ -1,5 +1,6 @@
 using System.Security.Cryptography;
 using System.Text;
+using Core.Backend.Secure.Dtos;
 using Core.Backend.Secure.exceptions;
 using Core.Database;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +25,7 @@ public class CredService
     public string? GetWebuntisToken(Guid uuid) => DecryptPw(GetUserTokenSet(uuid).WebUntisToken);
     public string? GetEduvidualToken(Guid uuid) => DecryptPw(GetUserTokenSet(uuid).EduvidualToken);
     private StoredUserTokens GetUserTokenSet(Guid uuid) => _db.StoredUserTokens.Include(x => x.User).First(x => x.UserUUID == uuid);
-    private string? DecryptPw(string? pw) => pw is not null ? Encoding.UTF8.GetString(_rsa.Decrypt(Convert.FromBase64String(pw), RSAEncryptionPadding.OaepSHA512)) : pw;
+    public string? DecryptPw(string? pw) => pw is not null ? Encoding.UTF8.GetString(_rsa.Decrypt(Convert.FromBase64String(pw), RSAEncryptionPadding.OaepSHA512)) : pw;
     private string EncryptPw(string pw) => Convert.ToBase64String(_rsa.Encrypt(Encoding.UTF8.GetBytes(pw), RSAEncryptionPadding.OaepSHA512));
 
     public void SaveToken(Guid uuid, string token, string type)
@@ -45,11 +46,11 @@ public class CredService
         }
     }
 
-    public void SaveLdapPassword(Guid uuid, string username, string password)
+    public void SaveLdapPassword(Guid uuid, LdapUserDto user, bool encrypt = false)
     {
         var userTokens = GetUserTokenSet(uuid);
-        userTokens.LdapUsername = username;
-        userTokens.LdapPassword = password;
+        userTokens.LdapUsername = user.LdapUsername;
+        userTokens.LdapPassword = encrypt ? EncryptPw(user.LdapPassword) : user.LdapPassword;
         _db.SaveChanges();
     }
 }
