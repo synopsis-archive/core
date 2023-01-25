@@ -44,7 +44,7 @@
             }
         },
         "polls": {
-            "url": "@@PROTOCOL@@://polls.plugin.@@DOMAIN_NAME@@",
+            "url": "https://polls.plugin.@@DOMAIN_NAME@@",
             "info": {
                 "name": "Polls",
                 "description": "Plugin Polls",
@@ -63,10 +63,10 @@
         }
     },
     "login": {
-        "url": "@@PROTOCOL@@://auth.plugin.@@DOMAIN_NAME@@"
+        "url": "https://auth.plugin.@@DOMAIN_NAME@@"
     },
     "navigation": {
-        "url": "@@PROTOCOL@@://frontend.plugin.@@DOMAIN_NAME@@"
+        "url": "https://frontend.plugin.@@DOMAIN_NAME@@"
     },
-    "secureBackendUrl": "@@PROTOCOL@@://secure.backend.@@DOMAIN_NAME@@"
+    "secureBackendUrl": "https://secure.backend.@@DOMAIN_NAME@@"
 }
