@@ -1,4 +1,4 @@
-conf=$(cat '../mainframe/mainframe-config.json')
+conf=$(cat './caddy/mainframe-config.json')
 search='https'
 
 for id in $(echo "$conf" | jq -r '.plugins | keys[]'); do
@@ -17,4 +17,4 @@ for id in $(echo "$conf" | jq -r '.plugins | keys[]'); do
         rm "./plugins/web/$id/frontend.zip"
     fi
 
-donef
+done
