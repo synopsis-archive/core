@@ -25,6 +25,13 @@ public class AuthController : ControllerBase
         _credService = cred;
     }
 
+    [HttpGet]
+    [ProducesResponseType(typeof(byte[]), 200, "application/octet-stream")]
+    public IActionResult GetPublicKey()
+    {
+        return File(_credService.GetPublicKey(), "application/octet-stream");
+    }
+
     [Authorize(Policy = "Auth-Token")]
     [HttpGet]
     public string GetIdToken()
