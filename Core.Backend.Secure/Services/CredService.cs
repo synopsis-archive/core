@@ -11,16 +11,19 @@ public class CredService
 {
     private CoreContext _db;
     private RSA _rsa;
-    private IConfiguration _conf;
 
-    public CredService(CoreContext db, IConfiguration conf, RSA rsa)
+    public CredService(CoreContext db, RSA rsa)
     {
         _db = db;
-        _conf = conf;
         _rsa = rsa;
-        //_privateKey = RsaService.ImportRSAKey("./keys/" + _conf["RSA:private-key"]);
-        //_publicKey = ImportPublicKey("./keys/"+_conf["RSA:public-key"]);
     }
+
+    /**
+     * Returns the public key of the RSA keypair using the format used in the frontend
+     *
+     * @return public key in SPKI format
+     */
+    public byte[] GetPublicKey() => _rsa.ExportSubjectPublicKeyInfo();
 
     public string? GetLdapPassword(Guid uuid) => DecryptPw(GetUserTokenSet(uuid).LdapPassword);
     public string? GetEduvidualToken(Guid uuid) => DecryptPw(GetUserTokenSet(uuid).EduvidualToken);

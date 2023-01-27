@@ -113,9 +113,9 @@
         frame.contentWindow.postMessage({ method: "error", data: { message } }, "*");
     }
 
-    function sendMessageToFrame(container, method, message) {
+    function sendMessageToFrame(container, method, message, transferableObjects = []) {
         const frame = document.getElementById(container).firstChild;
-        frame.contentWindow.postMessage({ method: method, data: message }, "*");
+        frame.contentWindow.postMessage({ method: method, data: message }, "*", transferableObjects);
     }
 
     async function executeLogin(secureBackendUrl, username, password) {
@@ -172,6 +172,16 @@
         let isAuthed = await checkLoginState(config.secureBackendUrl);
         if (!isAuthed) {
             createPluginFrame(config.login.url, "login-container");
+
+            addMessageListenerToFrame("login-container", async (data) => {
+                if (data.method === "getPublicKey") {
+                    const publicKey = await (await fetch(config.secureBackendUrl + "/Auth/GetPublicKey", {
+                        credentials: "include"
+                    })).arrayBuffer();
+                    sendMessageToFrame("login-container", "getPublicKey", publicKey, [publicKey]);
+                }
+            });
+
             do {
                 const credentials = await waitForCredentialsFromLogin();
                 try {
