@@ -44,7 +44,6 @@
             }
         },
         "polls": {
-            "url": "https://polls.plugin.@@DOMAIN_NAME@@",
             "repoUrl": "https://github.com/htl-grieskirchen-core/plugin-polls",
             "info": {
                 "name": "Polls",
@@ -63,7 +62,6 @@
             }
         },
         "quote-of-today": {
-            "url": "https://quote-of-today.plugin.@@DOMAIN_NAME@@",
             "repoUrl": "https://github.com/htl-grieskirchen-core/plugin-quote-of-today",
             "info": {
                 "name": "Quote of Today",
