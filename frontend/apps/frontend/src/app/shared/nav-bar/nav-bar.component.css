@@ -15,16 +15,3 @@
   background-color: #fff;
   opacity: 0.2;
 }
-
-.closeBtn {
-  margin-left: auto;
-}
-
-::placeholder {
-  color: black;
-  opacity: 1;
-}
-
-.edgesRound {
-  border-radius: 25px;
-}
