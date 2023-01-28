@@ -8,6 +8,7 @@ import { PluginComponent } from "./plugin/plugin.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { ListViewComponent } from "./list-view/list-view.component";
 import { ListViewItemComponent } from "./list-view-item/list-view-item.component";
+import {CoreUiModule} from "core-ui";
 import { MainframeConnectorModule } from "mainframe-connector";
 import { SharedModule } from "../shared/shared.module";
 
@@ -20,6 +21,6 @@ import { SharedModule } from "../shared/shared.module";
     ListViewComponent,
     ListViewItemComponent,
   ],
-  imports: [CommonModule, HomeRoutingModule, MainframeConnectorModule, SharedModule]
+  imports: [CommonModule, HomeRoutingModule, MainframeConnectorModule, SharedModule, CoreUiModule]
 })
 export class HomeModule {}
