@@ -235,7 +235,7 @@
                         return;
                     }
                     clearFrameContainer("plugin-container");
-                        createPluginFrame(plugin.url ?? document.location.origin.replace("mainframe", navData.plugin), "plugin-container");
+                        createPluginFrame(plugin.url ?? document.location.origin.replace("mainframe", navData.plugin+".plugin"), "plugin-container");
                     break;
                 case "container":
                     if (typeof navData.x !== "number" ||
