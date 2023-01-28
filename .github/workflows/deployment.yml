@@ -21,11 +21,16 @@ jobs:
           clean: false
       - name: Configure .env
         run: |
-          echo "DOMAIN_NAME=synopsis.hini.ga" >> .env
+          echo "DOMAIN_NAME=${{ vars.DOMAIN_NAME }}" >> .env
           echo "TLS_EMAIL=${{ secrets.TLS_EMAIL }}" >> .env
-          echo "LDAP_SERVER_IP=10.10.0.11" >> .env
+          echo "LDAP_SERVER_IP=${{ vars.LDAP_SERVER_IP }}" >> .env
           echo "RSA_PRIVATE_KEY_FILE=private.pem" >> .env
           echo "RSA_PUBLIC_KEY_FILE=public.pem" >> .env
+
+        working-directory: ./deployment
+      - name: Download Plugins
+        run: bash ./builder.sh
+
         working-directory: ./deployment
       - name: Build
         run: docker compose build --pull
