@@ -38,8 +38,4 @@ export class NavBarComponent implements OnInit{
     this.openTab = tab;
     // show tab
   }
-
-  closeSearchBar() {
-    this.showSearchBar = !this.showSearchBar;
-  }
 }
