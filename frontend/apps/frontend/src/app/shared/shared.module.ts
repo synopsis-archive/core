@@ -12,6 +12,10 @@ import {TagComponent} from "./tag/tag.component";
     TabComponent,
     TagComponent,
   ],
+  exports: [
+    NavBarComponent,
+    TagComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,
