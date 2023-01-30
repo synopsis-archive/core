@@ -1,5 +1,7 @@
 import {Component, HostBinding, Input, OnInit} from "@angular/core";
-import {MainframeNavService} from "mainframe-connector";
+import {MainframeNavService, Plugin} from "mainframe-connector";
+import {Router} from "@angular/router";
+import {NavBarService} from "../../core/nav-bar.service";
 
 @Component({
   selector: "app-plugin",
@@ -9,16 +11,22 @@ import {MainframeNavService} from "mainframe-connector";
 export class PluginComponent {
 
   background: string = "";
+  name: string | null = "";
+  id: string = null!;
 
-  @Input() set imageSrc (src: string | null) {
-    this.background = `background-image: linear-gradient(#00000000,#000000aa), url(${src})`;
-  };
-  @Input() name: string | null = "";
-  @Input() id: string = null!;
+  @Input() set plugin (plugin: Plugin) {
+    this.background = `background-image: linear-gradient(#00000000,#000000aa), url(${plugin.image})`;
+    this.name = plugin.name;
+    this.id = plugin.id;
+  }
 
-  constructor(private navService: MainframeNavService) {}
+  constructor(private navService: NavBarService) {}
 
   open() {
-    this.navService.openPlugin(this.id);
+    this.navService.openPlugin({
+      id: this.plugin.id,
+      name: this.plugin.name,
+      active: true
+    });
   }
 }

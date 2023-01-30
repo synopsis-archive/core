@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import {OpenPlugin} from "../classes/openPlugins";
+import {NavBarService} from "../../core/nav-bar.service";
 
 @Component({
   selector: "app-nav-bar",
@@ -6,16 +8,19 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./nav-bar.component.css"],
 })
 export class NavBarComponent implements OnInit{
-  tabs: string[] = ["Home", "Kirtag in Lambrechten", "Netzteil sprengen"];
+  // tabs: string[] = ["Home", "Kirtag in Lambrechten", "Netzteil sprengen"];
+  tabs: OpenPlugin[] = [];
   public val: string = "";
   showSearchBar: boolean = false;
   viewGrid: boolean = true;
   openTab: string = "Home";
 
-  constructor() {}
+  constructor(private navService: NavBarService) {}
 
   ngOnInit(): void {
     this.val = "nav";
+    this.navService.openPlugins.subscribe(x => this.tabs = x);
+    this.navService.getPlugins();
   }
 
   searchClicked() {
@@ -31,7 +36,7 @@ export class NavBarComponent implements OnInit{
   }
 
   closeTab(tab: string) {
-    this.tabs = this.tabs.filter(x => x !== tab);
+    // this.tabs = this.tabs.filter(x => x !== tab);
   }
 
   open(tab: string) {
@@ -39,3 +44,5 @@ export class NavBarComponent implements OnInit{
     // show tab
   }
 }
+
+export let openPlugins: OpenPlugin[] = [];

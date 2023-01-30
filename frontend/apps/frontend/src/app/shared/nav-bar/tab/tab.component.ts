@@ -1,4 +1,6 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {OpenPlugin} from "../../classes/openPlugins";
+import {NavBarService} from "../../../core/nav-bar.service";
 
 @Component({
   selector: "app-tab",
@@ -6,19 +8,22 @@ import {Component, EventEmitter, Input, Output} from "@angular/core";
   styleUrls: ["./tab.component.css"],
 })
 export class TabComponent {
-  constructor() {}
+  constructor(private navService: NavBarService) {}
 
-  @Input() link: string = "";
-  @Input() title: string = "";
-  @Input() isActive: boolean = false;
+  @Input() plugin: OpenPlugin = null!;
+  // @Input() link: string = "";
+  // @Input() title: string = "";
+  // @Input() isActive: boolean = false;
   @Output() closeTab: EventEmitter<string> = new EventEmitter<string>();
   @Output() openTab: EventEmitter<string> = new EventEmitter<string>();
+  @Input() closable: boolean = true;
 
   closeTabClick() {
-    this.closeTab.emit("close");
+    this.navService.closePlugin(this.plugin.id);
+    this.navService.activatePlugin("home");
   }
 
-  showTab(): void {
-    this.openTab.emit("show");
+  showPlugin(): void {
+    this.navService.activatePlugin(this.plugin.id);
   }
 }
