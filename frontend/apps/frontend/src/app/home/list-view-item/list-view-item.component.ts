@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from "@angular/core";
-import {Plugin} from "../../shared/classes/plugin";
+import {Plugin} from "mainframe-connector";
 
 @Component({
   // eslint-disable-next-line  @angular-eslint/component-selector
@@ -7,13 +7,9 @@ import {Plugin} from "../../shared/classes/plugin";
   templateUrl: "./list-view-item.component.html",
   styleUrls: ["./list-view-item.component.css"],
 })
-export class ListViewItemComponent implements OnInit {
+export class ListViewItemComponent {
 
   @Input() plugin!: Plugin;
 
   constructor() {}
-
-  ngOnInit(): void {
-    console.log('')
-  }
 }

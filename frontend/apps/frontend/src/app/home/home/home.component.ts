@@ -1,9 +1,12 @@
 import {Component, OnInit} from "@angular/core";
 import {
   IDTokenPayload,
-  MainframeIdTokenService
+  MainframeIdTokenService,
+  MainframeNavService,
+  PluginListService,
+  Plugin
 } from "mainframe-connector";
-import {Plugin} from "../../shared/classes/plugin";
+import {setTagColors} from "../../shared/classes/tagColors";
 
 @Component({
   selector: "app-home",
@@ -11,10 +14,8 @@ import {Plugin} from "../../shared/classes/plugin";
   styleUrls: ["./home.component.css"],
 })
 export class HomeComponent implements OnInit {
-
-  plugins: Plugin[] = [];
-
-  constructor(private service: MainframeIdTokenService) {
+  constructor(private service: MainframeIdTokenService, private pluginService: PluginListService,
+              public navService: MainframeNavService) {
   }
 
   jwtPayload: IDTokenPayload | undefined;
@@ -36,7 +37,15 @@ export class HomeComponent implements OnInit {
   // this.getNewPlugin('ORF interview', 'meeting.jpg')
   // ];
 
+  plugins: Plugin[] = [];
+
   ngOnInit(): void {
+    this.pluginService.getPluginList().then((plugins: Plugin[]) => {
+      this.plugins = plugins.sort((a,b) => a.name.localeCompare(b.name));
+      const tags = [...new Set(this.plugins.flatMap(x => x.tags))];
+      setTagColors(tags);
+    });
+
     this.service.getJwt().then(jwt=>{
       this.jwtPayload = this.service.decodeJwt(jwt);
     });

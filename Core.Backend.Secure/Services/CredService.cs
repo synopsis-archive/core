@@ -11,21 +11,24 @@ public class CredService
 {
     private CoreContext _db;
     private RSA _rsa;
-    private IConfiguration _conf;
 
-    public CredService(CoreContext db, IConfiguration conf, RSA rsa)
+    public CredService(CoreContext db, RSA rsa)
     {
         _db = db;
-        _conf = conf;
         _rsa = rsa;
-        //_privateKey = RsaService.ImportRSAKey("./keys/" + _conf["RSA:private-key"]);
-        //_publicKey = ImportPublicKey("./keys/"+_conf["RSA:public-key"]);
     }
 
-    public string? GetWebuntisToken(Guid uuid) => DecryptPw(GetUserTokenSet(uuid).WebUntisToken);
+    /**
+     * Returns the public key of the RSA keypair using the format used in the frontend
+     *
+     * @return public key in SPKI format
+     */
+    public byte[] GetPublicKey() => _rsa.ExportSubjectPublicKeyInfo();
+
+    public string? GetLdapPassword(Guid uuid) => DecryptPw(GetUserTokenSet(uuid).LdapPassword);
     public string? GetEduvidualToken(Guid uuid) => DecryptPw(GetUserTokenSet(uuid).EduvidualToken);
     private StoredUserTokens GetUserTokenSet(Guid uuid) => _db.StoredUserTokens.Include(x => x.User).First(x => x.UserUUID == uuid);
-    private string? DecryptPw(string? pw) => pw is not null ? Encoding.UTF8.GetString(_rsa.Decrypt(Convert.FromBase64String(pw), RSAEncryptionPadding.OaepSHA512)) : pw;
+    public string? DecryptPw(string? pw) => pw is not null ? Encoding.UTF8.GetString(_rsa.Decrypt(Convert.FromBase64String(pw), RSAEncryptionPadding.OaepSHA512)) : pw;
     private string EncryptPw(string pw) => Convert.ToBase64String(_rsa.Encrypt(Encoding.UTF8.GetBytes(pw), RSAEncryptionPadding.OaepSHA512));
 
     public void SaveToken(Guid uuid, string token, string type)
@@ -33,10 +36,6 @@ public class CredService
         var userTokens = GetUserTokenSet(uuid);
         switch (type)
         {
-            case "webuntis":
-                userTokens.WebUntisToken = token;
-                _db.SaveChanges();
-                break;
             case "eduvidual":
                 userTokens.EduvidualToken = token;
                 _db.SaveChanges();

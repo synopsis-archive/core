@@ -24,11 +24,11 @@ repos:
         types: [ file ]
         additional_dependencies:
           - "eslint@8.23.1"
-          - "@angular-eslint/eslint-plugin@14.1.1"
-          - "@angular-eslint/eslint-plugin-template@14.1.1"
+          - "@angular-eslint/eslint-plugin@15.2.0"
+          - "@angular-eslint/eslint-plugin-template@15.2.0"
           - "@typescript-eslint/parser@5.37.0"
           - "@typescript-eslint/eslint-plugin@5.37.0"
-          - "@nrwl/eslint-plugin-nx@15.0.4"
+          - "@nrwl/eslint-plugin-nx@15.5.1"
   - repo: local
     hooks:
         - id: simon-check

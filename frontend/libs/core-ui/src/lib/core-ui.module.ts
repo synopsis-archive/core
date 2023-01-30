@@ -22,5 +22,4 @@ import {SynoUsernameComponent} from "./syno-username/syno-username.component";
     SynoUsernameComponent,
   ],
 })
-export class CoreUiModule {
-}
+export class CoreUiModule {}
