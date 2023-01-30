@@ -2,7 +2,8 @@
   <label class="block mb-2 text-sm font-medium text-gray-900" for="email">E-Mail</label>
   <form class="h-14">
     <div class="absolute">
-      <input #emailHTML (input)="valid = email.length == 0 ? null:emailHTML.checkValidity()"
+      <input #emailHTML
+             (input)="valid = email.length == 0 ? null:emailHTML.checkValidity();this.changed.emit(email);this.isValid.emit(valid)"
              (submit)="valid = email.length == 0 ? null:emailHTML.checkValidity()"
              [(ngModel)]="email"
              [ngClass]="{'bg-green-50 text-green-900 border-green-800 focus:border-green-900 focus:ring-green-700':valid,

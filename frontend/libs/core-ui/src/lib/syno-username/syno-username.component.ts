@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {SynoBaseComponent} from "../syno-base/syno-base.component";
 
 @Component({
@@ -6,8 +6,10 @@ import {SynoBaseComponent} from "../syno-base/syno-base.component";
   templateUrl: "./syno-username.component.html",
 })
 export class SynoUsernameComponent extends SynoBaseComponent {
+  @Input() username = "";
+  @Output() usernameChange = new EventEmitter<string>();
+
   valid: boolean | null = null;
-  username = "";
   override variant = "default";
 
   styles = {
@@ -18,6 +20,7 @@ export class SynoUsernameComponent extends SynoBaseComponent {
 
   validate(username: string) {
     this.valid = username.length > 0;
+    if (this.valid) this.usernameChange.emit(username);
     this.variant = this.valid == null ? "default" : (this.valid ? "valid" : "invalid");
   }
 }
