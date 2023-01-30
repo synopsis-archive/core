@@ -5,7 +5,7 @@ namespace Core.WebUntis.Implementation.ResponseTypes;
 
 class HomeworkResponse
 {
-    [JsonPropertyName("data")] public DataHomeWorkResponse? Data { get; set; }
+    [JsonPropertyName("data")] public DataHomeWorkResponse Data { get; set; } = null!;
 
     public IEnumerable<HomeworkInterface> Convert()
     {
@@ -43,8 +43,8 @@ internal class TeacherHomeWorkResponse
 
 internal class DataHomeWorkResponse
 {
-    [JsonPropertyName("records")] public List<RecordHomeWorkResponse>? Records { get; set; }
-    [JsonPropertyName("homeworks")] public List<Homework>? Homeworks { get; set; }
+    [JsonPropertyName("records")] public List<RecordHomeWorkResponse> Records { get; set; } = null!;
+    [JsonPropertyName("homeworks")] public List<Homework> Homeworks { get; set; } = null!;
     [JsonPropertyName("teachers")] public List<TeacherHomeWorkResponse>? Teachers { get; set; }
     [JsonPropertyName("lessons")] public List<LessonHomeWork>? Lessons { get; set; }
 }
