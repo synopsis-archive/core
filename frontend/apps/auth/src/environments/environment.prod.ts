@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  backendUrl: document.location.origin.replace("/\/\w+\.plugin/", "/plugin.backend"),
+  backendUrl: document.location.origin.replace(/\/\w+\.plugin/, "/plugin.backend"),
 };
