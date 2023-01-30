@@ -17,6 +17,11 @@ const routes: Routes = [
     loadChildren: () =>
       import("./credits/credits.module").then((m) => m.CreditsModule),
   },
+  {
+    path: "**",
+    loadChildren: () =>
+      import("./errors/errors.module").then(m => m.ErrorsModule),
+  }
 ];
 
 @NgModule({
