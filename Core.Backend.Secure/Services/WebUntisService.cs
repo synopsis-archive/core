@@ -114,27 +114,34 @@ public class WebUntisService
         DateTime endDate)
     {
         var webUntisClient = await GetWebUntisClient(user);
-        return await webUntisClient.GetTimetable(ElementType.Teacher, startDate, endDate);
+        return await webUntisClient.GetTimetable(ElementType.Teacher, webUntisClient.PersonId, startDate, endDate);
     }
 
     public async Task<IEnumerable<Timetable>> GetTimetableFromStudent(ClaimsPrincipal user, DateTime startDate,
         DateTime endDate)
     {
         var webUntisClient = await GetWebUntisClient(user);
-        return await webUntisClient.GetTimetable(ElementType.Student, startDate, endDate);
+        return await webUntisClient.GetTimetable(ElementType.Student, webUntisClient.PersonId, startDate, endDate);
+    }
+
+    public async Task<IEnumerable<Timetable>> GetTimetableFromClass(ClaimsPrincipal user, int classId, DateTime startDate,
+        DateTime endDate)
+    {
+        var webUntisClient = await GetWebUntisClient(user);
+        return await webUntisClient.GetTimetable(ElementType.Class, classId, startDate, endDate);
     }
 
     public async Task<IEnumerable<Timetable>> GetSubstitutionsFromStudent(ClaimsPrincipal user, DateTime startDate, DateTime endDate)
     {
         var webUntisClient = await GetWebUntisClient(user);
-        var items = await webUntisClient.GetTimetable(ElementType.Student, startDate, endDate);
+        var items = await webUntisClient.GetTimetable(ElementType.Student, webUntisClient.PersonId, startDate, endDate);
         return items.Where(x => x.SubstitutionText == "Supplierung").DefaultIfEmpty(new Timetable { Id = -1 });
     }
 
     public async Task<IEnumerable<Timetable>> GetSubstitutionsFromTeacher(ClaimsPrincipal user, DateTime startDate, DateTime endDate)
     {
         var webUntisClient = await GetWebUntisClient(user);
-        var items = await webUntisClient.GetTimetable(ElementType.Teacher, startDate, endDate);
+        var items = await webUntisClient.GetTimetable(ElementType.Teacher, webUntisClient.PersonId, startDate, endDate);
         return items.Where(x => x.SubstitutionText == "Supplierung");
     }
 
