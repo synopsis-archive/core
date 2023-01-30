@@ -60,7 +60,6 @@ public class WebUntisService
             FirstName = t.FirstName,
             LastName = t.LastName
         });
-
     }
 
     public async Task<IEnumerable<Student>> GetStudents(ClaimsPrincipal user)
@@ -110,11 +109,18 @@ public class WebUntisService
         return await webUntisClient.GetClasses();
     }
 
-    public async Task<IEnumerable<Timetable>> GetTimetableFromTeacher(ClaimsPrincipal user, DateTime startDate,
-        DateTime endDate)
+    public async Task<IEnumerable<Timetable>> GetTimetableFromTeacher(ClaimsPrincipal user, int teacherId,
+        DateTime startDate, DateTime endDate)
     {
-        var webUntisClient = await GetWebUntisClient(user);
-        return await webUntisClient.GetTimetable(ElementType.Teacher, webUntisClient.PersonId, startDate, endDate);
+        IEnumerable<Timetable> res = new List<Timetable>();
+        foreach (var variable in (await GetClasses(user)).Where(x => x.Id != 754))
+        {
+            var timetable = await GetTimetableFromClass(user, variable.Id, startDate, endDate);
+            res = res.Concat(timetable
+                .Where(x => x.TeacherIds != null && x.TeacherIds.Contains(teacherId)));
+        }
+
+        return res;
     }
 
     public async Task<IEnumerable<Timetable>> GetTimetableFromStudent(ClaimsPrincipal user, DateTime startDate,
@@ -124,27 +130,31 @@ public class WebUntisService
         return await webUntisClient.GetTimetable(ElementType.Student, webUntisClient.PersonId, startDate, endDate);
     }
 
-    public async Task<IEnumerable<Timetable>> GetTimetableFromClass(ClaimsPrincipal user, int classId, DateTime startDate,
+    public async Task<IEnumerable<Timetable>> GetTimetableFromClass(ClaimsPrincipal user, int classId,
+        DateTime startDate,
         DateTime endDate)
     {
         var webUntisClient = await GetWebUntisClient(user);
         return await webUntisClient.GetTimetable(ElementType.Class, classId, startDate, endDate);
     }
 
-    public async Task<IEnumerable<Timetable>> GetSubstitutionsFromStudent(ClaimsPrincipal user, DateTime startDate, DateTime endDate)
+    public async Task<IEnumerable<Timetable>> GetSubstitutionsFromStudent(ClaimsPrincipal user, DateTime startDate,
+        DateTime endDate)
     {
         var webUntisClient = await GetWebUntisClient(user);
         var items = await webUntisClient.GetTimetable(ElementType.Student, webUntisClient.PersonId, startDate, endDate);
-        return items.Where(x => x.SubstitutionText == "Supplierung").DefaultIfEmpty(new Timetable { Id = -1 });
+        return items.Where(x => x.SubstitutionText == "Supplierung").DefaultIfEmpty(new Timetable {Id = -1});
     }
 
-    public async Task<IEnumerable<Timetable>> GetSubstitutionsFromTeacher(ClaimsPrincipal user, DateTime startDate, DateTime endDate)
+    public async Task<IEnumerable<Timetable>> GetSubstitutionsFromTeacher(
+        ClaimsPrincipal user,
+        int teacherId,
+        DateTime startDate,
+        DateTime endDate)
     {
-        var webUntisClient = await GetWebUntisClient(user);
-        var items = await webUntisClient.GetTimetable(ElementType.Teacher, webUntisClient.PersonId, startDate, endDate);
-        return items.Where(x => x.SubstitutionText == "Supplierung");
+        return (await GetTimetableFromTeacher(user, teacherId, startDate, endDate))
+            .Where(x => x.SubstitutionText == "Supplierung");
     }
-
 
     private class WebUntisCredentials
     {
