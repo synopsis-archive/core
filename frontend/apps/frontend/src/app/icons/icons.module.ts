@@ -9,6 +9,7 @@ import {
   IconX,
   IconSearch,
   IconSettings,
+  IconLayoutGrid,
 } from "angular-tabler-icons/icons";
 
 const icons = {
@@ -18,6 +19,7 @@ const icons = {
   IconX,
   IconSearch,
   IconSettings,
+  IconLayoutGrid,
 };
 
 @NgModule({

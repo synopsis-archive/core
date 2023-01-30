@@ -1,11 +1,48 @@
-<li class="w-full flex flex-row items-center hover:text-gray-700 hover:bg-gray-50 p-2 focus:ring-4 focus:ring-blue-300 focus:outline-none" [ngClass]="{'isActive': isActive}">
-  <a (click)="showTab()" class="inline-block w-full overflow-hidden font-normal">
-    {{title}}</a>
-  <button (click)="closeTabClick()">
-    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-      <line x1="18" y1="6" x2="6" y2="18"></line>
-      <line x1="6" y1="6" x2="18" y2="18"></line>
+<li
+  class="w-full flex flex-row items-center hover:text-gray-700 hover:bg-gray-50 relative overflow-hidden"
+  [ngClass]="{ isActive: isActive }"
+>
+  <div
+    (click)="showTab()"
+    class="flex w-full overflow-hidden font-normal h-full items-center"
+  >
+    {{ title }}
+  </div>
+  <div
+    class="absolute h-full w-20 right-0 top-0 bg-gradient-to-r from-transparent to-white"
+  ></div>
+  <button
+    (click)="closeTabClick()"
+    class="absolute right-1 h-full bg-gradient-to-l from-white-500"
+  >
+    <svg
+      width="15"
+      height="16"
+      viewBox="0 0 18 19"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M14 5L4 15"
+        stroke="black"
+        stroke-width="2.09491"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M4 5L14 15"
+        stroke="black"
+        stroke-width="2.09491"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <rect
+        x="6.84619"
+        y="7.84619"
+        width="4.31282"
+        height="4.31282"
+        fill="black"
+      />
     </svg>
   </button>
 </li>
