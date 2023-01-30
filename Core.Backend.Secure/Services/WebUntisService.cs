@@ -143,7 +143,7 @@ public class WebUntisService
     {
         var webUntisClient = await GetWebUntisClient(user);
         var items = await webUntisClient.GetTimetable(ElementType.Student, webUntisClient.PersonId, startDate, endDate);
-        return items.Where(x => x.SubstitutionText == "Supplierung").DefaultIfEmpty(new Timetable {Id = -1});
+        return items.Where(x => x.SubstitutionText == "Supplierung").DefaultIfEmpty(new Timetable { Id = -1 });
     }
 
     public async Task<IEnumerable<Timetable>> GetSubstitutionsFromTeacher(
