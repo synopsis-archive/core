@@ -1,12 +1,12 @@
-import {Component, OnInit} from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import {
   IDTokenPayload,
   MainframeIdTokenService,
   MainframeNavService,
   PluginListService,
-  Plugin
+  Plugin,
 } from "mainframe-connector";
-import {setTagColors} from "../../shared/classes/tagColors";
+import { setTagColors } from "../../shared/classes/tagColors";
 
 @Component({
   selector: "app-home",
@@ -14,9 +14,11 @@ import {setTagColors} from "../../shared/classes/tagColors";
   styleUrls: ["./home.component.css"],
 })
 export class HomeComponent implements OnInit {
-  constructor(private service: MainframeIdTokenService, private pluginService: PluginListService,
-              public navService: MainframeNavService) {
-  }
+  constructor(
+    private service: MainframeIdTokenService,
+    private pluginService: PluginListService,
+    public navService: MainframeNavService
+  ) {}
 
   jwtPayload: IDTokenPayload | undefined;
   showDashboard: boolean = true;
@@ -40,13 +42,13 @@ export class HomeComponent implements OnInit {
   plugins: Plugin[] = [];
 
   ngOnInit(): void {
-    this.pluginService.getPluginList().then(plugins => {
-      this.plugins = plugins.sort((a,b) => a.name.localeCompare(b.name));
-      let tags = [...new Set(this.plugins.flatMap(x => x.tags))];
+    this.pluginService.getPluginList().then((plugins) => {
+      this.plugins = plugins.sort((a, b) => a.name.localeCompare(b.name));
+      let tags = [...new Set(this.plugins.flatMap((x) => x.tags))];
       setTagColors(tags);
     });
 
-    this.service.getJwt().then(jwt=>{
+    this.service.getJwt().then((jwt) => {
       this.jwtPayload = this.service.decodeJwt(jwt);
     });
   }
