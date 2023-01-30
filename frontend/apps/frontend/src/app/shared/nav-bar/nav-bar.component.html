@@ -19,21 +19,19 @@
     </ul>
   </div>
   <div class="flex flex-row items-center gap-2">
-	<button (click)="searchClicked()" class="w-[30px] h-[30px] flex justify-center items-center bg-synogray-0 rounded-full">
-
-			<i-tabler name="search" class="navbar-icon-scale" />
-
+	<button (click)="searchClicked()" class="w-[30px] h-[30px] flex justify-center items-center hover:ring-2 hover:ring-synogray-600/50 bg-synogray-0 rounded-full">
+		<i-tabler name="search" class="navbar-icon-scale" />
 	</button>
-    <div class="flex flex-row rounded-full p-[3px]  justify-center items-center bg-synogray-210" (click)="changeView()" >
-        <button class="w-[25px] h-[25px] flex justify-center rounded-full  items-center" [ngClass]="{ isSelectedView: viewGrid }">
+    <div class="flex flex-row rounded-full p-[3px]  justify-center items-center bg-synogray-210 gap-1" (click)="changeView()" >
+        <button class="w-[25px] h-[25px] flex justify-center rounded-full hover:ring-2 hover:ring-synogray-600/50  items-center" [ngClass]="{ isSelectedView: viewGrid }">
           <i-tabler name="layout-grid" class="navbar-icon-scale"/>
         </button>
-        <button class="w-[25px] h-[25px] flex justify-center rounded-full items-center" [ngClass]="{ isSelectedView: !viewGrid }">
+        <button class="w-[25px] h-[25px] flex justify-center rounded-full hover:ring-2 hover:ring-synogray-600/50 items-center" [ngClass]="{ isSelectedView: !viewGrid }">
 			<i-tabler name="list" class="navbar-icon-scale" />
         </button>
 	</div>
 
-	<button (click)="showSettings()" class="h-[30px] w-[30px] flex justify-center items-center bg-white">
+	<button (click)="showSettings()" class="h-[30px] w-[30px] flex justify-center items-center bg-white hover:ring-2 hover:ring-synogray-600/50 rounded-full">
 		<i-tabler name="settings" class="navbar-icon-scale"/>
 	</button>
   </div>
