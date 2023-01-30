@@ -1,6 +1,8 @@
 <li
-  class="w-full flex flex-row items-center hover:text-gray-700 hover:bg-gray-50 relative overflow-hidden"
-  [ngClass]="{ isActive: isActive }"
+  [ngClass]="
+    'cursor-pointer relative rounded-lg stroke-gray-400 fill-gray-400 hover:fill-black hover:stroke-black flex flex-row items-center hover:text-gray-700 hover:bg-gray-50 overflow-hidden border w-[200px] h-[35px] whitespace-nowrap pl-3 border-gray-400/20 overflow-ellipsis ' +
+    (isActive ? 'bg-white' : 'bg-white border-gray-400/40')
+  "
 >
   <div
     (click)="showTab()"
@@ -9,40 +11,34 @@
     {{ title }}
   </div>
   <div
-    class="absolute h-full w-20 right-0 top-0 bg-gradient-to-r from-transparent to-white"
+    [ngClass]="
+      'h-full w-20 right-0 top-0 bg-gradient-to-r from-transparent to-white absolute' +
+      (isActive ? ' to-white' : ' bg-transparent')
+    "
   ></div>
   <button
     (click)="closeTabClick()"
-    class="absolute right-1 h-full bg-gradient-to-l from-white-500"
+    class="right-1 h-full bg-gradient-to-l from-white-500 absolute"
   >
     <svg
-      width="15"
-      height="16"
-      viewBox="0 0 18 19"
-      fill="none"
+      width="20"
+      height="20"
+      viewBox="0 0 12 12"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M14 5L4 15"
-        stroke="black"
-        stroke-width="2.09491"
+        d="M9.12676 2.90445L2.90454 9.12667"
+        stroke-width="0.82963"
         stroke-linecap="round"
         stroke-linejoin="round"
       />
       <path
-        d="M4 5L14 15"
-        stroke="black"
-        stroke-width="2.09491"
+        d="M2.90454 2.90445L9.12676 9.12667"
+        stroke-width="0.82963"
         stroke-linecap="round"
         stroke-linejoin="round"
       />
-      <rect
-        x="6.84619"
-        y="7.84619"
-        width="4.31282"
-        height="4.31282"
-        fill="black"
-      />
+      <rect x="4.98193" y="4.98175" width="2" height="2" />
     </svg>
   </button>
 </li>

@@ -54,3 +54,7 @@ ul {
   color: black;
   opacity: 1;
 }
+
+.navbar-icon-scale {
+  transform: scale(0.5);
+}

@@ -1,14 +1,11 @@
-<div
-  class="flex flex-row items-center justify-center bg-red-200"
+<nav
+  class="flex flex-row items-center justify-between relative mt-12 mb-4"
   [ngClass]="{ blur: showSearchBar }"
 >
   <div class="flex flex-row items-center">
-    <button>
-      <span
-        class="logo-placeholder w-6 rounded-full inline-block mr-4 p-4 left-0"
-      ></span>
-    </button>
+    <div class="logo-placeholder w-6 rounded-full inline-block mr-4 p-4 left-0">
 
+    </div>
     <ul
       class="text-sm font-medium text-center text-gray-500 rounded-lg sm:flex dark:text-gray-400 overflow-hidden gap-2"
     >
@@ -22,43 +19,30 @@
     </ul>
   </div>
   <div class="flex flex-row items-center gap-2">
-	<button (click)="searchClicked()" class="w-[30px] h-[30px] flex justify-center items-center bg-white">
-		<i-tabler name="search" />
+	<button (click)="searchClicked()" class="w-[30px] h-[30px] flex justify-center items-center bg-red-200">
+
+			<i-tabler name="search" class="navbar-icon-scale" />
+
 	</button>
     <div class="flex flex-row rounded-full" (click)="changeView()">
         <button class="w-[30px] h-[30px] flex justify-center items-center" [ngClass]="{ isSelectedView: viewGrid }">
-          <i-tabler name="layout-grid" />
+          <i-tabler name="layout-grid" class="navbar-icon-scale"/>
         </button>
         <button class="w-[30px] h-[30px] flex justify-center items-center" [ngClass]="{ isSelectedView: !viewGrid }">
-			<i-tabler name="layout-grid" />
+			<i-tabler name="layout-grid" class="navbar-icon-scale" />
         </button>
 	</div>
 
 	<button (click)="showSettings()" class="h-[30px] w-[30px] flex justify-center items-center bg-white">
-		<i-tabler name="settings" />
+		<i-tabler name="settings" class="navbar-icon-scale"/>
 	</button>
   </div>
-</div>
+</nav>
 
 <div *ngIf="showSearchBar">
   <div class="searchBar flex align-items-center">
     <button class="m-1">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="icon icon-tabler icon-tabler-search"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        stroke-width="2"
-        stroke="currentColor"
-        fill="none"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-        <circle cx="10" cy="10" r="7"></circle>
-        <line x1="21" y1="21" x2="15" y2="15"></line>
-      </svg>
+     <i-tabler name="search" class="navbar-icon-scale"/>
     </button>
     <input
       style="color: black"
@@ -66,22 +50,8 @@
       class="no-outline"
     />
     <button (click)="closeSearchBar()" class="closeBtn">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="icon icon-tabler icon-tabler-x"
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        stroke-width="2"
-        stroke="currentColor"
-        fill="none"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-        <line x1="18" y1="6" x2="6" y2="18"></line>
-        <line x1="6" y1="6" x2="18" y2="18"></line>
-      </svg>
+		<i-tabler name="x" class="navbar-icon-scale"/>
+
     </button>
   </div>
 </div>
