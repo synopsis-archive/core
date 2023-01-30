@@ -10,7 +10,6 @@ import {SynoUsernameComponent} from "./syno-username/syno-username.component";
 @NgModule({
   imports: [CommonModule, FormsModule,],
   declarations: [
-    SynoBaseComponent,
     SynoButtonComponent,
     SynoEmailComponent,
     SynoPasswordComponent,

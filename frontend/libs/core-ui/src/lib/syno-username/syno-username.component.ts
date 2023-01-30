@@ -1,12 +1,23 @@
-import {Component} from '@angular/core';
+import {Component} from "@angular/core";
+import {SynoBaseComponent} from "../syno-base/syno-base.component";
 
 @Component({
-  selector: 'syno-username',
-  templateUrl: './syno-username.component.html',
- })
-export class SynoUsernameComponent {
-  valid : boolean | null = null
+  selector: "syno-username",
+  templateUrl: "./syno-username.component.html",
+})
+export class SynoUsernameComponent extends SynoBaseComponent {
+  valid: boolean | null = null;
   username = "";
+  override variant = "default";
 
-  constructor() { }
+  styles = {
+    "default": "rounded-md block border w-80 p-3 pr-10 focus:outline-none focus:ring-1",
+    "valid": "rounded-md block border w-80 p-3 pr-10 focus:outline-none focus:ring-1 bg-green-50 text-green-900 border-green-800 focus:border-green-900 focus:ring-green-700",
+    "invalid": "rounded-md block border w-80 p-3 pr-10 focus:outline-none focus:ring-1 bg-red-50 text-red-900 ring-red-900 border-red-800 focus:border-red-900 focus:ring-red-700",
+  };
+
+  validate(username: string) {
+    this.valid = username.length > 0;
+    this.variant = this.valid == null ? "default" : (this.valid ? "valid" : "invalid");
+  }
 }
