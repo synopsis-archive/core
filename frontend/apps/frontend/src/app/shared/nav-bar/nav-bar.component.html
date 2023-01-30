@@ -1,5 +1,5 @@
 <nav
-  class="flex flex-row items-center justify-between relative mt-12 mb-4"
+  class="flex flex-row items-center justify-between relative mt-10 mb-10"
   [ngClass]="{ blur: showSearchBar }"
 >
   <div class="flex flex-row items-center">
@@ -7,7 +7,7 @@
 
     </div>
     <ul
-      class="text-sm font-medium text-center text-gray-500 rounded-lg sm:flex dark:text-gray-400 overflow-hidden gap-2"
+      class="text-sm font-medium text-center text-synogray-500 rounded-lg sm:flex dark:text-gray-400 overflow-hidden gap-2"
     >
       <app-tab
         (closeTab)="closeTab(tab)"
@@ -19,17 +19,17 @@
     </ul>
   </div>
   <div class="flex flex-row items-center gap-2">
-	<button (click)="searchClicked()" class="w-[30px] h-[30px] flex justify-center items-center bg-red-200">
+	<button (click)="searchClicked()" class="w-[30px] h-[30px] flex justify-center items-center bg-synogray-0 rounded-full">
 
 			<i-tabler name="search" class="navbar-icon-scale" />
 
 	</button>
-    <div class="flex flex-row rounded-full" (click)="changeView()">
-        <button class="w-[30px] h-[30px] flex justify-center items-center" [ngClass]="{ isSelectedView: viewGrid }">
+    <div class="flex flex-row rounded-full p-[3px]  justify-center items-center bg-synogray-210" (click)="changeView()" >
+        <button class="w-[25px] h-[25px] flex justify-center rounded-full  items-center" [ngClass]="{ isSelectedView: viewGrid }">
           <i-tabler name="layout-grid" class="navbar-icon-scale"/>
         </button>
-        <button class="w-[30px] h-[30px] flex justify-center items-center" [ngClass]="{ isSelectedView: !viewGrid }">
-			<i-tabler name="layout-grid" class="navbar-icon-scale" />
+        <button class="w-[25px] h-[25px] flex justify-center rounded-full items-center" [ngClass]="{ isSelectedView: !viewGrid }">
+			<i-tabler name="list" class="navbar-icon-scale" />
         </button>
 	</div>
 

@@ -10,14 +10,17 @@ module.exports = {
         sans: ["Space Grotesk", ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        gray: {
+        synogray: {
+          0: "#FFFFFF",
           80: "#FAFAFA",
           100: "#F7F7F7",
           200: "#E1E1E1",
+          210: "#DDDDDD",
           300: "#CFCFCF",
           400: "#A6A6A6",
           500: "#7E7E7E",
           600: "#626262",
+          999: "#000",
         },
       },
     },
