@@ -2,7 +2,8 @@
   <label class="block mb-2 text-sm font-medium text-gray-900" for="username">Username</label>
   <form class="h-14">
     <div class="absolute">
-      <input #usernameHTML (input)="valid = username.length == 0 ? null:usernameHTML.checkValidity()"
+      <input #usernameHTML
+             (input)="valid = username.length == 0 ? null:usernameHTML.checkValidity();this.changed.emit(username)"
              (submit)="valid = username.length == 0"
              [(ngModel)]="username"
              [ngClass]="{'bg-green-50 text-green-900 border-green-800 focus:border-green-900 focus:ring-green-700':valid,
