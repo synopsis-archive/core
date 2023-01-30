@@ -166,7 +166,7 @@ public class WebUntisClient : IWebUntisClient
                 -8520 => new InvalidTokenException(),
                 -8509 => new InsufficientRightsException(),
                 -8507 => new InvalidDateException(),
-                _ => new NotImplementedException()
+                _ => new Exception("unknown WebUntis error occured")
             };
         }
 
@@ -190,12 +190,7 @@ public class WebUntisClient : IWebUntisClient
 
         if (!response.IsSuccessStatusCode)
         {
-            var errorCode = response.StatusCode;
-
-            throw errorCode switch
-            {
-                _ => new NotImplementedException()
-            };
+            throw new Exception();
         }
 
         var responseJson = await response.Content.ReadAsStringAsync();
