@@ -34,12 +34,12 @@
     "@nrwl/angular:application": {
       "style": "css",
       "linter": "eslint",
-      "unitTestRunner": "jest",
+      "unitTestRunner": "none",
       "e2eTestRunner": "none"
     },
     "@nrwl/angular:library": {
       "linter": "eslint",
-      "unitTestRunner": "jest"
+      "unitTestRunner": "none"
     },
     "@nrwl/angular:component": {
       "style": "css",
@@ -69,13 +69,13 @@
     "@nrwl/web:application": {
       "style": "css",
       "linter": "eslint",
-      "unitTestRunner": "vitest",
-      "e2eTestRunner": "cypress"
+      "unitTestRunner": "none",
+      "e2eTestRunner": "none"
     },
     "@nrwl/web:library": {
       "style": "css",
       "linter": "eslint",
-      "unitTestRunner": "vitest"
+      "unitTestRunner": "none"
     }
   }
 }

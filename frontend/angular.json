@@ -5,7 +5,6 @@
     "core-ui": "libs/core-ui",
     "frontend": "apps/frontend",
     "mainframe": "apps/mainframe",
-    "mainframe-connector": "libs/mainframe-connector",
-    "mainframe-e2e": "apps/mainframe-e2e"
+    "mainframe-connector": "libs/mainframe-connector"
   }
 }
