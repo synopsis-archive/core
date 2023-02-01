@@ -25,7 +25,8 @@
       "executor": "@nrwl/vite:dev-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "mainframe:build"
+        "buildTarget": "mainframe:build",
+        "port": 4202
       },
       "configurations": {
         "development": {

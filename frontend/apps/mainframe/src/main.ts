@@ -1,1 +1,3 @@
-import "./app/app.element.ts";
+import { helloWorld } from "./hello";
+
+helloWorld();

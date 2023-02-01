@@ -7,7 +7,7 @@ export default defineConfig({
   cacheDir: "../../node_modules/.vite/mainframe",
 
   server: {
-    port: 4200,
+    port: 4202,
     host: "localhost",
   },
 
