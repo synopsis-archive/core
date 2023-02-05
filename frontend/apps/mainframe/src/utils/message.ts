@@ -21,3 +21,15 @@ export function waitForMessageFromFrame(containerId: string, filter: any): Promi
         window.addEventListener("message", listener);
     });
 }
+
+export function addMessageListenerToFrame(containerId: string, callback: (event: MessageEvent) => void | Promise<void>) {
+    const frame = document.getElementById(containerId)?.firstChild as HTMLIFrameElement;
+    window.addEventListener("message", function(event) {
+        if (event.source !== frame.contentWindow) return;
+
+        const result = callback(event.data);
+        if (result === undefined) return;
+
+        result.catch((e: any) => console.error("Error while handling message", e));
+    });
+}

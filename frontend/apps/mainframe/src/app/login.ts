@@ -6,7 +6,7 @@ export function sendErrorMessageToLogin(message: any) {
 }
 
 export async function waitForCredentialsFromLogin() {
-    return (await waitForMessageFromFrame("login-container", (data: any) => {
+    const message = await waitForMessageFromFrame("login-container", (data: any) => {
         if (data.method === "login") {
             if (typeof data.data === "object" &&
                 typeof data.data.username === "string" &&
@@ -18,7 +18,8 @@ export async function waitForCredentialsFromLogin() {
             }
         }
         return false;
-    }))?.data;
+    });
+    return message?.data;
 }
 
 export async function executeLogin(secureBackendUrl: string, username: string, password: string) {
