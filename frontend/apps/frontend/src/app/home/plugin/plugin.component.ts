@@ -11,7 +11,7 @@ import {NavBarService} from "../../core/nav-bar.service";
 export class PluginComponent {
 
   background: string = "";
-  name: string | null = "";
+  name: string = "";
   id: string = null!;
 
   @Input() set plugin (plugin: Plugin) {
@@ -24,8 +24,8 @@ export class PluginComponent {
 
   open() {
     this.navService.openPlugin({
-      id: this.plugin.id,
-      name: this.plugin.name,
+      id: this.id,
+      name: this.name,
       active: true
     });
   }

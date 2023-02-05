@@ -7,9 +7,9 @@
     </a>
 
     <ul
-      class="text-sm font-medium text-center text-gray-500 bg-transparent rounded-lg sm:flex dark:text-gray-400 overflow-hidden gap-2">
-      <app-tab [plugin]="tabs[0]" [closable]="false"></app-tab>
-      <app-tab *ngFor="let tab of tabs.splice(0,1)"
+      class="text-sm font-medium text-center text-gray-500 bg-transparent rounded-lg sm:flex dark:text-gray-400 overflow-hidden">
+<!--      <app-tab [plugin]="tabs[0]" [closable]="false"></app-tab>-->
+      <app-tab *ngFor="let tab of tabs"
                [plugin]="tab"></app-tab>
     </ul>
   </div>

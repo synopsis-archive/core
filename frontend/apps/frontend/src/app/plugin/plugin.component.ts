@@ -8,9 +8,6 @@ import {MainframeNavService} from "mainframe-connector";
   styleUrls: ["./plugin.component.css"],
 })
 export class PluginComponent implements OnInit {
-
-
-
   constructor(private route: ActivatedRoute,
               private navService: MainframeNavService) {}
 

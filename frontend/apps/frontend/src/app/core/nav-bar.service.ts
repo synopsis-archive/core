@@ -1,6 +1,6 @@
 import { Injectable } from"@angular/core";
 import {Subject} from "rxjs";
-import {OpenPlugin} from "../shared/classes/openPlugins";
+import {ActivePlugin} from "../shared/classes/activePlugin";
 import {Router} from "@angular/router";
 
 @Injectable({
@@ -8,22 +8,23 @@ import {Router} from "@angular/router";
 })
 export class NavBarService {
 
-  openPlugins = new Subject<OpenPlugin[]>();
+  openPlugins = new Subject<ActivePlugin[]>();
+  private _openPlugins: ActivePlugin[] = [new ActivePlugin("home", "Home", true)];
 
-  private _openPlugins: OpenPlugin[] = [{id: "home", name: "Home", active: true}]
   constructor(private router: Router) { }
 
   getPlugins() {
     this.openPlugins.next(this._openPlugins);
   }
 
-  openPlugin(plugin: OpenPlugin) {
+  openPlugin(plugin: ActivePlugin) {
     this._openPlugins.push(plugin);
     this.activatePlugin(plugin.id);
   }
 
   closePlugin(id: string) {
-    this.openPlugins.next(this._openPlugins.filter(p => p.id !== id));
+    this._openPlugins = this._openPlugins.filter(p => p.id !== id);
+    this.openPlugins.next(this._openPlugins);
   }
 
   activatePlugin(id: string) {
