@@ -1,25 +1,23 @@
 import { waitForMessageFromFrame } from "../utils/message";
+import { isAnyIncomingMessage } from "../types/handler.guards";
+import { IncomingMessage, MessageMap } from "../types/handler";
 
-export function sendErrorMessageToLogin(message: any) {
+export function sendErrorMessageToLogin(message: string) {
     const frame = document.getElementById("login-container")?.firstChild as HTMLIFrameElement;
     frame.contentWindow?.postMessage({ method: "error", data: { message } }, "*");
 }
 
-export async function waitForCredentialsFromLogin() {
-    const message = await waitForMessageFromFrame("login-container", (data: any) => {
-        if (data.method === "login") {
-            if (typeof data.data === "object" &&
-                typeof data.data.username === "string" &&
-                typeof data.data.password === "string") {
-                return true;
-            } else {
-                console.error("Invalid login data", data);
-                return false;
-            }
+export async function waitForCredentialsFromLogin(): Promise<MessageMap["login"]> {
+    const message = await waitForMessageFromFrame("login-container", (data: unknown) => {
+        if (!isAnyIncomingMessage(data)) {
+            console.error("Invalid message", data);
+            return false;
         }
-        return false;
+
+        return data.method === "login";
     });
-    return message?.data;
+
+    return (message as IncomingMessage<"login">).data;
 }
 
 export async function executeLogin(secureBackendUrl: string, username: string, password: string) {

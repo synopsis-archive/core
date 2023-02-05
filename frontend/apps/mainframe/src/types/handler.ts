@@ -6,6 +6,7 @@ export type MessageMap = {
     "loadPlugin": { id: string };
     "container": { x: number; y: number; width: number; height: number };
     "getPublicKey": undefined;
+    "login": { username: string; password: string };
 };
 
 export interface IncomingMessage<Method extends keyof MessageMap> {

@@ -25,9 +25,9 @@ export async function main() {
             try {
                 await executeLogin(config.secureBackendUrl, credentials.username, credentials.password);
                 isAuthed = true;
-            } catch (e: any) {
+            } catch (e: unknown) {
                 console.error("Failed to login", e);
-                if (e !== null && typeof e === "object" && typeof e.message === "string")
+                if (e !== null && typeof e === "object" && "message" in e && typeof e.message === "string")
                     sendErrorMessageToLogin(e.message);
                 else
                     sendErrorMessageToLogin("Es ist ein unbekannter Fehler aufgetreten!");

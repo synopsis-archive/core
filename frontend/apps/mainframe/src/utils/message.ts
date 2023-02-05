@@ -1,9 +1,9 @@
-export function sendMessageToFrame(container: string, method: string, message: any, transferableObjects: Transferable[] = []) {
+export function sendMessageToFrame(container: string, method: string, message: unknown, transferableObjects: Transferable[] = []) {
     const frame = document.getElementById(container)?.firstChild as HTMLIFrameElement;
     frame.contentWindow?.postMessage({ method, data: message }, "*", transferableObjects);
 }
 
-export function waitForMessageFromFrame(containerId: string, filter: any): Promise<any> {
+export function waitForMessageFromFrame(containerId: string, filter: (message: unknown) => boolean): Promise<unknown> {
     return new Promise(resolve => {
         const frame = document.getElementById(containerId)?.firstChild as HTMLIFrameElement;
 
@@ -30,6 +30,6 @@ export function addMessageListenerToFrame(containerId: string, callback: (event:
         const result = callback(event.data);
         if (result === undefined) return;
 
-        result.catch((e: any) => console.error("Error while handling message", e));
+        result.catch((e: unknown) => console.error("Error while handling message", e));
     });
 }

@@ -33,6 +33,13 @@ export function isAnyIncomingMessage(data: unknown): data is IncomingMessage<key
                 && typeof data.data.height === "number";
         case "getPublicKey":
             return data.data === undefined;
+        case "login":
+            return typeof data.data === "object"
+                && data.data !== null
+                && "username" in data.data
+                && typeof data.data.username === "string"
+                && "password" in data.data
+                && typeof data.data.password === "string";
         default:
             return false;
     }
