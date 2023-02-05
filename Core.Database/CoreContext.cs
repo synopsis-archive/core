@@ -9,7 +9,7 @@ public class CoreContext : DbContext
     public DbSet<Teacher> Teachers { get; set; } = null!;
     public DbSet<Student> Students { get; set; } = null!;
 
-    public CoreContext(DbContextOptions options) : base(options)
+    public CoreContext(DbContextOptions<CoreContext> options) : base(options)
     {
     }
 }

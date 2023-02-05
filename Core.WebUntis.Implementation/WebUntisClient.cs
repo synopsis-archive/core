@@ -25,7 +25,7 @@ public class WebUntisClient : IWebUntisClient
 
     private readonly HttpClient _httpClient;
     private readonly CookieContainer _cookies;
-    public int _personId;
+    public int PersonId;
 
     public WebUntisClient(
         string baseUrl,
@@ -73,7 +73,7 @@ public class WebUntisClient : IWebUntisClient
 
         AddToken(authentication.Token);
 
-        _personId = authentication.PersonId;
+        PersonId = authentication.PersonId;
 
         return authentication;
     }
@@ -125,11 +125,11 @@ public class WebUntisClient : IWebUntisClient
             .Select(x => x.Convert());
     }
 
-    public async Task<IEnumerable<Timetable>> GetTimetable(ElementType type, DateTime startDate,
+    public async Task<IEnumerable<Timetable>> GetTimetable(ElementType type, int id, DateTime startDate,
         DateTime endDate)
     {
         var request = new TimetableRequest(
-            _personId,
+            id,
             (int)type,
             UntisDateTimeMethods.ConvertDateToUntisDate(startDate),
             UntisDateTimeMethods.ConvertDateToUntisDate(endDate));
@@ -166,7 +166,7 @@ public class WebUntisClient : IWebUntisClient
                 -8520 => new InvalidTokenException(),
                 -8509 => new InsufficientRightsException(),
                 -8507 => new InvalidDateException(),
-                _ => new NotImplementedException()
+                _ => new Exception("unknown WebUntis error occured")
             };
         }
 
@@ -190,12 +190,7 @@ public class WebUntisClient : IWebUntisClient
 
         if (!response.IsSuccessStatusCode)
         {
-            var errorCode = response.StatusCode;
-
-            throw errorCode switch
-            {
-                _ => new NotImplementedException()
-            };
+            throw new Exception();
         }
 
         var responseJson = await response.Content.ReadAsStringAsync();
