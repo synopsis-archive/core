@@ -1,13 +1,13 @@
 export function sendMessageToFrame(container: string, method: string, message: any, transferableObjects: Transferable[] = []) {
     const frame = document.getElementById(container)?.firstChild as HTMLIFrameElement;
-    frame.contentWindow?.postMessage({ method: method, data: message }, "*", transferableObjects);
+    frame.contentWindow?.postMessage({ method, data: message }, "*", transferableObjects);
 }
 
 export function waitForMessageFromFrame(containerId: string, filter: any): Promise<any> {
     return new Promise(resolve => {
         const frame = document.getElementById(containerId)?.firstChild as HTMLIFrameElement;
 
-        let listener = (event: MessageEvent) => {
+        const listener = (event: MessageEvent) => {
             if (event.source !== frame.contentWindow) {
                 console.debug("Ignoring message from unknown source", event);
                 return;
@@ -24,7 +24,7 @@ export function waitForMessageFromFrame(containerId: string, filter: any): Promi
 
 export function addMessageListenerToFrame(containerId: string, callback: (event: MessageEvent) => void | Promise<void>) {
     const frame = document.getElementById(containerId)?.firstChild as HTMLIFrameElement;
-    window.addEventListener("message", function(event) {
+    window.addEventListener("message", event => {
         if (event.source !== frame.contentWindow) return;
 
         const result = callback(event.data);

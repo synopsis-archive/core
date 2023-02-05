@@ -9,6 +9,7 @@ export function isAnyIncomingMessage(data: unknown): data is IncomingMessage<key
     if (!("data" in data))
         return false;
 
+    // TODO: move data guards to the HandlerDefinition interface
     switch (data.method) {
         case "getIDToken":
             return data.data === undefined;
@@ -32,6 +33,8 @@ export function isAnyIncomingMessage(data: unknown): data is IncomingMessage<key
                 && typeof data.data.height === "number";
         case "getPublicKey":
             return data.data === undefined;
+        default:
+            return false;
     }
     return false;
 }

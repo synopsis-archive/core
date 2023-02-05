@@ -4,7 +4,7 @@ import { addMessageListenerToFrame } from "../utils/message";
 import { createIncomingMessageHandler } from "../app/handler";
 
 export const loadPluginHandler: IncomingMessageHandler<"loadPlugin"> = (message, context) => {
-    let plugin = context.config.plugins[message.data.id];
+    const plugin = context.config.plugins[message.data.id];
     if (plugin === undefined) {
         console.error("Could not find plugin", message.data.id);
         return;

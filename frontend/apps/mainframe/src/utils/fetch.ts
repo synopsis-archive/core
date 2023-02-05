@@ -1,6 +1,6 @@
 export async function fetch2(secureBackendUrl: string, requestPath: string, method: string, body = undefined) {
     const response = await fetch(secureBackendUrl + requestPath, {
-        method: method,
+        method,
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json"
