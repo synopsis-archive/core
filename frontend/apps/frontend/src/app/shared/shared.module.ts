@@ -16,12 +16,12 @@ import {RouterLink} from "@angular/router";
   exports: [
     NavBarComponent,
     TagComponent,
-    RouterLink
   ],
   imports: [
     CommonModule,
     FormsModule,
     IconsModule,
+    RouterLink
   ]
 })
 export class SharedModule {
