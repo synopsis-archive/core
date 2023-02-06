@@ -1,6 +1,8 @@
 export function sendMessageToFrame(container: string, method: string, message: unknown, transferableObjects: Transferable[] = []) {
     const frame = document.getElementById(container)?.firstChild as HTMLIFrameElement;
-    frame.contentWindow?.postMessage({ method, data: message }, "*", transferableObjects);
+    const postMessage = { method, data: message };
+    frame.contentWindow?.postMessage(postMessage, "*", transferableObjects);
+    console.debug("Sending message to frame", container, postMessage);
 }
 
 export function waitForMessageFromFrame(containerId: string, filter: (message: unknown) => boolean): Promise<unknown> {

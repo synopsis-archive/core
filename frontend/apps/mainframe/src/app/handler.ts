@@ -32,10 +32,12 @@ const handler: HandlerMap = {
 export const handleIncomingMessage = <Method extends keyof MessageMap>(message: IncomingMessage<Method>, context: MainframeContext) => {
     const handlerDefinition = handler[message.method];
 
-    if (handlerDefinition.isAllowed(context, message))
+    if (handlerDefinition.isAllowed(context, message)) {
+        console.debug("Handling message", message);
         handlerDefinition.handler(message, context);
-    else
+    } else {
         console.error("Message not allowed!", message);
+    }
 };
 
 export const createIncomingMessageHandler = (context: MainframeContext) => (message: unknown) => {
