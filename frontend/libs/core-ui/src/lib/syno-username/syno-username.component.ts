@@ -12,10 +12,11 @@ export class SynoUsernameComponent extends SynoBaseComponent {
   valid: boolean | null = null;
   override variant = "default";
 
+  styleBase = "rounded-md block border w-80 p-3 pr-10 focus:outline-none focus:ring-1 ";
   styles = {
-    "default": "rounded-md block border w-80 p-3 pr-10 focus:outline-none focus:ring-1",
-    "valid": "rounded-md block border w-80 p-3 pr-10 focus:outline-none focus:ring-1 bg-green-50 text-green-900 border-green-800 focus:border-green-900 focus:ring-green-700",
-    "invalid": "rounded-md block border w-80 p-3 pr-10 focus:outline-none focus:ring-1 bg-red-50 text-red-900 ring-red-900 border-red-800 focus:border-red-900 focus:ring-red-700",
+    "default": this.styleBase,
+    "valid": this.styleBase + "bg-green-50 text-green-900 border-green-800 focus:border-green-900 focus:ring-green-700",
+    "invalid": this.styleBase + "bg-red-50 text-red-900 ring-red-900 border-red-800 focus:border-red-900 focus:ring-red-700",
   };
 
   validate(username: string) {
