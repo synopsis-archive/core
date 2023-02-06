@@ -8,7 +8,7 @@ export type MessageMap = {
     "getPublicKey": undefined;
     "sendRequest": { path: string, payload: any | unknown | null };
     "login": { username: string; password: string };
-    "logout": { };
+    "logout": undefined;
 };
 
 export interface IncomingMessage<Method extends keyof MessageMap> {

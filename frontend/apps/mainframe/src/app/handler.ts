@@ -36,7 +36,7 @@ const handler: HandlerMap = {
     },
     "logout": {
         handler: logout,
-        isAllowed: context => context.sender === "navigation" || context.sender === "plugin"
+        isAllowed: context => context.sender === "navigation"
     },
 };
 
