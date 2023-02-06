@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {Plugin} from "mainframe-connector";
-import {Router} from "@angular/router";
 import {NavBarService} from "../../core/nav-bar.service";
 
 @Component({
