@@ -22,7 +22,6 @@ export class NavBarComponent implements OnInit{
     this.navService.openPlugins.subscribe(x => {
       this.tabs = x;
       this.changeDetection.detectChanges();
-      console.log(this.tabs);
     });
     this.navService.getPlugins();
   }
