@@ -18,7 +18,7 @@ export function isAnyIncomingMessage(data: unknown): data is IncomingMessage<key
                 && typeof data.data === "object"
                 && data.data !== null
                 && "id" in data.data
-                && typeof data.data.id === "string";
+                && (typeof data.data.id === "string" || data.data.id === null);
         case "container":
             return "data" in data
                 && typeof data.data === "object"

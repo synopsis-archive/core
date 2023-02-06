@@ -3,7 +3,7 @@ import { MainframeConfig } from "./config";
 export type MessageMap = {
     "getIDToken": undefined;
     "getPluginList": undefined;
-    "loadPlugin": { id: string };
+    "loadPlugin": { id: string | null };
     "container": { x: number; y: number; width: number; height: number };
     "getPublicKey": undefined;
     "login": { username: string; password: string };
