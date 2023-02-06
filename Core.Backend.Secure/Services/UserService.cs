@@ -1,5 +1,6 @@
 using Core.Backend.Secure.Dtos;
 using Core.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.Backend.Secure.Services;
 
@@ -26,4 +27,40 @@ public class UserService
             MatriculationNumber = usr.MatriculationNumber
         };
     }
+
+    public async Task<List<UserFavoriteDto>> GetUserFavorites()
+    {
+        var usr = _db.UserFavorites.ToListAsync();
+        return (await usr).Select(x => new UserFavoriteDto()
+        {
+            UUID = x.UUID,
+            PluginID = x.PluginId
+        }).ToList();
+    }
+
+    public async Task<UserFavoriteDto> AddUserFavorite(Guid uuid, string PluginId)
+    {
+        var usr = new UserFavorite { PluginId = PluginId, UUID = uuid };
+        await _db.UserFavorites.AddAsync(usr);
+        await _db.SaveChangesAsync();
+        return new UserFavoriteDto()
+        {
+            UUID = usr.UUID,
+            PluginID = usr.PluginId
+        };
+    }
+
+    public async Task<UserFavoriteDto> RemoveUserFavorite(Guid uuid, string PluginId)
+    {
+        var usr = await _db.UserFavorites.Where(x => x.UUID == uuid && x.PluginId == PluginId).FirstOrDefaultAsync();
+        _db.UserFavorites.Remove(usr!);
+        await _db.SaveChangesAsync();
+        return new UserFavoriteDto()
+        {
+            UUID = usr.UUID,
+            PluginID = usr.PluginId
+        };
+    }
+
+
 }

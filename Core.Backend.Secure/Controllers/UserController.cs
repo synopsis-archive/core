@@ -19,4 +19,24 @@ public class UserController : ControllerBase
     [HttpPost]
     public UserDTO GetUserInfo(string? uuid) => _userService.GetUserInfo(uuid ?? User.GetUUID().ToString());
 
+    [HttpGet("Favorites")]
+    public async Task<List<UserFavoriteDto>> GetUserFavorites()
+    {
+        return await _userService.GetUserFavorites();
+    }
+
+    [Authorize]
+    [HttpPost("AddFavorite")]
+    public async Task<UserFavoriteDto> AddUserFavorite(string PluginId)
+    {
+        return await _userService.AddUserFavorite(this.User.GetUUID(), PluginId);
+    }
+
+    [Authorize]
+    [HttpDelete("RemoveFavorite")]
+    public async Task<UserFavoriteDto> RemoveUserFavorite(string PluginId)
+    {
+        return await _userService.RemoveUserFavorite(this.User.GetUUID(), PluginId);
+    }
+
 }
