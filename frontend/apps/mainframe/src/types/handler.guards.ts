@@ -6,22 +6,22 @@ export function isAnyIncomingMessage(data: unknown): data is IncomingMessage<key
 
     if (!("method" in data) || typeof data.method !== "string")
         return false;
-    if (!("data" in data))
-        return false;
 
     // TODO: move data guards to the HandlerDefinition interface
     switch (data.method) {
         case "getIDToken":
-            return data.data === undefined;
+            return !("data" in data);
         case "getPluginList":
-            return data.data === undefined;
+            return !("data" in data);
         case "loadPlugin":
-            return typeof data.data === "object"
+            return "data" in data
+                && typeof data.data === "object"
                 && data.data !== null
                 && "id" in data.data
                 && typeof data.data.id === "string";
         case "container":
-            return typeof data.data === "object"
+            return "data" in data
+                && typeof data.data === "object"
                 && data.data !== null
                 && "x" in data.data
                 && typeof data.data.x === "number"
@@ -32,9 +32,10 @@ export function isAnyIncomingMessage(data: unknown): data is IncomingMessage<key
                 && "height" in data.data
                 && typeof data.data.height === "number";
         case "getPublicKey":
-            return data.data === undefined;
+            return !("data" in data);
         case "login":
-            return typeof data.data === "object"
+            return "data" in data
+                && typeof data.data === "object"
                 && data.data !== null
                 && "username" in data.data
                 && typeof data.data.username === "string"
