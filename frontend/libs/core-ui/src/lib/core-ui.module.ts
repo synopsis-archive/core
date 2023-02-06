@@ -6,13 +6,17 @@ import {SynoPasswordComponent} from "./syno-password/syno-password.component";
 import {FormsModule} from "@angular/forms";
 import {SynoUsernameComponent} from "./syno-username/syno-username.component";
 import {TablerIconsModule} from "angular-tabler-icons";
-import * as TablerIcons from "angular-tabler-icons/icons";
+import {IconEyeglass, IconEyeglassOff} from "angular-tabler-icons/icons";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    TablerIconsModule.pick(TablerIcons),
+    TablerIconsModule.pick({
+        IconEyeglass,
+        IconEyeglassOff,
+      },
+    ),
   ],
   declarations: [
     SynoButtonComponent,
