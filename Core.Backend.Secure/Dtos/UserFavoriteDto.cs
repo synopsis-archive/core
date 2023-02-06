@@ -1,8 +1,7 @@
-namespace Core.Backend.Secure.Dtos
+namespace Core.Backend.Secure.Dtos;
+
+public class UserFavoriteDto
 {
-    public class UserFavoriteDto
-    {
-        public Guid UUID { get; set; }
-        public string PluginID { get; set; } = null!;
-    }
+    public Guid UUID { get; set; }
+    public string PluginID { get; set; } = null!;
 }
