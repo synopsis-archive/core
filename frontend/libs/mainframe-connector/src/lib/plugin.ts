@@ -1,4 +1,7 @@
 ﻿export interface Plugin {
+    // id of plugin - example: "religion_abmelden"
+    id: string,
+
     // name of plugin - example: "Religion_abmelden"
     name: string,
 
