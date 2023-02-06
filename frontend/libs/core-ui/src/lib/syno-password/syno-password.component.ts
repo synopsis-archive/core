@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from "@angular/core";
 import {SynoBaseComponent} from "../syno-base/syno-base.component";
 
 @Component({
@@ -8,6 +8,7 @@ import {SynoBaseComponent} from "../syno-base/syno-base.component";
 export class SynoPasswordComponent extends SynoBaseComponent {
   @Input() password = "";
   @Output() passwordChange = new EventEmitter<string>();
+  @ViewChild("passwordHTML") passwordHTML: ElementRef | undefined;
 
   valid: boolean | null = null
   override variant = "default";
@@ -23,5 +24,11 @@ export class SynoPasswordComponent extends SynoBaseComponent {
     this.valid = password.length > 0;
     if (this.valid) this.passwordChange.emit(password);
     this.variant = this.valid == null ? "default" : (this.valid ? "valid" : "invalid");
+  }
+
+  changePwVisibility() {
+    if (!this.passwordHTML) return;
+    const oldType = this.passwordHTML.nativeElement.type;
+    this.passwordHTML.nativeElement.type = oldType === "password" ? "text" : "password";
   }
 }
