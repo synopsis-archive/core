@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { MainframeIdTokenService } from './mainframe-id-token.service';
+import { MainframeIdTokenService } from "./mainframe-id-token.service";
 
-describe('MainframeIdTokenService', () => {
+describe("MainframeIdTokenService", () => {
   let service: MainframeIdTokenService;
 
   beforeEach(() => {
@@ -10,7 +10,7 @@ describe('MainframeIdTokenService', () => {
     service = TestBed.inject(MainframeIdTokenService);
   });
 
-  it('should be created', () => {
+  it("should be created", () => {
     expect(service).toBeTruthy();
   });
 });

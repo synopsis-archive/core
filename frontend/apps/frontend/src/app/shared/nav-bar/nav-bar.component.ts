@@ -1,4 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { ActivePlugin } from "../classes/activePlugin";
+import { NavBarService } from "../../core/nav-bar.service";
+import { User } from "../classes/user";
 
 @Component({
   selector: "app-nav-bar",
@@ -7,16 +10,23 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./nav-bar.component.css"],
 })
 export class NavBarComponent implements OnInit {
-  tabs: string[] = ["Home", "Kirtag in Lambrechten", "Netzteil sprengen"];
+  tabs: ActivePlugin[] = [];
   public val: string = "";
   showSearchBar: boolean = false;
   viewGrid: boolean = true;
-  openTab: string = "Home";
 
-  constructor() {}
+  constructor(
+    private navService: NavBarService,
+    private changeDetection: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.val = "nav";
+    this.navService.openPlugins.subscribe((x) => {
+      this.tabs = x;
+      this.changeDetection.detectChanges();
+    });
+    this.navService.getPlugins();
   }
 
   searchClicked() {
@@ -29,18 +39,5 @@ export class NavBarComponent implements OnInit {
 
   showSettings() {
     // go to settings screen
-  }
-
-  closeTab(tab: string) {
-    this.tabs = this.tabs.filter((x) => x !== tab);
-  }
-
-  open(tab: string) {
-    this.openTab = tab;
-    // show tab
-  }
-
-  closeSearchBar() {
-    this.showSearchBar = !this.showSearchBar;
   }
 }

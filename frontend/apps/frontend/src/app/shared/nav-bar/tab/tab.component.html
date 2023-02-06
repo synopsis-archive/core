@@ -1,19 +1,19 @@
 <li
   [ngClass]="
-  'cursor-pointer relative  border-[1px] border-gray-300 text-gray-900 h-[35px] whitespace-nowrap text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 hover:fill-black hover:stroke-black flex flex-row items-center  fill-synogray-80 hover:fill-black hover:stroke-black pl-3 overflow-hidden w-[160px] bg-red-200' +
-    (isActive ? 'bg-white' : 'bg-synogray-50 border-synogray-400/40')
+    'cursor-pointer relative  border-[1px] border-gray-300 text-gray-900 h-[35px] whitespace-nowrap text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 hover:fill-black hover:stroke-black flex flex-row items-center  fill-synogray-80 hover:fill-black hover:stroke-black pl-3 overflow-hidden w-[160px] bg-red-200' +
+    (plugin?.active ? 'bg-white' : 'bg-synogray-50 border-synogray-400/40')
   "
 >
   <div
-    (click)="showTab()"
+    (click)="showPlugin()"
     class="flex w-full overflow-hidden font-normal h-full items-center"
   >
-    {{ title }}
+    {{ plugin?.name }}
   </div>
   <div
     [ngClass]="
       'h-full w-20 right-0 top-0 bg-gradient-to-r from-transparent to-white rounded-lg absolute' +
-      (isActive ? ' to-white' : ' bg-transparent')
+      (plugin?.active ? ' to-white' : ' bg-transparent')
     "
   ></div>
   <button

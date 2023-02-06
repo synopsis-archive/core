@@ -9,13 +9,8 @@
     <ul
       class="text-sm font-medium text-center text-synogray-500 rounded-lg sm:flex dark:text-gray-400 overflow-hidden gap-2"
     >
-      <app-tab
-        (closeTab)="closeTab(tab)"
-        [isActive]="openTab === tab"
-        (openTab)="open(tab)"
-        *ngFor="let tab of tabs"
-        [title]="tab"
-      ></app-tab>
+    <app-tab *ngFor="let tab of tabs"
+               [plugin]="tab"></app-tab>
     </ul>
   </div>
   <div class="flex flex-row items-center gap-2">
@@ -38,7 +33,7 @@
 </nav>
 
 <div *ngIf="showSearchBar">
-  <div class="searchBar flex align-items-center border-gray-300">
+  <div class="searchBar flex align-items-center border-gray-300 absolute h-full w-full">
     <button class="m-1">
      <i-tabler name="search" class="navbar-icon-scale"/>
     </button>
@@ -47,7 +42,7 @@
       placeholder="Enter your search term"
       class="no-outline"
     />
-    <button (click)="closeSearchBar()" class="closeBtn">
+    <button class="closeBtn">
 		<i-tabler name="x" class="navbar-icon-scale"/>
 
     </button>

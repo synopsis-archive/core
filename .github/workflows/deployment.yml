@@ -16,13 +16,21 @@ jobs:
       - deployment
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+          clean: false
       - name: Configure .env
         run: |
-          echo "DOMAIN_NAME=synopsis.hini.ga" >> .env
-          echo "SITE_PROTOCOL=http" >> .env
-          echo "LDAP_SERVER_IP=10.10.0.11" >> .env
+          echo "DOMAIN_NAME=${{ vars.DOMAIN_NAME }}" >> .env
+          echo "TLS_EMAIL=${{ secrets.TLS_EMAIL }}" >> .env
+          echo "LDAP_SERVER_IP=${{ vars.LDAP_SERVER_IP }}" >> .env
           echo "RSA_PRIVATE_KEY_FILE=private.pem" >> .env
           echo "RSA_PUBLIC_KEY_FILE=public.pem" >> .env
+
+        working-directory: ./deployment
+      - name: Download Plugins
+        run: bash ./builder.sh
+
         working-directory: ./deployment
       - name: Build
         run: docker compose build --pull
@@ -35,5 +43,7 @@ jobs:
           echo "${{ secrets.RSA_PUBLIC_KEY }}" > ./deployment/public-keys/public.pem
       - name: Deploy
         if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
-        run: docker compose up -d
+        run:  |
+          docker compose up -d
+          docker compose restart
         working-directory: ./deployment

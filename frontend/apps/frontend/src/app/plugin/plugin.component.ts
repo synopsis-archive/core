@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import {ActivatedRoute} from "@angular/router";
+import {MainframeNavService} from "mainframe-connector";
 
 @Component({
   selector: "app-plugin",
@@ -6,9 +8,12 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./plugin.component.css"],
 })
 export class PluginComponent implements OnInit {
-  constructor() {}
+  constructor(private route: ActivatedRoute,
+              private navService: MainframeNavService) {}
 
   ngOnInit(): void {
-    throw new Error("Method not implemented.");
+    this.route.params.subscribe(params => {
+      this.navService.openPlugin(params["id"]);
+    })
   }
 }

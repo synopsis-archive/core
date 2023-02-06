@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import {Injectable} from "@angular/core";
 
 @Injectable({
   providedIn: "root"
@@ -20,8 +20,8 @@ export class MainframeService {
     window.parent.postMessage({
       method: "login",
       data: {
-        username: username,
-        password: password
+        username,
+        password
       }
       // FIXME: Fix targetOrigin
     }, "*");

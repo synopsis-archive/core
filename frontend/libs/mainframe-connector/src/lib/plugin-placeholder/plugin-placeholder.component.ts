@@ -24,7 +24,7 @@ export class PluginPlaceholderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.intervalId = window.setInterval(() => {
-      let rect = this.elementRef.nativeElement.getBoundingClientRect();
+      const rect = this.elementRef.nativeElement.getBoundingClientRect();
       this.mainframeNavService.resizePlugin(rect.left, rect.top, rect.width, rect.height);
     }, 100);
   }
