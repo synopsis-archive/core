@@ -12,7 +12,9 @@ export const loadPluginHandler: IncomingMessageHandler<"loadPlugin"> = (message,
 
     clearFrameContainer("plugin-container");
 
-    createPluginFrame(plugin.url, "plugin-container");
+    const pluginURL = plugin.url ?? document.location.origin.replace("mainframe", message.data.id + ".plugin");
+
+    createPluginFrame(pluginURL, "plugin-container");
     addMessageListenerToFrame("plugin-container", createIncomingMessageHandler({
         config: context.config,
         sender: "plugin",

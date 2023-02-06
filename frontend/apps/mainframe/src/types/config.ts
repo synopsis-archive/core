@@ -6,7 +6,7 @@ export interface MainframeConfig {
 }
 
 export interface MainframePlugin {
-    url: string;
+    url?: string;
     permissions: string[];
     info: MainframePluginInfos;
 }
