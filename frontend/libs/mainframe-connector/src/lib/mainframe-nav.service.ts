@@ -11,7 +11,7 @@ export class MainframeNavService {
 
   public openPlugin(pluginId: string) {
     console.debug("Sending plugin open message: ", pluginId);
-    window.parent.postMessage({ method: "loadPlugin", plugin: pluginId }, "*");
+    window.parent.postMessage({ method: "loadPlugin", data: { id: pluginId } }, "*");
   }
 
   public resizePlugin(left: number, top: number, width: number, height: number) {
@@ -31,7 +31,7 @@ export class MainframeNavService {
     console.debug("Sending plugin resize message: ", rect);
     window.parent.postMessage({
       method: "container",
-      ...rect
+      data: rect
     }, "*");
   }
 }
