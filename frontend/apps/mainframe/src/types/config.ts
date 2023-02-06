@@ -19,5 +19,4 @@ export interface MainframePluginInfos {
     startDate: string; // TODO: Change this in the config, as this should really be of type number
     endDate: string;
     image: string;
-    isFavourite: boolean;
 }
