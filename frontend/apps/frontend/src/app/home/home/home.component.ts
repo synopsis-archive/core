@@ -49,6 +49,8 @@ export class HomeComponent implements OnInit {
     this.service.getJwt().then(jwt=>{
       this.jwtPayload = this.service.decodeJwt(jwt);
     });
+
+    this.navService.openPlugin(null);
   }
 
   buttonPressed() {
