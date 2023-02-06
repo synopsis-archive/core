@@ -51,6 +51,14 @@ public class AuthController : ControllerBase
         });
     }
 
+    [Authorize]
+    [HttpPost]
+    public IActionResult Logout()
+    {
+        Response.Cookies.Delete("auth");
+        return Ok(); // oda doch unauthorized? :D
+    }
+
     [HttpPost]
     public IActionResult Login(SignInParams signInParams)
     {
