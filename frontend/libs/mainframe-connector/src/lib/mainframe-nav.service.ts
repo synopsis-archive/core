@@ -9,7 +9,7 @@ export class MainframeNavService {
   constructor() {
   }
 
-  public openPlugin(pluginId: string) {
+  public openPlugin(pluginId: string | null) {
     console.debug("Sending plugin open message: ", pluginId);
     window.parent.postMessage({ method: "loadPlugin", data: { id: pluginId } }, "*");
   }

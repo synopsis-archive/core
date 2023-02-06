@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {Plugin} from "mainframe-connector";
+import {NavBarService} from "../../core/nav-bar.service";
 
 @Component({
   selector: "app-list-view",
@@ -15,10 +16,18 @@ export class ListViewComponent {
 
   titleAsc: boolean = true;
 
-  constructor() {}
+  constructor(private navService: NavBarService) {}
 
   sortPlugins() {
     this._plugins = this._plugins.sort((a,b) =>
       this.titleAsc ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name));
+  }
+
+  open(plugin: Plugin) {
+    this.navService.openPlugin({
+      id: plugin.id,
+      name: plugin.name,
+      active: true
+    });
   }
 }

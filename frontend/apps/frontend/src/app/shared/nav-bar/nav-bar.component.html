@@ -1,13 +1,16 @@
 <div class="flex flex-row items-center justify-between mt-2" [ngClass]="{'blur': showSearchBar}">
   <div class="flex flex-row items-center">
-    <button>
-      <span class="logo-placeholder w-6 rounded-full inline-block mr-4 p-4 left-0"></span>
-    </button>
+    <a routerLink="/">
+      <button class="flex items-center" >
+        <span class="logo-placeholder w-6 rounded-full inline-block mr-4 p-4 left-0"></span>
+      </button>
+    </a>
 
     <ul
-      class="text-sm font-medium text-center text-gray-500 bg-transparent rounded-lg sm:flex dark:text-gray-400 overflow-hidden gap-2">
-      <app-tab (closeTab)="closeTab(tab)" [isActive]="openTab === tab" (openTab)="open(tab)" *ngFor="let tab of tabs"
-               [title]="tab"></app-tab>
+      class="text-sm font-medium text-center text-gray-500 bg-transparent rounded-lg sm:flex dark:text-gray-400 overflow-hidden">
+<!--      <app-tab [plugin]="tabs[0]" [closable]="false"></app-tab>-->
+      <app-tab *ngFor="let tab of tabs"
+               [plugin]="tab"></app-tab>
     </ul>
   </div>
 
