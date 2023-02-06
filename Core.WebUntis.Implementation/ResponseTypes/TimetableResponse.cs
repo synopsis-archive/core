@@ -25,11 +25,11 @@ public class TimetableResponse
             Code = Code,
             Start = UntisDateTimeMethods.ConvertUntisTimeToTime(Start),
             End = UntisDateTimeMethods.ConvertUntisTimeToTime(End),
-            ClassIds = ClassIds.Select(x => x.Id).ToList(),
+            ClassIds = ClassIds?.Select(x => x.Id).ToList(),
             LessonType = LessonType,
-            RoomIds = RoomIds.Select(x => x.Id).ToList(),
-            SubjectIds = SubjectIds.Select(x => x.Id).ToList(),
-            TeacherIds = TeacherIds.Select(x => x.Id).ToList(),
+            RoomIds = RoomIds?.Select(x => x.Id).ToList(),
+            SubjectIds = SubjectIds?.Select(x => x.Id).ToList(),
+            TeacherIds = TeacherIds?.Select(x => x.Id).ToList(),
             SubstitutionText = SubstitutionText
         };
     }

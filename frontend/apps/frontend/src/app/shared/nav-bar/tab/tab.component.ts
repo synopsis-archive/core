@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 
 @Component({
   selector: "app-tab",
@@ -10,5 +10,15 @@ export class TabComponent {
 
   @Input() link: string = "";
   @Input() title: string = "";
+  @Input() isActive: boolean = false;
+  @Output() closeTab: EventEmitter<string> = new EventEmitter<string>();
+  @Output() openTab: EventEmitter<string> = new EventEmitter<string>();
 
+  closeTabClick() {
+    this.closeTab.emit("close");
+  }
+
+  showTab(): void {
+    this.openTab.emit("show");
+  }
 }

@@ -1,29 +1,41 @@
-import { Component, Input, OnInit } from "@angular/core";
-
-interface TabType {
-  id: number;
-  name: string;
-  icon: string;
-}
+import { Component, OnInit } from "@angular/core";
 
 @Component({
   selector: "app-nav-bar",
   templateUrl: "./nav-bar.component.html",
   styleUrls: ["./nav-bar.component.css"],
 })
-export class NavBarComponent implements OnInit {
+export class NavBarComponent implements OnInit{
+  tabs: string[] = ["Home", "Kirtag in Lambrechten", "Netzteil sprengen"];
+  public val: string = "";
+  showSearchBar: boolean = false;
+  viewGrid: boolean = true;
+  openTab: string = "Home";
+
   constructor() {}
 
-  @Input()
-  selectedId: number = 0;
-
-  @Input()
-  tabs: TabType[] = [];
-
-  @Input()
-  onTabClick: (id: number) => void = () => {};
-
   ngOnInit(): void {
-    this.selectedId = 0;
+    this.val = "nav";
+  }
+
+  searchClicked() {
+    this.showSearchBar = !this.showSearchBar;
+  }
+
+  changeView() {
+    this.viewGrid = !this.viewGrid;
+  }
+
+  showSettings() {
+    // go to settings screen
+  }
+
+  closeTab(tab: string) {
+    this.tabs = this.tabs.filter(x => x !== tab);
+  }
+
+  open(tab: string) {
+    this.openTab = tab;
+    // show tab
   }
 }
