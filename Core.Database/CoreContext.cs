@@ -9,6 +9,18 @@ public class CoreContext : DbContext
     public DbSet<Teacher> Teachers { get; set; } = null!;
     public DbSet<Student> Students { get; set; } = null!;
 
+    public DbSet<UserFavorite> UserFavorites { get; set; } = null!;
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        //base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<UserFavorite>().HasKey(u => new
+        {
+            u.UUID,
+            u.PluginId
+        });
+    }
+
     public CoreContext(DbContextOptions<CoreContext> options) : base(options)
     {
     }
