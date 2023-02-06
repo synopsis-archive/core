@@ -1,29 +1,40 @@
-import { Component, Input, OnInit } from "@angular/core";
-
-interface TabType {
-  id: number;
-  name: string;
-  icon: string;
-}
+import {ChangeDetectorRef, Component, OnInit} from "@angular/core";
+import {ActivePlugin} from "../classes/activePlugin";
+import {NavBarService} from "../../core/nav-bar.service";
+import {User} from "../classes/user";
 
 @Component({
   selector: "app-nav-bar",
   templateUrl: "./nav-bar.component.html",
   styleUrls: ["./nav-bar.component.css"],
 })
-export class NavBarComponent implements OnInit {
-  constructor() {}
+export class NavBarComponent implements OnInit{
+  tabs: ActivePlugin[] = [];
+  public val: string = "";
+  showSearchBar: boolean = false;
+  viewGrid: boolean = true;
 
-  @Input()
-  selectedId: number = 0;
-
-  @Input()
-  tabs: TabType[] = [];
-
-  @Input()
-  onTabClick: (id: number) => void = () => {};
+  constructor(private navService: NavBarService,
+              private changeDetection: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.selectedId = 0;
+    this.val = "nav";
+    this.navService.openPlugins.subscribe(x => {
+      this.tabs = x;
+      this.changeDetection.detectChanges();
+    });
+    this.navService.getPlugins();
+  }
+
+  searchClicked() {
+    this.showSearchBar = !this.showSearchBar;
+  }
+
+  changeView() {
+    this.viewGrid = !this.viewGrid;
+  }
+
+  showSettings() {
+    // go to settings screen
   }
 }

@@ -6,6 +6,10 @@ COPY Core.AuthLib/*.csproj ./Core.AuthLib/
 COPY Core.Database/*.csproj ./Core.Database/
 COPY Core.Ldap.Implementation/*.csproj ./Core.Ldap.Implementation/
 COPY Core.Ldap.Interface/*.csproj ./Core.Ldap.Interface/
+COPY Core.Moodle.Implementation/*.csproj ./Core.Moodle.Implementation/
+COPY Core.Moodle.Interface/*.csproj ./Core.Moodle.Interface/
+COPY Core.WebUntis.Implementation/*.csproj ./Core.WebUntis.Implementation/
+COPY Core.WebUntis.Interface/*.csproj ./Core.WebUntis.Interface/
 
 RUN dotnet restore Core.Backend.Secure
 
@@ -14,6 +18,10 @@ COPY Core.AuthLib/. ./Core.AuthLib/
 COPY Core.Database/. ./Core.Database/
 COPY Core.Ldap.Implementation/. ./Core.Ldap.Implementation/
 COPY Core.Ldap.Interface/. ./Core.Ldap.Interface/
+COPY Core.Moodle.Implementation/. ./Core.Moodle.Implementation/
+COPY Core.Moodle.Interface/. ./Core.Moodle.Interface/
+COPY Core.WebUntis.Implementation/. ./Core.WebUntis.Implementation/
+COPY Core.WebUntis.Interface/. ./Core.WebUntis.Interface/
 
 WORKDIR /source/Core.Backend.Secure
 RUN dotnet publish -c Release -o /app --no-restore

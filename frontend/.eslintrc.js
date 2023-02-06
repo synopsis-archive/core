@@ -38,6 +38,14 @@ module.exports = {
             "prefix": "app",
             "style": "kebab-case"
           }
+        ],
+        "quotes": [
+          "error",
+          "double",
+          {
+            "avoidEscape": true,
+            "allowTemplateLiterals": true
+          }
         ]
       }
     },

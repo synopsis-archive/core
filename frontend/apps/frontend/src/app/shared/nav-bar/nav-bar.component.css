@@ -6,3 +6,12 @@
     #42ff00 100%
   );
 }
+
+.isSelectedView {
+  background-color: white;
+}
+
+.blur {
+  background-color: #fff;
+  opacity: 0.2;
+}
