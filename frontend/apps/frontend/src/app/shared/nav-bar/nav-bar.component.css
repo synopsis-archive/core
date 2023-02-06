@@ -31,10 +31,6 @@ input {
   background-color: lightgray;
 }
 
-.isSelectedView {
-  background-color: white;
-}
-
 .blur {
   background-color: #fff;
   opacity: 0.2;
