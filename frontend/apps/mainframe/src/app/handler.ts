@@ -4,6 +4,7 @@ import { getPluginListHandler } from "../handler/getPluginList";
 import { loadPluginHandler } from "../handler/loadPlugin";
 import { containerHandler } from "../handler/container";
 import { getPublicKeyHandler } from "../handler/getPublicKey";
+import { sendRequest } from "../handler/sendRequest";
 import { isAnyIncomingMessage } from "../types/handler.guards";
 
 const handler: HandlerMap = {
@@ -26,6 +27,11 @@ const handler: HandlerMap = {
     "getPublicKey": {
         handler: getPublicKeyHandler,
         isAllowed: context => context.sender === "auth"
+    },
+    "sendRequest": {
+        handler: sendRequest,
+        // @todo: fix security issue
+        isAllowed: (context, message) => context.sender === "plugin" && message.data != null
     }
 };
 
