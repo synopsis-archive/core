@@ -24,7 +24,7 @@ public class TimetableRequest
 
 public class TimetableOptions
 {
-    [JsonPropertyName("element")] public TimetableElement Elements { get; set; }
+    [JsonPropertyName("element")] public TimetableElement? Elements { get; set; }
     [JsonPropertyName("showSubstText")] public bool SubstitutionText { get; set; }
     [JsonPropertyName("startDate")] public int StartDate { get; set; }
     [JsonPropertyName("endDate")] public int EndDate { get; set; }

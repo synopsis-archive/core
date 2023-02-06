@@ -43,5 +43,7 @@ jobs:
           echo "${{ secrets.RSA_PUBLIC_KEY }}" > ./deployment/public-keys/public.pem
       - name: Deploy
         if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
-        run: docker compose up -d
+        run:  |
+          docker compose up -d
+          docker compose restart
         working-directory: ./deployment

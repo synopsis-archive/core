@@ -1,5 +1,6 @@
 # frontend
 frontend    @littlegamer757
+frontend/apps/mainframe      @profiluefter @Klausmd5
 
 # architektur team
 Core.WebUntis.Interface      @profiluefter
@@ -13,7 +14,6 @@ Core.Backend/Pluginloader.cs @Klausmd5
 Core.Backend.Secure          @Klausmd5
 
 deployment                   @profiluefter
-mainframe                    @profiluefter @Klausmd5
 
 Core.AuthLib                                 @Klausmd5
 Core.AuthLib/Services/RsaService.cs          @Klausmd5

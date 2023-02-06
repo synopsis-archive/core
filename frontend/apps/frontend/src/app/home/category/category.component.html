@@ -24,8 +24,7 @@
   </h2>
   <div class="accordion-body overflow-hidden duration-500 transition-all" [ngClass]="{'accordion-body-displayed': !hidden}">
     <app-plugin *ngFor="let plugin of plugins"
-                [name]="plugin.name"
-                [imageSrc]="plugin.image"></app-plugin>
+                [plugin]="plugin"></app-plugin>
   </div>
 <!--  <div [hidden]="hidden">-->
 <!--    <div class="pt-5 overflow-hidden max-h-0 accordion-body" [ngClass]="{'accordion-body-displayed': !hidden}" >-->
