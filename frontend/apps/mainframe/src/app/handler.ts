@@ -6,6 +6,7 @@ import { containerHandler } from "../handler/container";
 import { getPublicKeyHandler } from "../handler/getPublicKey";
 import { sendRequest } from "../handler/sendRequest";
 import { isAnyIncomingMessage } from "../types/handler.guards";
+import {logout} from "../handler/logout";
 
 const handler: HandlerMap = {
     "getIDToken": {
@@ -32,7 +33,11 @@ const handler: HandlerMap = {
         handler: sendRequest,
         // @todo: fix security issue
         isAllowed: (context, message) => context.sender === "plugin" && message.data != null
-    }
+    },
+    "logout": {
+        handler: logout,
+        isAllowed: context => context.sender === "navigation" || context.sender === "plugin"
+    },
 };
 
 export const handleIncomingMessage = <Method extends keyof MessageMap>(message: IncomingMessage<Method>, context: MainframeContext) => {
