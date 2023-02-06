@@ -22,12 +22,14 @@ export class NavBarService {
     this.activatePlugin(plugin.id);
   }
 
-  closePlugin(id: string) {
+  closePlugin(id: string | undefined) {
+    if(!id) return;
     this._openPlugins = this._openPlugins.filter(p => p.id !== id);
     this.openPlugins.next(this._openPlugins);
   }
 
-  activatePlugin(id: string) {
+  activatePlugin(id: string | undefined) {
+    if (!id) return;
     this._openPlugins.forEach(x => x.active = x.id === id);
     this.openPlugins.next(this._openPlugins);
     if (id === "home") this.router.navigate(["/"]);

@@ -9,7 +9,7 @@ import {NavBarService} from "../../../core/nav-bar.service";
 })
 export class TabComponent implements OnInit {
 
-  @Input() plugin: ActivePlugin = null!;
+  @Input() plugin: ActivePlugin | null = null;
   // @Input() link: string = "";
   // @Input() title: string = "";
   // @Input() isActive: boolean = false;
@@ -19,15 +19,15 @@ export class TabComponent implements OnInit {
 
   constructor(private navService: NavBarService) {}
   ngOnInit(): void {
-    this.closable = this.plugin.id !== "home";
+    this.closable = this.plugin?.id !== "home";
   }
 
   closeTabClick() {
-    this.navService.closePlugin(this.plugin.id);
+    this.navService.closePlugin(this.plugin?.id);
     this.navService.activatePlugin("home");
   }
 
   showPlugin(): void {
-    this.navService.activatePlugin(this.plugin.id);
+    this.navService.activatePlugin(this.plugin?.id);
   }
 }

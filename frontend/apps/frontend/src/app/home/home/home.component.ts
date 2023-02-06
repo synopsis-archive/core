@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
       this.jwtPayload = this.service.decodeJwt(jwt);
     });
 
-    this.navService.openPlugin("");
+    this.navService.openPlugin(null);
   }
 
   buttonPressed() {
