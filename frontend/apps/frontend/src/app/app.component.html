@@ -1,7 +1,12 @@
 <!--<div style="width: 50vw; height: 50vh">-->
 <!--&lt;!&ndash;  <mainframe-plugin-placeholder></mainframe-plugin-placeholder>&ndash;&gt;-->
 <!--</div>-->
-<div class="container mx-auto h-full">
-  <app-nav-bar></app-nav-bar>
-  <router-outlet></router-outlet>
+<div class="h-screen w-full">
+  <div class="container mx-auto flex flex-col h-full">
+    <app-nav-bar></app-nav-bar>
+    <div class="flex-1 overflow-scroll">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="h-10 m-4">asjkldf</div>
+  </div>
 </div>
