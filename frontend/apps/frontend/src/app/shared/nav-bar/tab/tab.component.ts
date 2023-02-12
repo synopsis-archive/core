@@ -10,8 +10,8 @@ import { NavBarService } from "../../../core/nav-bar.service";
 export class TabComponent implements OnInit {
   @Input() plugin: ActivePlugin | null = null;
   // @Input() link: string = "";
-  // @Input() title: string = "";
-  // @Input() isActive: boolean = false;
+  @Input() title: string = "adfasdf";
+  @Input() isActive: boolean = false;
   // @Output() closeTab: EventEmitter<string> = new EventEmitter<string>();
   // @Output() openTab: EventEmitter<string> = new EventEmitter<string>();
   closable: boolean = true;

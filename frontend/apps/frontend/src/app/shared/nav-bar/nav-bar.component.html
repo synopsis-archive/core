@@ -1,14 +1,20 @@
 <nav
-  class="flex flex-row items-center justify-between relative mt-10 mb-10"
+  class="flex flex-row items-center justify-between relative mt-10 mb-10 h-10"
   [ngClass]="{ blur: showSearchBar }"
 >
   <div class="flex flex-row items-center">
-    <div class="logo-placeholder w-6 rounded-full inline-block mr-4 p-4 left-0 "></div>
+    <div class="logo-placeholder w-[2.3rem] rounded-full inline-block mr-6 p-4 left-0 "></div>
     <ul
-      class="text-sm font-medium gap-2 text-synogray-500"
+      class="text-sm font-medium gap-3 text-synogray-500 flex"
     >
-    <app-tab *ngFor="let tab of tabs"
-               [plugin]="tab"></app-tab>
+    <!-- <app-tab *ngFor="let tab of tabs"
+               [plugin]="tab"></app-tab> -->
+		<app-tab [isActive]="true">
+		</app-tab>
+		<app-tab>
+		</app-tab>
+		<app-tab >
+		</app-tab>
     </ul>
   </div>
 
