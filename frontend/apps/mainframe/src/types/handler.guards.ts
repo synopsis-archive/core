@@ -41,6 +41,10 @@ export function isAnyIncomingMessage(data: unknown): data is IncomingMessage<key
                 && typeof data.data.username === "string"
                 && "password" in data.data
                 && typeof data.data.password === "string";
+        case "logout":
+            return !("data" in data);
+        case "sendRequest":
+            return "data" in data && typeof data.data === "object" && data.data !== null;
         default:
             return false;
     }
