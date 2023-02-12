@@ -1,12 +1,12 @@
 <li
   [ngClass]="
-    'cursor-pointer relative  border-[1px] border-gray-300 text-gray-900 h-[35px] whitespace-nowrap text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 hover:fill-black hover:stroke-black flex flex-row items-center  fill-synogray-80 hover:fill-black hover:stroke-black pl-3 overflow-hidden w-[160px] bg-red-200' +
+    'cursor-pointer relative border-[1px] border-gray-300 text-gray-900 h-[35px] whitespace-nowrap text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 hover:fill-black hover:stroke-black flex flex-row items-center  fill-synogray-80 hover:fill-black hover:stroke-black pl-3 overflow-hidden w-[160px] bg-red-200' +
     (plugin?.active ? 'bg-white' : 'bg-synogray-50 border-synogray-400/40')
   "
 >
   <div
     (click)="showPlugin()"
-    class="flex w-full overflow-hidden font-normal h-full items-center"
+    class="flex w-full overflow-hidden h-full items-center font-bold text-sm bg-green-500"
   >
     {{ plugin?.name }}
   </div>
@@ -18,9 +18,9 @@
   ></div>
   <button
     (click)="closeTabClick()"
-    class="right-1 h-full bg-gradient-to-l from-white-500 absolute"
+    class="right-[1px] h-full bg-gradient-to-l from-white-500 absolute justify-center flex items-center"
   >
-    <svg
+    <!-- <svg
       width="17"
       height="17"
       viewBox="0 0 12 12"
@@ -39,6 +39,7 @@
         stroke-linejoin="round"
       />
       <rect x="4.98193" y="4.98175" width="2" height="2" />
-    </svg>
+    </svg> -->
+	<i-tabler name="x" class="h-3 w-3 scale-75"/>
   </button>
 </li>

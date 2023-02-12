@@ -2,17 +2,16 @@
   class="flex flex-row items-center justify-between relative mt-10 mb-10"
   [ngClass]="{ blur: showSearchBar }"
 >
-  <div class="flex flex-row items-center">
-    <div class="logo-placeholder w-6 rounded-full inline-block mr-4 p-4 left-0">
-
-    </div>
+  <div class="flex flex-row items-center bg-red-200">
+    <div class="logo-placeholder w-6 rounded-full inline-block mr-4 p-4 left-0 "></div>
     <ul
-      class="text-sm font-medium text-center text-synogray-500 rounded-lg sm:flex dark:text-gray-400 overflow-hidden gap-2"
+      class="text-sm font-medium gap-2 text-synogray-500 bg-purple-300"
     >
     <app-tab *ngFor="let tab of tabs"
                [plugin]="tab"></app-tab>
     </ul>
   </div>
+
   <div class="flex flex-row items-center gap-2">
 	<button (click)="searchClicked()" class="w-[30px] h-[30px] flex justify-center items-center hover:border-[1px] focused:border-[1px] hover:border-synogray-400/40 focused:border-synogray-400/40 bg-synogray-0 rounded-full">
 		<i-tabler name="search" class="navbar-icon-scale" />
