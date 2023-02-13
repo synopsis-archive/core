@@ -1,0 +1,6 @@
+<div [ngClass]="setClass()" (click)="switchState()">
+  <div class="indicator absolute h-full rounded-full aspect-square bg-white top-0 transition-all"
+       [ngClass]="{'left-0': !_active, 'left-1/2': _active}">
+  </div>
+  <ng-content/>
+</div>

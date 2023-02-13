@@ -8,6 +8,7 @@ import {SynoUsernameComponent} from "./syno-username/syno-username.component";
 import {TablerIconsModule} from "angular-tabler-icons";
 import {IconEyeglass, IconEyeglassOff} from "angular-tabler-icons/icons";
 import {SynoIconButtonComponent} from "./syno-icon-button/syno-icon-button.component";
+import {SynoSwitchComponent} from "./syno-switch/syno-switch.component";
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import {SynoIconButtonComponent} from "./syno-icon-button/syno-icon-button.compo
     SynoPasswordComponent,
     SynoUsernameComponent,
     SynoIconButtonComponent,
+    SynoSwitchComponent,
   ],
   exports: [
     SynoButtonComponent,
@@ -31,6 +33,7 @@ import {SynoIconButtonComponent} from "./syno-icon-button/syno-icon-button.compo
     SynoPasswordComponent,
     SynoUsernameComponent,
     SynoIconButtonComponent,
+    SynoSwitchComponent,
   ],
 })
 export class CoreUiModule {
