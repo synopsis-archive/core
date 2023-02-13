@@ -6,7 +6,7 @@ export type MessageMap = {
     "loadPlugin": { id: string | null };
     "container": { x: number; y: number; width: number; height: number };
     "getPublicKey": undefined;
-    "sendRequest": { path: string, payload: any | unknown | null };
+    "sendRequest": { method: "GET" | "POST" | "PUT" | "DELETE", path: string, payload: string | null };
     "login": { username: string; password: string };
     "logout": undefined;
 };
