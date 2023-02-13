@@ -8,6 +8,7 @@ import { TagComponent } from "./tag/tag.component";
 import { RouterLink } from "@angular/router";
 import { SynoNavTabComponent } from "./syno-nav-tab/syno-nav-tab.component";
 import { FooterComponent } from "./footer/footer.component";
+import { SynoBtnComponent } from "./syno-btn/syno-btn.component";
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { FooterComponent } from "./footer/footer.component";
     TagComponent,
     SynoNavTabComponent,
     FooterComponent,
+    SynoBtnComponent,
   ],
   exports: [NavBarComponent, TagComponent, FooterComponent],
   imports: [CommonModule, FormsModule, IconsModule, RouterLink],

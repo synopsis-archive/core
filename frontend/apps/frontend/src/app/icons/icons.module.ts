@@ -11,6 +11,7 @@ import {
   IconSettings,
   IconLayoutGrid,
   IconList,
+  IconLogout,
 } from "angular-tabler-icons/icons";
 
 const icons = {
@@ -22,6 +23,7 @@ const icons = {
   IconSettings,
   IconLayoutGrid,
   IconList,
+  IconLogout,
 };
 
 @NgModule({
