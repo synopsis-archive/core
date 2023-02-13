@@ -7,28 +7,30 @@ import {FormsModule} from "@angular/forms";
 import {SynoUsernameComponent} from "./syno-username/syno-username.component";
 import {TablerIconsModule} from "angular-tabler-icons";
 import {IconEyeglass, IconEyeglassOff} from "angular-tabler-icons/icons";
+import {SynoIconButtonComponent} from "./syno-icon-button/syno-icon-button.component";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     TablerIconsModule.pick({
-        IconEyeglass,
-        IconEyeglassOff,
-      },
-    ),
+      IconEyeglass,
+      IconEyeglassOff,
+    }),
   ],
   declarations: [
     SynoButtonComponent,
     SynoEmailComponent,
     SynoPasswordComponent,
     SynoUsernameComponent,
+    SynoIconButtonComponent,
   ],
   exports: [
     SynoButtonComponent,
     SynoEmailComponent,
     SynoPasswordComponent,
     SynoUsernameComponent,
+    SynoIconButtonComponent,
   ],
 })
 export class CoreUiModule {
