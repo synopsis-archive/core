@@ -21,6 +21,6 @@ export class SynoUsernameComponent extends SynoBaseComponent {
   validate(username: string) {
     this.valid = username.length > 0;
     if (this.valid) this.usernameChange.emit(username);
-    this.variant = this.valid == null ? "default" : (this.valid ? "valid" : "invalid");
+    this.variant = this.valid === null ? "default" : (this.valid ? "valid" : "invalid");
   }
 }
