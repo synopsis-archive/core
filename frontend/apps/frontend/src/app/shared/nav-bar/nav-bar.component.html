@@ -7,14 +7,7 @@
     <ul
       class="text-sm font-medium gap-3 text-synogray-500 flex"
     >
-    <!-- <app-tab *ngFor="let tab of tabs"
-               [plugin]="tab"></app-tab> -->
-		<app-tab [isActive]="true">
-		</app-tab>
-		<app-tab>
-		</app-tab>
-		<app-tab >
-		</app-tab>
+    <app-tab *ngFor="let tab of tabs" [title]="tab.name" [isActive]="tab.active"></app-tab>
     </ul>
   </div>
 
