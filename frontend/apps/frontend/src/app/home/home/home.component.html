@@ -4,18 +4,11 @@
   <div class="overflow-scroll">
     <h1 class="text-4xl font-bold my-5">Stoatseitn</h1>
     JWT: {{ jwtPayload | json }} Plugins : {{ plugins | json }}
-    <syno-button
-      (click)="buttonPressed()"
-      variant="red"
-      includeClasses="seas jungs wos gehtn"
-      excludeClasses="jungs wos"
-      >seas jungs button</syno-button
-    >
 
     <button
       type="button"
       (click)="navService.openPlugin('polls')"
-      class="bg-red-700"
+      class="bg-red-500"
     >
       Navigate to polls
     </button>
@@ -26,6 +19,7 @@
     >
       Navigate to quote-of-today
     </button>
+    <app-section-header> </app-section-header>
 
     <!--<mainframe-plugin-placeholder style="width: 500px; height: 500px; display: block"></mainframe-plugin-placeholder>-->
 
