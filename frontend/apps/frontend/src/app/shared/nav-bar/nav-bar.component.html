@@ -1,6 +1,6 @@
 <nav
   class="flex flex-row items-center justify-between relative mt-10 mb-10 h-10"
-  [ngClass]="{ blur: showSearchBar }"
+
 >
   <div class="flex flex-row items-center">
     <div class="logo-placeholder w-[2.3rem] rounded-full inline-block mr-6 p-4 left-0 "></div>
@@ -36,20 +36,3 @@
 	</button>
   </div>
 </nav>
-
-<div *ngIf="showSearchBar">
-  <div class="searchBar flex align-items-center border-gray-300 absolute h-full w-full">
-    <button class="m-1">
-     <i-tabler name="search" class="navbar-icon-scale"/>
-    </button>
-    <input
-      style="color: black"
-      placeholder="Enter your search term"
-      class="no-outline"
-    />
-    <button class="closeBtn">
-		<i-tabler name="x" class="navbar-icon-scale"/>
-
-    </button>
-  </div>
-</div>

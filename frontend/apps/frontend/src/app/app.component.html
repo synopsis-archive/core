@@ -2,14 +2,20 @@
 <!--&lt;!&ndash;  <mainframe-plugin-placeholder></mainframe-plugin-placeholder>&ndash;&gt;-->
 <!--</div>-->
 <div class="h-screen w-full relative overflow-hidden">
-  <div class="container mx-auto flex flex-col h-full z-20 relative">
+  <div
+    *ngIf="searchViewShown"
+    class="w-full h-full bg-gray-500/50 backdrop-blur-lg z-10 absolute"
+  >
+    search
+  </div>
+  <div class="container mx-auto flex flex-col h-full relative">
     <div class="h-[100px] w-full">
       <app-nav-bar></app-nav-bar>
     </div>
     <div class="flex-1 relative overflow-auto">
       <router-outlet></router-outlet>
     </div>
-    <div class="h-[100px] w-full">
+    <div class="h-[100px] w-full z-30">
       <div class="my-10">
         <app-footer></app-footer>
       </div>
@@ -19,6 +25,6 @@
   <img
     src="../assets/bg-line.svg"
     alt=""
-    class="absolute top-0 left-1/2 -translate-x-1/2 z-10"
+    class="absolute top-0 left-1/2 -translate-x-1/2 -z-10"
   />
 </div>

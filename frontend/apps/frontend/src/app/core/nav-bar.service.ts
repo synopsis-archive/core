@@ -43,4 +43,10 @@ export class NavBarService {
     console.log(newState);
     this.viewGrid.next(newState);
   }
+
+  searchPluginViewShown: Subject<boolean> = new Subject();
+
+  toggleSearchPluginView() {
+    this.searchPluginViewShown.next(true);
+  }
 }
