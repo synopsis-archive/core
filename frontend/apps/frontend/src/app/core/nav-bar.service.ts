@@ -1,17 +1,18 @@
-import { Injectable } from"@angular/core";
-import {Subject} from "rxjs";
-import {ActivePlugin} from "../shared/classes/activePlugin";
-import {Router} from "@angular/router";
+import { Injectable } from "@angular/core";
+import { Subject } from "rxjs";
+import { ActivePlugin } from "../shared/classes/activePlugin";
+import { Router } from "@angular/router";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class NavBarService {
-
   openPlugins = new Subject<ActivePlugin[]>();
-  private _openPlugins: ActivePlugin[] = [new ActivePlugin("home", "Home", true)];
+  private _openPlugins: ActivePlugin[] = [
+    new ActivePlugin("home", "Home", true),
+  ];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   getPlugins() {
     this.openPlugins.next(this._openPlugins);
@@ -23,16 +24,23 @@ export class NavBarService {
   }
 
   closePlugin(id: string | undefined) {
-    if(!id) return;
-    this._openPlugins = this._openPlugins.filter(p => p.id !== id);
+    if (!id) return;
+    this._openPlugins = this._openPlugins.filter((p) => p.id !== id);
     this.openPlugins.next(this._openPlugins);
   }
 
   activatePlugin(id: string | undefined) {
     if (!id) return;
-    this._openPlugins.forEach(x => x.active = x.id === id);
+    this._openPlugins.forEach((x) => (x.active = x.id === id));
     this.openPlugins.next(this._openPlugins);
     if (id === "home") this.router.navigate(["/"]);
     else this.router.navigate(["/plugin/" + id]);
+  }
+
+  viewGrid: Subject<boolean> = new Subject();
+
+  flipView(newState: boolean) {
+    console.log(newState);
+    this.viewGrid.next(newState);
   }
 }

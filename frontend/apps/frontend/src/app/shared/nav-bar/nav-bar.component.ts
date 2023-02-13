@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, Input, OnInit } from "@angular/core";
 import { ActivePlugin } from "../classes/activePlugin";
 import { NavBarService } from "../../core/nav-bar.service";
 import { User } from "../classes/user";
@@ -27,6 +27,7 @@ export class NavBarComponent implements OnInit {
       this.changeDetection.detectChanges();
     });
     this.navService.getPlugins();
+    this.viewGrid = false;
   }
 
   closeTabClick(plugin: ActivePlugin) {
@@ -43,6 +44,7 @@ export class NavBarComponent implements OnInit {
   }
 
   changeView() {
+    this.navService.flipView(!this.viewGrid);
     this.viewGrid = !this.viewGrid;
   }
 
