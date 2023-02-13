@@ -6,7 +6,20 @@
     *ngIf="searchViewShown"
     class="w-full h-full bg-gray-500/50 backdrop-blur-lg z-10 absolute"
   >
-    search
+	<div class="searchBar flex align-items-center border-gray-300 absolute h-full w-full">
+	  <button class="m-1">
+	   <i-tabler name="search" class="navbar-icon-scale"/>
+	  </button>
+	  <input
+		style="color: black"
+		placeholder="Enter your search term"
+		class="no-outline"
+	  />
+	  <button class="closeBtn">
+		  <i-tabler name="x" class="navbar-icon-scale"/>
+	  </button>
+	</div>
+
   </div>
   <div class="container mx-auto flex flex-col h-full relative">
     <div class="h-[100px] w-full">
