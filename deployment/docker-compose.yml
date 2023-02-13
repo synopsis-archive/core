@@ -33,6 +33,9 @@ services:
       dockerfile: deployment/backend.Dockerfile
     environment:
       RSA__public-key: "${RSA_PUBLIC_KEY_FILE}"
+      JWT__Issuer: "https://mainframe.${DOMAIN_NAME}"
+      JWT__Audience: "https://mainframe.${DOMAIN_NAME}"
+      MainframeOrigin: "https://mainframe.${DOMAIN_NAME}"
     depends_on:
       - backend-database
     volumes:

@@ -1,12 +1,17 @@
-export function clearFrameContainer(targetDivId: string) {
-    const targetDiv = document.getElementById(targetDivId);
-    while (targetDiv?.firstChild) {
+type FrameID = `${"login" | "nav" | "plugin"}-container`;
+
+export function clearFrameContainer(targetDivId: FrameID) {
+    const targetDiv = document.getElementById(targetDivId) as HTMLDivElement;
+    while (targetDiv.firstChild) {
         targetDiv.removeChild(targetDiv.firstChild);
     }
+    targetDiv.style.zIndex = "-1";
 }
 
-export function createPluginFrame(url: string, targetDivId: string) {
+export function createPluginFrame(url: string, targetDivId: FrameID) {
     const newFrame = document.createElement("iframe");
     newFrame.src = url;
-    document.getElementById(targetDivId)?.appendChild(newFrame);
+    const targetDiv = document.getElementById(targetDivId)!;
+    targetDiv.appendChild(newFrame);
+    targetDiv.style.zIndex = "1";
 }
