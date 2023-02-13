@@ -14,42 +14,27 @@
       aria-expanded="true"
       aria-controls="accordion-flush-body-1"
     >
-      <div class="flex gap-2">
-        <img [src]="icon" height="24" width="24" />
-        <span>{{ title }}</span>
+      <div class="flex gap-2 text-synogray-600 items-center">
+        <div class="w-6 h-6 bg-synogray-600 p-5 rounded-full">
+          <img
+            [src]="icon"
+            class="stroke-synogray-600 fill-synogray-600"
+            height="24"
+            width="24"
+          />
+        </div>
+        <p class="font-semibold text-2xl ml-2">{{ title }}</p>
       </div>
-      <svg
+      <i-tabler
         *ngIf="!hidden"
-        xmlns="http://www.w3.org/2000/svg"
-        class="icon icon-tabler icon-tabler-chevron-up"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        stroke-width="2"
-        stroke="currentColor"
-        fill="none"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-        <polyline points="6 15 12 9 18 15"></polyline>
-      </svg>
-      <svg
+        name="chevron-down"
+        class="text-synogray-600"
+      ></i-tabler>
+      <i-tabler
         *ngIf="hidden"
-        xmlns="http://www.w3.org/2000/svg"
-        class="icon icon-tabler icon-tabler-chevron-down"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        stroke-width="2"
-        stroke="currentColor"
-        fill="none"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-        <polyline points="6 9 12 15 18 9"></polyline>
-      </svg>
+        name="chevron-up"
+        class="text-synogray-600"
+      ></i-tabler>
     </button>
   </h2>
   <div

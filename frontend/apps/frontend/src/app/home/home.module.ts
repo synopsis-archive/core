@@ -11,6 +11,7 @@ import { ListViewItemComponent } from "./list-view-item/list-view-item.component
 import { CoreUiModule } from "core-ui";
 import { MainframeConnectorModule } from "mainframe-connector";
 import { SharedModule } from "../shared/shared.module";
+import { IconsModule } from "../icons/icons.module";
 
 @NgModule({
   declarations: [
@@ -25,8 +26,9 @@ import { SharedModule } from "../shared/shared.module";
     CommonModule,
     HomeRoutingModule,
     MainframeConnectorModule,
-    SharedModule,
     CoreUiModule,
+    IconsModule,
+    SharedModule,
   ],
 })
 export class HomeModule {}
