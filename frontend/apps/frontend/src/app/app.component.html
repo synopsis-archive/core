@@ -3,12 +3,16 @@
 <!--</div>-->
 <div class="h-screen w-full relative overflow-hidden">
   <div class="container mx-auto flex flex-col h-full z-20 relative">
-    <app-nav-bar></app-nav-bar>
-    <div class="flex-1 overflow-scroll">
+    <div class="h-[100px] w-full bg-green-400">
+      <app-nav-bar></app-nav-bar>
+    </div>
+    <div class="flex-1 relative">
       <router-outlet></router-outlet>
     </div>
-    <div class="my-10">
-      <app-footer></app-footer>
+    <div class="h-[100px] w-full bg-green-400">
+      <div class="my-10">
+        <app-footer></app-footer>
+      </div>
     </div>
   </div>
 
