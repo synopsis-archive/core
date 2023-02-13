@@ -1,7 +1,7 @@
 <app-syno-nav-tab [active]="isActive">
-  <div class="h-full w-full flex items-center relative">
+  <div class="h-full w-full flex items-center relative" (click)="(tabClick)">
     <div class="ml-2">{{ title }}</div>
-    <div class="absolute right-1 h-full flex items-center">
+    <div class="absolute right-1 h-full flex items-center" (click)="(xClick)">
       <i-tabler name="x" class="scale-[80%] cursor-pointer"></i-tabler>
     </div>
   </div>

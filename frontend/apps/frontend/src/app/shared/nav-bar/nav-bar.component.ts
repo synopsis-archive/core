@@ -29,6 +29,15 @@ export class NavBarComponent implements OnInit {
     this.navService.getPlugins();
   }
 
+  closeTabClick(plugin: ActivePlugin) {
+    this.navService.closePlugin(plugin.id);
+    this.navService.activatePlugin("home");
+  }
+
+  showPlugin(plugin: ActivePlugin): void {
+    this.navService.activatePlugin(plugin.id);
+  }
+
   searchClicked() {
     this.showSearchBar = !this.showSearchBar;
   }
