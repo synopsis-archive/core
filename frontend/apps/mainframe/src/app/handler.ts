@@ -7,6 +7,7 @@ import { getPublicKeyHandler } from "../handler/getPublicKey";
 import { sendRequest } from "../handler/sendRequest";
 import { isAnyIncomingMessage } from "../types/handler.guards";
 import {logout} from "../handler/logout";
+import {saveToken} from "../handler/saveToken";
 
 const handler: Partial<HandlerMap> = {
     "getIDToken": {
@@ -38,6 +39,10 @@ const handler: Partial<HandlerMap> = {
         handler: logout,
         isAllowed: context => context.sender === "navigation"
     },
+    "saveToken": {
+        handler: saveToken,
+        isAllowed: context => context.sender === "auth"
+    }
 };
 
 export const handleIncomingMessage = <Method extends keyof MessageMap>(message: IncomingMessage<Method>, context: MainframeContext) => {

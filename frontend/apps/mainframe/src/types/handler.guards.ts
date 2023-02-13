@@ -56,6 +56,12 @@ export function isAnyIncomingMessage(data: unknown): data is IncomingMessage<key
                 && typeof data.data.path === "string"
                 && "payload" in data.data
                 && (typeof data.data.payload === "string" || data.data.payload === null);
+        case "saveToken":
+            return "data" in data
+                && typeof data.data === "object"
+                && data.data !== null
+                && "token" in data.data
+                && typeof data.data.token === "string";
         default:
             return false;
     }
