@@ -18,7 +18,22 @@ public class Tests
     }
 
     [Test]
-    public void TestRooms()
+    public async Task TestRooms()
     {
+        await TestMethod(async () => { await _client.GetRooms(); });
+    }
+
+    private static async Task TestMethod(Func<Task> function)
+    {
+        try
+        {
+            await function.Invoke();
+        }
+        catch (Exception e)
+        {
+            Assert.Fail(e.Message);
+        }
+
+        Assert.Pass();
     }
 }
