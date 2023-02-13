@@ -1,12 +1,20 @@
 <!--<div style="width: 50vw; height: 50vh">-->
 <!--&lt;!&ndash;  <mainframe-plugin-placeholder></mainframe-plugin-placeholder>&ndash;&gt;-->
 <!--</div>-->
-<div class="h-screen w-full">
-  <div class="container mx-auto flex flex-col h-full">
+<div class="h-screen w-full relative overflow-hidden">
+  <div class="container mx-auto flex flex-col h-full z-20 relative">
     <app-nav-bar></app-nav-bar>
     <div class="flex-1 overflow-scroll">
       <router-outlet></router-outlet>
     </div>
-    <div class="h-10 m-4">asjkldf</div>
+    <div class="my-10">
+      <app-footer></app-footer>
+    </div>
   </div>
+
+  <img
+    src="../assets/bg-line.svg"
+    alt=""
+    class="absolute top-0 left-1/2 -translate-x-1/2 z-10"
+  />
 </div>
