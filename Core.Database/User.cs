@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Core.Ldap.Interface;
+using Core.AuthLib;
 
 namespace Core.Database;
 
@@ -18,7 +18,7 @@ public class User
     public string? Class { get; set; }
 
     [Required]
-    public LdapGroup Role { get; set; }
+    public UserRoles Role { get; set; }
 
     [Required]
     public string DisplayName { get; set; } = null!;
