@@ -12,7 +12,6 @@ import { User } from "../classes/user";
 export class NavBarComponent implements OnInit {
   tabs: ActivePlugin[] = [];
   public val: string = "";
-  showSearchBar: boolean = false;
   viewGrid: boolean = true;
 
   constructor(
@@ -38,9 +37,7 @@ export class NavBarComponent implements OnInit {
     this.navService.activatePlugin(plugin.id);
   }
 
-  searchClicked() {
-    this.showSearchBar = !this.showSearchBar;
-  }
+  searchClicked() {}
 
   changeView() {
     this.viewGrid = !this.viewGrid;
