@@ -16,7 +16,7 @@ public class CoreContext : DbContext
         //base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<UserFavorite>().HasKey(u => new
         {
-            u.User,
+            u.Uuid,
             u.PluginId
         });
     }

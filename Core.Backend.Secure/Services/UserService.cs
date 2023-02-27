@@ -30,10 +30,10 @@ public class UserService
 
     public async Task<List<UserFavoriteDto>> GetUserFavoritesFromUser(Guid uuid)
     {
-        var usr = await _db.UserFavorites.Include(x => x.User).Where(x => x.User.UUID == uuid).ToListAsync();
+        var usr = await _db.UserFavorites.Where(x => x.Uuid == uuid).ToListAsync();
         return usr.Select(x => new UserFavoriteDto()
         {
-            UUID = x.User.UUID,
+            UUID = x.Uuid,
             PluginID = x.PluginId
         }).ToList();
     }
@@ -43,25 +43,25 @@ public class UserService
         var usr = new UserFavorite
         {
             PluginId = PluginId,
-            User = _db.Users.First(x => x.UUID == uuid)
+            Uuid = uuid
         };
         await _db.UserFavorites.AddAsync(usr);
         await _db.SaveChangesAsync();
         return new UserFavoriteDto()
         {
-            UUID = usr.User.UUID,
+            UUID = uuid,
             PluginID = usr.PluginId
         };
     }
 
     public async Task<UserFavoriteDto> RemoveUserFavorite(Guid uuid, string PluginId)
     {
-        var usr = await _db.UserFavorites.Include(x => x.User).Where(x => x.User.UUID == uuid && x.PluginId == PluginId).FirstOrDefaultAsync();
+        var usr = await _db.UserFavorites.Where(x => x.Uuid == uuid && x.PluginId == PluginId).FirstOrDefaultAsync();
         _db.UserFavorites.Remove(usr!);
         await _db.SaveChangesAsync();
         return new UserFavoriteDto()
         {
-            UUID = usr.User.UUID,
+            UUID = uuid,
             PluginID = usr.PluginId
         };
     }
