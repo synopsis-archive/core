@@ -7,6 +7,7 @@ import {
   Plugin,
 } from "mainframe-connector";
 import { setTagColors } from "../../shared/classes/tagColors";
+import { NavBarService } from "../../core/nav-bar.service";
 
 @Component({
   selector: "app-home",
@@ -17,7 +18,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private service: MainframeIdTokenService,
     private pluginService: PluginListService,
-    public navService: MainframeNavService
+    public navService: MainframeNavService,
+    public navService1: NavBarService
   ) {}
 
   jwtPayload: IDTokenPayload | undefined;
@@ -53,6 +55,9 @@ export class HomeComponent implements OnInit {
     });
 
     this.navService.openPlugin(null);
+    this.navService1.isListShown.subscribe((x) => {
+      this.showDashboard = x;
+    });
   }
 
   buttonPressed() {

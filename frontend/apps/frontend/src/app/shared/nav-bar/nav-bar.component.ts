@@ -43,8 +43,8 @@ export class NavBarComponent implements OnInit {
   }
 
   changeView() {
-    this.navService.toggleIsListShown();
     this.viewGrid = !this.viewGrid;
+    this.navService.toggleIsListShown(this.viewGrid);
   }
 
   showSettings() {

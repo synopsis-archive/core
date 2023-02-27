@@ -38,10 +38,7 @@ export class NavBarService {
     else this.router.navigate(["/plugin/" + id]);
   }
 
-  toggleIsListShown() {
-    this.isListShown.next(!this.isListShown);
-  }
-  getIsListShown() {
-    return this.isListShown;
+  toggleIsListShown(val: boolean) {
+    this.isListShown.next(val);
   }
 }
