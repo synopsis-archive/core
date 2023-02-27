@@ -1,4 +1,4 @@
-import { Component} from "@angular/core";
+import {Component} from "@angular/core";
 import { Router } from "@angular/router";
 import {OnboardingService} from "../onboarding.service";
 
@@ -19,23 +19,25 @@ export class OnboardingComponent {
   ) {
   }
 
+
   proceedEduvidual() {
     this.onboardingService.setEduvidualToken(this.eduvidualToken);
-    this.step++;
+    this.step = 3;
     this.router.navigateByUrl("http://localhost:4201");
   }
 
   proceedLogin() {
     this.onboardingService.login(this.username, this.password);
-    this.step++;
+    this.step = 2;
   }
 
   toEduvidual() {
-    this.step++;
+    this.step = 2;
   }
 
   toLogin() {
-    this.step--;
+    this.step = 1;
+    this.password = "";
   }
 
   passwordChanged(pw: string) {
