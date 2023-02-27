@@ -1,4 +1,5 @@
 import {Component, OnInit} from "@angular/core";
+import {setTagColors} from "libs/core-ui/src/lib/syno-tag/tagColors";
 import {
   IDTokenPayload,
   MainframeIdTokenService,
@@ -6,7 +7,6 @@ import {
   PluginListService,
   Plugin
 } from "mainframe-connector";
-import {setTagColors} from "../../shared/classes/tagColors";
 
 @Component({
   selector: "app-home",
@@ -41,12 +41,12 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.pluginService.getPluginList().then((plugins: Plugin[]) => {
-      this.plugins = plugins.sort((a,b) => a.name.localeCompare(b.name));
+      this.plugins = plugins.sort((a, b) => a.name.localeCompare(b.name));
       const tags = [...new Set(this.plugins.flatMap(x => x.tags))];
       setTagColors(tags);
     });
 
-    this.service.getJwt().then(jwt=>{
+    this.service.getJwt().then(jwt => {
       this.jwtPayload = this.service.decodeJwt(jwt);
     });
 
