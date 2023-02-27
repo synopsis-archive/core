@@ -28,10 +28,12 @@ export class NavBarComponent implements OnInit{
 
   searchClicked() {
     this.showSearchBar = !this.showSearchBar;
+    this.navService.openSearch(this.showSearchBar);
   }
 
   changeView() {
     this.viewGrid = !this.viewGrid;
+    this.navService.changeView(this.viewGrid);
   }
 
   showSettings() {

@@ -1,7 +1,7 @@
 <!--<div style="width: 50vw; height: 50vh">-->
 <!--&lt;!&ndash;  <mainframe-plugin-placeholder></mainframe-plugin-placeholder>&ndash;&gt;-->
 <!--</div>-->
-<div class="container mx-auto h-full">
+<div class="container mx-auto h-full" [ngClass]="{'search':showSearch}">
   <app-nav-bar></app-nav-bar>
   <router-outlet></router-outlet>
 </div>

@@ -1,5 +1,5 @@
 import { Injectable } from"@angular/core";
-import {Subject} from "rxjs";
+import {BehaviorSubject, Subject} from "rxjs";
 import {ActivePlugin} from "../shared/classes/activePlugin";
 import {Router} from "@angular/router";
 
@@ -9,6 +9,8 @@ import {Router} from "@angular/router";
 export class NavBarService {
 
   openPlugins = new Subject<ActivePlugin[]>();
+  showDashboard = new BehaviorSubject<boolean>(true);
+  showSearch = new BehaviorSubject<boolean>(false);
   private _openPlugins: ActivePlugin[] = [new ActivePlugin("home", "Home", true)];
 
   constructor(private router: Router) { }
@@ -34,5 +36,13 @@ export class NavBarService {
     this.openPlugins.next(this._openPlugins);
     if (id === "home") this.router.navigate(["/"]);
     else this.router.navigate(["/plugin/" + id]);
+  }
+
+  changeView(showDashboard: boolean) {
+    this.showDashboard.next(showDashboard);
+  }
+
+  openSearch(open: boolean) {
+    this.showSearch.next(open);
   }
 }
