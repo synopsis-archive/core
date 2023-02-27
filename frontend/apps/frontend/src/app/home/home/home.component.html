@@ -1,42 +1,40 @@
 <div
-  class="border-[1.4px] border-synogray-100 bg-white/50 backdrop-blur-lg rounded-2xl p-4 relative h-full w-full"
+  class="border-[1.4px] border-synogray-100 bg-white/50 backdrop-blur-lg rounded-2xl p-4 relative h-full w-full overflow-scroll"
 >
-  <div class="overflow-scroll">
-    <h1 class="text-4xl font-bold my-5">Stoatseitn</h1>
-    JWT: {{ jwtPayload | json }} Plugins : {{ plugins | json }}
-    <syno-button
-      (click)="buttonPressed()"
-      variant="red"
-      includeClasses="seas jungs wos gehtn"
-      excludeClasses="jungs wos"
-      >seas jungs button</syno-button
-    >
-    <button
-      type="button"
-      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none"
-      (click)="showDashboard = !showDashboard"
-    >
-      {{ showDashboard ? "list" : "tiles" }}
-    </button>
+  <h1 class="text-4xl font-bold my-5">Stoatseitn</h1>
+  JWT: {{ jwtPayload | json }} Plugins : {{ plugins | json }}
+  <syno-button
+    (click)="buttonPressed()"
+    variant="red"
+    includeClasses="seas jungs wos gehtn"
+    excludeClasses="jungs wos"
+    >seas jungs button</syno-button
+  >
+  <button
+    type="button"
+    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none"
+    (click)="showDashboard = !showDashboard"
+  >
+    {{ showDashboard ? "list" : "tiles" }}
+  </button>
 
-    <button
-      type="button"
-      (click)="navService.openPlugin('polls')"
-      class="bg-red-700"
-    >
-      Navigate to polls
-    </button>
-    <button
-      type="button"
-      (click)="navService.openPlugin('quote-of-today')"
-      class="bg-red-700"
-    >
-      Navigate to quote-of-today
-    </button>
+  <button
+    type="button"
+    (click)="navService.openPlugin('polls')"
+    class="bg-red-700"
+  >
+    Navigate to polls
+  </button>
+  <button
+    type="button"
+    (click)="navService.openPlugin('quote-of-today')"
+    class="bg-red-700"
+  >
+    Navigate to quote-of-today
+  </button>
 
-    <!--<mainframe-plugin-placeholder style="width: 500px; height: 500px; display: block"></mainframe-plugin-placeholder>-->
+  <!--<mainframe-plugin-placeholder style="width: 500px; height: 500px; display: block"></mainframe-plugin-placeholder>-->
 
-    <app-dashboard *ngIf="showDashboard" [plugins]="plugins"></app-dashboard>
-    <app-list-view *ngIf="!showDashboard" [plugins]="plugins"></app-list-view>
-  </div>
+  <app-dashboard *ngIf="showDashboard" [plugins]="plugins"></app-dashboard>
+  <app-list-view *ngIf="!showDashboard" [plugins]="plugins"></app-list-view>
 </div>
