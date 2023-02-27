@@ -26,4 +26,7 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore
       - name: Test
+        env:
+          WEBUNTIS_USERNAME: ${{ secrets.WEBUNTIS_USERNAME }}
+          WEBUNTIS_PASSWORD: ${{ secrets.WEBUNTIS_PASSWORD }}
         run: dotnet test --no-restore --verbosity normal
