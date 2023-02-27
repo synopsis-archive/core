@@ -1,6 +1,4 @@
-using System.Text.Json;
 using Core.WebUntis.Implementation;
-using Core.WebUntis.Interface;
 using Core.WebUntis.Interface.Types;
 
 namespace Core.WebUntis.Tests;
