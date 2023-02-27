@@ -16,13 +16,15 @@ public class UserController : ControllerBase
 
     public UserController(UserService usr) => _userService = usr;
 
+    [Authorize]
     [HttpPost]
     public UserDTO GetUserInfo(string? uuid) => _userService.GetUserInfo(uuid ?? User.GetUUID().ToString());
 
+    [Authorize]
     [HttpGet("Favorites")]
     public async Task<List<UserFavoriteDto>> GetUserFavorites()
     {
-        return await _userService.GetUserFavorites();
+        return await _userService.GetUserFavoritesFromUser(this.User.GetUUID());
     }
 
     [Authorize]
