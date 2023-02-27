@@ -4,9 +4,11 @@ import { getPluginListHandler } from "../handler/getPluginList";
 import { loadPluginHandler } from "../handler/loadPlugin";
 import { containerHandler } from "../handler/container";
 import { getPublicKeyHandler } from "../handler/getPublicKey";
+import { sendRequest } from "../handler/sendRequest";
 import { isAnyIncomingMessage } from "../types/handler.guards";
+import {logout} from "../handler/logout";
 
-const handler: HandlerMap = {
+const handler: Partial<HandlerMap> = {
     "getIDToken": {
         handler: getIDTokenHandler,
         isAllowed: context => context.sender === "navigation" || context.sender === "plugin"
@@ -26,11 +28,20 @@ const handler: HandlerMap = {
     "getPublicKey": {
         handler: getPublicKeyHandler,
         isAllowed: context => context.sender === "auth"
-    }
+    },
+    "sendRequest": {
+        handler: sendRequest,
+        // TODO: fix security issue
+        isAllowed: (context, _message) => context.sender === "plugin"
+    },
+    "logout": {
+        handler: logout,
+        isAllowed: context => context.sender === "navigation"
+    },
 };
 
 export const handleIncomingMessage = <Method extends keyof MessageMap>(message: IncomingMessage<Method>, context: MainframeContext) => {
-    const handlerDefinition = handler[message.method];
+    const handlerDefinition = handler[message.method] as HandlerMap[Method];
 
     if (handlerDefinition.isAllowed(context, message)) {
         console.debug("Handling message", message);

@@ -1,4 +1,4 @@
-export async function fetch2(secureBackendUrl: string, requestPath: string, method: string, body = undefined) {
+export async function fetch2(secureBackendUrl: string, requestPath: string, method: string, body: string | undefined = undefined) {
     const response = await fetch(secureBackendUrl + requestPath, {
         method,
         headers: {
@@ -6,7 +6,7 @@ export async function fetch2(secureBackendUrl: string, requestPath: string, meth
             "Content-Type": "application/json"
         },
         credentials: "include",
-        body: body === undefined ? undefined : JSON.stringify(body)
+        body
     });
 
     if (response.status === 200)
