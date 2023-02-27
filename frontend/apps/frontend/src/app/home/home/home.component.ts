@@ -8,6 +8,7 @@ import {
 } from "mainframe-connector";
 import { setTagColors } from "../../shared/classes/tagColors";
 import { NavBarService } from "../../core/nav-bar.service";
+import { SearchService } from "../../core/search.service";
 
 @Component({
   selector: "app-home",

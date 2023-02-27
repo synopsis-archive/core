@@ -9,6 +9,7 @@ import { RouterLink } from "@angular/router";
 import { SynoNavTabComponent } from "./syno-nav-tab/syno-nav-tab.component";
 import { FooterComponent } from "./footer/footer.component";
 import { SynoBtnComponent } from "./syno-btn/syno-btn.component";
+import { SearchComponent } from "./search/search.component";
 
 @NgModule({
   declarations: [
@@ -18,8 +19,9 @@ import { SynoBtnComponent } from "./syno-btn/syno-btn.component";
     SynoNavTabComponent,
     FooterComponent,
     SynoBtnComponent,
+    SearchComponent,
   ],
-  exports: [NavBarComponent, TagComponent, FooterComponent],
+  exports: [NavBarComponent, TagComponent, FooterComponent, SearchComponent],
   imports: [CommonModule, FormsModule, IconsModule, RouterLink],
 })
 export class SharedModule {}
