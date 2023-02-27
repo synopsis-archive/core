@@ -31,7 +31,7 @@ public class UserService
     public async Task<List<UserFavoriteDto>> GetUserFavoritesFromUser(Guid uuid)
     {
         var usr = await _db.UserFavorites.Include(x => x.User).Where(x => x.User.UUID == uuid).ToListAsync();
-        return usr.sSelect(x => new UserFavoriteDto()
+        return usr.Select(x => new UserFavoriteDto()
         {
             UUID = x.User.UUID,
             PluginID = x.PluginId
