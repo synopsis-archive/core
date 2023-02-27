@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+using Core.AuthLib;
 using Core.Backend.Secure.Auth;
 using Core.Backend.Secure.Dtos;
 using Core.Database;
@@ -51,7 +52,7 @@ public class AuthService
     public User UpdateUserInDB(SignInResult signInResult, SignInParams signInParams)
     {
         string? mnr = null;
-        if (signInResult.User.OrganizationUnit.Equals(LdapGroup.Schueler))
+        if (signInResult.User.OrganizationUnit.Equals(UserRoles.Schueler))
         {
             var rg = new Regex(@"\d{6}");
             var mr = rg.Match(signInResult.User.LoginName);
