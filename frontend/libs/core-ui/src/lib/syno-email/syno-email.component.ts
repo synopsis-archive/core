@@ -25,6 +25,6 @@ export class SynoEmailComponent extends SynoBaseComponent {
 
     this.email.emit(this.valid ? email : null);
 
-    this.variant = this.valid == null ? "default" : (this.valid ? "valid" : "invalid");
+    this.variant = this.valid === null ? "default" : (this.valid ? "valid" : "invalid");
   }
 }

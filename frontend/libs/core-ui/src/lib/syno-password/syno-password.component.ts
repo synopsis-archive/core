@@ -23,7 +23,7 @@ export class SynoPasswordComponent extends SynoBaseComponent {
   validate(password: string) {
     this.valid = password.length > 0;
     if (this.valid) this.passwordChange.emit(password);
-    this.variant = this.valid == null ? "default" : (this.valid ? "valid" : "invalid");
+    this.variant = this.valid === null ? "default" : (this.valid ? "valid" : "invalid");
   }
 
   changePwVisibility() {
