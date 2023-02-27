@@ -19,37 +19,37 @@ public class Tests
     [Test]
     public async Task TestRooms()
     {
-        await TestMethod(async () => { await _client.GetRooms(); });
+        await TestMethod(async () => await _client.GetRooms() );
     }
 
     [Test]
     public async Task TestClasses()
     {
-        await TestMethod(async () => { await _client.GetClasses(); });
+        await TestMethod(async () => await _client.GetClasses() );
     }
 
     [Test]
     public async Task TestHolidays()
     {
-        await TestMethod(async () => { await _client.GetHolidays(); });
+        await TestMethod(async () => await _client.GetHolidays() );
     }
 
     [Test]
     public async Task TestHomeworks()
     {
-        await TestMethod(async () => { await _client.GetHomeworks(DateTime.Now, DateTime.Now.AddDays(1)); });
+        await TestMethod(async () => await _client.GetHomeworks(DateTime.Now, DateTime.Now.AddDays(1)) );
     }
 
     [Test]
     public async Task TestSubject()
     {
-        await TestMethod(async () => { await _client.GetSubjects(); });
+        await TestMethod(async () => await _client.GetSubjects() );
     }
 
     [Test]
     public async Task TestTimetable()
     {
-        await TestMethod(async () => { await _client.GetTimetable(ElementType.Student, _client.PersonId, DateTime.Now, DateTime.Now.AddDays(1)); });
+        await TestMethod(async () => await _client.GetTimetable(ElementType.Student, _client.PersonId, DateTime.Now, DateTime.Now.AddDays(1)) );
     }
 
     private static async Task TestMethod(Func<Task> function)
