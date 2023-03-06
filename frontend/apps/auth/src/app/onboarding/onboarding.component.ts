@@ -21,14 +21,21 @@ export class OnboardingComponent {
 
 
   proceedEduvidual() {
-    this.onboardingService.setEduvidualToken(this.eduvidualToken);
-    this.step = 3;
-    this.router.navigateByUrl("http://localhost:4201");
+    this.onboardingService.setEduvidualToken(this.eduvidualToken).then(_ => {
+      this.router.navigateByUrl("http://localhost:4201");
+    }).catch(error => {
+      console.error(error);
+      return;
+    });
   }
 
   proceedLogin() {
-    this.onboardingService.login(this.username, this.password);
-    this.step = 2;
+    this.onboardingService.login(this.username, this.password).then(_ => {
+      this.step = 2;
+    }).catch(error => {
+      console.error(error);
+      return;
+    });
   }
 
   toEduvidual() {

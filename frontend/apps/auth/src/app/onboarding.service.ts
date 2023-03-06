@@ -1,9 +1,14 @@
 import { Injectable } from "@angular/core";
+import { CredService } from "./core/cred.service";
+import { MainframeService } from "./mainframe.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class OnboardingService {
+
+  constructor(private mainframe: MainframeService, private credService: CredService) {
+  }
 
   setEduvidualToken(token: string): Promise<string> {
     const promise = new Promise<string>((resolve) => {
@@ -14,18 +19,17 @@ export class OnboardingService {
       });
     });
 
-    window.parent.postMessage({
-      method: "setEduvidualToken",
-      data: {
-        token,
-      }
-      // FIXME: Fix targetOrigin
-    }, "*");
+    window.parent.postMessage({ method: "saveToken", data: { token: token } }, "*");
 
     return promise;
   }
 
-  login(username: string, password: string) {
-    return;
+  async login(username: string, password: string) {
+    const pwEncrypted = await this.credService.encryptPassword(password);
+    this.mainframe.login(username, pwEncrypted, false).then(error => {
+      if (error) {
+        throw new Error(error);
+      }
+    })
   }
 }

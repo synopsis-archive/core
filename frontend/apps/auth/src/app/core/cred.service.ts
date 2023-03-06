@@ -52,8 +52,4 @@ export class CredService {
   ab2str(buf: Iterable<number>) {
     return String.fromCharCode.apply(null, Array.from(new Uint8Array(buf)));
   }
-
-  async saveToken(token: string) {
-      window.parent.postMessage({ method: "saveToken", data: { token: token } }, "*");
-  }
 }

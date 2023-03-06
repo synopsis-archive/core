@@ -40,7 +40,9 @@ export function isAnyIncomingMessage(data: unknown): data is IncomingMessage<key
                 && "username" in data.data
                 && typeof data.data.username === "string"
                 && "password" in data.data
-                && typeof data.data.password === "string";
+                && typeof data.data.password === "string"
+                && "redirect" in data.data
+                && typeof data.data.redirect === "boolean";
         case "logout":
             return !("data" in data);
         case "sendRequest":
