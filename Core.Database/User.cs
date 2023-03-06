@@ -26,7 +26,4 @@ public class User
     public string? MatriculationNumber { get; set; }
 
     public StoredUserTokens? StoredUserTokens { get; set; }
-
-    [ForeignKey("UUID")]
-    public virtual ICollection<UserFavorite> Favorites { get; set; } = null!;
 }
