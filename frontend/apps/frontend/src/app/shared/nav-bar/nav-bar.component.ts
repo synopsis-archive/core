@@ -49,6 +49,6 @@ export class NavBarComponent implements OnInit {
   }
 
   showSettings() {
-    // go to settings screen
+    this.navService.openSettings();
   }
 }
