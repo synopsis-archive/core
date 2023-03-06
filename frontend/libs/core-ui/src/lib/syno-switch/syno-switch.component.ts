@@ -12,7 +12,7 @@ export class SynoSwitchComponent extends SynoBaseComponent implements OnInit {
   _active = false;
 
   styles = {
-    "default": "bg-gray-300 rounded-full flex w-fit p-1 relative gap-2 cursor-pointer",
+    "default": "rounded-full flex w-fit p-1 relative gap-2 cursor-pointer text-synogray-550",
   };
 
   ngOnInit() {

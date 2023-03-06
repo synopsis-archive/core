@@ -9,6 +9,7 @@ import {SynoNavTabComponent} from "./syno-nav-tab/syno-nav-tab.component";
 import {FooterComponent} from "./footer/footer.component";
 import {SynoBtnComponent} from "./syno-btn/syno-btn.component";
 import {SearchComponent} from "./search/search.component";
+import {CoreUiModule} from "core-ui";
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import {SearchComponent} from "./search/search.component";
     FormsModule,
     IconsModule,
     RouterLink,
+    CoreUiModule,
   ],
 })
 export class SharedModule {
