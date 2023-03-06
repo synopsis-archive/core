@@ -22,6 +22,6 @@ import { SearchComponent } from "./search/search.component";
     SearchComponent,
   ],
   exports: [NavBarComponent, TagComponent, FooterComponent, SearchComponent],
-  imports: [CommonModule, FormsModule, IconsModule, RouterLink],
+  imports: [CommonModule, FormsModule, IconsModule, RouterLink, FormsModule],
 })
 export class SharedModule {}
