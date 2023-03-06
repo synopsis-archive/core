@@ -1,12 +1,8 @@
-<li class="w-full mx-1 my-2 shadow-md flex flex-row items-center hover:text-gray-700 hover:bg-gray-50 p-2 focus:ring-4 focus:ring-blue-300 focus:outline-none w-44 h-9 pl-15 bg-gray-300 text-ellipsis text-left text-black rounded-lg whitespace-nowrap"
-    [ngClass]="{'isActive': plugin?.active}">
-  <a (click)="showPlugin()" class="inline-block w-full overflow-hidden font-normal">
-    {{plugin?.name}}</a>
-  <button *ngIf="closable" (click)="closeTabClick()" class="p-0.5">
-    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-      <line x1="18" y1="6" x2="6" y2="18"></line>
-      <line x1="6" y1="6" x2="18" y2="18"></line>
-    </svg>
-  </button>
-</li>
+<app-syno-nav-tab [active]="isActive">
+  <div class="h-full w-full flex items-center relative" (click)="(tabClick)">
+    <div class="ml-2">{{ title }}</div>
+    <div class="absolute right-1 h-full flex items-center" (click)="(xClick)">
+      <i-tabler name="x" class="scale-[80%] cursor-pointer"></i-tabler>
+    </div>
+  </div>
+</app-syno-nav-tab>

@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
-import {ActivePlugin} from "../../classes/activePlugin";
-import {NavBarService} from "../../../core/nav-bar.service";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { ActivePlugin } from "../../classes/activePlugin";
+import { NavBarService } from "../../../core/nav-bar.service";
 
 @Component({
   selector: "app-tab",
@@ -8,26 +8,22 @@ import {NavBarService} from "../../../core/nav-bar.service";
   styleUrls: ["./tab.component.css"],
 })
 export class TabComponent implements OnInit {
-
-  @Input() plugin: ActivePlugin | null = null;
-  // @Input() link: string = "";
-  // @Input() title: string = "";
-  // @Input() isActive: boolean = false;
-  // @Output() closeTab: EventEmitter<string> = new EventEmitter<string>();
-  // @Output() openTab: EventEmitter<string> = new EventEmitter<string>();
+  @Input() title: string = "adfasdf";
+  @Input() isActive: boolean = false;
+  @Output() closeTab: EventEmitter<string> = new EventEmitter<string>();
+  @Output() openTab: EventEmitter<string> = new EventEmitter<string>();
   closable: boolean = true;
 
-  constructor(private navService: NavBarService) {}
+  constructor() {}
   ngOnInit(): void {
-    this.closable = this.plugin?.id !== "home";
+    this.closable = this.title !== "Home";
   }
 
-  closeTabClick() {
-    this.navService.closePlugin(this.plugin?.id);
-    this.navService.activatePlugin("home");
+  tabClick() {
+    this.openTab.emit();
   }
 
-  showPlugin(): void {
-    this.navService.activatePlugin(this.plugin?.id);
+  xClick() {
+    this.closeTab.emit();
   }
 }
