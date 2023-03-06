@@ -1,17 +1,38 @@
+<div class="backdrop-blur h-full w-full absolute z-30 top-0 left-0 px-10" (click)="close()"></div>
+
+<!--<div-->
+<!--  class="h-full w-full absolute bg-white/20 z-30 backdrop-blur-md flex flex-col"-->
+<!--&gt;-->
 <div
-  class="h-full w-full absolute bg-white/20 z-30 backdrop-blur-md flex flex-col"
+  class="h-full container mx-auto left-0 right-0 absolute bg-white/20 z-40 flex flex-col"
 >
-  <div class="w-full h-44 p-16">
+  <div class="w-full h-12 mt-16 mb-10 flex bg-synogray-80 rounded-xl border border-synogray-400 p-2">
+    <i-tabler name="search" class="my-auto h-8 ml-1.5 mr-2"/>
     <input
       [(ngModel)]="searchterm"
       placeholder="Enter your search term here"
-      class="w-full h-full bg-synogray-80 rounded-xl border border-synogray-400 p-2"
+      class="w-full h-full focus-visible:outline-none text-black bg-transparent"
     />
-    <div>{{ searchterm }}</div>
+    <button (click)="close()" class="my-auto text-black mr-1.5 ml-2 flex justify-center">
+      <i-tabler name="x" class="block"/>
+    </button>
   </div>
-  <div class="w-full flex-1 p-16 pt-0">
+  <div class="w-full flex-1 mb-16">
     <div
       class="w-full h-full bg-synogray-80 rounded-xl border border-synogray-400"
     ></div>
   </div>
 </div>
+
+<!--<div class="backdrop-blur h-screen w-full absolute top-0 left-0 px-10" (click)="close()"></div>-->
+
+<!--<div class="container absolute top-0 mx-auto my-20 z-50">-->
+<!--  <div class="flex align-items-center rounded-3xl bg-gray-100 my-2.5 mx-1 h-11 shadow-md">-->
+<!--    <i-tabler name="search" class="my-auto ml-3.5"/>-->
+<!--    <input placeholder="Enter your search term"-->
+<!--           class="w-full focus-visible:outline-none m-2 text-black bg-transparent placeholder:text-black placeholder:opacity-100">-->
+<!--    <button (click)="close()" class="my-auto text-black mr-3.5 flex justify-center">-->
+<!--      <i-tabler name="x" class="block"/>-->
+<!--    </button>-->
+<!--  </div>-->
+<!--</div>-->
