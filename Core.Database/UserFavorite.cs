@@ -8,7 +8,9 @@ public class UserFavorite
     [Key, Column(Order = 0)]
     public Guid Uuid { get; set; }
 
-    [Key, Column(Order = 1)]
-    public string PluginId { get; set; }
+    [ForeignKey("Uuid")]
+    public User User { get; set; } = null!;
 
+    [Key, Column(Order = 1)]
+    public string PluginId { get; set; } = null!;
 }
