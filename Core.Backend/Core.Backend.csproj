@@ -13,6 +13,7 @@
 
     <ItemGroup>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.3" />
     </ItemGroup>
 
     <ItemGroup>
@@ -28,6 +29,8 @@
     <ItemGroup>
       <None Remove="Dtos\" />
       <None Remove="Services\" />
+      <None Remove="Controllers\" />
+      <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
     </ItemGroup>
     <ItemGroup>
       <None Update="keys\dev-public-key.pem">
@@ -38,5 +41,6 @@
     <ItemGroup>
       <Folder Include="Dtos\" />
       <Folder Include="Services\" />
+      <Folder Include="Controllers\" />
     </ItemGroup>
 </Project>

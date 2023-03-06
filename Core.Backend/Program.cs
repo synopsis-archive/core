@@ -1,5 +1,11 @@
 using Core.AuthLib;
 using Core.Backend;
+using Core.Backend.Services;
+using Core.Database;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 Pluginloader.HookAssemblyResolver();
 
@@ -19,6 +25,8 @@ builder.Services.AddSwaggerGen(o =>
     o.AddSwaggerGenHeader();
 });
 
+builder.Services.AddDbContext<CoreContext>(db => db.UseSqlite(builder.Configuration.GetConnectionString("Database")));
+builder.Services.AddScoped<UserFavoritesService>();
 
 builder.AddHeaderAuth();
 
