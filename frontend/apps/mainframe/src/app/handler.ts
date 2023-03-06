@@ -8,7 +8,7 @@ import { sendRequest } from "../handler/sendRequest";
 import { isAnyIncomingMessage } from "../types/handler.guards";
 import {logout} from "../handler/logout";
 
-const handler: HandlerMap = {
+const handler: Partial<HandlerMap> = {
     "getIDToken": {
         handler: getIDTokenHandler,
         isAllowed: context => context.sender === "navigation" || context.sender === "plugin"
@@ -31,8 +31,8 @@ const handler: HandlerMap = {
     },
     "sendRequest": {
         handler: sendRequest,
-        // @todo: fix security issue
-        isAllowed: (context, message) => context.sender === "plugin" && message.data != null
+        // TODO: fix security issue
+        isAllowed: (context, _message) => context.sender === "plugin"
     },
     "logout": {
         handler: logout,
@@ -41,7 +41,7 @@ const handler: HandlerMap = {
 };
 
 export const handleIncomingMessage = <Method extends keyof MessageMap>(message: IncomingMessage<Method>, context: MainframeContext) => {
-    const handlerDefinition = handler[message.method];
+    const handlerDefinition = handler[message.method] as HandlerMap[Method];
 
     if (handlerDefinition.isAllowed(context, message)) {
         console.debug("Handling message", message);

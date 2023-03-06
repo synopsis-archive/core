@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
+import { BehaviorSubject, Subject } from "rxjs";
 import { ActivePlugin } from "../shared/classes/activePlugin";
 import { Router } from "@angular/router";
 
@@ -12,6 +12,8 @@ export class NavBarService {
   private _openPlugins: ActivePlugin[] = [
     new ActivePlugin("home", "Home", true),
   ];
+  showDashboard = new BehaviorSubject<boolean>(true);
+  showSearch = new BehaviorSubject<boolean>(false);
 
   constructor(private router: Router) {}
 

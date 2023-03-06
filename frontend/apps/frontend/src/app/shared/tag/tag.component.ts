@@ -9,17 +9,17 @@ import {tagColors} from "../classes/tagColors";
 export class TagComponent implements OnInit {
 
   @Input() name: string = "";
-  rgbColor: string | undefined;
+  hexColor: string | undefined;
 
   style: string = "";
 
   constructor() {}
 
   ngOnInit(): void {
-    this.rgbColor = tagColors.get(this.name);
+    this.hexColor = tagColors.get(this.name);
 
-    this.style = `background: ${this.rgbColor}40;`;
-    this.style += `color: ${this.rgbColor};`
-    this.style += `border: 0.15em solid ${this.rgbColor};`
+    this.style = `background: ${this.hexColor}40;`;
+    this.style += `color: ${this.hexColor};`
+    this.style += `border: 0.15em solid ${this.hexColor};`
   }
 }

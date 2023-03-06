@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   jwtPayload: IDTokenPayload | undefined;
-  showDashboard: boolean = true;
+  showDashboard!: boolean;
 
   // getNewPlugin = (name: string, image: string) => new Plugin( name, [], null, null, null, null, `../../../assets/images/${image}`);
   //
@@ -59,9 +59,7 @@ export class HomeComponent implements OnInit {
     this.navService1.isListShown.subscribe((x) => {
       this.showDashboard = x;
     });
-  }
-
-  buttonPressed() {
-    console.log("button pressed");
+    // this.showDashboard = this.navBarService.showDashboard.getValue();
+    // this.navBarService.showDashboard.subscribe(x => this.showDashboard = x);
   }
 }
