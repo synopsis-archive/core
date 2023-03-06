@@ -9,10 +9,10 @@ namespace Core.Backend.Secure.Services;
 
 public class CredService
 {
-    private CoreContext _db;
+    private CoreSecureContext _db;
     private RSA _rsa;
 
-    public CredService(CoreContext db, RSA rsa)
+    public CredService(CoreSecureContext db, RSA rsa)
     {
         _db = db;
         _rsa = rsa;

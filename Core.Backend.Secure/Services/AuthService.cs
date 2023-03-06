@@ -9,11 +9,11 @@ namespace Core.Backend.Secure.Services;
 
 public class AuthService
 {
-    private CoreContext _db;
+    private CoreSecureContext _db;
     private ILdapClient _ldap;
     private CredService _credService;
 
-    public AuthService(CoreContext db, ILdapClient ldap, CredService credService)
+    public AuthService(CoreSecureContext db, ILdapClient ldap, CredService credService)
     {
         _db = db;
         _ldap = ldap;

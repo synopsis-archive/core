@@ -13,12 +13,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 if (builder.Environment.IsDevelopment())
 {
-    builder.Services.AddDbContext<CoreContext>(db => db.UseSqlite("data source=core.sqlite3"));
+    builder.Services.AddDbContext<CoreSecureContext>(db => db.UseSqlite("data source=core.sqlite3"));
 }
 else
 {
     var connectionString = builder.Configuration.GetConnectionString("Production");
-    builder.Services.AddDbContext<CoreContext>(db =>
+    builder.Services.AddDbContext<CoreSecureContext>(db =>
         db.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 }
 
@@ -45,7 +45,7 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-    var context = scope.ServiceProvider.GetRequiredService<CoreContext>();
+    var context = scope.ServiceProvider.GetRequiredService<CoreSecureContext>();
     context.Database.EnsureCreated();
 }
 

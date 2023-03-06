@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Core.Secure.Database;
+namespace Core.Database;
 
 public class UserFavorite
 {
@@ -9,6 +9,6 @@ public class UserFavorite
     public Guid Uuid { get; set; }
 
     [Key, Column(Order = 1)]
-    public string PluginId { get; set; }
+    public string PluginId { get; set; } = null!;
 
 }

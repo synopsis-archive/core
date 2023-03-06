@@ -1,5 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Backend", "Core.Backend\Core.Backend.csproj", "{67893BB8-2A88-4095-81BD-D542231D9088}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.WebUntis.Interface", "Core.WebUntis.Interface\Core.WebUntis.Interface.csproj", "{493D65D2-EE9C-4CC5-8AD2-1B231394F88F}"
@@ -29,6 +30,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Backend.Secure", "Core.Backend.Secure\Core.Backend.Secure.csproj", "{24F60C5E-9AF4-4573-B323-1347DDEE84E2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.AuthLib", "Core.AuthLib\Core.AuthLib.csproj", "{BE4A3385-81BB-4571-BCE2-A35838EF0F51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Database", "Core.Database\Core.Database.csproj", "{A834D5AC-301D-48A8-966B-DD643F9DCC68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -84,6 +87,10 @@ Global
 		{BE4A3385-81BB-4571-BCE2-A35838EF0F51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE4A3385-81BB-4571-BCE2-A35838EF0F51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE4A3385-81BB-4571-BCE2-A35838EF0F51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A834D5AC-301D-48A8-966B-DD643F9DCC68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A834D5AC-301D-48A8-966B-DD643F9DCC68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A834D5AC-301D-48A8-966B-DD643F9DCC68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A834D5AC-301D-48A8-966B-DD643F9DCC68}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{493D65D2-EE9C-4CC5-8AD2-1B231394F88F} = {4B2A9A6E-8916-435C-B452-24A779859355}
