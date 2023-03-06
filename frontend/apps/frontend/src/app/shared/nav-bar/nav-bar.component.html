@@ -13,14 +13,14 @@
 
   <div class="flex flex-row items-center gap-2 h-full">
     <syno-icon-button (click)="searchClicked()">
-      <i-tabler name="search" class="navbar-icon-scale text-synogray-550"/>
+      <i-tabler name="search" class="navbar-icon-scale"/>
     </syno-icon-button>
-    <syno-switch (active)="viewGrid = !$event">
+    <syno-switch (stateChanged)="changeView()">
       <i-tabler name="layout-grid" class="navbar-icon-scale"/>
       <i-tabler name="list" class="navbar-icon-scale"/>
     </syno-switch>
     <syno-icon-button (click)="showSettings()">
-      <i-tabler name="settings" class="navbar-icon-scale text-synogray-550"/>
+      <i-tabler name="settings" class="navbar-icon-scale"/>
     </syno-icon-button>
   </div>
 </nav>

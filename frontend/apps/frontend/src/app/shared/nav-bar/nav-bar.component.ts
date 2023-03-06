@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { ActivePlugin } from "../classes/activePlugin";
 import { NavBarService } from "../../core/nav-bar.service";
-import { User } from "../classes/user";
 import { SearchService } from "../../core/search.service";
 
 @Component({

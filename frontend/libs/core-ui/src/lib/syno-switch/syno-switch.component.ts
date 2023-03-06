@@ -8,7 +8,7 @@ import {SynoBaseComponent} from "../syno-base/syno-base.component";
   encapsulation: ViewEncapsulation.None,
 })
 export class SynoSwitchComponent extends SynoBaseComponent implements OnInit {
-  @Output() active: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() stateChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
   _active = false;
 
   styles = {
@@ -22,6 +22,6 @@ export class SynoSwitchComponent extends SynoBaseComponent implements OnInit {
   switchState() {
     if (this.disabled) return;
     this._active = !this._active;
-    this.active.emit(this._active);
+    this.stateChanged.emit(this._active);
   }
 }
