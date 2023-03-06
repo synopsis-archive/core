@@ -41,4 +41,7 @@ export class NavBarService {
   toggleIsListShown(val: boolean) {
     this.isListShown.next(val);
   }
+  openSettings() {
+    this.router.navigate(["/settings"]);
+  }
 }
