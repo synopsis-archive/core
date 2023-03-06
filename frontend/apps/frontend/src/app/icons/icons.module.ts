@@ -14,6 +14,7 @@ import {
   IconLogout,
   IconChevronDown,
   IconChevronUp,
+  IconStar,
 } from "angular-tabler-icons/icons";
 
 const icons = {
@@ -28,6 +29,7 @@ const icons = {
   IconLogout,
   IconChevronDown,
   IconChevronUp,
+  IconStar,
 };
 
 @NgModule({

@@ -20,7 +20,7 @@ export class NavBarService {
   }
 
   openPlugin(plugin: ActivePlugin) {
-    this._openPlugins.push(plugin);
+    if (!this._openPlugins.find(x => x.id === plugin.id)) this._openPlugins.push(plugin);
     this.activatePlugin(plugin.id);
   }
 
@@ -41,6 +41,7 @@ export class NavBarService {
   toggleIsListShown(val: boolean) {
     this.isListShown.next(val);
   }
+
   openSettings() {
     this.router.navigate(["/settings"]);
   }

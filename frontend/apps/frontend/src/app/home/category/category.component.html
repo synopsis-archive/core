@@ -27,6 +27,6 @@
     class="accordion-body overflow-hidden duration-500 transition-all"
     [ngClass]="{ 'accordion-body-displayed': !hidden }"
   >
-    <app-plugin *ngFor="let plugin of plugins" [plugin]="plugin"></app-plugin>
+    <app-grid-plugin *ngFor="let plugin of plugins" [plugin]="plugin"></app-grid-plugin>
   </div>
 </div>

@@ -1,25 +1,49 @@
-<div class="backdrop-blur h-full w-full absolute z-30 top-0 left-0 px-10" (click)="close()"></div>
+<div class="backdrop-blur h-full w-full absolute z-30 top-0 left-0" (click)="close()"></div>
 
 <!--<div-->
 <!--  class="h-full w-full absolute bg-white/20 z-30 backdrop-blur-md flex flex-col"-->
 <!--&gt;-->
 <div
-  class="h-full container mx-auto left-0 right-0 absolute bg-white/20 z-40 flex flex-col"
+  class="container h-full py-16 mx-auto left-0 right-0 absolute z-40 flex flex-col"
 >
-  <div class="w-full h-12 mt-16 mb-10 flex bg-synogray-80 rounded-xl border border-synogray-400 p-2">
-    <i-tabler name="search" class="my-auto h-8 ml-1.5 mr-2"/>
+<!--  <div class="w-full h-12 mt-16 mb-10 flex bg-synogray-80 rounded-25 border border-synogray-400 p-2">-->
+  <div class="w-full min-h-12 flex bg-synogray-80 shadow-md rounded-3xl">
+    <i-tabler name="search" class="my-auto h-8 ml-3.5 mr-2"/>
     <input
       [(ngModel)]="searchterm"
+      (keyup)="search()"
       placeholder="Enter your search term here"
       class="w-full h-full focus-visible:outline-none text-black bg-transparent"
     />
-    <button (click)="close()" class="my-auto text-black mr-1.5 ml-2 flex justify-center">
+    <button (click)="close()" class="my-auto text-black mr-3.5 ml-2 flex justify-center">
       <i-tabler name="x" class="block"/>
     </button>
   </div>
-  <div class="w-full flex-1 mb-16">
+  <div class="w-full flex-1 h-full pt-6 pb-10">
+<!--    <div-->
+<!--      class="w-full h-full bg-synogray-80 rounded-25 border border-synogray-400"-->
+<!--    ></div>-->
     <div
-      class="w-full h-full bg-synogray-80 rounded-xl border border-synogray-400"
-    ></div>
+      class="w-full h-full bg-synogray-80 rounded-2xl shadow-md overflow-hidden"
+    >
+      <div
+        *ngIf="results.length > 0"
+        class="overflow-y-scroll h-fit max-h-full flex flex-wrap gap-5 p-5 items-start"
+      >
+        <div class="w-full mb-2 flex gap-2 items-center">
+          <div class="text-white flex justify-center bg-gray-800 rounded-full items-center h-8 w-8">
+            <i-tabler name="star" class="block"/>
+          </div>
+          <h2 class="text-xl font-bold">Suchergebnisse</h2>
+        </div>
+        <app-search-result *ngFor="let plugin of results" [plugin]="plugin"></app-search-result>
+      </div>
+      <div
+        *ngIf="results.length == 0"
+        class="flex items-center h-full w-full justify-center"
+      >
+        Es wurden keine Plugins gefunden.
+      </div>
+    </div>
   </div>
 </div>
