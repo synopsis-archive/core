@@ -12,7 +12,7 @@ export class NavBarService {
   private _openPlugins: ActivePlugin[] = [
     new ActivePlugin("home", "Home", true),
   ];
-  showDashboard = new BehaviorSubject<boolean>(true);
+  showDashboard = new BehaviorSubject<boolean>(false);
   showSearch = new BehaviorSubject<boolean>(false);
 
   constructor(private router: Router) {}

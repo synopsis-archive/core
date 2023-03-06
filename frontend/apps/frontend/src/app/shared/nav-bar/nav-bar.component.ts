@@ -13,7 +13,7 @@ import { SearchService } from "../../core/search.service";
 export class NavBarComponent implements OnInit {
   tabs: ActivePlugin[] = [];
   public val: string = "";
-  viewGrid: boolean = true;
+  viewGrid: boolean = false;
 
   constructor(
     private navService: NavBarService,
