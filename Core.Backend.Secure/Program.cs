@@ -2,9 +2,9 @@ using System.Security.Cryptography;
 using Core.AuthLib;
 using Core.AuthLib.Services;
 using Core.Backend.Secure.Services;
-using Core.Database;
 using Core.Ldap.Implementation;
 using Core.Ldap.Interface;
+using Core.Secure.Database;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

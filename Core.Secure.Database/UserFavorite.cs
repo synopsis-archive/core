@@ -1,7 +1,7 @@
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Core.Database;
+namespace Core.Secure.Database;
 
 public class UserFavorite
 {

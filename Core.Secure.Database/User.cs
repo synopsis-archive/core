@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Core.Ldap.Interface;
 
-namespace Core.Database;
+namespace Core.Secure.Database;
 
 public class User
 {

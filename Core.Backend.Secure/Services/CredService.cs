@@ -2,7 +2,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Core.Backend.Secure.Dtos;
 using Core.Backend.Secure.exceptions;
-using Core.Database;
+using Core.Secure.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace Core.Backend.Secure.Services;

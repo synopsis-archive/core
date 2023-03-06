@@ -22,7 +22,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Ldap.Implementation", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Plugin.Interface", "Core.Plugin.Interface\Core.Plugin.Interface.csproj", "{765F354B-3BAD-473D-98B5-12735D8D4516}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Database", "Core.Database\Core.Database.csproj", "{60C6D2A9-BD3A-46FE-A46A-3A29C7F16335}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Secure.Database", "Core.Secure.Database\Core.Secure.Database.csproj", "{60C6D2A9-BD3A-46FE-A46A-3A29C7F16335}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.TestPlugin", "Core.TestPlugin\Core.TestPlugin.csproj", "{EA4265F9-14E9-4EF2-BB21-A09C8DA9F806}"
 EndProject

@@ -1,6 +1,6 @@
 using System.Security.Claims;
 using Core.AuthLib;
-using Core.Database;
+using Core.Secure.Database;
 using Core.WebUntis.Implementation;
 using Core.WebUntis.Interface.Types;
 using Student = Core.WebUntis.Interface.Types.Student;

@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace Core.Database;
+namespace Core.Secure.Database;
 
 public class CoreContext : DbContext
 {

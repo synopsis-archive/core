@@ -1,8 +1,8 @@
 using System.Text.RegularExpressions;
 using Core.Backend.Secure.Auth;
 using Core.Backend.Secure.Dtos;
-using Core.Database;
 using Core.Ldap.Interface;
+using Core.Secure.Database;
 using SignInResult = Core.Ldap.Interface.SignInResult;
 
 namespace Core.Backend.Secure.Services;

@@ -1,5 +1,5 @@
 using Core.Backend.Secure.Dtos;
-using Core.Database;
+using Core.Secure.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace Core.Backend.Secure.Services;
