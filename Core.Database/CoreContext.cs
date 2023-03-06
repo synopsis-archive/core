@@ -24,6 +24,7 @@ namespace Core.Database
 
         public CoreContext(DbContextOptions<CoreContext> options) : base(options)
         {
+
         }
     }
 }
