@@ -1,17 +1,16 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-
-import { HomeRoutingModule } from "./home-routing.module";
-import { HomeComponent } from "./home/home.component";
-import { CategoryComponent } from "./category/category.component";
-import { PluginComponent } from "./plugin/plugin.component";
-import { DashboardComponent } from "./dashboard/dashboard.component";
-import { ListViewComponent } from "./list-view/list-view.component";
-import { ListViewItemComponent } from "./list-view-item/list-view-item.component";
-import { CoreUiModule } from "core-ui";
-import { MainframeConnectorModule } from "mainframe-connector";
-import { SharedModule } from "../shared/shared.module";
-import { IconsModule } from "../icons/icons.module";
+import {NgModule} from "@angular/core";
+import {CommonModule} from "@angular/common";
+import {HomeRoutingModule} from "./home-routing.module";
+import {HomeComponent} from "./home/home.component";
+import {CategoryComponent} from "./category/category.component";
+import {PluginComponent} from "./plugin/plugin.component";
+import {DashboardComponent} from "./dashboard/dashboard.component";
+import {ListViewComponent} from "./list-view/list-view.component";
+import {ListViewItemComponent} from "./list-view-item/list-view-item.component";
+import {CoreUiModule} from "core-ui";
+import {MainframeConnectorModule} from "mainframe-connector";
+import {SharedModule} from "../shared/shared.module";
+import {IconsModule} from "../icons/icons.module";
 
 @NgModule({
   declarations: [
@@ -31,4 +30,5 @@ import { IconsModule } from "../icons/icons.module";
     IconsModule,
   ],
 })
-export class HomeModule {}
+export class HomeModule {
+}

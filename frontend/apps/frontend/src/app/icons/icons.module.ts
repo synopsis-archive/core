@@ -1,19 +1,20 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { TablerIconsModule } from "angular-tabler-icons";
+import {NgModule} from "@angular/core";
+import {TablerIconsModule} from "angular-tabler-icons";
 
 import {
-  IconCamera,
-  IconHeart,
   IconBrandGithub,
-  IconX,
-  IconSearch,
-  IconSettings,
+  IconCamera,
+  IconChevronDown,
+  IconChevronUp,
+  IconEyeglass,
+  IconEyeglassOff,
+  IconHeart,
   IconLayoutGrid,
   IconList,
   IconLogout,
-  IconChevronDown,
-  IconChevronUp,
+  IconSearch,
+  IconSettings,
+  IconX,
 } from "angular-tabler-icons/icons";
 
 const icons = {
@@ -28,6 +29,8 @@ const icons = {
   IconLogout,
   IconChevronDown,
   IconChevronUp,
+  IconEyeglass,
+  IconEyeglassOff,
 };
 
 @NgModule({
