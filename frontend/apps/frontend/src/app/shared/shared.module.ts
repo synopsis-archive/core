@@ -7,7 +7,6 @@ import {IconsModule} from "../icons/icons.module";
 import {RouterLink} from "@angular/router";
 import {SynoNavTabComponent} from "./syno-nav-tab/syno-nav-tab.component";
 import {FooterComponent} from "./footer/footer.component";
-import {SynoBtnComponent} from "./syno-btn/syno-btn.component";
 import {SearchComponent} from "./search/search.component";
 import {CoreUiModule} from "core-ui";
 
@@ -17,7 +16,6 @@ import {CoreUiModule} from "core-ui";
     TabComponent,
     SynoNavTabComponent,
     FooterComponent,
-    SynoBtnComponent,
     SearchComponent,
   ],
   exports: [
