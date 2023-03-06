@@ -6,7 +6,7 @@ namespace Core.Database;
 public class UserFavorite
 {
     [Key, Column(Order = 0)]
-    public Guid Uuid { get; set; }
+    public User User { get; set; }
 
     [ForeignKey("Uuid")]
     public User User { get; set; } = null!;
