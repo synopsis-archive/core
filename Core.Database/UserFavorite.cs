@@ -5,10 +5,10 @@ namespace Core.Database;
 
 public class UserFavorite
 {
-    [Key, Column(Order = 0)]
+    [Key]
     public Guid Uuid { get; set; }
 
-    [Key, Column(Order = 1)]
-    public string PluginId { get; set; }
+    [Key]
+    public string PluginId { get; set; } = null!;
 
 }

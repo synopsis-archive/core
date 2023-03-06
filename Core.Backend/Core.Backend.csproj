@@ -23,9 +23,17 @@
     </ItemGroup>
 
     <ItemGroup>
+      <None Remove="Dtos\" />
+      <None Remove="Services\" />
+    </ItemGroup>
+    <ItemGroup>
       <None Update="keys\dev-public-key.pem">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Dtos\" />
+      <Folder Include="Services\" />
+    </ItemGroup>
 </Project>
