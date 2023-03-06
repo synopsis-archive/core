@@ -3672,6 +3672,13 @@ angular-credit-card@^0.1.4:
   dependencies:
     tslib "^2.3.0"
 
+angular-resize-event@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/angular-resize-event/-/angular-resize-event-3.2.0.tgz#06ad2585f441ec81b7c9c62ee2fbb92fc5b3bcb3"
+  integrity sha512-8Cx99afBcbcWAFihThuWwt0hB281eieE+2uPA+lwPAcITvvJwTEfd788m6dMwsfz2EoogrCafyF4+l0PDs8Gjw==
+  dependencies:
+    tslib "^2.3.0"
+
 angular-tabler-icons@^1.119.0:
   version "1.119.0"
   resolved "https://registry.yarnpkg.com/angular-tabler-icons/-/angular-tabler-icons-1.119.0.tgz#ccb987cb4c7ba1e974302b67860b004c43b3e324"
@@ -8443,7 +8450,7 @@ mini-css-extract-plugin@~2.4.7:
   dependencies:
     schema-utils "^4.0.0"
 
-mini-svg-data-uri@^1.2.3:
+mini-svg-data-uri@^1.2.3, mini-svg-data-uri@^1.4.3:
   version "1.4.4"
   resolved "https://registry.yarnpkg.com/mini-svg-data-uri/-/mini-svg-data-uri-1.4.4.tgz#8ab0aabcdf8c29ad5693ca595af19dd2ead09939"
   integrity sha512-r9deDe9p5FJUPZAk3A59wGH7Ii9YrjjWw0jmw/liSbHl2CHiyXj6FcDXDu2K3TjVAXqiJdaw3xxwlZZr9E6nHg==

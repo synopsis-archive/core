@@ -35,4 +35,8 @@ export class NavBarService {
     if (id === "home") this.router.navigate(["/"]);
     else this.router.navigate(["/plugin/" + id]);
   }
+
+  openSettings(){
+    this.router.navigate(["/settings"]);
+  }
 }

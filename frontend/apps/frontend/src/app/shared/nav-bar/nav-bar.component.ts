@@ -1,7 +1,6 @@
 import {ChangeDetectorRef, Component, OnInit} from "@angular/core";
 import {ActivePlugin} from "../classes/activePlugin";
 import {NavBarService} from "../../core/nav-bar.service";
-import {User} from "../classes/user";
 
 @Component({
   selector: "app-nav-bar",
@@ -35,6 +34,6 @@ export class NavBarComponent implements OnInit{
   }
 
   showSettings() {
-    // go to settings screen
+    this.navService.openSettings();
   }
 }
