@@ -8,12 +8,10 @@ import { Router } from "@angular/router";
 })
 export class NavBarService {
   openPlugins = new Subject<ActivePlugin[]>();
-  isListShown = new Subject<boolean>();
+  isListShown = new BehaviorSubject<boolean>(true);
   private _openPlugins: ActivePlugin[] = [
     new ActivePlugin("home", "Home", true),
   ];
-  showDashboard = new BehaviorSubject<boolean>(false);
-  showSearch = new BehaviorSubject<boolean>(false);
 
   constructor(private router: Router) {}
 

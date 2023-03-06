@@ -57,8 +57,9 @@ export class HomeComponent implements OnInit {
 
     this.navService.openPlugin(null);
     this.navService1.isListShown.subscribe((x) => {
-      this.showDashboard = x;
+      this.showDashboard = !x;
     });
+    this.showDashboard = !this.navService1.isListShown.getValue();
     // this.showDashboard = this.navBarService.showDashboard.getValue();
     // this.navBarService.showDashboard.subscribe(x => this.showDashboard = x);
   }
