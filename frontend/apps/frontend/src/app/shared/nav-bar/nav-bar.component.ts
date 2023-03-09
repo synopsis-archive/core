@@ -13,7 +13,7 @@ import { SearchService } from "../../core/search.service";
 export class NavBarComponent implements OnInit {
   tabs: ActivePlugin[] = [];
   public val: string = "";
-  viewGrid: boolean = true;
+  viewGrid: boolean = false;
 
   constructor(
     private navService: NavBarService,
@@ -28,6 +28,8 @@ export class NavBarComponent implements OnInit {
       this.changeDetection.detectChanges();
     });
     this.navService.getPlugins();
+    this.navService.isListShown.subscribe((x) => this.viewGrid = !x);
+    this.viewGrid = !this.navService.isListShown.getValue();
   }
 
   closeTabClick(plugin: ActivePlugin) {
@@ -44,7 +46,6 @@ export class NavBarComponent implements OnInit {
   }
 
   changeView() {
-    this.viewGrid = !this.viewGrid;
     this.navService.toggleIsListShown(this.viewGrid);
   }
 
