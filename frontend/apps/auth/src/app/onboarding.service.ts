@@ -19,7 +19,7 @@ export class OnboardingService {
       });
     });
 
-    window.parent.postMessage({ method: "saveToken", data: { token: token } }, "*");
+    window.parent.postMessage({ method: "saveToken", data: { token } }, "*");
 
     return promise;
   }

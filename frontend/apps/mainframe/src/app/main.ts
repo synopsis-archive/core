@@ -10,7 +10,7 @@ main().catch(e => console.error(e));
 // TODO: implement loading spinner
 export async function main() {
     const config = await loadMainframeConfig();
-    let isAuthed = await checkLoginState(config.secureBackendUrl);
+    const isAuthed = await checkLoginState(config.secureBackendUrl);
 
     if (!isAuthed) {
         createPluginFrame(config.login.url, "login-container");
