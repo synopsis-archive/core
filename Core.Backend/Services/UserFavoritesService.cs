@@ -1,4 +1,3 @@
-using System;
 using Core.Backend.Dtos;
 using Core.Database;
 using Microsoft.EntityFrameworkCore;

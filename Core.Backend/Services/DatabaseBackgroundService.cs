@@ -1,6 +1,4 @@
 using Core.Database;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace CorePlugin.Plugin.Services;
 
