@@ -9,9 +9,11 @@ export async function fetch2(secureBackendUrl: string, requestPath: string, meth
         body
     });
 
-    if (response.status === 200)
-        return await response.json();
-
+    if (response.ok) {
+        const res = await response.text();
+        if (res === "") return null;
+        return JSON.parse(res);
+    }
     const error = await response.json();
 
     if (typeof error === "string")

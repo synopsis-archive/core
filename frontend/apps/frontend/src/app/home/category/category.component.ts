@@ -12,7 +12,7 @@ export class CategoryComponent implements OnInit {
   @Input() title: string | null = "";
   @Input() icon: string | null = "";
 
-  hidden: boolean = true;
+  hidden: boolean = false;
 
   constructor() {}
 
