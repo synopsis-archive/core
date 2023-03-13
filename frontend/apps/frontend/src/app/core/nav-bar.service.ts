@@ -13,7 +13,11 @@ export class NavBarService {
     new ActivePlugin("home", "Home", true),
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => {
+      return false;
+    };
+  }
 
   getPlugins() {
     this.openPlugins.next(this._openPlugins);
