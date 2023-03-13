@@ -1,15 +1,17 @@
-import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
-import {SynoButtonComponent} from "./syno-button/syno-button.component";
-import {SynoEmailComponent} from "./syno-email/syno-email.component";
-import {SynoPasswordComponent} from "./syno-password/syno-password.component";
-import {FormsModule} from "@angular/forms";
-import {SynoUsernameComponent} from "./syno-username/syno-username.component";
-import {TablerIconsModule} from "angular-tabler-icons";
-import {IconEyeglass, IconEyeglassOff} from "angular-tabler-icons/icons";
-import {SynoIconButtonComponent} from "./syno-icon-button/syno-icon-button.component";
-import {SynoSwitchComponent} from "./syno-switch/syno-switch.component";
-import {SynoTagComponent} from "./syno-tag/syno-tag.component";
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { SynoButtonComponent } from "./syno-button/syno-button.component";
+import { SynoEmailComponent } from "./syno-email/syno-email.component";
+import { SynoPasswordComponent } from "./syno-password/syno-password.component";
+import { FormsModule } from "@angular/forms";
+import { SynoUsernameComponent } from "./syno-username/syno-username.component";
+import { TablerIconsModule } from "angular-tabler-icons";
+import { IconEyeglass, IconEyeglassOff } from "angular-tabler-icons/icons";
+import { SynoIconButtonComponent } from "./syno-icon-button/syno-icon-button.component";
+import { SynoSwitchComponent } from "./syno-switch/syno-switch.component";
+import { SynoTagComponent } from "./syno-tag/syno-tag.component";
+import { SynoSelectComponent } from "./syno-select/syno-select.component";
+import { SynoSelectMultipleComponent } from "./syno-select-multiple/syno-select-multiple.component";
 
 @NgModule({
   imports: [
@@ -28,6 +30,8 @@ import {SynoTagComponent} from "./syno-tag/syno-tag.component";
     SynoIconButtonComponent,
     SynoSwitchComponent,
     SynoTagComponent,
+    SynoSelectComponent,
+    SynoSelectMultipleComponent,
   ],
   exports: [
     SynoButtonComponent,
@@ -37,7 +41,8 @@ import {SynoTagComponent} from "./syno-tag/syno-tag.component";
     SynoIconButtonComponent,
     SynoSwitchComponent,
     SynoTagComponent,
+    SynoSelectComponent,
+    SynoSelectMultipleComponent,
   ],
 })
-export class CoreUiModule {
-}
+export class CoreUiModule {}
