@@ -2642,6 +2642,11 @@
   dependencies:
     esquery "^1.0.1"
 
+"@popperjs/core@^2.9.3":
+  version "2.11.6"
+  resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.6.tgz#cee20bd55e68a1720bdab363ecf0c821ded4cd45"
+  integrity sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==
+
 "@rollup/plugin-babel@^5.3.0":
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-babel/-/plugin-babel-5.3.1.tgz#04bc0608f4aa4b2e4b1aebf284344d0f68fda283"
@@ -3664,6 +3669,13 @@ angular-credit-card@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/angular-credit-card/-/angular-credit-card-0.1.4.tgz#bf13cf47c9fbced11782c48c790e59df76ac9dbc"
   integrity sha512-oIP4/1jXTlvAKdnw8wLZe5cTq7wiD1x1+uRC8rOYoKrS9sYidO/kRfEqPS9ZJS/2BMeymKiCndNKx3ONO4gHqg==
+  dependencies:
+    tslib "^2.3.0"
+
+angular-resize-event@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/angular-resize-event/-/angular-resize-event-3.2.0.tgz#06ad2585f441ec81b7c9c62ee2fbb92fc5b3bcb3"
+  integrity sha512-8Cx99afBcbcWAFihThuWwt0hB281eieE+2uPA+lwPAcITvvJwTEfd788m6dMwsfz2EoogrCafyF4+l0PDs8Gjw==
   dependencies:
     tslib "^2.3.0"
 
@@ -6068,6 +6080,14 @@ flatted@^3.1.0, flatted@^3.2.7:
   resolved "https://registry.npmjs.org/flatted/-/flatted-3.2.7.tgz"
   integrity sha512-5nqDSxl8nn5BSNxyR3n4I6eDmbolI6WT+QqR547RwxQapgjQBmtktdP+HTBb/a/zLsbzERTONyUB5pefh5TtjQ==
 
+flowbite@^1.6.3:
+  version "1.6.3"
+  resolved "https://registry.yarnpkg.com/flowbite/-/flowbite-1.6.3.tgz#f98b52ec0a4cbe397e5a456c7dc281ac22090534"
+  integrity sha512-wTtAzZBLrUYqUBoTSNcMAeJrZNAcdx04EDgXWnkQ7gkKoAPFvLaq/H/Zw0JKZLVKFpKxqJ7PlvocfDApSHjhvw==
+  dependencies:
+    "@popperjs/core" "^2.9.3"
+    mini-svg-data-uri "^1.4.3"
+
 follow-redirects@^1.0.0, follow-redirects@^1.14.0, follow-redirects@^1.15.0:
   version "1.15.2"
   resolved "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.15.2.tgz"
@@ -8430,7 +8450,7 @@ mini-css-extract-plugin@~2.4.7:
   dependencies:
     schema-utils "^4.0.0"
 
-mini-svg-data-uri@^1.2.3:
+mini-svg-data-uri@^1.2.3, mini-svg-data-uri@^1.4.3:
   version "1.4.4"
   resolved "https://registry.yarnpkg.com/mini-svg-data-uri/-/mini-svg-data-uri-1.4.4.tgz#8ab0aabcdf8c29ad5693ca595af19dd2ead09939"
   integrity sha512-r9deDe9p5FJUPZAk3A59wGH7Ii9YrjjWw0jmw/liSbHl2CHiyXj6FcDXDu2K3TjVAXqiJdaw3xxwlZZr9E6nHg==

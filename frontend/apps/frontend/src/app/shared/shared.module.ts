@@ -10,6 +10,9 @@ import { SynoNavTabComponent } from "./syno-nav-tab/syno-nav-tab.component";
 import { FooterComponent } from "./footer/footer.component";
 import { SynoBtnComponent } from "./syno-btn/syno-btn.component";
 import { SearchComponent } from "./search/search.component";
+import { SearchResultComponent } from "./search-result/search-result.component";
+import { GridPluginComponent } from "./grid-plugin/grid-plugin.component";
+import {CoreUiModule} from "core-ui";
 
 @NgModule({
   declarations: [
@@ -20,8 +23,17 @@ import { SearchComponent } from "./search/search.component";
     FooterComponent,
     SynoBtnComponent,
     SearchComponent,
+    SearchResultComponent,
+    GridPluginComponent,
   ],
-  exports: [NavBarComponent, TagComponent, FooterComponent, SearchComponent],
-  imports: [CommonModule, FormsModule, IconsModule, RouterLink, FormsModule],
+  exports: [NavBarComponent, TagComponent, FooterComponent, SearchComponent, GridPluginComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IconsModule,
+    RouterLink,
+    FormsModule,
+    CoreUiModule,
+  ],
 })
 export class SharedModule {}

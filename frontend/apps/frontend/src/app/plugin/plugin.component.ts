@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
 import {MainframeNavService} from "mainframe-connector";
+import {NavBarService} from "../core/nav-bar.service";
+import {SearchService} from "../core/search.service";
 
 @Component({
   selector: "app-plugin",
@@ -14,6 +16,6 @@ export class PluginComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.navService.openPlugin(params["id"]);
-    })
+    });
   }
 }
