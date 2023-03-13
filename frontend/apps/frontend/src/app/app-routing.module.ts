@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { PluginComponent } from "./plugin/plugin.component";
 
 const routes: Routes = [
   {
@@ -18,14 +17,20 @@ const routes: Routes = [
       import("./credits/credits.module").then((m) => m.CreditsModule),
   },
   {
+    path: "settings",
+    loadChildren: () =>
+      import("./settings/settings.module").then((m) => m.SettingsModule),
+  },
+  {
     path: "**",
     loadChildren: () =>
       import("./errors/errors.module").then(m => m.ErrorsModule),
   }
+
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: "reload"})],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
