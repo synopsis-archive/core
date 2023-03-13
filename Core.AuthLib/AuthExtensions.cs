@@ -12,12 +12,8 @@ public static class AuthExtensions
 
     public static UserRoles GetRole(this ClaimsPrincipal cp)
     {
-        return cp.Claims.First(x => x.Type == "rolle").Value switch
-        {
-            "lehrer" => UserRoles.Lehrer,
-            "schüler" => UserRoles.Schueler,
-            "staff" => UserRoles.Administrator,
-            _ => throw new Exception("Unknown Role")
-        };
+        if (!Enum.TryParse(cp.Claims.First(x => x.Type == "rolle").Value, true, out UserRoles userRole))
+            throw new Exception("Unknown Role");
+        return userRole;
     }
 }
