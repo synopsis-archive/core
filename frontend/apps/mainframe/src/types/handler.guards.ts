@@ -47,6 +47,8 @@ export function isAnyIncomingMessage(data: unknown): data is IncomingMessage<key
             return "data" in data
                 && typeof data.data === "object"
                 && data.data !== null
+                && "requestId" in data.data
+                && typeof data.data.requestId === "number"
                 && "method" in data.data
                 && typeof data.data.method === "string"
                 && ["GET", "POST", "PUT", "DELETE"].includes(data.data.method)
