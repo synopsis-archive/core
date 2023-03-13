@@ -166,6 +166,7 @@ public class WebUntisClient : IWebUntisClient
                 -8520 => new InvalidTokenException(),
                 -8509 => new InsufficientRightsException(),
                 -8507 => new InvalidDateException(),
+                -8504 => new BadCredentialsException(),
                 _ => new Exception("unknown WebUntis error occured")
             };
         }

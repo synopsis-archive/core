@@ -12,4 +12,5 @@ export class ListViewItemComponent {
   @Input() plugin!: Plugin;
 
   constructor() {}
+
 }

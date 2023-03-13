@@ -1,35 +1,39 @@
 @startuml
-
 actor User
 
-node Frontend
-
-node Backend {
-    component api [
-        API-Controller
-    ]
-
-    component UntisInterface
-    component EduvidualInterface
-    component LDAPInterface
+rectangle Browser {
+   node Mainframe
+   node Plugin
 }
 
 database db [
     Datenbank
 ]
 
-node LDAP
-node Webuntis
-node eduvidual
+node PluginBackend
+database PluginDatabase
+node SecureBackend
+node LDAPInterface
+node WebUntisInterface
+node EduvidualInterface
 
-User --> Frontend
-Frontend --> api
-api --> UntisInterface
-api --> EduvidualInterface
-api --> LDAPInterface
-UntisInterface --> Webuntis
-EduvidualInterface --> eduvidual
-LDAPInterface --> LDAP
-api --> db
 
+rectangle APIs {
+   node LDAP
+   node WebUntis
+   node eduvidual
+}
+
+User--> Mainframe
+Mainframe---> SecureBackend
+Mainframe<--> Plugin
+Plugin --> PluginBackend
+PluginBackend --> PluginDatabase
+SecureBackend--> WebUntisInterface
+WebUntisInterface--> WebUntis
+SecureBackend--> EduvidualInterface
+EduvidualInterface--> eduvidual
+SecureBackend--> LDAPInterface
+LDAPInterface--> LDAP
+SecureBackend--> db
 @enduml

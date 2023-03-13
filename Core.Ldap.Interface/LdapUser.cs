@@ -1,3 +1,5 @@
+using Core.AuthLib;
+
 namespace Core.Ldap.Interface;
 
 public class LdapUser
@@ -27,5 +29,5 @@ public class LdapUser
      * One of three Organization Units the user could be part of
      * e.g Schueler, Administrator, Lehrer
      */
-    public LdapGroup OrganizationUnit { get; set; } = LdapGroup.Schueler;
+    public UserRoles OrganizationUnit { get; set; } = UserRoles.Schueler;
 }

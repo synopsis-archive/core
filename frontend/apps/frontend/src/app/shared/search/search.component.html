@@ -1,0 +1,17 @@
+<div
+  class="h-full w-full absolute bg-white/20 z-30 backdrop-blur-md flex flex-col"
+>
+  <div class="w-full h-44 p-16">
+    <input
+      [(ngModel)]="searchterm"
+      placeholder="Enter your search term here"
+      class="w-full h-full bg-synogray-80 rounded-xl border border-synogray-400 p-2"
+    />
+    <div>{{ searchterm }}</div>
+  </div>
+  <div class="w-full flex-1 p-16 pt-0">
+    <div
+      class="w-full h-full bg-synogray-80 rounded-xl border border-synogray-400"
+    ></div>
+  </div>
+</div>

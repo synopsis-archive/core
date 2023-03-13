@@ -1,0 +1,3 @@
+# Editor configuration, see https://editorconfig.org
+[*]
+indent_size = 4

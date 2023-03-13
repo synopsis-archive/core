@@ -2,6 +2,7 @@ using System.Collections;
 using Core.Ldap.Interface;
 using System.DirectoryServices.Protocols;
 using System.Net;
+using Core.AuthLib;
 using Microsoft.Extensions.Options;
 
 namespace Core.Ldap.Implementation;
@@ -64,11 +65,11 @@ public class LdapClient : ILdapClient
         };
     }
 
-    private static LdapGroup GetOrganizationUnitOfString(string[] organizationUnits)
+    private static UserRoles GetOrganizationUnitOfString(string[] organizationUnits)
     {
         if (organizationUnits.Any(x => x.Contains("Administration")))
-            return LdapGroup.Administrator;
-        return organizationUnits.Any(x => x.Contains("Lehrer")) ? LdapGroup.Lehrer : LdapGroup.Schueler;
+            return UserRoles.Administrator;
+        return organizationUnits.Any(x => x.Contains("Lehrer")) ? UserRoles.Lehrer : UserRoles.Schueler;
     }
 
     private static SearchResultEntryCollection GetDirectoryEntry(DirectoryConnection connection, string username)

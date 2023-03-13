@@ -27,7 +27,11 @@
     </tr>
     </thead>
     <tbody>
-    <tr class="bg-white border-b" app-list-view-item *ngFor="let plugin of _plugins" [plugin]="plugin"></tr>
+    <tr app-list-view-item
+        class="bg-white border-b hover:cursor-pointer"
+        *ngFor="let plugin of _plugins"
+        [plugin]="plugin"
+        (click)="open(plugin)"></tr>
     </tbody>
   </table>
 </div>

@@ -15,3 +15,7 @@
   background-color: #fff;
   opacity: 0.2;
 }
+
+.navbar-icon-scale {
+  transform: scale(0.7);
+}

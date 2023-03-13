@@ -56,7 +56,7 @@ public static class Pluginloader
     private static Assembly? OnAssemblyResolve(object? sender, ResolveEventArgs args)
     {
         var folderPath = Path.GetDirectoryName((args.RequestingAssembly ?? typeof(Pluginloader).Assembly).Location);
-        var assemblyPath = Path.Combine(folderPath, new AssemblyName(args.Name).Name + ".dll");
+        var assemblyPath = Path.Combine(folderPath!, new AssemblyName(args.Name).Name + ".dll");
 
         Debug.WriteLine($"Resolving assembly {args.Name} from {assemblyPath}");
 
