@@ -1,4 +1,4 @@
-namespace Core.Backend.Secure.Dtos;
+namespace Core.Backend.Dtos;
 
 public class UserFavoriteDto
 {

@@ -4,7 +4,7 @@ using Core.Backend.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Core.Backend.Secure.Controllers;
+namespace Core.Backend.Controllers;
 
 [Authorize(Policy = "ID-Token")]
 [ApiController]
