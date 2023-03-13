@@ -1,5 +1,5 @@
 using Core.AuthLib;
-using Core.Backend.Secure.Dtos;
+using Core.Backend.Dtos;
 using Core.Backend.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

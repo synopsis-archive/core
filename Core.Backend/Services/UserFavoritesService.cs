@@ -1,5 +1,5 @@
 using System;
-using Core.Backend.Secure.Dtos;
+using Core.Backend.Dtos;
 using Core.Database;
 using Microsoft.EntityFrameworkCore;
 
