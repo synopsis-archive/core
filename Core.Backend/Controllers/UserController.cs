@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Core.Backend.Secure.Controllers;
 
-[Authorize(Policy = "Auth-Token")]
+[Authorize(Policy = "ID-Token")]
 [ApiController]
 [Route("[controller]/[action]")]
 public class UserController : ControllerBase
@@ -17,22 +17,22 @@ public class UserController : ControllerBase
     public UserController(UserFavoritesService userFavoritesService) => _userFavoritesService = userFavoritesService;
 
     [Authorize]
-    [HttpGet("Favorites")]
-    public async Task<List<UserFavoriteDto>> GetUserFavorites()
+    [HttpGet]
+    public async Task<List<UserFavoriteDto>> Favorites()
     {
         return await _userFavoritesService.GetUserFavoritesFromUser(this.User.GetUUID());
     }
 
     [Authorize]
-    [HttpPost("AddFavorite")]
-    public async Task<UserFavoriteDto> AddUserFavorite(string PluginId)
+    [HttpPost]
+    public async Task<UserFavoriteDto> AddFavorite(string PluginId)
     {
         return await _userFavoritesService.AddUserFavorite(this.User.GetUUID(), PluginId);
     }
 
     [Authorize]
-    [HttpDelete("RemoveFavorite")]
-    public async Task<UserFavoriteDto> RemoveUserFavorite(string PluginId)
+    [HttpDelete]
+    public async Task<UserFavoriteDto> RemoveFavorite(string PluginId)
     {
         return await _userFavoritesService.RemoveUserFavorite(this.User.GetUUID(), PluginId);
     }
