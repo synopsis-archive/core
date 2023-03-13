@@ -40,7 +40,9 @@ export function isAnyIncomingMessage(data: unknown): data is IncomingMessage<key
                 && "username" in data.data
                 && typeof data.data.username === "string"
                 && "password" in data.data
-                && typeof data.data.password === "string";
+                && typeof data.data.password === "string"
+                && "redirect" in data.data
+                && typeof data.data.redirect === "boolean";
         case "logout":
             return !("data" in data);
         case "sendRequest":
@@ -56,6 +58,12 @@ export function isAnyIncomingMessage(data: unknown): data is IncomingMessage<key
                 && typeof data.data.path === "string"
                 && "payload" in data.data
                 && (typeof data.data.payload === "string" || data.data.payload === null);
+        case "saveToken":
+            return "data" in data
+                && typeof data.data === "object"
+                && data.data !== null
+                && "token" in data.data
+                && typeof data.data.token === "string";
         default:
             return false;
     }
