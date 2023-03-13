@@ -24,9 +24,9 @@ export class OnboardingService {
     return promise;
   }
 
-  async login(username: string, password: string) {
+  async login(username: string, password: string, redirect: boolean) {
     const pwEncrypted = await this.credService.encryptPassword(password);
-    this.mainframe.login(username, pwEncrypted, false).then(error => {
+    this.mainframe.login(username, pwEncrypted, redirect).then(error => {
       if (error) {
         throw new Error(error);
       }
