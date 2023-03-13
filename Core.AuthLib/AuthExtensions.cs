@@ -13,7 +13,7 @@ public static class AuthExtensions
     public static UserRoles GetRole(this ClaimsPrincipal cp)
     {
         if (!Enum.TryParse(cp.Claims.First(x => x.Type == "rolle").Value, true, out UserRoles userRole))
-            throw new Exception("Unknown Role");
+            throw new ArgumentException("Unknown Role");
         return userRole;
     }
 }
