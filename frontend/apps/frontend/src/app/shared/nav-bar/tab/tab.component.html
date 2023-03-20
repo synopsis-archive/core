@@ -1,5 +1,8 @@
 <app-syno-nav-tab [active]="isActive">
-  <div class="h-full w-full flex items-center relative" (click)="tabClick()">
+  <div
+    class="h-full w-full flex items-center relative hover:cursor-pointer"
+    (click)="tabClick()"
+  >
     <div class="ml-2">{{ title }}</div>
     <div
       *ngIf="closable"
