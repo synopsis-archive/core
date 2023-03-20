@@ -12,7 +12,8 @@
     "start": "nx run-many --target=serve",
     "start:auth": "nx serve auth",
     "start:frontend": "nx serve frontend",
-    "start:mainframe": "nx serve mainframe"
+    "start:mainframe": "nx serve mainframe",
+    "postinstall": "yarn add --ignore-scripts git://github.com/htl-grieskirchen-core/ngx-core-ui.git"
   },
   "private": true,
   "dependencies": {
@@ -26,11 +27,12 @@
     "@angular/router": "15.1.0",
     "@eisberg-labs/ngx-size-me": "^2.0.2",
     "@fontsource/space-grotesk": "^4.5.10",
-    "angular-resize-event": "^3.2.0",
-    "flowbite": "^1.6.3",
+    "@htl-grieskirchen-core/ngx-core-ui": "git://github.com/htl-grieskirchen-core/ngx-core-ui.git",
     "@nrwl/angular": "15.5.1",
     "angular-credit-card": "^0.1.4",
+    "angular-resize-event": "^3.2.0",
     "core-js": "^3.6.5",
+    "flowbite": "^1.6.3",
     "jsrsasign": "^10.6.1",
     "jsrsasign-util": "^1.0.5",
     "jwt-decode": "^3.1.2",
