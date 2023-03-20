@@ -18,7 +18,7 @@ export abstract class SynoBaseComponent {
 
     this.variant = this.variant.toLowerCase().trim();
     if (this.variant in this.styles) style = this.styles[this.variant];
-    if (this.disabled) style = this.styles["disabled"];
+    if (this.disabled && "disabled" in this.styles) style = this.styles["disabled"];
 
     style += " " + this.includeClasses;
     this.excludeClasses.split(" ").forEach(e => style = style.replace(e, ""));
