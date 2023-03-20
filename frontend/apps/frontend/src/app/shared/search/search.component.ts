@@ -19,8 +19,16 @@ export class SearchComponent implements OnInit {
   private plugins: Plugin[] = [];
 
   search() {
-    this.results = this.plugins.filter((x) =>
-      x.name.toUpperCase().includes(this.searchterm.toUpperCase()));
+    this.searchTitle();
+    this.searchTags();
+  }
+
+  searchTitle() {
+    this.results = this.plugins.filter((x) => x.name.toUpperCase().includes(this.searchterm.toUpperCase()));
+  }
+
+  searchTags() {
+
   }
 
   close() {
