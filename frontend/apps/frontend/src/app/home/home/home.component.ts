@@ -6,9 +6,8 @@ import {
   Plugin,
   PluginListService,
 } from "mainframe-connector";
-import {setTagColors} from "libs/core-ui/src/lib/syno-tag/tagColors";
+import {setTagColors} from "core-ui";
 import {NavBarService} from "../../core/nav-bar.service";
-import {SelectOption} from "../../../../../../libs/core-ui/src/lib/syno-select-multiple/syno-select-multiple.component";
 
 @Component({
   selector: "app-home",
