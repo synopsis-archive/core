@@ -11,12 +11,10 @@ export class MainframeService {
   login(username: string, password: string, redirect: boolean): Promise<void> {
     const promise = new Promise<void>((resolve, reject) => {
       window.addEventListener("message", (event) => {
-        console.log(event);
         if (event.data.method === "success") {
           resolve();
         }
         if (event.data.method === "error") {
-          console.error(event.data.data.message);
           reject(new Error(event.data.data.message));
         }
       });

@@ -35,7 +35,6 @@ export const login: IncomingMessageHandler<"login"> = (message, context) => {
     }).catch(e => {
         if(e instanceof Promise) {
             e.then((error: any) => {
-                console.log(error)
                 if (typeof error === "string")
                     sendErrorMessageToLogin(error);
                 else

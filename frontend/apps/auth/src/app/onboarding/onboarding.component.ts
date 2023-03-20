@@ -31,7 +31,6 @@ export class OnboardingComponent {
     this.onboardingService.login(this.username, this.password, false).then(_ => {
       this.step = 2;
     }).catch(error => {
-      console.error(error);
       this.error = "Anmeldung fehlgeschlagen!";
     });
   }
