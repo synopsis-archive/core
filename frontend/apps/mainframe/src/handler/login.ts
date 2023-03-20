@@ -35,8 +35,9 @@ export const login: IncomingMessageHandler<"login"> = (message, context) => {
     }).catch(e => {
         if(e instanceof Promise) {
             e.then((error: any) => {
-                if (error !== null && typeof error === "object" && "message" in error && typeof error.message === "string")
-                    sendErrorMessageToLogin("Hey Schüler/Lehrer! Deine Anmeldedaten sind falsch!");
+                console.log(error)
+                if (typeof error === "string")
+                    sendErrorMessageToLogin(error);
                 else
                     sendErrorMessageToLogin("Es ist ein unbekannter Fehler aufgetreten!");
             });

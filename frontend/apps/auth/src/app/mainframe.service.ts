@@ -8,11 +8,16 @@ export class MainframeService {
   constructor() {
   }
 
-  login(username: string, password: string, redirect: boolean): Promise<string> {
-    const promise = new Promise<string>((resolve) => {
+  login(username: string, password: string, redirect: boolean): Promise<void> {
+    const promise = new Promise<void>((resolve, reject) => {
       window.addEventListener("message", (event) => {
+        console.log(event);
+        if (event.data.method === "success") {
+          resolve();
+        }
         if (event.data.method === "error") {
-          resolve(event.data.data.message);
+          console.error(event.data.data.message);
+          reject(new Error(event.data.data.message));
         }
       });
     });
