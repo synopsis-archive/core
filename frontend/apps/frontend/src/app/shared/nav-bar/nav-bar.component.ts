@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { ActivePlugin } from "../classes/activePlugin";
 import { NavBarService } from "../../core/nav-bar.service";
-import { User } from "../classes/user";
 import { SearchService } from "../../core/search.service";
 
 @Component({
@@ -14,6 +13,7 @@ export class NavBarComponent implements OnInit {
   tabs: ActivePlugin[] = [];
   public val: string = "";
   viewGrid: boolean = false;
+  settingsShown: boolean = false;
 
   constructor(
     private navService: NavBarService,
@@ -39,6 +39,7 @@ export class NavBarComponent implements OnInit {
   closeTabClick(plugin: ActivePlugin) {
     this.navService.closePlugin(plugin.id);
     this.navService.activatePlugin("home");
+    if (plugin.id === "settings") this.settingsShown = false
   }
 
   showPlugin(plugin: ActivePlugin | undefined): void {
@@ -55,5 +56,6 @@ export class NavBarComponent implements OnInit {
 
   showSettings() {
     this.navService.openSettings();
+    this.settingsShown = true;
   }
 }

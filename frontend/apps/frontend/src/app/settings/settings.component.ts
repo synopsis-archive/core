@@ -39,7 +39,7 @@ export class SettingsComponent implements OnInit, AfterViewInit {
     //I BI TRAURIG
     if (this.isValid()) {
       const pwEncrypted = await this.credService.encryptPassword(this.password!);
-      this.mainframe.login(this.username!, pwEncrypted)
+      this.mainframe.login(this.username!, pwEncrypted, false)
         .then(error => {
           console.log(error)
           this.changeAnswer = error
@@ -49,8 +49,6 @@ export class SettingsComponent implements OnInit, AfterViewInit {
     console.log(`Change is: ${this.changeAnswer}`)
     console.log(`Username: ${this.username}`)
     console.log(`Password: ${this.password}`)
-
-
   }
 
   private isValid(): boolean{

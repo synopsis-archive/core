@@ -39,6 +39,7 @@ export class NavBarService {
     this._openPlugins.forEach((x) => (x.active = x.id === id));
     this.openPlugins.next(this._openPlugins);
     if (id === "home") this.router.navigate(["/"]);
+    else if (id === "settings") this.router.navigate(["/settings"]);
     else this.router.navigate(["/plugin/" + id]);
   }
 
@@ -47,6 +48,7 @@ export class NavBarService {
   }
 
   openSettings() {
-    this.router.navigate(["/settings"]);
+    if (!this._openPlugins.find(x => x.id === "settings")) this._openPlugins.push(new ActivePlugin("settings","Settings",true));
+    this.activatePlugin("settings");
   }
 }

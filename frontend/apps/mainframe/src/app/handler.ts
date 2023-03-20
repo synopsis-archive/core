@@ -46,7 +46,7 @@ const handler: Partial<HandlerMap> = {
     },
     "login": {
         handler: login,
-        isAllowed: context => context.sender === "auth"
+        isAllowed: context => context.sender === "auth" || context.sender === "navigation"
     }
 };
 
