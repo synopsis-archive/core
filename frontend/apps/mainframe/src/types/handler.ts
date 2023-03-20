@@ -7,8 +7,9 @@ export type MessageMap = {
     "container": { x: number; y: number; width: number; height: number };
     "getPublicKey": undefined;
     "sendRequest": { requestId: number, method: "GET" | "POST" | "PUT" | "DELETE", path: string, payload: string | null };
-    "login": { username: string; password: string };
+    "login": { username: string; password: string, redirect: boolean };
     "logout": undefined;
+    "saveToken": { token: string };
 };
 
 export interface IncomingMessage<Method extends keyof MessageMap> {
