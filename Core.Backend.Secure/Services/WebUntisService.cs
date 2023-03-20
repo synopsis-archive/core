@@ -1,6 +1,6 @@
 using System.Security.Claims;
 using Core.AuthLib;
-using Core.Database;
+using Core.Secure.Database;
 using Core.WebUntis.Implementation;
 using Core.WebUntis.Interface.Types;
 using Student = Core.WebUntis.Interface.Types.Student;
@@ -11,9 +11,9 @@ public class WebUntisService
 {
     private readonly IConfiguration _config;
     private readonly CredService _credService;
-    private readonly CoreContext _db;
+    private readonly CoreSecureContext _db;
 
-    public WebUntisService(IConfiguration config, CredService credService, CoreContext db)
+    public WebUntisService(IConfiguration config, CredService credService, CoreSecureContext db)
     {
         _config = config;
         _credService = credService;

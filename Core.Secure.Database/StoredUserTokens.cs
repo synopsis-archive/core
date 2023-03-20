@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Core.Database;
+namespace Core.Secure.Database;
 
 public class StoredUserTokens
 {

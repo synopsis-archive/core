@@ -1,9 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 
-const defaultTheme = require("tailwindcss/defaultTheme");
+var defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
-  content: ["./apps/*/src/**/*.{html,ts}", "./libs/*/src/**/*.{html,ts}", "./node_modules/flowbite/**/*.js"],
+  content: [
+    "./apps/*/src/**/*.{html,ts}",
+    "./libs/*/src/**/*.{html,ts}",
+    "./node_modules/flowbite/**/*.js",
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -30,7 +34,5 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require('flowbite/plugin')
-  ],
+  plugins: [require("flowbite/plugin")],
 };

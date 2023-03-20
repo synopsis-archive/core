@@ -24,23 +24,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   jwtPayload: IDTokenPayload | undefined;
-  showDashboard: boolean = true;
-
-  // getNewPlugin = (name: string, image: string) => new Plugin( name, [], null, null, null, null, `../../../assets/images/${image}`);
-  //
-  // plugins: Plugin[] = [
-  // this.getNewPlugin('BeReal Anfängerkurs', 'nodla.jpeg'),
-  // this.getNewPlugin('Kirtag in Lambrechten', 'wiesn.jpg'),
-  // this.getNewPlugin('Beamer hi mochn', 'heimooo.jpg'),
-  // this.getNewPlugin('Zugbremse reparieren', 'BeReal.jpeg'),
-  // this.getNewPlugin('Roboter-Quartett mit Sperrer', 'loata.jpeg'),
-  // this.getNewPlugin('Schuhkressenbauer', 'schuhkressenbauer.jpg'),
-  // this.getNewPlugin('Minecraft Modpacks', 'simon.jpeg'),
-  // this.getNewPlugin('MIchael?', 'miche2.JPG'),
-  // this.getNewPlugin('Chayacheck', 'groans.JPG'),
-  // this.getNewPlugin('periodischer Chill', 'chille.jpg'),
-  // this.getNewPlugin('ORF interview', 'meeting.jpg')
-  // ];
+  showDashboard!: boolean;
 
   plugins: Plugin[] = [];
 
@@ -57,11 +41,10 @@ export class HomeComponent implements OnInit {
 
     this.navService.openPlugin(null);
     this.navService1.isListShown.subscribe((x) => {
-      this.showDashboard = x;
+      this.showDashboard = !x;
     });
-  }
-
-  buttonPressed() {
-    console.log("button pressed");
+    this.showDashboard = !this.navService1.isListShown.getValue();
+    // this.showDashboard = this.navBarService.showDashboard.getValue();
+    // this.navBarService.showDashboard.subscribe(x => this.showDashboard = x);
   }
 }
