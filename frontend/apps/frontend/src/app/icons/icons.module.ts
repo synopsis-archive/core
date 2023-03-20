@@ -2,19 +2,21 @@ import {NgModule} from "@angular/core";
 import {TablerIconsModule} from "angular-tabler-icons";
 
 import {
-  IconBrandGithub,
   IconCamera,
-  IconChevronDown,
-  IconChevronUp,
-  IconEyeglass,
-  IconEyeglassOff,
   IconHeart,
+  IconBrandGithub,
+  IconX,
+  IconSearch,
+  IconSettings,
   IconLayoutGrid,
   IconList,
   IconLogout,
-  IconSearch,
-  IconSettings,
-  IconX,
+  IconChevronDown,
+  IconChevronUp,
+  IconStar,
+  IconAffiliate,
+  IconEyeglass,
+  IconEyeglassOff,
 } from "angular-tabler-icons/icons";
 
 const icons = {
@@ -29,6 +31,8 @@ const icons = {
   IconLogout,
   IconChevronDown,
   IconChevronUp,
+  IconStar,
+  IconAffiliate,
   IconEyeglass,
   IconEyeglassOff,
 };
@@ -38,4 +42,5 @@ const icons = {
   imports: [TablerIconsModule.pick(icons)],
   exports: [TablerIconsModule],
 })
-export class IconsModule {}
+export class IconsModule {
+}

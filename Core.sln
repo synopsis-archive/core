@@ -1,5 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Backend", "Core.Backend\Core.Backend.csproj", "{67893BB8-2A88-4095-81BD-D542231D9088}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.WebUntis.Interface", "Core.WebUntis.Interface\Core.WebUntis.Interface.csproj", "{493D65D2-EE9C-4CC5-8AD2-1B231394F88F}"
@@ -22,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Ldap.Implementation", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Plugin.Interface", "Core.Plugin.Interface\Core.Plugin.Interface.csproj", "{765F354B-3BAD-473D-98B5-12735D8D4516}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Database", "Core.Database\Core.Database.csproj", "{60C6D2A9-BD3A-46FE-A46A-3A29C7F16335}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Secure.Database", "Core.Secure.Database\Core.Secure.Database.csproj", "{60C6D2A9-BD3A-46FE-A46A-3A29C7F16335}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.TestPlugin", "Core.TestPlugin\Core.TestPlugin.csproj", "{EA4265F9-14E9-4EF2-BB21-A09C8DA9F806}"
 EndProject
@@ -30,6 +31,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Backend.Secure", "Core
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.AuthLib", "Core.AuthLib\Core.AuthLib.csproj", "{BE4A3385-81BB-4571-BCE2-A35838EF0F51}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Database", "Core.Database\Core.Database.csproj", "{A834D5AC-301D-48A8-966B-DD643F9DCC68}"
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.WebUntis.Tests", "Core.WebUntis.Tests\Core.WebUntis.Tests.csproj", "{7B7922CC-10B9-40A5-B529-E80F47B51211}"
 EndProject
 Global
@@ -86,6 +88,10 @@ Global
 		{BE4A3385-81BB-4571-BCE2-A35838EF0F51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE4A3385-81BB-4571-BCE2-A35838EF0F51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE4A3385-81BB-4571-BCE2-A35838EF0F51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A834D5AC-301D-48A8-966B-DD643F9DCC68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A834D5AC-301D-48A8-966B-DD643F9DCC68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A834D5AC-301D-48A8-966B-DD643F9DCC68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A834D5AC-301D-48A8-966B-DD643F9DCC68}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7B7922CC-10B9-40A5-B529-E80F47B51211}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7B7922CC-10B9-40A5-B529-E80F47B51211}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B7922CC-10B9-40A5-B529-E80F47B51211}.Release|Any CPU.ActiveCfg = Release|Any CPU

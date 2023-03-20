@@ -12,7 +12,6 @@ export const getPluginListHandler: IncomingMessageHandler<"getPluginList"> = (_m
             startDate: plugin.info.startDate,
             endDate: plugin.info.endDate,
             image: plugin.info.image,
-            isFavourite: plugin.info.isFavourite
         };
     });
 

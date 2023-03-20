@@ -9,6 +9,8 @@ import {SynoNavTabComponent} from "./syno-nav-tab/syno-nav-tab.component";
 import {FooterComponent} from "./footer/footer.component";
 import {SearchComponent} from "./search/search.component";
 import {CoreUiModule} from "core-ui";
+import {SearchResultComponent} from "./search-result/search-result.component";
+import {GridPluginComponent} from "./grid-plugin/grid-plugin.component";
 
 @NgModule({
   declarations: [
@@ -17,17 +19,21 @@ import {CoreUiModule} from "core-ui";
     SynoNavTabComponent,
     FooterComponent,
     SearchComponent,
+    SearchResultComponent,
+    GridPluginComponent,
   ],
   exports: [
     NavBarComponent,
     FooterComponent,
     SearchComponent,
+    GridPluginComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     IconsModule,
     RouterLink,
+    FormsModule,
     CoreUiModule,
   ],
 })

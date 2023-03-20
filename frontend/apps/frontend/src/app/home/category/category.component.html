@@ -18,15 +18,15 @@
         <img [src]="icon" height="24" width="24" />
         <span>{{ title }}</span>
       </div>
-      <i-tabler *ngIf="!hidden" name="chevron-up"></i-tabler>
-      <i-tabler *ngIf="hidden" name="chevron-down"></i-tabler>
+      <i-tabler *ngIf="hidden" name="chevron-up"></i-tabler>
+      <i-tabler *ngIf="!hidden" name="chevron-down"></i-tabler>
     </button>
   </h2>
   <div
     *ngIf="hidden"
     class="accordion-body overflow-hidden duration-500 transition-all"
-    [ngClass]="{ 'accordion-body-displayed': !hidden }"
+    [ngClass]="{ 'accordion-body-displayed': hidden }"
   >
-    <app-plugin *ngFor="let plugin of plugins" [plugin]="plugin"></app-plugin>
+    <app-grid-plugin *ngFor="let plugin of plugins" [plugin]="plugin"></app-grid-plugin>
   </div>
 </div>

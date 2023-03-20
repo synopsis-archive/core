@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { SearchService } from "./core/search.service";
+import { NavBarService } from "./core/nav-bar.service";
 
 @Component({
   selector: "app-root",
