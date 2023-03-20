@@ -1,0 +1,15 @@
+<div class="w-52 relative">
+  <div (click)="showOptions = !showOptions" [class]="setClass()">
+    <div class="flex justify-between w-full h-full bg-white/80 rounded-[0.42rem] text-black px-3 py-2">
+      <label class="overflow-hidden whitespace-nowrap">{{label}}</label>
+      <i-tabler name="chevron-down" class="scale-75" *ngIf="!showOptions"/>
+      <i-tabler name="chevron-up" class="scale-75" *ngIf="showOptions"/>
+    </div>
+  </div>
+  <div *ngIf="showOptions" class="absolute w-full bg-white z-50 transition-all px-2">
+    <option *ngFor="let i of items" (click)="updateSelection(i.title)">
+      <input type="checkbox" [checked]="i.checked">
+      {{i.title}}
+    </option>
+  </div>
+</div>

@@ -2,22 +2,7 @@
   class="border-[1.4px] border-synogray-100 bg-white/50 backdrop-blur-lg rounded-2xl pl-8 py-8 flex flex-col relative overflow-hidden h-full w-full"
 >
   <h1 class="text-4xl font-bold mb-5">Home</h1>
-  <!-- <button
-    type="button"
-    (click)="navService.openPlugin('polls')"
-    class="bg-red-700"
-  >
-    Navigate to polls
-  </button>
-  <button
-    type="button"
-    (click)="navService.openPlugin('quote-of-today')"
-    class="bg-red-700"
-  >
-    Navigate to quote-of-today
-  </button> -->
 
-  <!--<mainframe-plugin-placeholder style="width: 500px; height: 500px; display: block"></mainframe-plugin-placeholder>-->
   <app-dashboard class="flex-1 min-h-0" *ngIf="showDashboard" [plugins]="plugins"></app-dashboard>
   <app-list-view class="flex-1 min-h-0" *ngIf="!showDashboard" [plugins]="plugins"></app-list-view>
 </div>
