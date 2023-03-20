@@ -1,4 +1,5 @@
-<div class="plugin-box shadow-lg cursor-pointer" [style]="background" (click)="open()">
+<div class="plugin-box shadow-lg cursor-pointer flex-col justify-between" [style]="background" (click)="open()">
+  <i-tabler name="star" class="ml-auto" [ngClass]="isFavorite ? 'fill-yellow-400 text-yellow-400' : 'text-gray-500 hover:text-yellow-400'"/>
   <p class="name-box">
     {{name}}
   </p>

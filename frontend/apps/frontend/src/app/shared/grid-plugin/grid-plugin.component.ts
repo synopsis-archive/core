@@ -12,6 +12,7 @@ export class GridPluginComponent {
   background: string = "";
   name: string = "";
   id: string = null!;
+  isFavorite: boolean = false;
 
   @Input() set plugin(plugin: Plugin) {
     this.background = `background-image: linear-gradient(#00000000,#000000aa), url(${plugin.image})`;
