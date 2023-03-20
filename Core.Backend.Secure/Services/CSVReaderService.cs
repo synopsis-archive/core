@@ -1,4 +1,4 @@
-using Core.Database;
+using Core.Secure.Database;
 
 namespace Core.Backend.Secure.Services;
 
@@ -22,7 +22,7 @@ public class CsvReaderService : BackgroundService
     protected override Task ExecuteAsync(CancellationToken stoppingToken)
     {
         using var scope = _serviceProvider.CreateScope();
-        var db = scope.ServiceProvider.GetRequiredService<CoreContext>();
+        var db = scope.ServiceProvider.GetRequiredService<CoreSecureContext>();
         db.Database.EnsureCreated();
 
         var csvSection = _conf.GetSection("CSV");
@@ -38,7 +38,7 @@ public class CsvReaderService : BackgroundService
         return Task.Run(() => { }, stoppingToken);
     }
 
-    private void RepopulateStudents(CoreContext db, string csvPath, string studentsPath)
+    private void RepopulateStudents(CoreSecureContext db, string csvPath, string studentsPath)
     {
         var path = Path.Combine(csvPath, studentsPath);
 
@@ -71,7 +71,7 @@ public class CsvReaderService : BackgroundService
         db.SaveChanges();
     }
 
-    private void RepopulateTeachers(CoreContext db, string csvPath, string teachersPath)
+    private void RepopulateTeachers(CoreSecureContext db, string csvPath, string teachersPath)
     {
         var path = Path.Combine(csvPath, teachersPath);
 

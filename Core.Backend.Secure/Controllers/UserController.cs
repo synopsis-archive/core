@@ -4,7 +4,7 @@ using Core.Backend.Secure.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Core.Backend.Secure.Controllers;
+namespace Core.Backend.Controllers;
 
 [Authorize(Policy = "Auth-Token")]
 [ApiController]
@@ -16,7 +16,7 @@ public class UserController : ControllerBase
 
     public UserController(UserService usr) => _userService = usr;
 
+    [Authorize]
     [HttpPost]
     public UserDTO GetUserInfo(string? uuid) => _userService.GetUserInfo(uuid ?? User.GetUUID().ToString());
-
 }
