@@ -27,7 +27,7 @@ const handler: Partial<HandlerMap> = {
     },
     "getPublicKey": {
         handler: getPublicKeyHandler,
-        isAllowed: context => context.sender === "auth"
+        isAllowed: context => context.sender === "auth" || context.sender === "navigation"
     },
     "sendRequest": {
         handler: sendRequest,

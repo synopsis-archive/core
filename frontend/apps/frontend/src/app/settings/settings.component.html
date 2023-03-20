@@ -32,9 +32,12 @@
         <div attr.aria-labelledby="accordion-{{credential}}-heading" class="hidden" id="accordion-{{credential}}-body">
           <div class="p-5 font-light border-b border-t-0 border-gray-200">
             <div class="flex flex-col items-center justify-center v-screen mb-0 p-5 border border-gray-200">
-              <syno-email class="mb-0"></syno-email> <!-- todo change mb in component to 0-->
-              <syno-password></syno-password>
-              <syno-button>Save</syno-button>
+              <syno-username [(username)]="username" class="mb-0"></syno-username> <!-- todo change mb in component to 0-->
+              <syno-password (changed)="password = $event"></syno-password>
+              <syno-button (click)="click()">Save</syno-button>
+              <div *ngIf="changeAnswer.length>0" class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                <span class="font-medium">{{changeAnswer}}</span>
+              </div>
             </div>
           </div>
         </div>

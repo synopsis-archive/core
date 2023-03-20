@@ -1,6 +1,8 @@
 import {AfterViewInit, Component, OnInit} from "@angular/core";
 import type {AccordionInterface, AccordionItem, AccordionOptions} from "flowbite";
 import {Accordion} from "flowbite";
+import {MainframeService} from "../../../../auth/src/app/mainframe.service";
+import {CredService} from "../../../../auth/src/app/core/cred.service";
 
 @Component({
   selector: "app-settings",
@@ -15,18 +17,44 @@ export class SettingsComponent implements OnInit, AfterViewInit {
   accordion: AccordionInterface = null!
 
   checked: boolean = true
-  credentials: string[] = ["WebUntis", "Eduvidual"];
-  selectedItem: AccordionItem | null = null;
-  constructor() {
+  credentials: string[] = ["WebUntis", "Eduvidual"]
+  selectedItem: AccordionItem | null = null
+  //emailValid: boolean | null = false
+  username: string = ""
+  password?: string
+  changeAnswer: string = ""
 
+  constructor(private credService: CredService,
+              private mainframe: MainframeService) {
   }
 
   ngOnInit(): void {
     this.accordionItems = []
   }
 
-  click() {
+  async click() {
+    console.log("click") //FUNKTIONIERT NED SO WIRKLE :(
+    //Login wiad aufgruafn oba es wird nixe gschickt?
+    //Siehe: ExecuteLogin -> wiad nixe do (bei Loginscreen oba scho)
+    //I BI TRAURIG
+    if (this.isValid()) {
+      const pwEncrypted = await this.credService.encryptPassword(this.password!);
+      this.mainframe.login(this.username!, pwEncrypted)
+        .then(error => {
+          console.log(error)
+          this.changeAnswer = error
+        })
+    }
+    if(this.changeAnswer.length == 0) this.changeAnswer = "!Error! Leider konnten wir Sie nicht anmelden. Versuchen Sie es bitte erneut!"
+    console.log(`Change is: ${this.changeAnswer}`)
+    console.log(`Username: ${this.username}`)
+    console.log(`Password: ${this.password}`)
 
+
+  }
+
+  private isValid(): boolean{
+    return  this.username != undefined && this.username?.length > 0 && this.password != undefined && this.password?.length > 0
   }
 
   ngAfterViewInit(): void {
