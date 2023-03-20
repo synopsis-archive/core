@@ -5,13 +5,15 @@ import { SizeMeDim } from "@eisberg-labs/ngx-size-me";
 @Component({
   selector: "mainframe-plugin-placeholder",
   templateUrl: "./plugin-placeholder.component.html",
-  styleUrls: ["./plugin-placeholder.component.css"]
+  styleUrls: ["./plugin-placeholder.component.css"],
 })
 export class PluginPlaceholderComponent implements OnInit, OnDestroy {
   intervalId: number | null = null;
 
-  constructor(private mainframeNavService: MainframeNavService, private elementRef: ElementRef) {
-  }
+  constructor(
+    private mainframeNavService: MainframeNavService,
+    private elementRef: ElementRef
+  ) {}
 
   handleResize(event: SizeMeDim) {
     this.mainframeNavService.resizePlugin(
@@ -25,7 +27,12 @@ export class PluginPlaceholderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.intervalId = window.setInterval(() => {
       const rect = this.elementRef.nativeElement.getBoundingClientRect();
-      this.mainframeNavService.resizePlugin(rect.left, rect.top, rect.width, rect.height);
+      this.mainframeNavService.resizePlugin(
+        rect.left,
+        rect.top,
+        rect.width,
+        rect.height
+      );
     }, 100);
   }
 

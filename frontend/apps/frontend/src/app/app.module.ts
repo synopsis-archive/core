@@ -9,19 +9,18 @@ import { AppRoutingModule } from "./app-routing.module";
 import { SettingsModule } from "./settings/settings.module";
 
 @NgModule({
-    declarations: [AppComponent],
-    providers: [],
-    bootstrap: [AppComponent],
-    imports: [
-        BrowserModule,
-        MainframeConnectorModule,
-        SharedModule,
-        HomeModule,
-        AppRoutingModule,
-        SharedModule,
-        SettingsModule,
-    ],
-    exports: [
-    ]
+  declarations: [AppComponent],
+  providers: [],
+  bootstrap: [AppComponent],
+  imports: [
+    BrowserModule,
+    MainframeConnectorModule,
+    SharedModule,
+    HomeModule,
+    AppRoutingModule,
+    SharedModule,
+    SettingsModule,
+  ],
+  exports: [],
 })
 export class AppModule {}
