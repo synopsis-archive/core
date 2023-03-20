@@ -1,7 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {SearchService} from "../../core/search.service";
 import {Plugin, PluginListService} from "mainframe-connector";
-import {setTagColors} from "../classes/tagColors";
 
 @Component({
   selector: "app-search",

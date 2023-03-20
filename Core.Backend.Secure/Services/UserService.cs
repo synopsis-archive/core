@@ -1,13 +1,13 @@
 using Core.Backend.Secure.Dtos;
-using Core.Database;
+using Core.Secure.Database;
 
 namespace Core.Backend.Secure.Services;
 
 public class UserService
 {
-    private CoreContext _db;
+    private CoreSecureContext _db;
 
-    public UserService(CoreContext db)
+    public UserService(CoreSecureContext db)
     {
         _db = db;
     }
@@ -26,4 +26,5 @@ public class UserService
             MatriculationNumber = usr.MatriculationNumber
         };
     }
+
 }

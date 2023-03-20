@@ -1,5 +1,9 @@
 using Core.AuthLib;
 using Core.Backend;
+using Core.Backend.Services;
+using Core.Database;
+using CorePlugin.Plugin.Services;
+using Microsoft.EntityFrameworkCore;
 
 Pluginloader.HookAssemblyResolver();
 
@@ -8,7 +12,6 @@ Pluginloader.LoadPlugins("plugins");
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -19,6 +22,9 @@ builder.Services.AddSwaggerGen(o =>
     o.AddSwaggerGenHeader();
 });
 
+builder.Services.AddDbContext<CoreContext>(db => db.UseSqlite(builder.Configuration.GetConnectionString("DatabaseConnection")));
+builder.Services.AddScoped<UserFavoritesService>();
+builder.Services.AddHostedService<DatabaseBackgroundService>();
 
 builder.AddHeaderAuth();
 
@@ -38,5 +44,4 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
 app.InjectAppToPlugin().Run();

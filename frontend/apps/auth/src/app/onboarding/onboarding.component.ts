@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import { Router } from "@angular/router";
+import {Router} from "@angular/router";
 import {OnboardingService} from "../onboarding.service";
 
 @Component({
@@ -12,23 +12,30 @@ export class OnboardingComponent {
   step = 1;
   username = "";
   password = "";
+  error: null | string = null;
 
   constructor(
     private onboardingService: OnboardingService,
-    private router: Router
   ) {
   }
 
+  // TODO: add error handling
 
   proceedEduvidual() {
-    this.onboardingService.setEduvidualToken(this.eduvidualToken);
-    this.step = 3;
-    this.router.navigateByUrl("http://localhost:4201");
+    this.onboardingService.setEduvidualToken(this.eduvidualToken).then(_ => {
+    }).catch(_ => {
+      this.error = "Token konnte nicht gespeichert werden!";
+      return;
+    });
   }
 
   proceedLogin() {
-    this.onboardingService.login(this.username, this.password);
-    this.step = 2;
+    this.onboardingService.login(this.username, this.password, false).then(_ => {
+      this.step = 2;
+    }).catch(_ => {
+      this.error = "Anmeldung fehlgeschlagen!";
+      return;
+    });
   }
 
   toEduvidual() {

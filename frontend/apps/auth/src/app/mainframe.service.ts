@@ -8,7 +8,7 @@ export class MainframeService {
   constructor() {
   }
 
-  login(username: string, password: string): Promise<string> {
+  login(username: string, password: string, redirect: boolean): Promise<string> {
     const promise = new Promise<string>((resolve) => {
       window.addEventListener("message", (event) => {
         if (event.data.method === "error") {
@@ -21,7 +21,8 @@ export class MainframeService {
       method: "login",
       data: {
         username,
-        password
+        password,
+        redirect
       }
       // FIXME: Fix targetOrigin
     }, "*");
