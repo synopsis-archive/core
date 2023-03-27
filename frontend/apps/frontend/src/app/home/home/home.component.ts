@@ -8,6 +8,7 @@ import {
 } from "mainframe-connector";
 import {setTagColors} from "core-ui";
 import {NavBarService} from "../../core/nav-bar.service";
+import {UserService} from "../../core/user.service";
 
 @Component({
   selector: "app-home",
@@ -19,9 +20,9 @@ export class HomeComponent implements OnInit {
     private service: MainframeIdTokenService,
     private pluginService: PluginListService,
     public navService: MainframeNavService,
-    public navService1: NavBarService
-  ) {
-  }
+    public navBarService: NavBarService,
+    public userService: UserService
+  ) {}
 
   jwtPayload: IDTokenPayload | undefined;
   showDashboard!: boolean;
@@ -29,10 +30,16 @@ export class HomeComponent implements OnInit {
   plugins: Plugin[] = [];
 
   ngOnInit(): void {
-    this.pluginService.getPluginList().then((plugins: Plugin[]) => {
+    this.userService.favorites.subscribe(x =>
+      x.forEach(fav => {
+        this.plugins.find(p => p.id === fav.pluginID)!.isFavourite = true;
+      }));
+
+    this.pluginService.getPluginList().then(async (plugins: Plugin[]) => {
       this.plugins = plugins.sort((a, b) => a.name.localeCompare(b.name));
       const tags = [...new Set(this.plugins.flatMap((x) => x.tags))];
       setTagColors(tags);
+      await this.userService.getFavorites();
     });
 
     this.service.getJwt().then((jwt) => {
@@ -40,9 +47,9 @@ export class HomeComponent implements OnInit {
     });
 
     this.navService.openPlugin(null);
-    this.navService1.isListShown.subscribe((x) => {
+    this.navBarService.isListShown.subscribe((x) => {
       this.showDashboard = !x;
     });
-    this.showDashboard = !this.navService1.isListShown.getValue();
+    this.showDashboard = !this.navBarService.isListShown.getValue();
   }
 }

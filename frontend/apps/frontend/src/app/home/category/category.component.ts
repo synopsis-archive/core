@@ -10,7 +10,7 @@ export class CategoryComponent implements OnInit {
 
   @Input() plugins: Plugin[] = [];
   @Input() title: string | null = "";
-  @Input() icon: string | null = "";
+  @Input() icon: string = "";
 
   hidden: boolean = false;
 

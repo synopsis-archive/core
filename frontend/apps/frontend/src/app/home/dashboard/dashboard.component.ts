@@ -15,20 +15,19 @@ export class DashboardComponent implements OnInit {
   }
 
   categories: Category[] = [];
-  getNewCategory = (name: string, icon: string) => new Category( name, `../../../assets/icons/${icon}`);
 
   ngOnInit(): void {
     this.categories = [
-      this.getNewCategory("Favoriten", "star.svg"),
-      this.getNewCategory("Meine", "user-search.svg"),
-      this.getNewCategory("Bald fällig", "hourglass-low.svg"),
-      this.getNewCategory("Alle", "border-all.svg")];
+      new Category("Favoriten", "star"),
+      new Category("Meine", "user-search"),
+      new Category("Bald fällig", "hourglass-low"),
+      new Category("Alle", "border-all")];
   }
 }
 
 export class Category {
   constructor(
     public name: string | null,
-    public icon: string | null) {
+    public icon: string) {
   }
 }

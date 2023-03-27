@@ -14,6 +14,9 @@ import {
   IconChevronDown,
   IconChevronUp,
   IconStar,
+  IconUserSearch,
+  IconHourglassLow,
+  IconBorderAll,
   IconAffiliate,
   IconEyeglass,
   IconEyeglassOff,
@@ -33,12 +36,14 @@ const icons = {
   IconChevronUp,
   IconStar,
   IconAffiliate,
+  IconUserSearch,
+  IconHourglassLow,
+  IconBorderAll,
   IconEyeglass,
   IconEyeglassOff,
 };
 
 @NgModule({
-  declarations: [],
   imports: [TablerIconsModule.pick(icons)],
   exports: [TablerIconsModule],
 })

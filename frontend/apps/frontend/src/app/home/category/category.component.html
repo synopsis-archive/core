@@ -2,7 +2,7 @@
   id="accordion-flush"
   class="pb-5"
   data-accordion="collapse"
-  data-active-classes="bg-white dark:bg-gray-900 dark:text-white"
+  data-active-classes="dark:text-white"
   data-inactive-classes="dark:text-gray-400"
 >
   <h2 id="accordion-flush-heading-1">
@@ -15,7 +15,7 @@
       aria-controls="accordion-flush-body-1"
     >
       <div class="flex gap-2">
-        <img [src]="icon" height="24" width="24" />
+        <i-tabler [name]="icon" height="24" width="24" />
         <span>{{ title }}</span>
       </div>
       <i-tabler *ngIf="hidden" name="chevron-up"></i-tabler>
