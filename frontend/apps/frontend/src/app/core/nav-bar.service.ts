@@ -9,6 +9,7 @@ import { Router } from "@angular/router";
 export class NavBarService {
   openPlugins = new Subject<ActivePlugin[]>();
   isListShown = new BehaviorSubject<boolean>(false);
+  areSettingsShown = new BehaviorSubject<boolean>(false);
   private _openPlugins: ActivePlugin[] = [
     new ActivePlugin("home", "Home", true),
   ];
@@ -45,6 +46,10 @@ export class NavBarService {
 
   toggleIsListShown(val: boolean) {
     this.isListShown.next(val);
+  }
+
+  toggleAreSettingsShown() {
+    this.areSettingsShown.next(!this.areSettingsShown.getValue());
   }
 
   openSettings() {

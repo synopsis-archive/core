@@ -46,9 +46,6 @@ export class SettingsComponent implements OnInit, AfterViewInit {
         })
     }
     if(this.changeAnswer.length == 0) this.changeAnswer = "!Error! Leider konnten wir Sie nicht anmelden. Versuchen Sie es bitte erneut!"
-    console.log(`Change is: ${this.changeAnswer}`)
-    console.log(`Username: ${this.username}`)
-    console.log(`Password: ${this.password}`)
   }
 
   private isValid(): boolean{

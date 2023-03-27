@@ -31,13 +31,14 @@ export class NavBarComponent implements OnInit {
     });
     this.navService.getPlugins();
     this.navService.isListShown.subscribe((x) => this.viewList = x);
+    this.navService.areSettingsShown.subscribe((x) => this.settingsShown = x);
     this.showPlugin(this.tabs.find(tab => tab.active));
   }
 
   closeTabClick(plugin: ActivePlugin) {
     this.navService.closePlugin(plugin.id);
     this.navService.activatePlugin("home");
-    if (plugin.id === "settings") this.settingsShown = false
+    if (plugin.id === "settings") this.navService.toggleAreSettingsShown()
   }
 
   showPlugin(plugin: ActivePlugin | undefined): void {
@@ -54,6 +55,6 @@ export class NavBarComponent implements OnInit {
 
   showSettings() {
     this.navService.openSettings();
-    this.settingsShown = true;
+    this.navService.toggleAreSettingsShown()
   }
 }
