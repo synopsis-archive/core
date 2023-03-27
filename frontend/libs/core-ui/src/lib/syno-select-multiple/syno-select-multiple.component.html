@@ -6,7 +6,7 @@
       <i-tabler name="chevron-up" class="scale-75 my-auto ml-3.5 mr-2" *ngIf="showOptions"/>
     </div>
   </div>
-  <div *ngIf="showOptions" class="absolute w-full z-50 transition-all px-2 mt-1 shadow-md rounded-3xl bg-synogray-80 p-2">
+  <div *ngIf="showOptions" class="absolute w-full z-50 transition-all mt-1 shadow-md rounded-3xl bg-synogray-80 p-2">
     <option *ngFor="let i of items" (click)="updateSelection(i.title)" class="ml-3.5 mr-2 mt-1">
       <input type="checkbox" class="mr-2" [checked]="i.checked">
       {{i.title}}

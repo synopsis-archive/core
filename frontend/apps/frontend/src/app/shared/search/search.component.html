@@ -13,9 +13,9 @@
     <div class="grow">
       <syno-select-multiple
         [items]="selectOptions"
-        [excludeClasses]="'bg-gradient-to-r from-synoblue to-synogreen'"
-        [includeClasses]="'shadow-md rounded-3xl focus-visible:outline-none text-black bg-synogray-80 h-full'"
-        [title]="'Search for tags'"
+        excludeClasses="bg-gradient-to-r from-synoblue to-synogreen"
+        includeClasses="shadow-md rounded-3xl focus-visible:outline-none text-black bg-synogray-80 h-full"
+        title="Search for tags"
         (selectionChanged)="search()"></syno-select-multiple>
     </div>
     <div class=" min-h-12 grid bg-synogray-80 shadow-md rounded-3xl">

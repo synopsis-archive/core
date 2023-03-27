@@ -43,7 +43,6 @@ export class SearchComponent implements OnInit {
     let selected: string[] = this.selectOptions.filter(x => x.checked).map(x => x.title);
     if (selected.length === 0 && this.searchterm === "") this.results = this.plugins;
     else if (selected.length !== 0) this.results = this.results.filter(x => selected.every(t => x.tags.includes(t)));
-    else return;
   }
 
   close() {
