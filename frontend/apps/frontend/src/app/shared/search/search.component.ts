@@ -2,6 +2,8 @@ import {Component, OnInit} from "@angular/core";
 import {SearchService} from "../../core/search.service";
 import {Plugin, PluginListService} from "mainframe-connector";
 import {SelectOption} from "../../../../../../libs/core-ui/src/lib/syno-select-multiple/syno-select-multiple.component";
+import {setTagColors} from "core-ui";
+import {UserService} from "../../core/user.service";
 
 @Component({
   selector: "app-search",
@@ -10,7 +12,8 @@ import {SelectOption} from "../../../../../../libs/core-ui/src/lib/syno-select-m
 })
 export class SearchComponent implements OnInit {
   constructor(private searchService: SearchService,
-              private pluginService: PluginListService,) {
+              private pluginService: PluginListService,
+              private userService: UserService,) {
   }
 
   public searchterm: string = "";
@@ -21,11 +24,19 @@ export class SearchComponent implements OnInit {
   public selectOptions: SelectOption[] = [];
 
   ngOnInit(): void {
-    this.pluginService.getPluginList().then((plugins: Plugin[]) => {
+    this.pluginService.getPluginList().then(async (plugins: Plugin[]) => {
       this.plugins = plugins.sort((a, b) => a.name.localeCompare(b.name));
       this.tags = [...new Set(this.plugins.flatMap((x) => x.tags))];
-      this.tags.forEach(x => this.selectOptions.push({title: x,  checked: false}));
-      this.results = this.plugins;
+      this.tags.forEach(x => this.selectOptions.push({title: x, checked: false}));
+
+      await this.userService.getFavorites();
+    });
+
+    this.userService.favorites.subscribe(x => {
+        x.forEach(fav => {
+          this.plugins.find(p => p.id === fav.pluginID)!.isFavourite = true;
+        });
+        this.results = this.plugins;
     });
   }
 

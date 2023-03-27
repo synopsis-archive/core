@@ -35,10 +35,9 @@ export class GridPluginComponent {
     });
   }
 
-  changeFavorite() {
+  async changeFavorite() {
     this.isFavorite = !this.isFavorite;
-    if (this.isFavorite) this.userService.addFavorite(this.id);
-    else this.userService.deleteFavorite(this.id);
-    this.userService.getFavorites();
+    if (this.isFavorite) await this.userService.addFavorite(this.id);
+    else await this.userService.deleteFavorite(this.id);
   }
 }

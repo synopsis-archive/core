@@ -28,19 +28,25 @@ export class HomeComponent implements OnInit {
   showDashboard!: boolean;
 
   plugins: Plugin[] = [];
+  private _plugins: Plugin[] = [];
 
   ngOnInit(): void {
-    this.userService.favorites.subscribe(x =>
+    this.userService.favorites.subscribe(x => {
+      this._plugins.forEach(plugin => plugin.isFavourite = false);
       x.forEach(fav => {
-        this.plugins.find(p => p.id === fav.pluginID)!.isFavourite = true;
-      }));
+        this._plugins.find(p => p.id === fav.pluginID)!.isFavourite = true;
+      });
+      this.plugins = this._plugins;
+    });
+
 
     this.pluginService.getPluginList().then(async (plugins: Plugin[]) => {
-      this.plugins = plugins.sort((a, b) => a.name.localeCompare(b.name));
-      const tags = [...new Set(this.plugins.flatMap((x) => x.tags))];
+      this._plugins = plugins.sort((a, b) => a.name.localeCompare(b.name));
+      const tags = [...new Set(this._plugins.flatMap((x) => x.tags))];
       setTagColors(tags);
+
       await this.userService.getFavorites();
-    });
+    })
 
     this.service.getJwt().then((jwt) => {
       this.jwtPayload = this.service.decodeJwt(jwt);
