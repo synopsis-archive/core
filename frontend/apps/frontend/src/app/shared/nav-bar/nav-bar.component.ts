@@ -38,7 +38,7 @@ export class NavBarComponent implements OnInit {
   closeTabClick(plugin: ActivePlugin) {
     this.navService.closePlugin(plugin.id);
     this.navService.activatePlugin("home");
-    if (plugin.id === "settings") this.navService.toggleAreSettingsShown()
+    if (plugin.id === "settings") this.navService.toggleAreSettingsShown();
   }
 
   showPlugin(plugin: ActivePlugin | undefined): void {
@@ -55,6 +55,6 @@ export class NavBarComponent implements OnInit {
 
   showSettings() {
     this.navService.openSettings();
-    this.navService.toggleAreSettingsShown()
+    this.navService.toggleAreSettingsShown();
   }
 }
