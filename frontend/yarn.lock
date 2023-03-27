@@ -3679,10 +3679,10 @@ angular-resize-event@^3.2.0:
   dependencies:
     tslib "^2.3.0"
 
-angular-tabler-icons@^1.119.0:
-  version "1.119.0"
-  resolved "https://registry.yarnpkg.com/angular-tabler-icons/-/angular-tabler-icons-1.119.0.tgz#ccb987cb4c7ba1e974302b67860b004c43b3e324"
-  integrity sha512-fz7Ckn6LmdxZXWKuwleG28B0srPxWOukOvvF18FHN7s/ArCtoQWE1Gs5CF/dE1yy1N/V7zsLVxGc7fmGhuqdmw==
+angular-tabler-icons@^2.11.1:
+  version "2.11.1"
+  resolved "https://registry.yarnpkg.com/angular-tabler-icons/-/angular-tabler-icons-2.11.1.tgz#53cb1a019626c7f21c23e6c8665fc589fc0db1fd"
+  integrity sha512-Z8N3PM2aihPSILFfPkjW4InXKdQVAwVhkkXB6rfCmylEsrqVax+LBkIOkiPc/V6lhd6knwcT4nxNdvVo6Ty8JA==
   dependencies:
     tslib "^2.0.0"
 
