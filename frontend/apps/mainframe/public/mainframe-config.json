@@ -6,16 +6,11 @@
             "info": {
                 "name": "Polls",
                 "description": "Plugin Polls",
-                "teachers": [
-                    "Teacher1",
-                    "Teacher2"
-                ],
-                "tags": [
-                    "dua moi wos"
-                ],
+                "teachers": ["Teacher1", "Teacher2"],
+                "tags": ["dua moi wos"],
                 "startDate": "1662789600",
                 "endDate": "1663221600",
-                "image": "example.com/image.png"
+                "image": "https://gemeindebund.at/website2020/wp-content/uploads/2020/07/umfrage-fragebogen_br_cirquedesprit-fotolia-com-3.jpg"
             }
         },
         "quote-of-today": {
@@ -24,16 +19,11 @@
             "info": {
                 "name": "Quote of Today",
                 "description": "Quote of Today on Login Screen",
-                "teachers": [
-                    "Teacher1",
-                    "Teacher2"
-                ],
-                "tags": [
-                    "quotes"
-                ],
+                "teachers": ["Teacher1", "Teacher2"],
+                "tags": ["quotes"],
                 "startDate": "1662789600",
                 "endDate": "1663221600",
-                "image": "example.com/image.png"
+                "image": "https://parade.com/.image/ar_4:3%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTkwNTc2MDE0NzkwNTY3ODA0/stay-positive-quotes.jpg"
             }
         }
     },
