@@ -8,9 +8,9 @@ import {RouterLink} from "@angular/router";
 import {SynoNavTabComponent} from "./syno-nav-tab/syno-nav-tab.component";
 import {FooterComponent} from "./footer/footer.component";
 import {SearchComponent} from "./search/search.component";
-import {CoreUiModule} from "core-ui";
 import {SearchResultComponent} from "./search-result/search-result.component";
 import {GridPluginComponent} from "./grid-plugin/grid-plugin.component";
+import {CoreUiLibModule} from "@htl-grieskirchen-core/ngx-core-ui/projects/core-ui-lib/src/lib/core-ui-lib.module";
 
 @NgModule({
   declarations: [
@@ -34,7 +34,7 @@ import {GridPluginComponent} from "./grid-plugin/grid-plugin.component";
     IconsModule,
     RouterLink,
     FormsModule,
-    CoreUiModule,
+    CoreUiLibModule,
   ],
 })
 export class SharedModule {

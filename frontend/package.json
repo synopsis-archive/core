@@ -12,8 +12,7 @@
     "start": "nx run-many --target=serve",
     "start:auth": "nx serve auth",
     "start:frontend": "nx serve frontend",
-    "start:mainframe": "nx serve mainframe",
-    "postinstall": "yarn add --ignore-scripts git://github.com/htl-grieskirchen-core/ngx-core-ui.git"
+    "start:mainframe": "nx serve mainframe"
   },
   "private": true,
   "dependencies": {
