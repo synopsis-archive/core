@@ -25,6 +25,19 @@
                 "endDate": "1663221600",
                 "image": "https://i.pinimg.com/originals/60/f5/af/60f5af4c78f46001941b0de8f984d94c.jpg"
             }
+        },
+        "webuntis-planner": {
+            "url": "http://localhost:52863",
+            "repoUrl": "https://github.com/htl-grieskirchen-core/plugin-webuntis-planner",
+            "info": {
+                "name": "Webuntis Planner",
+                "description": "WebUntis Planner",
+                "teachers": ["Teacher1", "Teacher2"],
+                "tags": ["calendar"],
+                "startDate": "1662789600",
+                "endDate": "1663221600",
+                "image": "https://pyxis.nymag.com/v1/imgs/a70/8bd/ca5c024edf9b7c781a305efe8db1fcd475-simplified-planner.2x.rsquare.w600.jpg"
+            }
         }
     },
     "login": {
