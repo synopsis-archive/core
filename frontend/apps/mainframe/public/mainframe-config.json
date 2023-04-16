@@ -7,10 +7,10 @@
                 "name": "Umfragen",
                 "description": "Plugin Polls",
                 "teachers": ["Teacher1", "Teacher2"],
-                "tags": ["nadler!"],
+                "tags": ["dua moi wos"],
                 "startDate": "1662789600",
                 "endDate": "1663221600",
-                "image": "https://media.bazaarvoice.com/shutterstock_1491304799-1030x541.jpg"
+                "image": "https://gemeindebund.at/website2020/wp-content/uploads/2020/07/umfrage-fragebogen_br_cirquedesprit-fotolia-com-3.jpg"
             }
         },
         "quote-of-today": {
@@ -23,20 +23,7 @@
                 "tags": ["quotes"],
                 "startDate": "1662789600",
                 "endDate": "1663221600",
-                "image": "https://i.pinimg.com/originals/60/f5/af/60f5af4c78f46001941b0de8f984d94c.jpg"
-            }
-        },
-        "webuntis-planner": {
-            "url": "http://localhost:52863",
-            "repoUrl": "https://github.com/htl-grieskirchen-core/plugin-webuntis-planner",
-            "info": {
-                "name": "Webuntis Planner",
-                "description": "WebUntis Planner",
-                "teachers": ["Teacher1", "Teacher2"],
-                "tags": ["calendar"],
-                "startDate": "1662789600",
-                "endDate": "1663221600",
-                "image": "https://pyxis.nymag.com/v1/imgs/a70/8bd/ca5c024edf9b7c781a305efe8db1fcd475-simplified-planner.2x.rsquare.w600.jpg"
+                "image": "https://parade.com/.image/ar_4:3%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTkwNTc2MDE0NzkwNTY3ODA0/stay-positive-quotes.jpg"
             }
         }
     },
