@@ -1,11 +1,11 @@
 const gitprocess = require("child_process");
 const webpack = require("webpack");
 
-const commitDate = gitprocess
-  .execSync('git log -1 --date=format:"%Y/%m/%d %T" --format="%ad"')
+const commitDate = process.env["COMMITDATE"] ?? gitprocess
+  .execSync('git log -1 --date=format:"%d.%m.%Y %T" --format="%ad"')
   .toString();
 
-const commitHash = gitprocess
+const commitHash = process.env["COMMITHASH"] ?? gitprocess
   .execSync('git log -1 --pretty=format:"%H"')
   .toString();
 

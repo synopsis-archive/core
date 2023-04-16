@@ -27,7 +27,7 @@
     "@eisberg-labs/ngx-size-me": "^2.0.2",
     "@fontsource/space-grotesk": "^4.5.10",
     "@nrwl/angular": "15.5.1",
-    "@nrwl/webpack": "^15.9.2",
+    "@nrwl/webpack": "15.5.1",
     "angular-credit-card": "^0.1.4",
     "angular-resize-event": "^3.2.0",
     "angular-tabler-icons": "^2.11.1",

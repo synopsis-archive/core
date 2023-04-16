@@ -8,6 +8,9 @@ import {MainframeIdTokenService} from "mainframe-connector";
 })
 export class FooterComponent {
 
+  hash: string = COMMITHASH;
+  date: string = COMMITDATE;
+
   constructor(
     private service: MainframeIdTokenService,
   ) {
