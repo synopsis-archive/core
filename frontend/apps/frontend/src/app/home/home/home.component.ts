@@ -31,12 +31,12 @@ export class HomeComponent implements OnInit {
   // private _plugins: Plugin[] = [];
 
   ngOnInit(): void {
-    this.pluginService.getPluginList().then(async (plugins: Plugin[]) => {
+    this.pluginService.getPluginList().then((plugins: Plugin[]) => {
       this.plugins = plugins.sort((a, b) => a.name.localeCompare(b.name));
       const tags = [...new Set(this.plugins.flatMap((x) => x.tags))];
       setTagColors(tags);
 
-      await this.userService.getFavorites();
+      this.userService.getFavorites();
     })
 
     this.service.getJwt().then((jwt) => {

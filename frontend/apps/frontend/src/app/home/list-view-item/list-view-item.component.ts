@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, Input} from "@angular/core";
 import {Plugin} from "mainframe-connector";
 import {UserService} from "../../core/user.service";
 

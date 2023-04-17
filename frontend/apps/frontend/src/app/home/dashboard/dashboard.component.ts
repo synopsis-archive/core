@@ -24,13 +24,18 @@ export class DashboardComponent implements OnInit {
     this.userService.favorites.subscribe((x:UserFavorite[]) => {
       const ids = x.map(plugin => plugin.pluginID);
       this.plugins.forEach(plugin => plugin.isFavourite = ids.includes(plugin.id));
-
-      this.categories = [
-        new Category("Favoriten", "star", this.plugins.filter(x => x.isFavourite)),
-        new Category("Meine", "user-search", this.plugins),
-        new Category("Bald fällig", "hourglass-low", this.plugins),
-        new Category("Alle", "border-all", this.plugins)];
+      this.setCategories();
     });
+
+    this.setCategories();
+  }
+
+  private setCategories() {
+    this.categories = [
+      new Category("Favoriten", "star", this.plugins.filter(x => x.isFavourite)),
+      new Category("Meine", "user-search", this.plugins),
+      new Category("Bald fällig", "hourglass-low", this.plugins),
+      new Category("Alle", "border-all", this.plugins)];
   }
 }
 

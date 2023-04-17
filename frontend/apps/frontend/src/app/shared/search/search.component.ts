@@ -24,12 +24,12 @@ export class SearchComponent implements OnInit {
   public selectOptions: SelectOption[] = [];
 
   ngOnInit(): void {
-    this.pluginService.getPluginList().then(async (plugins: Plugin[]) => {
+    this.pluginService.getPluginList().then((plugins: Plugin[]) => {
       this.plugins = plugins.sort((a, b) => a.name.localeCompare(b.name));
       this.tags = [...new Set(this.plugins.flatMap((x) => x.tags))];
       this.tags.forEach(x => this.selectOptions.push({title: x, checked: false}));
 
-      await this.userService.getFavorites();
+      this.userService.getFavorites();
     });
 
     this.userService.favorites.subscribe(x => {
