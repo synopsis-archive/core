@@ -1,12 +1,13 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from "@angular/core";
 import {Plugin} from "mainframe-connector";
+import {UserService} from "../../core/user.service";
 
 @Component({
   selector: "app-category",
   templateUrl: "./category.component.html",
   styleUrls: ["./category.component.css"],
 })
-export class CategoryComponent implements OnInit {
+export class CategoryComponent implements OnInit, OnChanges {
 
   @Input() plugins: Plugin[] = [];
   @Input() title: string | null = "";
@@ -18,5 +19,9 @@ export class CategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.hidden = true;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes)
   }
 }

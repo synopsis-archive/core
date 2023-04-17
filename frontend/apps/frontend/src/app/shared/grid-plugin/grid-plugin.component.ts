@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from "@angular/core";
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from "@angular/core";
 import {Plugin} from "mainframe-connector";
 import {NavBarService} from "../../core/nav-bar.service";
 import {SearchService} from "../../core/search.service";
@@ -9,7 +9,7 @@ import {UserService} from "../../core/user.service";
   templateUrl: "./grid-plugin.component.html",
   styleUrls: ["./grid-plugin.component.css"],
 })
-export class GridPluginComponent {
+export class GridPluginComponent implements OnInit{
   background: string = "";
   name: string = "";
   id: string = null!;
@@ -39,5 +39,12 @@ export class GridPluginComponent {
     this.isFavorite = !this.isFavorite;
     if (this.isFavorite) await this.userService.addFavorite(this.id);
     else await this.userService.deleteFavorite(this.id);
+  }
+
+  ngOnInit(): void {
+
+    this.userService.favorites.subscribe(x => {
+      this.isFavorite = x.map(x => x.pluginID).includes(this.id);
+    });
   }
 }
