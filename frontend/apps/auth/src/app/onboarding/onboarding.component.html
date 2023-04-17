@@ -3,8 +3,9 @@
     <div class="h-40"></div>
     <div class="my-auto w-80">
       <h1 class="text-3xl font-bold">First things first.</h1>
-      <p class="mb-10">Please enter your eduvidual token</p>
-      <form>
+      <p >Please enter your eduvidual token</p>
+      <h2 *ngIf="error !== null" class="text-red-500 font-bold mb-4 mt-3">{{error}}</h2>
+      <form class="mt-5">
         <div *ngIf="step === 1">
           <syno-username [(username)]="username"></syno-username>
           <syno-password (passwordChange)="passwordChanged($event)"></syno-password>
