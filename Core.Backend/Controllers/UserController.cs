@@ -25,7 +25,7 @@ public class UserController : ControllerBase
 
     [Authorize]
     [HttpPost]
-    public async Task<UserFavoriteDto> AddFavorite(string PluginId)
+    public async Task<UserFavoriteDto> AddFavorite([FromQuery] string PluginId)
     {
         return await _userFavoritesService.AddUserFavorite(this.User.GetUUID(), PluginId);
     }

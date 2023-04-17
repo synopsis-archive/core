@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from "@angular/core";
 import {Plugin} from "mainframe-connector";
+import {UserService} from "../../core/user.service";
 
 @Component({
   selector: "app-category",
@@ -10,7 +11,7 @@ export class CategoryComponent implements OnInit {
 
   @Input() plugins: Plugin[] = [];
   @Input() title: string | null = "";
-  @Input() icon: string | null = "";
+  @Input() icon: string = "";
 
   hidden: boolean = false;
 
