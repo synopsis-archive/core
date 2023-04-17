@@ -7,7 +7,7 @@ import {UserService} from "../../core/user.service";
   templateUrl: "./category.component.html",
   styleUrls: ["./category.component.css"],
 })
-export class CategoryComponent implements OnInit, OnChanges {
+export class CategoryComponent implements OnInit {
 
   @Input() plugins: Plugin[] = [];
   @Input() title: string | null = "";
@@ -19,9 +19,5 @@ export class CategoryComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.hidden = true;
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes)
   }
 }

@@ -3,6 +3,7 @@ import {Plugin} from "mainframe-connector";
 import {NavBarService} from "../../core/nav-bar.service";
 import {SearchService} from "../../core/search.service";
 import {UserService} from "../../core/user.service";
+import {UserFavorite} from "../classes/userFavorite";
 
 @Component({
   selector: "app-grid-plugin",
@@ -43,7 +44,7 @@ export class GridPluginComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.userService.favorites.subscribe(x => {
+    this.userService.favorites.subscribe((x:UserFavorite[]) => {
       this.isFavorite = x.map(x => x.pluginID).includes(this.id);
     });
   }
