@@ -26,9 +26,9 @@ export class LoginComponent {
 
     const pwEncrypted = await this.credService.encryptPassword(this.password);
 
-    this.mainframe.login(this.username, pwEncrypted, true).then(error => {
+    this.mainframe.login(this.username, pwEncrypted, true).catch(error => {
       this.loading = false;
-      this.error = error;
+      this.error = error.message;
     })
   }
 }

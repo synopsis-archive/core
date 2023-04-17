@@ -1,4 +1,5 @@
 import {Component} from "@angular/core";
+import {Router} from "@angular/router";
 import {OnboardingService} from "../onboarding.service";
 
 @Component({
@@ -18,7 +19,10 @@ export class OnboardingComponent {
   ) {
   }
 
+  // TODO: add error handling
+
   proceedEduvidual() {
+    this.error = null;
     this.onboardingService.setEduvidualToken(this.eduvidualToken).then(_ => {
     }).catch(_ => {
       this.error = "Token konnte nicht gespeichert werden!";
@@ -27,8 +31,9 @@ export class OnboardingComponent {
   }
 
   proceedLogin() {
+    this.error = null;
     this.onboardingService.login(this.username, this.password, false).then(_ => {
-      this.step = 2;
+      this.toEduvidual();
     }).catch(error => {
       this.error = error.message;
     });

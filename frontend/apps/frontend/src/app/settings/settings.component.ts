@@ -1,6 +1,8 @@
 import {AfterViewInit, Component, OnInit} from "@angular/core";
 import type {AccordionInterface, AccordionItem, AccordionOptions} from "flowbite";
 import {Accordion} from "flowbite";
+import {MainframeService} from "../../../../auth/src/app/mainframe.service";
+import {CredService} from "../../../../auth/src/app/core/cred.service";
 
 @Component({
   selector: "app-settings",
@@ -10,23 +12,39 @@ import {Accordion} from "flowbite";
 
 export class SettingsComponent implements OnInit, AfterViewInit {
 
-  accordionItems: AccordionItem[] = null!
-  options: AccordionOptions = null!
-  accordion: AccordionInterface = null!
+  accordionItems: AccordionItem[] = null!;
+  options: AccordionOptions = null!;
+  accordion: AccordionInterface = null!;
 
-  checked: boolean = true
+  checked: boolean = true;
   credentials: string[] = ["WebUntis", "Eduvidual"];
   selectedItem: AccordionItem | null = null;
-  constructor() {
+  username: string = "";
+  password?: string;
+  changeAnswer: string = "";
 
+  constructor(private credService: CredService,
+              private mainframe: MainframeService) {
   }
 
   ngOnInit(): void {
-    this.accordionItems = []
+    this.accordionItems = [];
   }
 
-  click() {
+  async click() {
+    if (this.isValid()) {
+      const pwEncrypted = await this.credService.encryptPassword(this.password!);
+      this.mainframe.login(this.username!, pwEncrypted, false)
+        .catch(error => {
+          console.log(error);
+          this.changeAnswer = error;
+        })
+    }
+    if(this.changeAnswer.length == 0) this.changeAnswer = "!Error! Leider konnten wir Sie nicht anmelden. Versuchen Sie es bitte erneut!";
+  }
 
+  private isValid(): boolean{
+    return  this.username != undefined && this.username?.length > 0 && this.password != undefined && this.password?.length > 0;
   }
 
   ngAfterViewInit(): void {
@@ -37,7 +55,7 @@ export class SettingsComponent implements OnInit, AfterViewInit {
         triggerEl: document.querySelector(`#accordion-${credential}-heading`)!,
         targetEl: document.querySelector(`#accordion-${credential}-body`)!,
         active: false
-      },)
+      })
     }
     this.options = {
       alwaysOpen: false,
