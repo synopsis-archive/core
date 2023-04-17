@@ -19,8 +19,6 @@ export class OnboardingComponent {
   ) {
   }
 
-  // TODO: add error handling
-
   proceedEduvidual() {
     this.onboardingService.setEduvidualToken(this.eduvidualToken).then(_ => {
       this.error = null;
