@@ -35,10 +35,11 @@ export class SettingsComponent implements AfterViewInit {
     if (this.isValid()) {
       switch (credentials) {
         case "Eduvidual":
-          await this.onboarding.setEduvidualToken(this.token).catch(_ => {
+          await this.onboarding.setEduvidualToken(this.token).then(_ => {
+          }).catch(_ => {
             this.changeAnswer = "Token konnte nicht gespeichert werden!";
             return;
-          })
+          });
           break;
         default:
           break;
