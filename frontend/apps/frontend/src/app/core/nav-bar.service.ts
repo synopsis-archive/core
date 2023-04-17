@@ -8,7 +8,8 @@ import { Router } from "@angular/router";
 })
 export class NavBarService {
   openPlugins = new Subject<ActivePlugin[]>();
-  isListShown = new BehaviorSubject<boolean>(true);
+  isListShown = new BehaviorSubject<boolean>(false);
+  areSettingsShown = new BehaviorSubject<boolean>(false);
   private _openPlugins: ActivePlugin[] = [
     new ActivePlugin("home", "Home", true),
   ];
@@ -39,6 +40,7 @@ export class NavBarService {
     this._openPlugins.forEach((x) => (x.active = x.id === id));
     this.openPlugins.next(this._openPlugins);
     if (id === "home") this.router.navigate(["/"]);
+    else if (id === "settings") this.router.navigate(["/settings"]);
     else this.router.navigate(["/plugin/" + id]);
   }
 
@@ -46,7 +48,12 @@ export class NavBarService {
     this.isListShown.next(val);
   }
 
+  toggleAreSettingsShown() {
+    this.areSettingsShown.next(!this.areSettingsShown.getValue());
+  }
+
   openSettings() {
-    this.router.navigate(["/settings"]);
+    if (!this._openPlugins.find(x => x.id === "settings")) this._openPlugins.push(new ActivePlugin("settings","Settings",true));
+    this.activatePlugin("settings");
   }
 }

@@ -19,10 +19,9 @@ export class OnboardingComponent {
   ) {
   }
 
-  // TODO: add error handling
-
   proceedEduvidual() {
     this.onboardingService.setEduvidualToken(this.eduvidualToken).then(_ => {
+      this.error = null;
     }).catch(_ => {
       this.error = "Token konnte nicht gespeichert werden!";
       return;
@@ -31,10 +30,10 @@ export class OnboardingComponent {
 
   proceedLogin() {
     this.onboardingService.login(this.username, this.password, false).then(_ => {
-      this.step = 2;
-    }).catch(_ => {
-      this.error = "Anmeldung fehlgeschlagen!";
-      return;
+      this.toEduvidual();
+      this.error = null;
+    }).catch(error => {
+      this.error = error.message;
     });
   }
 

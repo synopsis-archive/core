@@ -3,7 +3,7 @@ WORKDIR /source
 
 COPY Core.Backend.Secure/*.csproj ./Core.Backend.Secure/
 COPY Core.AuthLib/*.csproj ./Core.AuthLib/
-COPY Core.Database/*.csproj ./Core.Database/
+COPY Core.Secure.Database/*.csproj ./Core.Secure.Database/
 COPY Core.Ldap.Implementation/*.csproj ./Core.Ldap.Implementation/
 COPY Core.Ldap.Interface/*.csproj ./Core.Ldap.Interface/
 COPY Core.Moodle.Implementation/*.csproj ./Core.Moodle.Implementation/
@@ -15,7 +15,7 @@ RUN dotnet restore Core.Backend.Secure
 
 COPY Core.Backend.Secure/. ./Core.Backend.Secure/
 COPY Core.AuthLib/. ./Core.AuthLib/
-COPY Core.Database/. ./Core.Database/
+COPY Core.Secure.Database/. ./Core.Secure.Database/
 COPY Core.Ldap.Implementation/. ./Core.Ldap.Implementation/
 COPY Core.Ldap.Interface/. ./Core.Ldap.Interface/
 COPY Core.Moodle.Implementation/. ./Core.Moodle.Implementation/

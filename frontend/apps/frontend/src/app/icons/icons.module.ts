@@ -1,6 +1,5 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { TablerIconsModule } from "angular-tabler-icons";
+import {NgModule} from "@angular/core";
+import {TablerIconsModule} from "angular-tabler-icons";
 
 import {
   IconCamera,
@@ -16,6 +15,8 @@ import {
   IconChevronUp,
   IconStar,
   IconAffiliate,
+  IconEyeglass,
+  IconEyeglassOff,
 } from "angular-tabler-icons/icons";
 
 const icons = {
@@ -32,6 +33,8 @@ const icons = {
   IconChevronUp,
   IconStar,
   IconAffiliate,
+  IconEyeglass,
+  IconEyeglassOff,
 };
 
 @NgModule({
@@ -39,4 +42,5 @@ const icons = {
   imports: [TablerIconsModule.pick(icons)],
   exports: [TablerIconsModule],
 })
-export class IconsModule {}
+export class IconsModule {
+}

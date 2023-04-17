@@ -1,14 +1,13 @@
-import { Component, OnInit } from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {
   IDTokenPayload,
   MainframeIdTokenService,
   MainframeNavService,
-  PluginListService,
   Plugin,
+  PluginListService,
 } from "mainframe-connector";
-import { setTagColors } from "../../shared/classes/tagColors";
-import { NavBarService } from "../../core/nav-bar.service";
-import { SearchService } from "../../core/search.service";
+import {setTagColors} from "core-ui";
+import {NavBarService} from "../../core/nav-bar.service";
 
 @Component({
   selector: "app-home",
@@ -21,7 +20,8 @@ export class HomeComponent implements OnInit {
     private pluginService: PluginListService,
     public navService: MainframeNavService,
     public navService1: NavBarService
-  ) {}
+  ) {
+  }
 
   jwtPayload: IDTokenPayload | undefined;
   showDashboard!: boolean;
@@ -44,7 +44,5 @@ export class HomeComponent implements OnInit {
       this.showDashboard = !x;
     });
     this.showDashboard = !this.navService1.isListShown.getValue();
-    // this.showDashboard = this.navBarService.showDashboard.getValue();
-    // this.navBarService.showDashboard.subscribe(x => this.showDashboard = x);
   }
 }
