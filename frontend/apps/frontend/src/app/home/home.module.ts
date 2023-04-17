@@ -10,35 +10,6 @@ import {CoreUiModule} from "core-ui";
 import {MainframeConnectorModule} from "mainframe-connector";
 import {SharedModule} from "../shared/shared.module";
 import {IconsModule} from "../icons/icons.module";
-import {
-  IconAffiliate,
-  IconBrandGithub,
-  IconCamera, IconChevronDown, IconChevronUp, IconEyeglass, IconEyeglassOff,
-  IconHeart,
-  IconLayoutGrid, IconList, IconLogout,
-  IconSearch,
-  IconSettings, IconStar,
-  IconX
-} from "angular-tabler-icons/icons";
-import {TablerIconsModule} from "angular-tabler-icons";
-
-const icons = {
-  IconCamera,
-  IconHeart,
-  IconBrandGithub,
-  IconX,
-  IconSearch,
-  IconSettings,
-  IconLayoutGrid,
-  IconList,
-  IconLogout,
-  IconChevronDown,
-  IconChevronUp,
-  IconStar,
-  IconAffiliate,
-  IconEyeglass,
-  IconEyeglassOff,
-};
 
 @NgModule({
   declarations: [
@@ -55,7 +26,6 @@ const icons = {
     SharedModule,
     CoreUiModule,
     IconsModule,
-    TablerIconsModule.pick(icons)
   ],
 })
 export class HomeModule {
