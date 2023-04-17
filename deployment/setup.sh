@@ -2,27 +2,29 @@
 echo "Installing docker..."
 
 sudo apt-get update -y
-yes | sudo apt-get install \
+sudo apt-get install \
     ca-certificates \
     curl \
-    gnupg
+    gnupg -y
 
 sudo install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 sudo chmod a+r /etc/apt/keyrings/docker.gpg
 
 echo \
-  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
-  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" |
+    sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
 
 # Clone Compose
-wget https://raw.githubusercontent.com/htl-grieskirchen-core/core/develop/deployment/docker-compose.yml
+curl -O https://raw.githubusercontent.com/htl-grieskirchen-core/core/develop/deployment/docker-compose.yml
 docker-compose up -d
 
 echo "Check Conf..."
 
-conf=$(cat './caddy/mainframe-config.json')
+sudo apt-get install jq -y
+curl -O https://raw.githubusercontent.com/htl-grieskirchen-core/core/master/deployment/caddy/mainframe-config.json
+conf=$(cat './mainframe-config.json')
 search='https'
 RED="\e[31m"
 GREEN="\e[32m"
