@@ -12,6 +12,7 @@ import { SynoSwitchComponent } from "./syno-switch/syno-switch.component";
 import { SynoTagComponent } from "./syno-tag/syno-tag.component";
 import { SynoSelectComponent } from "./syno-select/syno-select.component";
 import { SynoSelectMultipleComponent } from "./syno-select-multiple/syno-select-multiple.component";
+import {SynoTokenComponent} from "./syno-token/syno-token.component";
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import { SynoSelectMultipleComponent } from "./syno-select-multiple/syno-select-
     SynoTagComponent,
     SynoSelectComponent,
     SynoSelectMultipleComponent,
+    SynoTokenComponent,
   ],
   exports: [
     SynoButtonComponent,
@@ -43,6 +45,7 @@ import { SynoSelectMultipleComponent } from "./syno-select-multiple/syno-select-
     SynoTagComponent,
     SynoSelectComponent,
     SynoSelectMultipleComponent,
+    SynoTokenComponent,
   ],
 })
 export class CoreUiModule {}

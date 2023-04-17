@@ -13,4 +13,7 @@ export class ListViewItemComponent {
 
   constructor() {}
 
+  toNumber(str: string): number {
+    return Number(str);
+  }
 }

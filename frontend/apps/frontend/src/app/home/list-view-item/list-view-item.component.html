@@ -2,7 +2,7 @@
   {{plugin.name}}
 </th>
 <td class="py-4 px-6">
-  {{plugin.endDate ?? '-'}}
+  {{plugin.endDate ? (toNumber(plugin.endDate) * 1000 | date) : '-'}}
 </td>
 <td class="py-4 px-6">
   {{plugin.teachers.join(', ')}}
