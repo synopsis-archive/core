@@ -22,6 +22,7 @@ RUN yarn build mainframe --prod
 
 FROM caddy:2-alpine
 
+COPY deployment/caddy/Caddyfile /srv/input.Caddyfile
 COPY deployment/caddy/entrypoint.sh /entrypoint.sh
 RUN apk add dos2unix && dos2unix /entrypoint.sh && chmod +x /entrypoint.sh
 
