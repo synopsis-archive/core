@@ -74,7 +74,7 @@ public class MoodleClient : IMoodleClient
         return assignments;
     }
 
-    private async Task<JsonDocument> GetJsonResponse(string functionName, string token, string additionalArgs)
+    public async Task<JsonDocument> GetJsonResponse(string functionName, string token, string? additionalArgs)
     {
 
         var httpAddress = new Uri(

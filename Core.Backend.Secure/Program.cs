@@ -4,6 +4,8 @@ using Core.AuthLib.Services;
 using Core.Backend.Secure.Services;
 using Core.Ldap.Implementation;
 using Core.Ldap.Interface;
+using Core.Moodle.Implementation;
+using Core.Moodle.Interface;
 using Core.Secure.Database;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,6 +35,10 @@ builder.Services.Configure<LdapConfiguration>(builder.Configuration.GetSection("
 builder.Services.AddTransient<ILdapClient, LdapClient>();
 
 builder.Services.AddTransient<WebUntisService>();
+
+builder.Services.Configure<MoodleConfiguration>(builder.Configuration.GetSection("Moodle"));
+builder.Services.AddTransient<IMoodleClient, MoodleClient>();
+builder.Services.AddHttpClient<MoodleClient>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
