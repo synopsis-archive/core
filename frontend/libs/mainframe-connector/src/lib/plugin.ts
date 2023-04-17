@@ -25,4 +25,7 @@
 
     // whether the user added this course to their favourites
     isFavourite: boolean;
+
+    // user groups that are allowed to use this plugin
+    targetUserGroups?: Array<"staff" | "teacher" | "student">;
 }

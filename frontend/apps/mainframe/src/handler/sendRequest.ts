@@ -1,9 +1,16 @@
 import { IncomingMessageHandler } from "../types/handler";
 import { sendMessageToFrame } from "../utils/message";
-import { fetch2 } from "../utils/fetch";
 
 export const sendRequest: IncomingMessageHandler<"sendRequest"> = (message, context) => {
-    fetch2(context.config.secureBackendUrl, message.data.path, message.data.method, message.data.payload ?? undefined)
+    fetch(context.config.secureBackendUrl + message.data.path, {
+        method: message.data.method,
+        body: message.data.payload ?? undefined,
+        credentials: "include",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+    })
         .then(response => response.text())
         .then(response => sendMessageToFrame("plugin-container", "sendRequest", {
             response,

@@ -10,11 +10,11 @@
         placeholder="Enter your search term here"
         class="w-full h-full focus-visible:outline-none text-black bg-transparent placeholder:text-black"/>
     </div>
-    <div class="grow">
+    <div class="grow shrink-0 w-12">
       <syno-select-multiple
         [items]="selectOptions"
         excludeClasses="bg-gradient-to-r from-synoblue to-synogreen"
-        includeClasses="shadow-md rounded-3xl focus-visible:outline-none text-black bg-synogray-80 h-full"
+        includeClasses="shadow-md rounded-3xl focus-visible:outline-none text-black bg-synogray-80 h-full flex shrink-0"
         title="Search for tags"
         (selectionChanged)="search()"></syno-select-multiple>
     </div>
