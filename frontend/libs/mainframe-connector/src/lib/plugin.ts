@@ -27,5 +27,5 @@
     isFavourite: boolean;
 
     // user groups that are allowed to use this plugin
-    targetUserGroups?: ["staff" | "student" | "teacher"];
+    targetUserGroups?: Array<"staff" | "teacher" | "student">;
 }
