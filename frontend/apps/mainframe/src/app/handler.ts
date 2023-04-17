@@ -42,7 +42,7 @@ const handler: Partial<HandlerMap> = {
     },
     "saveToken": {
         handler: saveToken,
-        isAllowed: context => context.sender === "auth"
+        isAllowed: context => context.sender === "auth" || context.sender === "navigation"
     },
     "login": {
         handler: login,

@@ -14,9 +14,11 @@
          id="accordion-credentials">
       <div *ngFor="let credential of credentials">
         <h2 class="inner" id="accordion-{{credential}}-heading">
-          <button [ngClass]="{'rounded-t-xl bg-transparent text-inherit': credential === credentials[0]}" aria-controls="accordion-credentials-body-3"
+          <button [ngClass]="{'rounded-t-xl bg-transparent text-inherit': credential === credentials[0]}"
+                  aria-controls="accordion-credentials-body-3"
                   aria-expanded="false"
-                  class="flex items-center justify-between w-full p-3 font-medium text-left text-inherit border-b border-b-gray-200" data-accordion-target="#accordion-credentials-body-3"
+                  class="flex items-center justify-between w-full p-3 font-medium text-left text-inherit border-b border-b-gray-200"
+                  data-accordion-target="#accordion-credentials-body-3"
                   type="button">
             <span>{{credential}}</span>
             <svg class="w-6 h-6 shrink-0" data-accordion-icon fill="none" stroke="currentColor" stroke-width="1.5"
@@ -32,10 +34,11 @@
         <div attr.aria-labelledby="accordion-{{credential}}-heading" class="hidden" id="accordion-{{credential}}-body">
           <div class="p-5 font-light border-b border-t-0 border-gray-200">
             <div class="flex flex-col items-center justify-center v-screen mb-0 p-5 border border-gray-200">
-              <syno-username [(username)]="username" class="mb-0"></syno-username> <!-- todo change mb in component to 0-->
-              <syno-password (passwordChange)="password = $event"></syno-password>
-              <syno-button (click)="click()">Save</syno-button>
-              <div *ngIf="changeAnswer.length>0" class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+              <syno-token [(token)]="token"></syno-token>
+              <syno-button (click)="click(credential)">Save</syno-button>
+              <div *ngIf="changeAnswer.length>0"
+                   class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+                   role="alert">
                 <span class="font-medium">{{changeAnswer}}</span>
               </div>
             </div>
