@@ -5,4 +5,5 @@ export const environment = {
     { repoOwner: "htl-grieskirchen-core", name: "Polls", repoName: "plugin-polls" },
     { repoOwner: "htl-grieskirchen-core", name: "Template", repoName: "plugin-template" },
   ],
+  backendURL: "http://localhost:5256"
 };
