@@ -14,6 +14,7 @@ Core.Backend/Pluginloader.cs @Klausmd5
 Core.Backend.Secure          @Klausmd5
 
 deployment                   @profiluefter
+deployment/builder.sh        @Klausmd5
 
 Core.AuthLib                                 @Klausmd5
 Core.AuthLib/Services/RsaService.cs          @Klausmd5
