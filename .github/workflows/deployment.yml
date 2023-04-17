@@ -36,6 +36,5 @@ jobs:
 
       - name: Push
         run:  |
-            docker compose build
-            docker compose push
+           TAG=${{ env.BUILD_VERSION }} docker compose push
         working-directory: ./deployment
