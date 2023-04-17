@@ -20,8 +20,8 @@ export class SettingsComponent implements AfterViewInit {
   checked: boolean = true;
   credentials: string[] = ["Eduvidual"];
   selectedItem: AccordionItem | null = null;
-  username: string = "";
-  password?: string = "TEST"; //TODO
+  username?: string = "";
+  password?: string = "";
   token: string = "";
   changeAnswer: string = "";
 
@@ -45,7 +45,7 @@ export class SettingsComponent implements AfterViewInit {
           break;
       }
     } else this.changeAnswer = "Geben Sie valide Daten ein!";
-    if (this.changeAnswer.length == 0) this.changeAnswer = "!Error! Leider konnten wir Sie nicht anmelden. Versuchen Sie es bitte erneut!";
+    if (this.changeAnswer.length === 0) this.changeAnswer = "!Error! Leider konnten wir Sie nicht anmelden. Versuchen Sie es bitte erneut!";
   }
 
   private isValid(): boolean {
