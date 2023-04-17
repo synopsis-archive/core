@@ -19,6 +19,9 @@ jobs:
         with:
           submodules: recursive
           clean: false
+      - name: Get commit date
+        run: |
+          echo "GITHUB_DATE=$(git show --date=format:"%d.%m.%Y %T" --format="%ad" --no-patch --no-notes $GITHUB_SHA)" >> $GITHUB_ENV
       - name: Configure .env
         run: |
           echo "DOMAIN_NAME=${{ vars.DOMAIN_NAME }}" >> .env

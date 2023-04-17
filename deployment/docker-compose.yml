@@ -7,6 +7,9 @@ services:
     build:
       context: ..
       dockerfile: deployment/caddy/caddy.Dockerfile
+      args:
+        COMMITHASH: "${GITHUB_SHA}"
+        COMMITDATE: "${GITHUB_DATE}"
     environment:
       DOMAIN_NAME: "${DOMAIN_NAME}"
       TLS_EMAIL: "${TLS_EMAIL}"

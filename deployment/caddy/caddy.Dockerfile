@@ -18,6 +18,11 @@ RUN yarn build frontend --prod
 
 FROM build AS mainframe
 
+ARG COMMITHASH
+ENV COMMITHASH=$COMMITHASH
+ARG COMMITDATE
+ENV COMMITDATE=$COMMITDATE
+
 RUN yarn build mainframe --prod
 
 FROM caddy:2-alpine
