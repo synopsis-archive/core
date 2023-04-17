@@ -1,5 +1,4 @@
 import {Component} from "@angular/core";
-import {Router} from "@angular/router";
 import {OnboardingService} from "../onboarding.service";
 
 @Component({
@@ -19,8 +18,6 @@ export class OnboardingComponent {
   ) {
   }
 
-  // TODO: add error handling
-
   proceedEduvidual() {
     this.onboardingService.setEduvidualToken(this.eduvidualToken).then(_ => {
     }).catch(_ => {
@@ -32,9 +29,8 @@ export class OnboardingComponent {
   proceedLogin() {
     this.onboardingService.login(this.username, this.password, false).then(_ => {
       this.step = 2;
-    }).catch(_ => {
-      this.error = "Anmeldung fehlgeschlagen!";
-      return;
+    }).catch(error => {
+      this.error = error.message;
     });
   }
 
