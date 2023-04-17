@@ -23,7 +23,7 @@ repos:
         files: frontend/.*\.tsx?$ # *.ts and *.tsx
         types: [ file ]
         additional_dependencies:
-          - "eslint@8.23.1"
+          - "eslint@8.38.0"
           - "@angular-eslint/eslint-plugin@15.2.0"
           - "@angular-eslint/eslint-plugin-template@15.2.0"
           - "@typescript-eslint/parser@5.37.0"
