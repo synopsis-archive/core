@@ -36,3 +36,9 @@ jobs:
       - name: Push
         run: docker compose push
         working-directory: ./deployment
+
+      - name: Update latest
+        run: docker compose build && docker compose push
+        working-directory: ./deployment
+        env:
+          TAG: latest
