@@ -14,6 +14,10 @@ export class ListViewItemComponent {
 
   constructor(private userService: UserService) {}
 
+  toNumber(str: string): number {
+    return Number(str);
+  }
+
   changeFavorite() {
     this.plugin.isFavourite = !this.plugin.isFavourite;
     if (this.plugin.isFavourite) this.userService.addFavorite(this.plugin.id);

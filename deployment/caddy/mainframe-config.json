@@ -35,7 +35,7 @@
             }
         },
 		"seatmap-generator":{
-			"repoUrl": "https://github.com/htl-grieskirchen-core/plugin-seatmap-generator",
+			"repoUrl": "https://github.com/rgrueneisHtlgkr/plugin-seatmap-generator",
 			"info": {
 			   "name": "SeatMap",
 			   "description": "App zum Erstellen eines zufülligen Sitzplans in verschiedenen EDV-Räumen",
