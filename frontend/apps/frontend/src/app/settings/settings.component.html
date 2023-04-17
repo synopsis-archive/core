@@ -32,9 +32,15 @@
         <div attr.aria-labelledby="accordion-{{credential}}-heading" class="hidden" id="accordion-{{credential}}-body">
           <div class="p-5 font-light border-b border-t-0 border-gray-200">
             <div class="flex flex-col items-center justify-center v-screen mb-0 p-5 border border-gray-200">
-              <syno-username [(username)]="username" class="mb-0"></syno-username> <!-- todo change mb in component to 0-->
-              <syno-password (passwordChange)="password = $event"></syno-password>
-              <syno-button (click)="click()">Save</syno-button>
+              <input
+                type="text"
+                id="token"
+                placeholder="Enter your Token"
+                required
+                class="rounded-md mb-5 block border w-80 p-3 pr-10 focus:outline-none focus:ring-1"
+                [(ngModel)]="token"
+                name="eduToken"/>
+              <syno-button (click)="click(credential)">Save</syno-button>
               <div *ngIf="changeAnswer.length>0" class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
                 <span class="font-medium">{{changeAnswer}}</span>
               </div>

@@ -1,8 +1,9 @@
-import {AfterViewInit, Component, OnInit} from "@angular/core";
+import {AfterViewInit, Component} from "@angular/core";
 import type {AccordionInterface, AccordionItem, AccordionOptions} from "flowbite";
 import {Accordion} from "flowbite";
 import {MainframeService} from "../../../../auth/src/app/mainframe.service";
 import {CredService} from "../../../../auth/src/app/core/cred.service";
+import {OnboardingService} from "../../../../auth/src/app/onboarding.service";
 
 @Component({
   selector: "app-settings",
@@ -10,41 +11,44 @@ import {CredService} from "../../../../auth/src/app/core/cred.service";
   styleUrls: ["./settings.component.css"],
 })
 
-export class SettingsComponent implements OnInit, AfterViewInit {
+export class SettingsComponent implements AfterViewInit {
 
-  accordionItems: AccordionItem[] = null!;
+  accordionItems: AccordionItem[] = [];
   options: AccordionOptions = null!;
   accordion: AccordionInterface = null!;
 
   checked: boolean = true;
-  credentials: string[] = ["WebUntis", "Eduvidual"];
+  credentials: string[] = ["Eduvidual"];
   selectedItem: AccordionItem | null = null;
   username: string = "";
-  password?: string;
+  password?: string = "TEST"; //TODO
+  token: string = "";
   changeAnswer: string = "";
 
   constructor(private credService: CredService,
-              private mainframe: MainframeService) {
+              private mainframe: MainframeService,
+              private onboarding: OnboardingService) {
   }
 
-  ngOnInit(): void {
-    this.accordionItems = [];
-  }
-
-  async click() {
+  async click(credentials: string) {
+    this.changeAnswer = "";
     if (this.isValid()) {
-      const pwEncrypted = await this.credService.encryptPassword(this.password!);
-      this.mainframe.login(this.username!, pwEncrypted, false)
-        .catch(error => {
-          console.log(error);
-          this.changeAnswer = error;
-        })
-    }
-    if(this.changeAnswer.length == 0) this.changeAnswer = "!Error! Leider konnten wir Sie nicht anmelden. Versuchen Sie es bitte erneut!";
+      switch (credentials) {
+        case "Eduvidual":
+          await this.onboarding.setEduvidualToken(this.token).catch(_ => {
+            this.changeAnswer = "Token konnte nicht gespeichert werden!";
+            return;
+          })
+          break;
+        default:
+          break;
+      }
+    } else this.changeAnswer = "Geben Sie valide Daten ein!";
+    if (this.changeAnswer.length == 0) this.changeAnswer = "!Error! Leider konnten wir Sie nicht anmelden. Versuchen Sie es bitte erneut!";
   }
 
-  private isValid(): boolean{
-    return  this.username != undefined && this.username?.length > 0 && this.password != undefined && this.password?.length > 0;
+  private isValid(): boolean {
+    return (this.token !== undefined && this.token.length > 0) || (this.username !== undefined && this.username?.length > 0 && this.password !== undefined && this.password?.length > 0);
   }
 
   ngAfterViewInit(): void {
@@ -62,6 +66,7 @@ export class SettingsComponent implements OnInit, AfterViewInit {
       activeClasses: "text-gray-500",
       inactiveClasses: "text-gray-500",
       onOpen: (_) => {
+        this.changeAnswer = "";
       },
       onClose: (_) => {
       },
@@ -75,10 +80,10 @@ export class SettingsComponent implements OnInit, AfterViewInit {
 
   clicked(credential: string) {
     let clickedItem = this.accordion.getItem(`accordion-${credential}-heading`)
-    if(clickedItem?.active){
+    if (clickedItem?.active) {
       this.selectedItem = null
       this.accordion.close(`accordion-${credential}-heading`)
-    }else if(clickedItem != null){
+    } else if (clickedItem != null) {
       this.selectedItem = clickedItem
       this.accordion.open(`accordion-${credential}-heading`)
     }
