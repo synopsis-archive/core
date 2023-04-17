@@ -4,12 +4,12 @@ services:
     caddy:
         container_name: core-caddy
         restart: unless-stopped
-        image: ghcr.io/htl-grieskirchen-core/core/caddy:${TAG}
+        image: ghcr.io/htl-grieskirchen-core/core/caddy:${TAG:-latest}
         build:
             context: ..
             dockerfile: deployment/caddy/caddy.Dockerfile
         environment:
-            DOMAIN_NAME: "${DOMAIN_NAME}"
+            DOMAIN_NAME: "${DOMAIN_NAME:-synopsis.htl-grieskirchen.at}"
             TLS_EMAIL: "${TLS_EMAIL}"
         depends_on:
             - backend
@@ -29,7 +29,7 @@ services:
     backend:
         container_name: core-backend
         restart: unless-stopped
-        image: ghcr.io/htl-grieskirchen-core/core/backend:${TAG}
+        image: ghcr.io/htl-grieskirchen-core/core/backend:${TAG:-latest}
         build:
             context: ..
             dockerfile: deployment/backend.Dockerfile
@@ -59,14 +59,14 @@ services:
     secure:
         container_name: core-secure
         restart: unless-stopped
-        image: ghcr.io/htl-grieskirchen-core/core/secure:${TAG}
+        image: ghcr.io/htl-grieskirchen-core/core/secure:${TAG:-latest}
         build:
             context: ..
             dockerfile: deployment/backend.secure.Dockerfile
         environment:
             ConnectionStrings__Production: "server=secure-database;database=core;user=root;password=network-security"
             MainframeOrigin: "https://mainframe.${DOMAIN_NAME}"
-            LDAPConfiguration__ServerIp: "${LDAP_SERVER_IP}"
+            LDAPConfiguration__ServerIp: "${LDAP_SERVER_IP:-10.10.0.11}"
             JWT__Issuer: "https://mainframe.${DOMAIN_NAME}"
             JWT__Audience: "https://mainframe.${DOMAIN_NAME}"
             RSA__private-key: "${RSA_PRIVATE_KEY_FILE}"
