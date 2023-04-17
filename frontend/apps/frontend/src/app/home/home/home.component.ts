@@ -28,7 +28,6 @@ export class HomeComponent implements OnInit {
   showDashboard!: boolean;
 
   plugins: Plugin[] = [];
-  // private _plugins: Plugin[] = [];
 
   ngOnInit(): void {
     this.pluginService.getPluginList().then((plugins: Plugin[]) => {

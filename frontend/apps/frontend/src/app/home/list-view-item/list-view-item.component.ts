@@ -14,9 +14,9 @@ export class ListViewItemComponent {
 
   constructor(private userService: UserService) {}
 
-  async changeFavorite() {
+  changeFavorite() {
     this.plugin.isFavourite = !this.plugin.isFavourite;
-    if (this.plugin.isFavourite) await this.userService.addFavorite(this.plugin.id);
-    else await this.userService.deleteFavorite(this.plugin.id);
+    if (this.plugin.isFavourite) this.userService.addFavorite(this.plugin.id);
+    else this.userService.deleteFavorite(this.plugin.id);
   }
 }

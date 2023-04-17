@@ -36,14 +36,13 @@ export class GridPluginComponent implements OnInit{
     });
   }
 
-  async changeFavorite() {
+  changeFavorite() {
     this.isFavorite = !this.isFavorite;
-    if (this.isFavorite) await this.userService.addFavorite(this.id);
-    else await this.userService.deleteFavorite(this.id);
+    if (this.isFavorite) this.userService.addFavorite(this.id);
+    else this.userService.deleteFavorite(this.id);
   }
 
   ngOnInit(): void {
-
     this.userService.favorites.subscribe((x:UserFavorite[]) => {
       this.isFavorite = x.map(x => x.pluginID).includes(this.id);
     });
