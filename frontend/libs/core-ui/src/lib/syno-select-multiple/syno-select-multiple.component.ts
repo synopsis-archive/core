@@ -16,7 +16,7 @@ export class SynoSelectMultipleComponent extends SynoBaseComponent implements On
   showOptions = false;
 
   styles: Record<string, string> = {
-    "default": "bg-gradient-to-r from-synoblue to-synogreen rounded-lg p-[1.5px] pl-[1.6px] box-border flex justify-center items-center"
+    "default": "bg-gradient-to-r from-synoblue to-synogreen rounded-lg p-[1.5px] pl-[1.6px] box-border flex justify-center items-center shrink-0"
   };
 
   ngOnInit() {

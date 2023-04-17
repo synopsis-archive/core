@@ -33,7 +33,19 @@
                 "endDate": "1663221600",
                 "image": "example.com/image.png"
             }
-        }
+        },
+		"seatmap-generator":{
+			"repoUrl": "https://github.com/htl-grieskirchen-core/plugin-seatmap-generator",
+			"info": {
+			   "name": "SeatMap",
+			   "description": "App zum Erstellen eines zufülligen Sitzplans in verschiedenen EDV-Räumen",
+			   "teachers": ["alle Lehrer"],
+			   "tags": ["Schularbeit", "PLF", "Test", "Sitzplan"],
+			   "startDate": 1693519200,
+			   "endDate": 1720994400,
+			   "image": "example.com/image.png"
+			}
+		}
     },
     "login": {
         "url": "https://auth.plugin.@@DOMAIN_NAME@@"
