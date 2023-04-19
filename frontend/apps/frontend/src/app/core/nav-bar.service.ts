@@ -1,7 +1,7 @@
-import { Injectable } from "@angular/core";
-import { BehaviorSubject, Subject } from "rxjs";
-import { ActivePlugin } from "../shared/classes/activePlugin";
-import { Router } from "@angular/router";
+import {Injectable} from "@angular/core";
+import {BehaviorSubject, Subject} from "rxjs";
+import {ActivePlugin} from "../shared/classes/activePlugin";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: "root",
@@ -9,7 +9,6 @@ import { Router } from "@angular/router";
 export class NavBarService {
   openPlugins = new Subject<ActivePlugin[]>();
   isListShown = new BehaviorSubject<boolean>(false);
-  areSettingsShown = new BehaviorSubject<boolean>(false);
   private _openPlugins: ActivePlugin[] = [
     new ActivePlugin("home", "Home", true),
   ];
@@ -46,10 +45,6 @@ export class NavBarService {
 
   toggleIsListShown(val: boolean) {
     this.isListShown.next(val);
-  }
-
-  toggleAreSettingsShown() {
-    this.areSettingsShown.next(!this.areSettingsShown.getValue());
   }
 
   openSettings() {
