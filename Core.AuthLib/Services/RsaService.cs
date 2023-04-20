@@ -21,8 +21,18 @@ public static class RsaService
         }
         else
         {
-            AsymmetricCipherKeyPair? keyPair = (AsymmetricCipherKeyPair)new PemReader(new StringReader(pk)).ReadObject();
-            rsaParams = DotNetUtilities.ToRSAParameters(keyPair.Private as RsaPrivateCrtKeyParameters);
+            try
+            {
+                AsymmetricCipherKeyPair? keyPair = (AsymmetricCipherKeyPair)new PemReader(new StringReader(pk)).ReadObject();
+                rsaParams = DotNetUtilities.ToRSAParameters(keyPair.Private as RsaPrivateCrtKeyParameters);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                RsaPrivateCrtKeyParameters? keyPair = (RsaPrivateCrtKeyParameters)new PemReader(new StringReader(pk)).ReadObject();
+                rsaParams = DotNetUtilities.ToRSAParameters(keyPair);
+            }
+
         }
 
         var rsa = RSA.Create();
