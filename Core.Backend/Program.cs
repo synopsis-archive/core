@@ -22,7 +22,18 @@ builder.Services.AddSwaggerGen(o =>
     o.AddSwaggerGenHeader();
 });
 
-builder.Services.AddDbContext<CoreContext>(db => db.UseSqlite(builder.Configuration.GetConnectionString("DatabaseConnection")));
+
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddDbContext<CoreContext>(db => db.UseSqlite(builder.Configuration.GetConnectionString("DatabaseConnection")));
+}
+else
+{
+    var connectionString = builder.Configuration.GetConnectionString("Production");
+    builder.Services.AddDbContext<CoreContext>(db =>
+        db.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+}
+
 builder.Services.AddScoped<UserFavoritesService>();
 builder.Services.AddHostedService<DatabaseBackgroundService>();
 
