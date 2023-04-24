@@ -10,6 +10,8 @@ import {UserFavorite} from "../../shared/classes/userFavorite";
 })
 export class DashboardComponent implements OnInit {
 
+  msPerWeek = 604800000;
+
   @Input() plugins: Plugin[] = [];
 
   userRole: UserRole = null!;
@@ -20,7 +22,6 @@ export class DashboardComponent implements OnInit {
   categories: Category[] = [];
 
   ngOnInit(): void {
-
     this.userService.favorites.subscribe((x: UserFavorite[]) => {
       const ids = x.map(plugin => plugin.pluginID);
       this.plugins.forEach(plugin => plugin.isFavourite = ids.includes(plugin.id));
@@ -30,16 +31,15 @@ export class DashboardComponent implements OnInit {
     this.tokenService.getJwt().then(jwt => {
       const payload = this.tokenService.decodeJwt(jwt);
       this.userRole = payload.rolle;
+      this.setCategories();
     });
-
-    this.setCategories();
   }
 
   private setCategories() {
     this.categories = [
       new Category("Favoriten", "star", this.plugins.filter(x => x.isFavourite)),
-      new Category("Meine", "user-search", this.plugins.filter(p => p.targetUserGroups?.includes(this.userRole) || this.userRole === "Administrator")),
-      new Category("Bald fällig", "hourglass-low", this.plugins),
+      new Category("Meine", "user-search", this.plugins.filter(p => p.targetUserGroups?.includes(this.userRole))),
+      new Category("Bald fällig", "hourglass-low", this.plugins.filter(p => Number(p.endDate) - Date.now() < this.msPerWeek && Number(p.endDate) > Date.now())),
       new Category("Alle", "border-all", this.plugins)];
   }
 }
