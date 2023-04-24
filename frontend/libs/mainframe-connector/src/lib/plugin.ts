@@ -1,4 +1,6 @@
-﻿export interface Plugin {
+﻿import {UserRole} from "./mainframe-id-token.service";
+
+export interface Plugin {
     // id of plugin - example: "religion_abmelden"
     id: string,
 
@@ -27,5 +29,5 @@
     isFavourite: boolean;
 
     // user groups that are allowed to use this plugin
-    targetUserGroups?: Array<"staff" | "teacher" | "student">;
+    targetUserGroups?: UserRole[];
 }
