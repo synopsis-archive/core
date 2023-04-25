@@ -36,11 +36,17 @@ export class DashboardComponent implements OnInit {
   }
 
   private setCategories() {
+    const dueSoonFilter = (p: Plugin) => Number(p.endDate) - Date.now() < this.msPerWeek && Number(p.endDate) > Date.now();
+
     this.categories = [
       new Category("Favoriten", "star", this.plugins.filter(x => x.isFavourite)),
-      new Category("Meine", "user-search", this.plugins.filter(p => p.targetUserGroups?.includes(this.userRole) ?? true)),
-      new Category("Bald fällig", "hourglass-low", this.plugins.filter(p => Number(p.endDate) - Date.now() < this.msPerWeek && Number(p.endDate) > Date.now())),
-      new Category("Alle", "border-all", this.plugins)];
+      new Category("Bald fällig", "hourglass-low", this.plugins.filter(p => dueSoonFilter(p))),
+      new Category("Alle", "border-all", this.plugins),
+    ];
+
+    if (this.userRole !== "Schueler") {
+      this.categories.push(new Category("Meine", "user-search", this.plugins.filter(p => p.targetUserGroups?.includes(this.userRole))));
+    }
   }
 }
 

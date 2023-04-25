@@ -56,13 +56,15 @@ export class HomeComponent implements OnInit {
 
   private filterPlugins() {
     this.plugins = this.plugins.filter(p => {
+      if (p.targetUserGroups === undefined) return true;
+
       switch (this.jwtPayload!.rolle) {
         case "Administrator":
           return true;
         case "Lehrer":
-          return p.targetUserGroups?.includes("Lehrer") || p.targetUserGroups?.includes("Schueler") || p.targetUserGroups === undefined;
+          return p.targetUserGroups?.includes("Lehrer") || p.targetUserGroups?.includes("Schueler");
         case "Schueler":
-          return p.targetUserGroups?.includes("Schueler") ?? true;
+          return p.targetUserGroups?.includes("Schueler");
       }
     });
   }
