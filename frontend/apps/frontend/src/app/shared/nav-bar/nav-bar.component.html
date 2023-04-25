@@ -11,7 +11,7 @@
     </ul>
   </div>
 
-  <div class="flex flex-row items-center gap-2 h-full" *ngIf="!settingsShown">
+  <div class="flex flex-row items-center gap-2 h-full"  *ngIf="showControls">
     <syno-icon-button (click)="searchClicked()">
       <i-tabler name="search" class="navbar-icon-scale"/>
     </syno-icon-button>
