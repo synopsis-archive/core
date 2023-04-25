@@ -32,6 +32,7 @@ services:
       context: ..
       dockerfile: deployment/backend.Dockerfile
     environment:
+      ConnectionStrings__Production: "server=backend-database;database=core;user=root;password=network-security"
       RSA__public-key: "${RSA_PUBLIC_KEY_FILE}"
       JWT__Issuer: "https://mainframe.${DOMAIN_NAME}"
       JWT__Audience: "https://mainframe.${DOMAIN_NAME}"
