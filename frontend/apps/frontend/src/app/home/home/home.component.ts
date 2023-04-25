@@ -60,9 +60,9 @@ export class HomeComponent implements OnInit {
         case "Administrator":
           return true;
         case "Lehrer":
-          return p.targetUserGroups?.includes("Lehrer") || p.targetUserGroups?.includes("Schueler");
+          return p.targetUserGroups?.includes("Lehrer") || p.targetUserGroups?.includes("Schueler") || p.targetUserGroups === undefined;
         case "Schueler":
-          return p.targetUserGroups?.includes("Schueler");
+          return p.targetUserGroups?.includes("Schueler") ?? true;
       }
     });
   }
