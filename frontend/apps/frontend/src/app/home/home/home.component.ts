@@ -30,16 +30,9 @@ export class HomeComponent implements OnInit {
   plugins: Plugin[] = [];
 
   ngOnInit(): void {
-    this.pluginService.getPluginList().then((plugins: Plugin[]) => {
-      this.plugins = plugins.sort((a, b) => a.name.localeCompare(b.name));
-      const tags = [...new Set(this.plugins.flatMap((x) => x.tags))];
-      setTagColors(tags);
-
-      this.userService.getFavorites();
-    })
-
     this.service.getJwt().then((jwt) => {
       this.jwtPayload = this.service.decodeJwt(jwt);
+      this.getPlugins();
     });
 
     this.navService.openPlugin(null);
@@ -47,5 +40,30 @@ export class HomeComponent implements OnInit {
       this.showDashboard = !x;
     });
     this.showDashboard = !this.navBarService.isListShown.getValue();
+  }
+
+  private getPlugins() {
+    this.pluginService.getPluginList().then((plugins: Plugin[]) => {
+      this.plugins = plugins.sort((a, b) => a.name.localeCompare(b.name));
+      this.filterPlugins();
+
+      const tags = [...new Set(this.plugins.flatMap((x) => x.tags))];
+      setTagColors(tags);
+
+      this.userService.getFavorites();
+    });
+  }
+
+  private filterPlugins() {
+    this.plugins = this.plugins.filter(p => {
+      switch (this.jwtPayload!.rolle) {
+        case "Administrator":
+          return true;
+        case "Lehrer":
+          return p.targetUserGroups?.includes("Lehrer") || p.targetUserGroups?.includes("Schueler");
+        case "Schueler":
+          return p.targetUserGroups?.includes("Schueler");
+      }
+    });
   }
 }

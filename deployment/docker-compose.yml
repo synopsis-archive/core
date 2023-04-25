@@ -25,6 +25,7 @@ services:
         networks:
             - public
 
+
     backend:
         container_name: core-backend
         restart: unless-stopped
