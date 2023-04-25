@@ -51,8 +51,8 @@ export interface IDTokenPayload {
   // uid: db-uuid
   uuid: string,
 
-  // rolle: <schüler, lehrer, staff>
-  rolle: string,
+  // rolle: <Administrator, Lehrer, Schueler>
+  rolle: UserRole,
 
   // Email
   email: string,
@@ -69,3 +69,5 @@ export interface IDTokenPayload {
   // klasse - nur bei Schülern verfügbar
   klasse: string | undefined,
 }
+
+export type UserRole = "Administrator" | "Lehrer" | "Schueler";

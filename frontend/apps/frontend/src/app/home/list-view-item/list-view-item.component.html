@@ -5,7 +5,10 @@
   {{plugin.endDate ? (toNumber(plugin.endDate) * 1000 | date) : '-'}}
 </td>
 <td class="py-4 px-6">
-  {{plugin.teachers.join(', ')}}
+  {{plugin.teachers.join(", ")}}
+</td>
+<td class="py-4 px-6">
+  {{plugin.targetUserGroups?.join(", ")}}
 </td>
 <td class="py-4 px-6">
   <syno-tag *ngFor="let tag of plugin.tags" [name]="tag"></syno-tag>
