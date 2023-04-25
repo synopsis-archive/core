@@ -1,7 +1,7 @@
-import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
-import { ActivePlugin } from "../classes/activePlugin";
-import { NavBarService } from "../../core/nav-bar.service";
-import { SearchService } from "../../core/search.service";
+import {ChangeDetectorRef, Component, OnInit} from "@angular/core";
+import {ActivePlugin} from "../classes/activePlugin";
+import {NavBarService} from "../../core/nav-bar.service";
+import {SearchService} from "../../core/search.service";
 
 @Component({
   selector: "app-nav-bar",
@@ -12,13 +12,14 @@ export class NavBarComponent implements OnInit {
   tabs: ActivePlugin[] = [];
   public val: string = "";
   viewList: boolean = false;
-  settingsShown: boolean = false;
+  showControls: boolean = true;
 
   constructor(
     private navService: NavBarService,
     private changeDetection: ChangeDetectorRef,
     private searchService: SearchService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.val = "nav";
@@ -31,18 +32,17 @@ export class NavBarComponent implements OnInit {
     });
     this.navService.getPlugins();
     this.navService.isListShown.subscribe((x) => this.viewList = x);
-    this.navService.areSettingsShown.subscribe((x) => this.settingsShown = x);
     this.showPlugin(this.tabs.find(tab => tab.active));
   }
 
   closeTabClick(plugin: ActivePlugin) {
     this.navService.closePlugin(plugin.id);
-    this.navService.activatePlugin("home");
-    if (plugin.id === "settings") this.navService.toggleAreSettingsShown();
+    this.showPlugin(this.tabs.find(t => t.id === "home"));
   }
 
   showPlugin(plugin: ActivePlugin | undefined): void {
     if (plugin) this.navService.activatePlugin(plugin.id);
+    this.showControls = plugin?.id !== "settings";
   }
 
   searchClicked() {
@@ -55,6 +55,6 @@ export class NavBarComponent implements OnInit {
 
   showSettings() {
     this.navService.openSettings();
-    this.navService.toggleAreSettingsShown();
+    this.showControls = false;
   }
 }

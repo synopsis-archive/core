@@ -1,4 +1,4 @@
-<div class="container mx-auto h-screen">
+<div class="container mx-auto h-screen px-12">
   <div class="fixed top-0 left-0 p-10">
     <span class="logo-placeholder w-6 rounded-full inline-block mr-4"></span>
     <h1 class="text-4xl font-bold inline-block">Synopsis</h1>
@@ -9,7 +9,6 @@
         <h1 class="text-3xl font-bold">Welcome to HTL Grieskirchen Core!</h1>
         <p class="mb-10">Please enter your credentials</p>
 
-        <!-- TODO: make less ugly -->
         <h2 *ngIf="error !== null" class="text-red-500 font-bold mb-4">
           {{ error }}
         </h2>

@@ -9,17 +9,14 @@ import {NavBarService} from "../../core/nav-bar.service";
 })
 export class ListViewComponent {
 
-  _plugins: Plugin[] = [];
-  @Input() set plugins(plugins: Plugin[]) {
-    this._plugins = plugins;
-  };
+  @Input() plugins: Plugin[] = [];
 
   titleAsc: boolean = true;
 
   constructor(private navService: NavBarService) {}
 
   sortPlugins() {
-    this._plugins = this._plugins.sort((a,b) =>
+    this.plugins = this.plugins.sort((a,b) =>
       this.titleAsc ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name));
   }
 

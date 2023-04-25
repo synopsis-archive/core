@@ -5,6 +5,7 @@
     <div class="grow-[2] flex bg-synogray-80 shadow-md rounded-3xl">
       <i-tabler name="search" class="my-auto h-8 ml-3.5 mr-2"/>
       <input
+        synoAutofocus
         [(ngModel)]="searchterm"
         (keyup)="search()"
         placeholder="Enter your search term here"
@@ -18,8 +19,8 @@
         title="Search for tags"
         (selectionChanged)="search()"></syno-select-multiple>
     </div>
-    <div class=" min-h-12 grid bg-synogray-80 shadow-md rounded-3xl">
-      <button (click)="close()" class="my-auto text-black mr-3 ml-3 flex justify-self-center">
+    <div class="min-h-12 grid bg-synogray-80 shadow-md rounded-3xl cursor-pointer" (click)="close()">
+      <button class="my-auto text-black mr-3 ml-3 flex justify-self-center">
         <i-tabler name="x" class="block"></i-tabler>
       </button>
     </div>
