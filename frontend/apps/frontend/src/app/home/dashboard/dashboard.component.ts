@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit {
   private setCategories() {
     this.categories = [
       new Category("Favoriten", "star", this.plugins.filter(x => x.isFavourite)),
-      new Category("Meine", "user-search", this.plugins.filter(p => p.targetUserGroups?.includes(this.userRole))),
+      new Category("Meine", "user-search", this.plugins.filter(p => p.targetUserGroups?.includes(this.userRole) ?? true)),
       new Category("Bald fällig", "hourglass-low", this.plugins.filter(p => Number(p.endDate) - Date.now() < this.msPerWeek && Number(p.endDate) > Date.now())),
       new Category("Alle", "border-all", this.plugins)];
   }
