@@ -5,7 +5,7 @@ using Core.Database;
 using CorePlugin.Plugin.Services;
 using Microsoft.EntityFrameworkCore;
 
-Pluginloader.HookAssemblyResolver();
+//Pluginloader.HookAssemblyResolver();
 
 Pluginloader.LoadPlugins("plugins");
 
