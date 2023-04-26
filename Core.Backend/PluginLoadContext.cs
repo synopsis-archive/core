@@ -14,6 +14,8 @@ class PluginLoadContext : AssemblyLoadContext
 
     protected override Assembly? Load(AssemblyName assemblyName)
     {
+        if (assemblyName.Name == "Core.Plugin.Interface")
+            return typeof(ICorePlugin).Assembly;
         string assemblyPath = _resolver.ResolveAssemblyToPath(assemblyName);
         if (assemblyPath != null)
         {
