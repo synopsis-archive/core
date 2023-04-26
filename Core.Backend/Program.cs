@@ -5,9 +5,7 @@ using Core.Database;
 using CorePlugin.Plugin.Services;
 using Microsoft.EntityFrameworkCore;
 
-//Pluginloader.HookAssemblyResolver();
-
-Pluginloader.LoadPlugins("plugins");
+PluginLoader.LoadPlugins("plugins");
 
 var builder = WebApplication.CreateBuilder(args);
 
