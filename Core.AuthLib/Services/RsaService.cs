@@ -12,7 +12,7 @@ public static class RsaService
     {
 
         var pk = File.ReadAllText(pem);
-        RSAParameters rsaParams = new();
+        RSAParameters rsaParams;
 
         if (!isPrivateKey)
         {
